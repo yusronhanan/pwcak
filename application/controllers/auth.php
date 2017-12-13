@@ -40,12 +40,12 @@ class Auth extends CI_Controller {
 		public function submit_user(){
 		if($this->input->post('submit')) {
 
-			$this->form_validation->set_rules('name','Name','trim|required');
+			$this->form_validation->set_rules('name','Name','required');
 			$this->form_validation->set_rules('email','Email','trim|required');
 			$this->form_validation->set_rules('username','Username','trim|required');
 			$this->form_validation->set_rules('password','Password','trim|required');
-			$this->form_validation->set_rules('city','City','trim|required');
-			$this->form_validation->set_rules('bio','Bio','trim|required');
+			$this->form_validation->set_rules('city','City','required');
+			$this->form_validation->set_rules('bio','Bio','required');
 
 			if($this->form_validation->run() == TRUE){
 				if($this->auth_model->register_user()==TRUE)
@@ -64,6 +64,8 @@ class Auth extends CI_Controller {
 			}
 		}
 	}
+
+		
 	
 	 	public function logout() {
         $this->session->sess_destroy();

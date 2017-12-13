@@ -267,15 +267,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		 		<div class="grid-hor">
 		 			<form action="<?php echo base_url(); ?>myaccount/submit_content" method="post" enctype="multipart/form-data">
 		 			<h3 id="grid-example-basic">
-		 			<input type="text" name="step_title" placeholder="Your Title" style="padding: 8px;text-align: center;"></h3>
+		 			<input type="text" name="step_title" placeholder="Your Title" value="<?php if(!empty($getcontent)){ echo $getcontent->step_title;} ?>" style="padding: 8px;text-align: center;"></h3>
 		 			<br>
 		 			<input type="hidden" name="id_title" value="<?php echo $tit_info[2]; ?>">
-		 			<?php 
-		 			$step_before = $this->session->flashdata('step_before');
-		 			$step_next = $step_before + 1; #cek string + int apa bisa?
-		 			 ?>
-		 			<input type="hidden" name="step_number" value="<?php if(empty($step_before)) { echo '1'; } else{ echo $step_next; } ?>">
-		 			<textarea name="content" class="ckeditor" id="ckeditor"></textarea>
+
+		 			<input type="hidden" name="step_number" value="<?php if($step == ''){ echo $getcontent->step_number;} else{ echo $step; } ?>">
+		 			<textarea name="content" class="ckeditor" id="ckeditor"><?php if(!empty($getcontent)){ echo $getcontent->content;} ?></textarea>
 		 			
 				</div>
 				<div style="text-align: right; padding-right: 35px">

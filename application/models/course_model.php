@@ -105,6 +105,19 @@ class Course_model extends CI_Model {
             ->result();
         }
     }
+    public function check_content($id_title){
+        $query = $this->db->where('id_title', $id_title)
+                          ->get('course_content');
+     
+        if($query->num_rows()>0)
+        {
+            return true; 
+        }
+        else
+        {
+            return false;
+        }
+    }
 
 
 	public function GetSubject(){

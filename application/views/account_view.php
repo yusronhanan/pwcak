@@ -215,11 +215,11 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 						      	</div>
 
 								<div>
-									<h3> Nama </h3>
-									<h4>Bio.</h4>
-									<h4>City, Nation</h4>
+									<h3><?php echo $user_info->name; ?></h3>
+									<h4><?php echo $user_info->bio; ?></h4>
+									<h4><?php echo $user_info->city; ?></h4>
 									<br/> <br/> <br/>
-									<button class="btn btn-default"><a href="#" data-toggle="modal" data-target="#myModal99"><i class="fa fa-pencil"></i>Edit Account</a></button>
+									<button class="btn btn-default"><a href="#" data-toggle="modal" data-target="#edituser"><i class="fa fa-pencil"></i>Edit Account</a></button>
 									<button class="btn btn-default"><a href="#" data-toggle="modal" data-target=""><i class="fa fa-plus"></i>Follow</a></button>
 								</div>
 								
@@ -237,7 +237,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 
 
 	<!-- Modal99 -->
-		<div class="modal fade" id="myModal99" tabindex="-1" role="dialog" >
+		<div class="modal fade" id="edituser" tabindex="-1" role="dialog" >
 			<div class="modal-dialog" role="document">
 			<!-- Modal content-->
 				<div class="modal-content news-w3l">
@@ -246,11 +246,14 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 							<h4>Edit Profile</h4>
 							<!--newsletter-->
 							<div class="login-main wthree">
-							  <form action="#" method="post">
-								<h5> Nama </h5> <input type="text" disabled value="namanya" name="nama">
-								<h5> Bio </h5> <input type="text" disabled value="bionya" name="bio">
-								<h5> Lokasi </h5> <input type="text" disabled value="lokasinya" name="lokasi">
-								<input type="submit" value="Save">
+							   <form action="<?php echo base_url(); ?>myaccount/edit_user" method="post" enctype="multipart/form-data">
+								<input type="text" placeholder="Name" value="<?php echo $user_info->name ?>" name="name">
+								<input type="email" placeholder="Email" required="" name="email" value="<?php echo $user_info->email ?>">
+								<input type="text" name="username" placeholder="Username" value="<?php echo $user_info->username ?>" disabled>
+								<input type="text" placeholder="City" name="city" value="<?php echo $user_info->city ?>">
+								<input type="text" name="bio" placeholder="Bio" value="<?php echo $user_info->bio ?>">
+								<input type="submit" value="Save" name="submit">
+								
 							</form>
 							</div>		
 						</div>
@@ -331,16 +334,114 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 		</div>
 	</div>
 	<div class="clearfix"></div>
-		
+		<div class="row">
+<div class="col-md-6">
+
+
+
+        <div class="nav nav-justified navbar-nav">
+ 
+            <form class="navbar-form navbar-search" id="formcourses" method="get" action="<?php echo base_url() ?>myaccount" role="search">
+                <div class="input-group">
+                                                                                                
+                    <input type="text" id="title" name="title" class="form-control" value="<?php if(!empty($title)) { echo $title; } ?>">
+                
+                    <div class="input-group-btn">
+                        <input type="submit"  class="btn btn-search btn-danger" value="Search" id="searchcourses">
+                        <!-- <button type="button" class="btn btn-search btn-danger" id="searchcourses">
+                            <span class="glyphicon glyphicon-search"></span>
+                            <span class="label-icon">Search</span>
+                        </button> -->
+                        <!-- <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                            <span class="caret"></span>
+                        </button> -->
+                        <select class="form-control" name="subject">
+                                <option value="">All</option>
+                                <?php 
+                                foreach ($list_subject as $sbj) {
+                                 if ($sbj->value == $subject) {
+                                    
+                                 ?>
+                                 <option value="<?php echo $sbj->value ?>" selected="selected"><?php echo $sbj->text ?></option>
+                                 <?php }
+                                 else { ?>
+                                    <option value="<?php echo $sbj->value ?>"><?php echo $sbj->text ?></option>
+                                <?php 
+                            }
+                            } ?>
+                                </select>
+                      <!--   <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    <span class="label-icon">Mathematic</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                <span class="glyphicon glyphicon-book"></span>
+                                <span class="label-icon">BHS INDONESIA</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                <span class="glyphicon glyphicon-book"></span>
+                                <span class="label-icon">dummy</span>
+                                </a>
+                            </li>
+                             <li>
+                                <a href="#">
+                                <span class="glyphicon glyphicon-book"></span>
+                                <span class="label-icon">dummy</span>
+                                </a>
+                            </li>
+                             <li>
+                                <a href="#">
+                                <span class="glyphicon glyphicon-book"></span>
+                                <span class="label-icon">dummy</span>
+                                </a>
+                            </li>
+                             <li>
+                                <a href="#">
+                                <span class="glyphicon glyphicon-book"></span>
+                                <span class="label-icon">dummy</span>
+                                </a>
+                            </li>
+
+                             <li>
+                                <a href="#">
+                                <span class="glyphicon glyphicon-book"></span>
+                                <span class="label-icon">dummy</span>
+                                </a>
+                            </li>
+                        </ul> -->
+                    </div>
+                </div>  
+            </form>   
+         
+        </div>
+</div>
+</div>
 
 		<h3 style="text-align: left;">My Courses</h3>
 		
+		<?php 
+        if (!empty($list_courses)) {
+        foreach ($list_courses as $courses) {
+			
+		 ?>
 		<div class="col-md-4 eve-agile e1">
 			<div class="eve-sub1">
-				<a href="#" data-toggle="modal" data-target="#myModal5"><img src="<?php echo base_url() ?>assets/images/e2.jpg" width="350px" height="250px"></a>
-			<h4><a href="#" data-toggle="modal" data-target="#myModal5">Educational</a></h4>
-				<h6>By an <a href="#">admin</a>, Oct-2016</h6>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+				<a href="#" data-toggle="modal" data-target="#myModal5"><img src="<?php echo base_url() ?>assets/images/<?php echo $courses->thumbnail ?>" width="350px" height="250px" alt="image"></a>
+			<h4><a href="#" data-toggle="modal" data-target="#myModal5"><?php echo $courses->title ?></a></h4>
+				<?php 
+					if(array_key_exists($courses->id_user, $username)) {
+					$usrnm =  $username[$courses->id_user];
+				}?>
+				<h6>By  <a href="<?php echo base_url() ?><?php echo $usrnm ?>">
+					<?php echo $usrnm ?>
+				</a>, <?php echo $courses->created_at ?></h6>
+				<p><?php echo $courses->description ?></p>
 			</div>
 			<div class="eve-sub2">
 				<div class="eve-w3lleft">
@@ -348,47 +449,22 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 					<h6><i class="fa fa-heart-o" aria-hidden="true"></i>78</h6>
 				</div>	
 				<div class="eve-w3lright e1">
-					<a href="#" data-toggle="modal" data-target="#myModal5"><h5>More</h5></a>
+					<a href="<?php echo base_url(); ?>index.php/lesson"><h5>More</h5></a>
 				</div>
 				<div class="clearfix"></div>	
 			</div>
 		</div>
-		<div class="col-md-4 eve-agile e2">
-			<div class="eve-sub1">
-				<a href="#" data-toggle="modal" data-target="#myModal6"><img src="<?php echo base_url() ?>assets/images/e2.jpg" width="350px" height="250px"></a>
-				<h4><a href="#" data-toggle="modal" data-target="#myModal6">Educational</a></h4>
-				<h6>By an <a href="#">admin</a>, Oct-2016</h6>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
-			</div>
-			<div class="eve-sub2">
-				<div class="eve-w3lleft">
-					<h6><i class="fa fa-comment-o" aria-hidden="true"></i>64</h6>
-					<h6><i class="fa fa-heart-o" aria-hidden="true"></i>86</h6>
-				</div>	
-				<div class="eve-w3lright">
-					<a href="#" data-toggle="modal" data-target="#myModal6"><h5>More</h5></a>
-				</div>
-				<div class="clearfix"></div>	
-			</div>
-		</div>
-		<div class="col-md-4 eve-agile e3">
-			<div class="eve-sub1">
-				<a href="#" data-toggle="modal" data-target="#myModal7"><img src="<?php echo base_url() ?>assets/images/e2.jpg" width="350px" height="250px"></a>
-				<h4><a href="#" data-toggle="modal" data-target="#myModal7">Educational</a></h4>
-				<h6>By an <a href="#">admin</a>, Oct-2016</h6>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
-			</div>
-			<div class="eve-sub2">
-				<div class="eve-w3lleft">
-					<h6><i class="fa fa-comment-o" aria-hidden="true"></i>47</h6>
-					<h6><i class="fa fa-heart-o" aria-hidden="true"></i>58</h6>
-				</div>	
-				<div class="eve-w3lright">
-					<a href="#" data-toggle="modal" data-target="#myModal7"><h5>More</h5></a>
-				</div>
-				<div class="clearfix"></div>	
-			</div>
-		</div>
+		<?php 
+    }
+    } else{ ?>
+		  <div id="about" class="about">
+    <div class="container">
+            <h1> <span>Sorry!</span></h1>
+            <h2>Not Found. Try Again</h2>
+    </div>
+</div>
+        <?php } ?>
+		
 	</div>
 </div>
 
@@ -443,19 +519,19 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 
 
 <!--tidak ada course-->
-<div id="about" class="about">
+<!-- <div id="about" class="about">
 	<div class="container">
 			<h1> <span>Wohoo!</span></h1>
 			<h2>No course to preview.</h2>
 	</div>
-</div>
+</div> -->
 	
 	<div class="clearfix"></div>
 <!--//tidak ada course-->
 
 
 <!-- footer -->
-	<div class="footer" id="footer">
+	<!-- <div class="footer" id="footer">
 		<div class="container">
 			<div class="col-md-4 agileinfo_footer_grid">
 				<h4>About Us</h4>
@@ -479,14 +555,14 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 					<li><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><a href="mailto:info@example.com">info@example.com</a></li>
 					<li><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> (0123) 0111 111 222</li>
 				</ul>
-			</div>
+			</div> -->
 			
 			<!-- <div class="clearfix"> </div>
 			<div class="w3agile_footer_copy">
 				<p>© 2017 Educational. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts.</a></p>
 			</div> -->
-		</div>
-	</div>
+		<!-- </div>
+	</div> -->
 
 <!-- //footer -->
 

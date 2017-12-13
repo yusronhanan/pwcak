@@ -47,6 +47,28 @@ class Auth_model extends CI_Model {
         }
     }
 
+    public function edit_user(){
+        $id_user = $this->session->userdata('logged_id');
+        $data=array(
+
+            'name' => $this->input->post('name'),
+            'email' => $this->input->post('email'),
+            // 'username' => $this->input->post('username'),
+            // 'password' => $this->input->post('password'),
+            'city' => $this->input->post('city'),
+            'bio' => $this->input->post('bio')
+        );
+
+        $this->db->where('id_user',$id_user)
+                ->update('user', $data);
+
+        if($this->db->affected_rows() > 0) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 	public function GetUser($where)
     {
       return $this->db->where($where)->get('user');

@@ -364,7 +364,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 								<div class="modal-content news-w3l">
 										<div class="modal-header">
 											<button type="button" class="close w3l" data-dismiss="modal">&times;</button>
-											<h4>Edit Profile</h4>
+											<h4>Detail User</h4>
 											<!--newsletter-->
 											<div class="login-main wthree">
 												<form action="#" method="post">

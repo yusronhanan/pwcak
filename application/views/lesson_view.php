@@ -287,7 +287,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		                	</div>
 		                	<div class="clearfix"> </div>
 		                </a></li>
-		                <li><a href="#" class="view">View all messages</a></li>
+		                <li><a href="<?php echo base_url(); ?>notif" class="view">View all messages</a></li>
 		              </ul>
 		            </li>
 					<li class="dropdown">

@@ -84,6 +84,27 @@ class Course_model extends CI_Model {
             ->result();
 		}
 	}
+    public function GLCMyAccount($keyword){
+        // courses on my account /search course course list
+        $id_user = $this->session->userdata('logged_id');
+        if (empty($keyword)) {
+        return $this->db
+            ->where('id_user', $id_user)
+            ->limit(15,0)
+            // ->order_by() 
+            ->get('course_title')
+            ->result();
+        }
+        else{
+        return $this->db
+            ->where($keyword)
+            ->where('id_user', $id_user)
+            ->limit(15,0) 
+            // ->order_by()
+            ->get('course_title')
+            ->result();
+        }
+    }
 
 
 	public function GetSubject(){

@@ -209,9 +209,9 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 							<!--newsletter-->
 							<div class="login-main wthree">
 								<form action="#" method="post">
-									<h5> Nama </h5> <input type="text" disabled value="namanya" name="nama">
-									<h5> Bio </h5> <input type="text" disabled value="bionya" name="bio">
-									<h5> Lokasi </h5> <input type="text" disabled value="lokasinya" name="lokasi">
+									<h5> Nama </h5> <input type="text" value="namanya" name="nama">
+									<h5> Bio </h5> <input type="text" value="bionya" name="bio">
+									<h5> Lokasi </h5> <input type="text" value="lokasinya" name="lokasi">
 									<input type="submit" value="Save">
 								</form>
 							</div>		
@@ -277,7 +277,8 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 	                                <td>mboh</td>
 	                                <td colspan="2"> 
 	                                <button class = "btn btn-primary"><a href="#" data-toggle="modal" data-target="#myModalEdit" style="color: white"><i class="fa fa-edit"></i> Edit </a></button>
-	                       			<button class = "btn btn-danger"><i class="fa fa-trash-o"></i> Delete </button>  
+	                       			<button class = "btn btn-danger"><i class="fa fa-trash-o"></i> Delete </button>
+	                       			<button class = "btn btn-primary"><a href="#" data-toggle="modal" data-target="#myModalView" style="color: white"><i class="glyphicon glyphicon-eye-open"></i> View </a></button>
 	                                </td>
 	                                <td> </td>
 	                            </tr>
@@ -290,7 +291,8 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 	                                <td>iya</td>
 	                                <td colspan="2"> 
 	                                <button class = "btn btn-primary"><a href="#" data-toggle="modal" data-target="#myModalEdit" style="color: white"><i class="fa fa-edit"></i> Edit </a></button>
-	                       			<button class = "btn btn-danger"><i class="fa fa-trash-o"></i> Delete </button>  
+	                       			<button class = "btn btn-danger"><i class="fa fa-trash-o"></i> Delete </button> 
+	                       			<button class = "btn btn-primary"><a href="#" data-toggle="modal" data-target="#myModalView" style="color: white"><i class="glyphicon glyphicon-eye-open"></i> View </a></button>
 	                                </td>
 	                                <td> </td>
 	                            </tr>
@@ -304,6 +306,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 	                                <td colspan="2"> 
 	                                 <button class = "btn btn-primary"><a href="#" data-toggle="modal" data-target="#myModalEdit" style="color: white"><i class="fa fa-edit"></i> Edit </a></button>
 	                       			<button class = "btn btn-danger"><i class="fa fa-trash-o"></i> Delete </button>  
+	                       			<button class = "btn btn-primary"><a href="#" data-toggle="modal" data-target="#myModalView" style="color: white"><i class="glyphicon glyphicon-eye-open"></i> View </a></button>
 	                                </td>
 	                                <td> </td>
 	                            </tr>
@@ -315,8 +318,9 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 	                                <td>sidoarjo</td>
 	                                <td>apa</td>
 	                                <td colspan="2"> 
-	                                 <button class = "btn btn-primary"><a href="#" data-toggle="modal" data-target="#myModalEdit" style="color: white"><i class="fa fa-edit"></i> Edit </a></button>
+	                                <button class = "btn btn-primary"><a href="#" data-toggle="modal" data-target="#myModalEdit" style="color: white"><i class="fa fa-edit"></i> Edit </a></button>
 	                       			<button class = "btn btn-danger"><i class="fa fa-trash-o"></i> Delete </button>  
+	                       			<button class = "btn btn-primary"><a href="#" data-toggle="modal" data-target="#myModalView" style="color: white"><i class="glyphicon glyphicon-eye-open"></i> View </a></button>
 	                                </td>
 	                                <td> </td>
 	                            </tr>
@@ -337,10 +341,10 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 											<!--newsletter-->
 											<div class="login-main wthree">
 												<form action="#" method="post">
-													<h5> Email User </h5> <input type="text" disabled value="emailnya" name="email">
-													<h5> Username </h5> <input type="text" disabled value="usernamenya" name="Username">
-													<h5> City </h5> <input type="text" disabled value="kotanya" name="city">
-													<h5> Bio </h5> <input type="text" disabled value="bionya" name="bio">
+													<h5> Email User </h5> <input type="text" value="emailnya" name="email">
+													<h5> Username </h5> <input type="text" value="usernamenya" name="Username">
+													<h5> City </h5> <input type="text" value="kotanya" name="city">
+													<h5> Bio </h5> <input type="text" value="bionya" name="bio">
 
 													<input type="submit" value="Save">
 												</form>
@@ -351,6 +355,33 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 						</div>
 							<div class="clearfix"></div>
 					<!-- Modal edit -->
+
+
+					<!--Modal lihat-->
+						<div class="modal fade" id="myModalView" tabindex="-1" role="dialog" >
+							<div class="modal-dialog" role="document">
+							<!-- Modal content-->
+								<div class="modal-content news-w3l">
+										<div class="modal-header">
+											<button type="button" class="close w3l" data-dismiss="modal">&times;</button>
+											<h4>Edit Profile</h4>
+											<!--newsletter-->
+											<div class="login-main wthree">
+												<form action="#" method="post">
+													<h5> Email User </h5> <input type="text" disabled value="emailnya" name="email">
+													<h5> Username </h5> <input type="text" disabled value="usernamenya" name="Username">
+													<h5> City </h5> <input type="text" disabled value="kotanya" name="city">
+													<h5> Bio </h5> <input type="text" disabled value="bionya" name="bio">
+
+													<!-- <input type="submit" value="Save"> -->
+												</form>
+											</div>		
+										</div>
+								</div>
+							</div>
+						</div>
+							<div class="clearfix"></div>
+					<!-- Modal lihat -->
 
 
 	                <div class="table-responsive tab-pane fade" id="crse">

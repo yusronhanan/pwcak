@@ -61,6 +61,27 @@ class Course extends CI_Controller {
 		$this->load->view('template', $data);
 	}
 
+	public function detail_course(){
+		if ($this->session->userdata('logged_in') == TRUE) {
+		$id_title = $this->uri->segment(3);
+		$id_course = $this->uri->segment(3);
+		$id_user = $this->uri->segment(3);
+		$data['det'] = $this->course_model->GetDetailTitle($id_title);
+		$data['detail'] = $this->course_model->GetDetailCourse($id_course);
+		$data['name'] = $this->course_model->GetDetailUser($id_user);
+
+		$this->load->view('lesson_view', $data);
+	}else{
+		redirect('home');
+	}
+
+	}
+	// public function GetId(){
+ //        if($this->session->userdata('logged_in')==TRUE){
+ //            $data['course'] = $this->course_model->GetIdCourse();
+ //            $this->load->view('lesson_view',$data);
+ //        }
+ //    }
 }
 
 /* End of file course.php */

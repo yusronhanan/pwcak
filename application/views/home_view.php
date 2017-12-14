@@ -70,9 +70,9 @@
 				<div class="eve-w3lleft">
 					<h6><i class="fa fa-comment-o" aria-hidden="true"></i>17</h6>
 					<h6><i class="fa fa-heart-o" aria-hidden="true"></i>78</h6>
-				</div>	
+				</div>
 				<div class="eve-w3lright e1">
-					<a href="<?php echo base_url() ?>#"><h5>More</h5></a>
+					<a href="<?php echo base_url(); ?>index.php/course/detail_course/2"><h5>More</h5></a>
 				</div>
 				<div class="clearfix"></div>	
 			</div>
@@ -82,51 +82,6 @@
 	</div>
 </div>
 
-						<div class="modal fade" id="myModal5" tabindex="-1" role="dialog" >
-							<div class="modal-dialog">
-							<!-- Modal content-->
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4>Educational</h4>
-											<img src="<?php echo base_url() ?>assets/images/e2.jpg" alt="blog-image" />
-											<span>Lorem ipsum dolor sit amet, Sed ut perspiciatis unde omnis iste natus error sit voluptatem , eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.accusantium doloremque laudantium.</span>
-									</div>
-								</div>
-						
-							</div>
-				       </div>
-					   <!-- //Modal1 -->
-						<div class="modal fade" id="myModal6" tabindex="-1" role="dialog" >
-							<div class="modal-dialog">
-							<!-- Modal content-->
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4>Educational</h4>
-											<img src="<?php echo base_url() ?>assets/images/e1.jpg" alt="blog-image" />
-											<span>Lorem ipsum dolor sit amet, Sed ut perspiciatis unde omnis iste natus error sit voluptatem , eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.accusantium doloremque laudantium.</span>
-									</div>
-								</div>
-						
-							</div>
-				       </div>
-
-					   <!-- //Modal1 -->
-						<div class="modal fade" id="myModal7" tabindex="-1" role="dialog" >
-							<div class="modal-dialog">
-							<!-- Modal content-->
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4>Educational</h4>
-											<img src="<?php echo base_url() ?>assets/images/e3.jpg" alt="blog-image" />
-											<span>Lorem ipsum dolor sit amet, Sed ut perspiciatis unde omnis iste natus error sit voluptatem , eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.accusantium doloremque laudantium.</span>
-									</div>
-								</div>
-						
-							</div>
-				       </div>
 					   <!-- //Modal1 -->
 
 <!-- //popular courses -->

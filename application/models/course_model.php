@@ -129,6 +129,33 @@ class Course_model extends CI_Model {
       return $this->db->where($where)->get('course_title');
     }
 
+    public function GetDetailCourse($id_course){
+        $id_course = $this->uri->segment(3);
+        return $this->db->where('id_course',$id_course)
+                        ->get('course_content')
+                        
+                        ->row();
+    }
+     public function GetDetailTitle($id_title){
+        $id_course = $this->uri->segment(3);
+        return $this->db->where('id_title',$id_title)
+                        ->get('course_title')
+                        
+                        ->row();
+    }
+    public function GetDetailUser($id_user){
+        $id_user = $this->uri->segment(3);
+        return $this->db->where('id_user',$id_user)
+                        ->get('user')
+                        
+                        ->row();
+    }
+    // public function GetIdCourse(){
+    //     return $this->db->get('course_content')
+    //                     ->result();
+    // }
+
+
     public function GetContent($where)
     {
       return $this->db->where($where)->get('course_content');

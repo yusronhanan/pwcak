@@ -201,7 +201,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body>
 <div id="wrapper">
 
-<!----->
         <nav class="navbar-default navbar-static-top" role="navigation">
              <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -210,7 +209,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-               <h1> <a class="navbar-brand" href="index.html">Android</a></h1>         
+               <h1> <a class="navbar-brand" href="index.html"><?php echo substr($det->title ,0,5); ?></a></h1>         
 			   </div>
 			 <div class=" border-bottom">
         	<div class="full-left">
@@ -311,10 +310,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <ul class="nav" id="side-menu">
 				
                     <li>
-                        <a href="index.html" class=" hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon "></i><span class="nav-label">Lesson 1: Install AS</a>
+                        <a href="index.html" class=" hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon " ></i><span class="nav-label"><?php echo $detail->step_title; ?></a>
                     </li>
                    
-					 <li>
+					 <!-- <li>
                         <a href="inbox.html" class=" hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon"></i> <span class="nav-label">Lesson 2: Install JDK</span> </a>
                     </li>
                     
@@ -324,7 +323,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                      
                     <li>
                         <a href="layout.html" class=" hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon"></i> <span class="nav-label">Lesson 4: Buat apk</span> </a>
-                    </li>
+                    </li> -->
                    
                     <li>
                         <a href="#" class=" hvr-bounce-to-right"><i class="fa fa-list nav_icon"></i> <span class="nav-label">Forms</span><span class="fa arrow"></span></a>
@@ -353,9 +352,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		    <div class="banner">
 		   
 				<h2>
-				<a href="index.html">Android</a>
+				<a href="index.html"><?php echo $det->title; ?></a>
 				<i class="fa fa-angle-right"></i>
-				<span>by: Yusron Hanan</span>
+				<span>by: <?php echo $name->name; ?></span>
 				</h2>
 		    </div>
 		<!--//banner-->
@@ -363,11 +362,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="grid-system">
 			<div class="horz-grid">
 		 		<div class="grid-hor">
-		 			<h3 id="grid-example-basic">Lesson 1: Install AS</h3>
-		 			<p class="">Using a single set of <code>.col-md-*</code> grid classes, 
-		 			you can create a basic grid system that starts out stacked on mobile devices and tablet devices 
-		 			(the extra small to small range) 
-		 			before becoming horizontal on desktop (medium) devices. Place grid columns in any <code>.row</code>.</p>
+		 			<h3 id="grid-example-basic" ><?php echo $detail->step_title;?></h3>
+		 			<p class="" ><?php echo $detail->content; ?></p>
 				</div>
 				<div style="text-align: right; padding-right: 35px">
 					<button type="submit" class="btn btn-danger">Next</button>	
@@ -391,22 +387,51 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		 			<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 					<div class="container">
 					    <div class="row">
+					    	<div class="col-sm-8">
+					            <div class="panel panel-white post ">
+					                <div class="post-heading">
+					                    <div class="pull-left image">
+					                        <img src="http://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar" alt="user profile image" name="img_content">
+					                    </div>
+					                    <div class="pull-left meta">
+					                        <div class="title h5">
+					                            <a href="#" name="from_username"><b>Ryan Haywood</b></a>
+					                            Add comment.
+					                        </div>
+					                        <h6 class="text-muted time" name="created_at">1 minute ago</h6>
+					                    </div>
+					                </div> 
+					                <div class="post-description" name="">
+					                <input type="text" name="title_comment" placeholder= "Add Comment Title ..." style="padding: 5px; border: none;" > 
+					                   <textarea name="post_comment" style="margin-top:10px;margin-bottom:5px;width:715px;height:78px;padding:10px;" placeholder="Add Your Comment here ..."></textarea>
+					                    <!-- <div class="stats">
+					                        <a href="#" class="btn btn-default stat-item">
+					                            <i class="fa fa-thumbs-up icon"></i>2
+					                        </a>
+					                        <a href="#" class="btn btn-default stat-item">
+					                            <i class="fa fa-thumbs-down icon"></i>12
+					                        </a>
+					                    </div> -->
+					                    <input class="btn btn-info" type="submit" value="Post">
+					                </div>
+					            </div>
+					        </div>
 					        <div class="col-sm-8">
 					            <div class="panel panel-white post ">
 					                <div class="post-heading">
 					                	
 					                    <div class="pull-left image">
-					                        <img src="http://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar" alt="user profile image">
+					                        <img src="http://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar" alt="user profile image" name="img_content">
 					                    </div>
 					                    <div class="pull-left meta">
 					                        <div class="title h5">
-					                            <a href="#"><b>Ryan Haywood</b></a>
+					                            <a href="#" name="user_comment"><b>Ryan Haywood</b></a>
 					                            made a post.
 					                        </div>
-					                        <h6 class="text-muted time">1 minute ago</h6>
+					                        <h6 class="text-muted time" name="time_comment">1 minute ago</h6>
 					                    </div>
 					                </div> 
-					                <div class="post-description"> 
+					                <div class="post-description" name=""> 
 					                    <p>Bootdey is a gallery of free snippets resources templates and utilities for bootstrap css hmtl js framework. Codes for developers and web designers</p>
 					                    <div class="stats">
 					                        <a href="#" class="btn btn-default stat-item">

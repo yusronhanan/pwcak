@@ -25,6 +25,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.1/sweetalert2.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.1/sweetalert2.min.css">
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script>
 		$(function () {
 			$('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
@@ -202,33 +203,44 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		    <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
+
+				<?php
+				if (!empty($list_content)) {
+				$i = 1;
+				 foreach ($list_content as $list_c) {
+					?>
 				
-                    <li>
-                        <a href="index.html" class=" hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon "></i><span class="nav-label">Lesson 1: Install AS</a>
+
+					<li>
+                        <a href="" id="go_step" class=" hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon "></i><span class="nav-label">Lesson <?php echo $i++; ?> : <?php echo  $list_c->step_title; ?></a>
+                        <form action="<?php echo base_url(); ?>myaccount/add_course/<?php echo $tit_info[3]; ?>" id="<?php echo  $list_c->step_number; ?>" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="step_number" value="<?php echo  $list_c->step_number; ?>">
+                        <input type="submit" class="hidden" name="GO" id="goo">
+                        </form>
                     </li>
                    
-					 <li>
-                        <a href="inbox.html" class=" hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon"></i> <span class="nav-label">Lesson 2: Install JDK</span> </a>
+					<?php
+				}
+				?>
+				
+				<?php
+
+				}
+				else{
+					?>
+					<li>
+                        <a href="" class=" hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon "></i><span class="nav-label">Lesson 1 : KOSONG</a>
+                        
                     </li>
+					<?php
+				}
+				 ?>
                     
-                    <li>
-                        <a href="gallery.html" class=" hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon"></i> <span class="nav-label">Lesson 3: Install MEMU</span> </a>
-                    </li>
-                     
-                    <li>
-                        <a href="layout.html" class=" hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon"></i> <span class="nav-label">Lesson 4: Buat apk</span> </a>
-                    </li>
+                   
+                    
                    
                     <li>
-                        <a href="#" class=" hvr-bounce-to-right"><i class="fa fa-list nav_icon"></i> <span class="nav-label">Forms</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li><a href="forms.html" class=" hvr-bounce-to-right"><i class="fa fa-align-left nav_icon"></i>Basic forms</a></li>
-                            <li><a href="validation.html" class=" hvr-bounce-to-right"><i class="fa fa-check-square-o nav_icon"></i>Validation</a></li>
-                        </ul>
-                    </li>
-                   
-                    <li>
-                        <a href="#" class=" hvr-bounce-to-right"><i class="fa fa-cog nav_icon"></i> <span class="nav-label">Settings</span><span class="fa arrow"></span></a>
+                        <a href="#" data-toggle="modal" data-target="#settingcourse" class=" hvr-bounce-to-right"><i class="fa fa-cog nav_icon"></i> <span class="nav-label">Settings</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li><a href="signin.html" class=" hvr-bounce-to-right"><i class="fa fa-sign-in nav_icon"></i>Signin</a></li>
                             <li><a href="signup.html" class=" hvr-bounce-to-right"><i class="fa fa-sign-in nav_icon"></i>Singup</a></li>
@@ -238,6 +250,57 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
 			</div>
         </nav>
+        <!-- Modal setting course -->
+		<div class="modal fade" id="settingcourse" tabindex="-1" role="dialog" >
+		<div class="modal-dialog" role="document">
+			<!-- Modal content-->
+			<div class="modal-content news-w3l">
+				<div class="modal-header">
+							<button type="button" class="close w3l" data-dismiss="modal">&times;</button>
+							<h4>Edit Course</h4>
+							<!--newsletter-->
+							<div class="login-main wthree">
+							 <form action="<?php echo base_url(); ?>myaccount/add_course/<?php echo $tit_info[3]; ?>" method="post" enctype="multipart/form-data">
+							 	<input type="hidden" name="id_title" value="<?php echo $tit_info[2]; ?>">
+							 	<input type="hidden" name="step_number" value="<?php echo $step; ?>">
+								Course Name 
+								<input type="text" name="coursename" class="form-control" value="<?php echo $tit_info[0]; ?>">
+								Subject 
+								 <select class="form-control" name="subject">
+                                <option value="">All</option>
+                                <?php 
+                                foreach ($list_subject as $sbj) {
+                                 if ($sbj->value == $tit_info[5]) {
+                                    
+                                 ?>
+                                 <option value="<?php echo $sbj->value ?>" selected="selected"><?php echo $sbj->text ?></option>
+                                 <?php }
+                                 else { ?>
+                                    <option value="<?php echo $sbj->value ?>"><?php echo $sbj->text ?></option>
+                                <?php 
+                            }
+                            } ?>
+                                </select>
+                                Description
+                                <textarea name="description" class="form-control"><?php echo $tit_info[4]; ?></textarea>
+                                
+							<!-- <label for="file-upload" class="custom-file-upload ">
+    						<span class="glyphicon glyphicon-upload"></span>  Upload Thumbnail
+							</label> -->
+								<br/>
+								<!-- Choose Thumbnail -->
+								<!-- <input id="file-upload" name="thumbnail" type="file" class="form-control"/> -->
+								<br>
+								<input type="submit" name="settingcourse" value="Update Now" class="btn btn-danger pull-right">
+								<br>
+							</form>
+							</div>
+						<!--//newsletter-->			
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //Modal setting course -->
         <div id="page-wrapper" class="gray-bg dashbard-1">
        <div class="content-main">
  
@@ -265,18 +328,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="grid-system">
 			<div class="horz-grid">
 		 		<div class="grid-hor">
-		 			<form action="<?php echo base_url(); ?>myaccount/submit_content" method="post" enctype="multipart/form-data">
+		 			<form action="<?php echo base_url(); ?>myaccount/add_course/<?php echo $tit_info[3]; ?>" method="post" enctype="multipart/form-data">
 		 			<h3 id="grid-example-basic">
 		 			<input type="text" name="step_title" placeholder="Your Title" value="<?php if(!empty($getcontent)){ echo $getcontent->step_title;} ?>" style="padding: 8px;text-align: center;"></h3>
 		 			<br>
 		 			<input type="hidden" name="id_title" value="<?php echo $tit_info[2]; ?>">
-
-		 			<input type="hidden" name="step_number" value="<?php if($step == ''){ echo $getcontent->step_number;} else{ echo $step; } ?>">
+		 			
+		 			<input type="hidden" name="step_number" value="<?php
+		 			echo $step; ?>">
+		 			
 		 			<textarea name="content" class="ckeditor" id="ckeditor"><?php if(!empty($getcontent)){ echo $getcontent->content;} ?></textarea>
 		 			
 				</div>
 				<div style="text-align: right; padding-right: 35px">
-					<input type="submit" name="submit" class="btn btn-danger" value="Next">
+					<input type="submit" name="save" class="btn btn-danger" value="SAVE">
+
+					<?php 
+					if ($step >= $last) {
+					 ?>
+					 <input type="submit" name="newstep" class="btn btn-success" value="NEW STEP">
+					<?php 
+					} ?>
+					
+					<input type="submit" name="done" class="btn btn-danger" value="SAVE AND BACK TO MY ACCOUNT">
 					</form>	
 				</div>
 
@@ -325,6 +399,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 });
                             </script>
                     <?php endif; ?>
+
+    <script type="text/javascript">
+    	$(document).ready(function(){
+    
+    $("a#go_step").click(function(){
+    $(this).next().children( "#goo" ).click();     
+    return false;
+}); 
+});
+
+// 	window.onbeforeunload = function (event) {
+//     var message = 'Important: Please click on \'Save\' button to leave this page.';
+//     if (typeof event == 'undefined') {
+//         event = window.event;
+//     }
+//     if (event) {
+//         event.returnValue = message;
+//     }
+//     return message;
+// };
+
+</script>
 </body>
 </html>
 

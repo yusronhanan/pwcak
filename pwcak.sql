@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 13 Des 2017 pada 08.06
+-- Generation Time: 22 Des 2017 pada 16.59
 -- Versi Server: 10.1.13-MariaDB
 -- PHP Version: 7.0.8
 
@@ -68,7 +68,31 @@ CREATE TABLE `course_content` (
 --
 
 INSERT INTO `course_content` (`id_course`, `id_title`, `id_user`, `step_number`, `step_title`, `content`, `img`, `created_at`, `last_update`) VALUES
-(2, 20, 1, 1, 'tes', '<p><img alt="" src="http://indonesiaone.org/wp-content/uploads/2017/03/Fenomena-Gojek-dan-Grab-Menjadi-Raksasa-Dunia-Transportasi-Online.jpg" style="height:108px; width:200px" /></p>\n\n<p>asdbasjdbasjdjasbjasdbjaskdkjasdsad</p>\n', NULL, '2017-12-10 16:27:08', '2017-12-10 16:27:08');
+(2, 20, 1, 1, 'tes', '<p><img alt="" src="http://indonesiaone.org/wp-content/uploads/2017/03/Fenomena-Gojek-dan-Grab-Menjadi-Raksasa-Dunia-Transportasi-Online.jpg" style="height:108px; width:200px" /></p>\n\n<p>asdbasjdbasjdjasbjasdbjaskdkjasdsad</p>\n', NULL, '2017-12-10 16:27:08', '2017-12-10 16:27:08'),
+(3, 20, 1, 2, 'tes ini ke 2', '<p><img alt="" src="http://indonesiaone.org/wp-content/uploads/2017/03/Fenomena-Gojek-dan-Grab-Menjadi-Raksasa-Dunia-Transportasi-Online.jpg" style="height:108px; width:200px" /></p>\r\n<p> ini 2<?p>\r\n<p>asdbasjdbasjdjasbjasdbjaskdkjasdsad</p>\r\n', NULL, '2017-12-10 16:27:08', '2017-12-10 16:27:08'),
+(4, 20, 1, 4, 'tes', '<p><img alt="" src="http://indonesiaone.org/wp-content/uploads/2017/03/Fenomena-Gojek-dan-Grab-Menjadi-Raksasa-Dunia-Transportasi-Online.jpg" style="height:108px; width:200px" /></p>\r\n\r\n<p>asdbasjdbasjdjasbjasdbjaskdkjasdsad</p>\r\n', NULL, '2017-12-14 13:40:27', '2017-12-14 13:40:27'),
+(5, 20, 1, 5, 'tes', '<p><img alt="" src="http://indonesiaone.org/wp-content/uploads/2017/03/Fenomena-Gojek-dan-Grab-Menjadi-Raksasa-Dunia-Transportasi-Online.jpg" style="height:108px; width:200px" /></p>\r\n\r\n<p>asdbasjdbasjdjasbjasdbjaskdkjasdsad</p>\r\n', NULL, '2017-12-14 13:42:52', '2017-12-14 13:42:52'),
+(6, 20, 1, 6, 'tes', '<p><img alt="" src="http://indonesiaone.org/wp-content/uploads/2017/03/Fenomena-Gojek-dan-Grab-Menjadi-Raksasa-Dunia-Transportasi-Online.jpg" style="height:108px; width:200px" /></p>\r\n\r\n<p>asdbasjdbasjdjasbjasdbjaskdkjasdsad</p>\r\n', NULL, '2017-12-14 13:43:12', '2017-12-14 13:43:12'),
+(7, 20, 1, 7, 'tes', '<p><img alt="" src="http://indonesiaone.org/wp-content/uploads/2017/03/Fenomena-Gojek-dan-Grab-Menjadi-Raksasa-Dunia-Transportasi-Online.jpg" style="height:108px; width:200px" /></p>\r\n\r\n<p>asdbasjdbasjdjasbjasdbjaskdkjasdsad</p>\r\n', NULL, '2017-12-14 13:43:17', '2017-12-14 13:43:17'),
+(8, 20, 1, 8, 'tessss', '<p><img alt="" src="http://indonesiaone.org/wp-content/uploads/2017/03/Fenomena-Gojek-dan-Grab-Menjadi-Raksasa-Dunia-Transportasi-Online.jpg" style="height:108px; width:200px" /></p>\r\n\r\n<p>asdbasjdbasjdjasbjasdbjaskdkjasdsad</p>\r\n', NULL, '2017-12-14 13:46:19', '2017-12-14 13:46:19'),
+(9, 20, 1, 9, 'tess', '<p><img alt="" src="http://indonesiaone.org/wp-content/uploads/2017/03/Fenomena-Gojek-dan-Grab-Menjadi-Raksasa-Dunia-Transportasi-Online.jpg" style="height:108px; width:200px" /></p>\r\n\r\n<p>asdbasjdbasjdjasbjasdbjaskdkjasdsad</p>\r\n', NULL, '2017-12-14 13:46:26', '2017-12-14 13:46:26'),
+(10, 20, 1, 10, 'tes', '<p><img alt="" src="http://indonesiaone.org/wp-content/uploads/2017/03/Fenomena-Gojek-dan-Grab-Menjadi-Raksasa-Dunia-Transportasi-Online.jpg" style="height:108px; width:200px" /></p>\r\n\r\n<p>asdbasjdbasjdjasbjasdbjaskdkjasdsad</p>\r\n', NULL, '2017-12-14 13:58:17', '2017-12-14 13:58:17'),
+(11, 20, 1, 1, 'tes', '<p><img alt="" src="http://indonesiaone.org/wp-content/uploads/2017/03/Fenomena-Gojek-dan-Grab-Menjadi-Raksasa-Dunia-Transportasi-Online.jpg" style="height:108px; width:200px" /></p>\r\n\r\n<p>asdbasjdbasjdjasbjasdbjaskdkjasdsad</p>\r\n', NULL, '2017-12-14 14:12:15', '2017-12-14 14:12:15'),
+(12, 20, 1, 1, 'tes', '<p><img alt="" src="http://indonesiaone.org/wp-content/uploads/2017/03/Fenomena-Gojek-dan-Grab-Menjadi-Raksasa-Dunia-Transportasi-Online.jpg" style="height:108px; width:200px" /></p>\r\n\r\n<p>asdbasjdbasjdjasbjasdbjaskdkjasdsad</p>\r\n', NULL, '2017-12-14 14:12:22', '2017-12-14 14:12:22'),
+(13, 20, 1, 1, 'tes', '<p><img alt="" src="http://indonesiaone.org/wp-content/uploads/2017/03/Fenomena-Gojek-dan-Grab-Menjadi-Raksasa-Dunia-Transportasi-Online.jpg" style="height:108px; width:200px" /></p>\r\n\r\n<p>asdbasjdbasjdjasbjasdbjaskdkjasdsad</p>\r\n', NULL, '2017-12-14 14:33:00', '2017-12-14 14:33:00'),
+(14, 20, 1, 1, 'tes', '<p><img alt="" src="http://indonesiaone.org/wp-content/uploads/2017/03/Fenomena-Gojek-dan-Grab-Menjadi-Raksasa-Dunia-Transportasi-Online.jpg" style="height:108px; width:200px" /></p>\r\n\r\n<table border="1" cellpadding="1" cellspacing="1" style="width:500px">\r\n	<tbody>\r\n		<tr>\r\n			<td>&nbsp;</td>\r\n			<td>&nbsp;</td>\r\n		</tr>\r\n		<tr>\r\n			<td>&nbsp;</td>\r\n			<td>&pound;</td>\r\n		</tr>\r\n		<tr>\r\n			<td>&nbsp;</td>\r\n			<td>&nbsp;</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p>asdbasjdbasjdjasbjasdbjaskdkjasdsad</p>\r\n', NULL, '2017-12-14 20:22:17', '2017-12-14 20:22:17'),
+(15, 20, 1, 8, 'tessss', '<p><img alt="" src="http://indonesiaone.org/wp-content/uploads/2017/03/Fenomena-Gojek-dan-Grab-Menjadi-Raksasa-Dunia-Transportasi-Online.jpg" style="height:108px; width:200px" /></p>\r\n\r\n<p>asdbasjdbasjdjasbjasdbjaskdkjasdsad</p>\r\n', NULL, '2017-12-21 15:12:04', '2017-12-21 15:12:04'),
+(16, 20, 1, 8, 'tessss', '<p><img alt="" src="http://indonesiaone.org/wp-content/uploads/2017/03/Fenomena-Gojek-dan-Grab-Menjadi-Raksasa-Dunia-Transportasi-Online.jpg" style="height:108px; width:200px" /></p>\r\n\r\n<p>asdbasjdbasjdjasbjasdbjaskdkjasdsad</p>\r\n', NULL, '2017-12-21 15:13:26', '2017-12-21 15:13:26'),
+(17, 20, 1, 11, 'tes', '<p><img alt="" src="http://indonesiaone.org/wp-content/uploads/2017/03/Fenomena-Gojek-dan-Grab-Menjadi-Raksasa-Dunia-Transportasi-Online.jpg" style="height:108px; width:200px" /></p>\r\n\r\n<p>asdbasjdbasjdjasbjasdbjaskdkjasdsad</p>\r\n', NULL, '2017-12-21 15:13:54', '2017-12-21 15:13:54'),
+(18, 20, 1, 12, 'tes', '<p><img alt="" src="http://indonesiaone.org/wp-content/uploads/2017/03/Fenomena-Gojek-dan-Grab-Menjadi-Raksasa-Dunia-Transportasi-Online.jpg" style="height:108px; width:200px" /></p>\r\n\r\n<p>asdbasjdbasjdjasbjasdbjaskdkjasdsad</p>\r\n', NULL, '2017-12-21 15:14:14', '2017-12-21 15:14:14'),
+(25, 24, 1, 6, 'Coba 6 simpa', '<p>asdasdasddsadssadsadasdsa</p>\r\n\r\n<p>update 1 sukses</p>\r\n', NULL, '2017-12-21 15:41:57', '2017-12-22 18:29:19'),
+(26, 24, 1, 2, 'Coba 2 bkjbkj', '<p>asdasdasddsadssadsadasdsa</p>\r\n', NULL, '2017-12-21 15:44:27', '2017-12-22 22:57:18'),
+(27, 24, 1, 3, 'Coba 3 aa', '<p>asdasdasddsadssadsadasdsa</p>\r\n', NULL, '2017-12-21 15:44:35', '2017-12-22 18:29:10'),
+(28, 24, 1, 4, 'Coba 4', '<p>asdasdasddsadssadsadasdsa</p>\r\n', NULL, '2017-12-21 15:45:03', '2017-12-22 18:26:20'),
+(29, 24, 1, 5, 'Coba 1 simpan', '<p>asdasdasddsadssadsadasdsa</p>\r\n\r\n<p>update 1 sukses</p>\r\n', NULL, '2017-12-22 10:09:12', '2017-12-22 10:21:07'),
+(30, 26, 1, 1, 'SS', '<p>AASD</p>\r\n', NULL, '2017-12-22 16:23:54', '2017-12-22 16:23:54'),
+(31, 24, 1, 7, 'Coba 7', '<p>asdasdasddsadssadsadasdsa</p>\r\n', NULL, '2017-12-22 17:36:20', '2017-12-22 18:19:22'),
+(32, 24, 1, 8, 'tes 8 newstep', '<p>asdasdasdasdasdsad</p>\r\n', NULL, '2017-12-22 18:20:11', '2017-12-22 21:07:29');
 
 -- --------------------------------------------------------
 
@@ -86,35 +110,40 @@ CREATE TABLE `course_title` (
   `created_at` datetime NOT NULL,
   `last_update` datetime NOT NULL,
   `verified` int(2) NOT NULL DEFAULT '0',
-  `visitor` int(11) NOT NULL
+  `visitor` int(11) NOT NULL,
+  `random_code` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `course_title`
 --
 
-INSERT INTO `course_title` (`id_title`, `id_user`, `title`, `subject`, `description`, `thumbnail`, `created_at`, `last_update`, `verified`, `visitor`) VALUES
-(1, 1, 'DUMMY LEARNING', 'mat', 'Ini dumy dummy dumy', 'dummy.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 0),
-(2, 2, 'DUMMY LEARNING 2', 'mat', 'Ini dumy dummy dumy', 'e2.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 0),
-(3, 3, 'DUMMY LEARNING 3', 'mat', 'Ini dumy dummy dumy', 'dummy.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 0),
-(4, 3, 'DUMMY LEARNING 4', 'mat', 'Ini dumy dummy dumy', 'dummy.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 0),
-(5, 1, 'DUMMY LEARNING 5', 'mat', 'Ini dumy dummy dumy', 'dummy.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 0),
-(6, 3, 'DUMMY LEARNING 6', 'sjrh', 'Ini dumy dummy dumy', 'dummy.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 0),
-(7, 3, 'DUMMY LEARNING 7', 'sjrh', 'Ini dumy dummy dumy', 'dummy.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 0),
-(8, 3, 'DUMMY LEARNING 8', 'sjrh', 'Ini dumy dummy dumy', 'dummy.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 0),
-(9, 1, 'DUMMY LEARNING9', 'sjrh', 'Ini dumy dummy dumy', 'dummy.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 0),
-(10, 3, 'DUMMY LEARNING 10', 'bi', 'Ini dumy dummy dumy', 'dummy.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 0),
-(11, 3, 'DUMMY LEARNING 11', 'bi', 'Ini dumy dummy dumy', 'dummy.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 0),
-(12, 3, 'DUMMY LEARNING 12', 'bi', 'Ini dumy dummy dumy', 'dummy.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 0),
-(13, 3, 'DUMMY LEARNING 13', 'bi', 'Ini dumy dummy dumy', 'dummy.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 0),
-(14, 1, 'DUMMY LEARNING14', 'bi', 'Ini dumy dummy dumy', 'dummy.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 0),
-(15, 3, 'DUMMY LEARNING 15', 'mat', 'Ini dumy dummy dumy', 'dummy.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 0),
-(16, 3, 'DUMMY LEARNING 122', 'mat', 'Ini dumy dummy dumy', 'dummy.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 0),
-(17, 1, 'asdsa', 'bi', ' sadasdsad', 'e2.jpg', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0),
-(18, 1, 'asadasdasadsdasd', 'bi', ' sadasdasdasdasdasd', 'e2.jpg', '2017-12-10 14:15:04', '2017-12-10 14:15:04', 0, 0),
-(19, 1, 'asdsadsasda', 'sjrh', ' asdasdsadsadsadsa', 'motour2.png', '2017-12-10 14:17:20', '2017-12-10 14:17:20', 0, 0),
-(20, 1, 'asdasdasdsadsad', 'bi', ' adsaasdsadsadasdsad', 'lokasi.png', '2017-12-10 14:18:44', '2017-12-10 14:18:44', 0, 0),
-(21, 1, 'tes 1', 'mat', ' tes1 tes1tes1tes   tes1t', '99005-OLBLCU-379.jpg', '2017-12-10 14:45:27', '2017-12-10 14:45:27', 0, 0);
+INSERT INTO `course_title` (`id_title`, `id_user`, `title`, `subject`, `description`, `thumbnail`, `created_at`, `last_update`, `verified`, `visitor`, `random_code`) VALUES
+(1, 1, 'DUMMY LEARNING', 'mat', 'Ini dumy dummy dumy', 'dummy.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 0, ''),
+(2, 2, 'DUMMY LEARNING 2', 'mat', 'Ini dumy dummy dumy', 'e2.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 0, ''),
+(3, 3, 'DUMMY LEARNING 3', 'mat', 'Ini dumy dummy dumy', 'dummy.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 0, ''),
+(4, 3, 'DUMMY LEARNING 4', 'mat', 'Ini dumy dummy dumy', 'dummy.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 0, ''),
+(5, 1, 'DUMMY LEARNING 5', 'mat', 'Ini dumy dummy dumy', 'dummy.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 0, ''),
+(6, 3, 'DUMMY LEARNING 6', 'sjrh', 'Ini dumy dummy dumy', 'dummy.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 0, ''),
+(7, 3, 'DUMMY LEARNING 7', 'sjrh', 'Ini dumy dummy dumy', 'dummy.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 0, ''),
+(8, 3, 'DUMMY LEARNING 8', 'sjrh', 'Ini dumy dummy dumy', 'dummy.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 0, ''),
+(9, 1, 'DUMMY LEARNING9', 'sjrh', 'Ini dumy dummy dumy', 'dummy.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 0, ''),
+(10, 3, 'DUMMY LEARNING 10', 'bi', 'Ini dumy dummy dumy', 'dummy.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 0, ''),
+(11, 3, 'DUMMY LEARNING 11', 'bi', 'Ini dumy dummy dumy', 'dummy.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 0, ''),
+(12, 3, 'DUMMY LEARNING 12', 'bi', 'Ini dumy dummy dumy', 'dummy.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 0, ''),
+(13, 3, 'DUMMY LEARNING 13', 'bi', 'Ini dumy dummy dumy', 'dummy.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 0, ''),
+(14, 1, 'DUMMY LEARNING14', 'bi', 'Ini dumy dummy dumy', 'dummy.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 0, ''),
+(15, 3, 'DUMMY LEARNING 15', 'mat', 'Ini dumy dummy dumy', 'dummy.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 0, ''),
+(16, 3, 'DUMMY LEARNING 122', 'mat', 'Ini dumy dummy dumy', 'dummy.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 0, ''),
+(17, 1, 'asdsa', 'bi', ' sadasdsad', 'e2.jpg', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0, ''),
+(18, 1, 'asadasdasadsdasd', 'bi', ' sadasdasdasdasdasd', 'e2.jpg', '2017-12-10 14:15:04', '2017-12-10 14:15:04', 0, 0, ''),
+(19, 1, 'asdsadsasda', 'sjrh', ' asdasdsadsadsadsa', 'motour2.png', '2017-12-10 14:17:20', '2017-12-10 14:17:20', 0, 0, ''),
+(20, 1, 'asdasdasdsadsad', 'bi', ' adsaasdsadsadasdsad', 'lokasi.png', '2017-12-10 14:18:44', '2017-12-10 14:18:44', 0, 0, ''),
+(21, 1, 'tes 1', 'mat', ' tes1 tes1tes1tes   tes1t', '99005-OLBLCU-379.jpg', '2017-12-10 14:45:27', '2017-12-10 14:45:27', 0, 0, ''),
+(23, 1, 'title test 2', 'mat', ' adsasdsdsd', 'DEPAN1.png', '2017-12-21 15:15:54', '2017-12-21 15:15:54', 0, 0, ''),
+(24, 1, 'dcaatitle course', 'mat', ' adsaaasasdasdAAAd', 'BELAKANG1.png', '2017-12-21 15:28:34', '2017-12-22 22:55:53', 0, 0, 'DB1EzYWA7qJ'),
+(25, 1, 'tes lagi 3', 'mat', ' adsadasasd', '204.jpg', '2017-12-21 15:33:55', '2017-12-21 15:33:55', 0, 0, 'EfKOv81GU56'),
+(26, 1, 'dasdas', 'bi', ' asdasds', '2041.jpg', '2017-12-22 16:12:10', '2017-12-22 16:12:10', 0, 0, 'G2B7nfbRjhV');
 
 -- --------------------------------------------------------
 
@@ -152,19 +181,22 @@ CREATE TABLE `user` (
   `name` text NOT NULL,
   `city` varchar(100) NOT NULL,
   `bio` text NOT NULL,
+  `photo` varchar(200) NOT NULL DEFAULT 'github.png',
   `role` int(1) NOT NULL DEFAULT '0',
-  `hash_validation` text NOT NULL
+  `hash_validation` text NOT NULL,
+  `created_at` datetime NOT NULL,
+  `last_update` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `user`
 --
 
-INSERT INTO `user` (`id_user`, `email`, `username`, `password`, `name`, `city`, `bio`, `role`, `hash_validation`) VALUES
-(1, 'yusronzain@gmail.com', 'yusron', 'yusron', 'yusron hanan', 'situbondo', 'mboh', 0, '09718937138ajknakjsjas'),
-(2, 'qori@gmail.com', 'qori', 'qoriatul', 'Yusron', 'ngawi', 'ngawi coy', 0, ''),
-(3, 'karin@gmail.com', 'karin', 'karin', 'karin', 'sda', 'sda', 0, ''),
-(4, 'bayu@gmail.com', 'bayu', 'bayu', 'bayu', 'kdr', 'kdr', 0, '');
+INSERT INTO `user` (`id_user`, `email`, `username`, `password`, `name`, `city`, `bio`, `photo`, `role`, `hash_validation`, `created_at`, `last_update`) VALUES
+(1, 'yusronzain@gmail.com', 'yusron', 'yusron', 'Yusron Hanan Zain Vidi Imtinan', 'malang - situbond', 'web developerrr', 'DEPAN5.png', 0, '09718937138ajknakjsjas', '0000-00-00 00:00:00', '2017-12-22 22:21:27'),
+(2, 'qori@gmail.com', 'qori', 'qoriatul', 'Yusron', 'ngawi', 'ngawi coy', 'github.png', 0, '', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, 'karin@gmail.com', 'karin', 'karin', 'karin', 'sda', 'sda', 'github.png', 0, '', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(4, 'bayu@gmail.com', 'bayu', 'bayu', 'bayu', 'kdr', 'kdr', 'github.png', 0, '', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -253,12 +285,12 @@ ALTER TABLE `config`
 -- AUTO_INCREMENT for table `course_content`
 --
 ALTER TABLE `course_content`
-  MODIFY `id_course` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_course` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT for table `course_title`
 --
 ALTER TABLE `course_title`
-  MODIFY `id_title` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_title` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT for table `qna`
 --

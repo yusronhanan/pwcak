@@ -80,6 +80,9 @@ class Myaccount extends CI_Controller {
 		else if($this->input->post('settingcourse')) {
 			$this->editcourse_title();
 		}
+		else if ($this->input->post('editthumbnail')) {
+			$this->editcourse_thumbnail();	
+		}
 		else {
 		$step_number = $this->input->post('step_number');
 		if ($this->session->userdata('logged_in') == TRUE) {
@@ -121,7 +124,7 @@ class Myaccount extends CI_Controller {
 		}
 
 		$data = [
-			'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject'),
+			'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject').'|'.$getcourse->row('thumbnail'),
 			'getcontent'			=> $getcontent,
 			'step'					=> $step,
 			'list_content'			=> $list_content,		
@@ -177,7 +180,7 @@ class Myaccount extends CI_Controller {
 					if (!empty($this->input->post('newstep'))) {
 						
 						$data = [
-						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject'),
+						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject').'|'.$getcourse->row('thumbnail'),
 						'getcontent'			=> $getcontent,
 						'step'					=> $newnumber,
 						'list_content'			=> $list_content,		
@@ -196,7 +199,7 @@ class Myaccount extends CI_Controller {
 						// redirect('myaccount/add_course/'.$random_code);
 						$getcontent = $this->course_model->GetContent(['id_title' => $id_title, 'step_number' => $this->input->post('step_number')])->row();
 						$data = [
-						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject'),
+						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject').'|'.$getcourse->row('thumbnail'),
 						'getcontent'			=> $getcontent,
 						'step'					=> $this->input->post('step_number'),
 						'list_content'			=> $list_content,		
@@ -260,6 +263,32 @@ class Myaccount extends CI_Controller {
 			}
 		}
 	}
+
+	public function editphoto(){
+				$config['upload_path'] = './assets/images';
+                $config['allowed_types'] = 'jpg|png';
+                $config['max_size']  = '2000';
+                
+                $this->load->library('upload', $config);
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('photoprofile')){
+  
+				$result = $this->auth_model->editphoto($this->upload->data());
+				if($result == false) {
+					$this->session->set_flashdata('notif_failed','Maaf, ada kesalahan. Coba lagi');
+					redirect('myaccount');
+				}
+				else {
+					$this->session->set_flashdata('notif_success','Anda sukses mengedit foto profile');
+					redirect('myaccount');
+				}
+			
+			}  
+			else{
+				$this->session->set_flashdata('notif', $this->upload->display_errors());
+				redirect('myaccount');
+                }
+	}
 	public function newcourse_title(){
 
 		if($this->input->post('submit')){
@@ -269,7 +298,7 @@ class Myaccount extends CI_Controller {
 			$this->form_validation->set_rules('description','Description','required');
 
 			if($this->form_validation->run() == TRUE){
-				 $config['upload_path'] = './assets/images';
+				$config['upload_path'] = './assets/images';
                 $config['allowed_types'] = 'jpg|png';
                 $config['max_size']  = '2000';
                 
@@ -329,7 +358,7 @@ class Myaccount extends CI_Controller {
 					$this->session->set_flashdata('notif_success','Anda sukses update data course');
 					$getcontent = $this->course_model->GetContent(['id_title' => $id_title, 'step_number' => $this->input->post('step_number')])->row();
 						$data = [
-						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject'),
+						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject').'|'.$getcourse->row('thumbnail'),
 						'getcontent'			=> $getcontent,
 						'step'					=> $this->input->post('step_number'),
 						'list_content'			=> $list_content,		
@@ -346,7 +375,7 @@ class Myaccount extends CI_Controller {
 					$this->session->set_flashdata('notif_failed','Maaf, ada kesalahan saat update. Coba lagi');
 					$getcontent = $this->course_model->GetContent(['id_title' => $id_title, 'step_number' => $this->input->post('step_number')])->row();
 						$data = [
-						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject'),
+						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject').'|'.$getcourse->row('thumbnail'),
 						'getcontent'			=> $getcontent,
 						'step'					=> $this->input->post('step_number'),
 						'list_content'			=> $list_content,		
@@ -365,7 +394,7 @@ class Myaccount extends CI_Controller {
 					$this->session->set_flashdata('notif',validation_errors());
 					$getcontent = $this->course_model->GetContent(['id_title' => $id_title, 'step_number' => $this->input->post('step_number')])->row();
 						$data = [
-						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject'),
+						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject').'|'.$getcourse->row('thumbnail'),
 						'getcontent'			=> $getcontent,
 						'step'					=> $this->input->post('step_number'),
 						'list_content'			=> $list_content,		
@@ -379,6 +408,82 @@ class Myaccount extends CI_Controller {
 						$this->load->view('add_course_view',$data);
 
 			}
+		
+
+		}
+		public function editcourse_thumbnail(){
+
+						$id_title = $this->input->post('id_title');
+						$random_code = $this->course_model->GetData(['id_title'=>$id_title],'course_title')->row('random_code');
+						$getcourse = $this->course_model->GetCourse(['id_title'=>$id_title]);
+
+						$id_usermaker = $getcourse->row('id_user');
+						$lastid = (int) $this->course_model->GetLastStep(['id_title'=>$id_title]);
+						$list_content = $this->course_model->GetListContent(['id_title' => $id_title, 'id_user' => $id_usermaker]);
+						$getcontent = '';
+						$getname = $this->auth_model->GetUser(['id_user' => $id_usermaker])->row('name');
+
+						$config['upload_path'] = './assets/images';
+                		$config['allowed_types'] = 'jpg|png';
+                		$config['max_size']  = '2000';
+                
+                		$this->load->library('upload', $config);
+                		$this->upload->initialize($config);
+                if ($this->upload->do_upload('photothumbnail')){
+
+						$result = $this->course_model->edit_course_thumbnail($this->upload->data());
+					if($result == TRUE) {
+					$this->session->set_flashdata('notif_success','Anda sukses update thumbnail course');
+					$getcontent = $this->course_model->GetContent(['id_title' => $id_title, 'step_number' => $this->input->post('step_number')])->row();
+						$data = [
+						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject').'|'.$getcourse->row('thumbnail'),
+						'getcontent'			=> $getcontent,
+						'step'					=> $this->input->post('step_number'),
+						'list_content'			=> $list_content,		
+						'last'					=> $lastid,
+						'list_subject'			=> $this->course_model->GetSubject(),
+						
+						// 'list_subject'		=> $this->course_model->GetSubject(),
+
+					];
+						
+						$this->load->view('add_course_view',$data);
+				}
+				else {
+					$this->session->set_flashdata('notif_failed','Maaf, ada kesalahan saat update thumbnail. Coba lagi');
+					$getcontent = $this->course_model->GetContent(['id_title' => $id_title, 'step_number' => $this->input->post('step_number')])->row();
+						$data = [
+						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject').'|'.$getcourse->row('thumbnail'),
+						'getcontent'			=> $getcontent,
+						'step'					=> $this->input->post('step_number'),
+						'list_content'			=> $list_content,		
+						'last'					=> $lastid,
+						'list_subject'			=> $this->course_model->GetSubject(),
+						
+						// 'list_subject'		=> $this->course_model->GetSubject(),
+
+					];
+						
+						$this->load->view('add_course_view',$data);
+				}
+			}  
+			else{
+				$this->session->set_flashdata('notif', $this->upload->display_errors());
+				$getcontent = $this->course_model->GetContent(['id_title' => $id_title, 'step_number' => $this->input->post('step_number')])->row();
+						$data = [
+						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject').'|'.$getcourse->row('thumbnail'),
+						'getcontent'			=> $getcontent,
+						'step'					=> $this->input->post('step_number'),
+						'list_content'			=> $list_content,		
+						'last'					=> $lastid,
+						'list_subject'			=> $this->course_model->GetSubject(),
+						
+						// 'list_subject'		=> $this->course_model->GetSubject(),
+
+					];
+						
+						$this->load->view('add_course_view',$data);
+                }
 		
 
 		}

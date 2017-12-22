@@ -78,6 +78,24 @@ class Auth_model extends CI_Model {
             return false;
         }
     }
+    public function editphoto($photo){
+        date_default_timezone_set('Asia/Jakarta'); # add your city to set local time zone
+        $now = date('Y-m-d H:i:s');
+        $id_user = $this->session->userdata('logged_id');
+        $data=array(
+              'photo'               => $photo['file_name'],
+              'last_update'         => $now,
+        );
+
+        $this->db->where('id_user',$id_user)
+                 ->update('user', $data);
+
+        if($this->db->affected_rows() > 0) {
+            return true;
+        }else{
+            return false;
+        }
+    }
 
 	public function GetUser($where)
     {

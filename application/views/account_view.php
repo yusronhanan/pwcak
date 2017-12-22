@@ -28,6 +28,48 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.1/sweetalert2.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.1/sweetalert2.min.css">
 
+<style type="text/css">
+  .custom-input-file {
+    overflow: hidden;
+    position: relative;
+    width: 200px;
+    height: 200px;
+    background-repeat: no-repeat;
+    /*background-attachment: fixed;*/
+    background-position: center; 
+    background-size: 200px;
+    /*border-radius: 120px;*/
+}
+.changephoto{
+    z-index: 999;
+    line-height: 0;
+    font-size: 0;
+    position: absolute;
+    opacity: 0;
+    filter: alpha(opacity = 0);-ms-filter: "alpha(opacity=0)";
+    margin: 0;
+    padding:0;
+    left:0;
+}
+.uploadPhoto {
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    display: none;
+    width: 50%;
+    height: 50%;
+    color: #fff;    
+    text-align: center;
+    line-height: 60px;
+    text-transform: uppercase;    
+    background-color: rgba(0,0,0,.3);
+    /*border-radius: 50px;*/
+    cursor: pointer;
+}
+.custom-input-file:hover .uploadPhoto { display: block; }
+   
+</style>
+
 </head>
 <body>
 	<?php if ($this->session->flashdata('notif_success')): ?>
@@ -210,17 +252,38 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 						
 							<div class="slider-info" style="background:rgba(0, 0, 0, 0);">
 
+								<?php 
+								if ($this->session->userdata('logged_id') == $user_info->id_user) {
+								 ?>
+								 <form id="formfoto" action ="<?php echo base_url();?>myaccount/editphoto" method="post" enctype="multipart/form-data">
+						      	<div class="custom-input-file" id="previewavatar" style="background-image:url('<?php echo base_url() ?>assets/images/<?php echo $user_info->photo; ?>');border-radius: 50%; float: left;">
+                                    <label class="uploadPhoto">
+                                        Edit
+                                        <input type="file" id="filefoto" name="photoprofile" class="change-avatar changephoto">
+                                    </label>
+                                </div>
+                                </form>
+								 <?php }
+								 else { ?>
 								<div>
-						          <img src="http://placehold.it/200x200" alt="" class="img-responsive profile-photo" style="border-radius: 50%; float: left;" />
+						          <img src="<?php echo base_url() ?>assets/images/<?php echo $user_info->photo; ?>" width="200px" height="200px" alt="" class="img-responsive profile-photo" style="border-radius: 50%; float: left;" />
 						      	</div>
+						      	<?php } ?>
 
 								<div>
 									<h3><?php echo $user_info->name; ?></h3>
 									<h4><?php echo $user_info->bio; ?></h4>
 									<h4><?php echo $user_info->city; ?></h4>
 									<br/> <br/> <br/>
-									<button class="btn btn-default"><a href="#" data-toggle="modal" data-target="#edituser"><i class="fa fa-pencil"></i>Edit Account</a></button>
+								<?php 
+								if ($this->session->userdata('logged_id') == $user_info->id_user) {
+								 ?>
+								 <button class="btn btn-default"><a href="#" data-toggle="modal" data-target="#edituser"><i class="fa fa-pencil"></i>Edit Account</a></button>
+								 <?php }
+								 else { ?>
 									<button class="btn btn-default"><a href="#" data-toggle="modal" data-target=""><i class="fa fa-plus"></i>Follow</a></button>
+								<?php } ?>
+
 								</div>
 								
 							</div>
@@ -234,9 +297,10 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 
 		<!-- //Slider -->
 	</div>
+<?php 
+	if ($this->session->userdata('logged_id') == $user_info->id_user) { ?>
 
-
-	<!-- Modal99 -->
+	<!-- Modal edit user -->
 		<div class="modal fade" id="edituser" tabindex="-1" role="dialog" >
 			<div class="modal-dialog" role="document">
 			<!-- Modal content-->
@@ -261,8 +325,9 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 				</div>
 			 </div>
 			<div class="clearfix"></div>
-	<!-- //Modal99 -->
-
+	<!-- //Modal edit user -->
+ <?php }
+ ?>
 </div>
 <!--main-content-->
 
@@ -647,13 +712,21 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 			*/								
 			$().UItoTop({ easingType: 'easeOutQuart' });
 			});
+
+			
 		</script>
+
 		<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 	<!-- //smooth scrolling -->
 	<!--// bottom-top -->
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap-3.1.1.min.js"></script>
 
+<script type="text/javascript">
+	document.getElementById("filefoto").onchange = function() {
+		    document.getElementById("formfoto").submit();
+	}  
 	
+</script>
 
 </body>
 </html>

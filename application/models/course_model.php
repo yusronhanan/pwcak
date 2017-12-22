@@ -99,8 +99,7 @@ class Course_model extends CI_Model {
         date_default_timezone_set('Asia/Jakarta'); # add your city to set local time zone
         $now = date('Y-m-d H:i:s');
         $user_id = $this->session->userdata('logged_id');
-        $random_code= random_string('alnum',11);
-
+        
         $data = array(
             'title'              => $this->input->post('coursename'),
             'subject'            => $this->input->post('subject'),
@@ -121,6 +120,29 @@ class Course_model extends CI_Model {
         }
        
     }
+    public function edit_course_thumbnail($thumbnail){
+        
+        date_default_timezone_set('Asia/Jakarta'); # add your city to set local time zone
+        $now = date('Y-m-d H:i:s');
+        $user_id = $this->session->userdata('logged_id');
+        
+        $data=array(
+              'thumbnail'           => $thumbnail['file_name'],
+              'last_update'         => $now,
+        );
+
+        $this->db->where('id_title',$this->input->post('id_title'))
+                ->update('course_title', $data);
+
+      
+        if ($this->db->affected_rows() > 0) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+       
+    }
+    
     
 	public function GetListCourses($keyword){
 		// courses/search course course list

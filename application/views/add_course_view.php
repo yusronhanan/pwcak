@@ -89,6 +89,48 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--skycons-icons-->
 <script src="<?php echo base_url(); ?>assets/lesson/js/skycons.js"></script>
 <!--//skycons-icons-->
+
+<style type="text/css">
+  .custom-input-file {
+    overflow: hidden;
+    position: relative;
+    width: 400px;
+    height: 400px;
+    background-repeat: no-repeat;
+    /*background-attachment: fixed;*/
+    background-position: center; 
+    background-size: 400px;
+    /*border-radius: 120px;*/
+}
+.changephoto{
+    z-index: 999;
+    line-height: 0;
+    font-size: 0;
+    position: absolute;
+    opacity: 0;
+    filter: alpha(opacity = 0);-ms-filter: "alpha(opacity=0)";
+    margin: 0;
+    padding:0;
+    left:0;
+}
+.uploadPhoto {
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    display: none;
+    width: 50%;
+    height: 50%;
+    color: #fff;    
+    text-align: center;
+    line-height: 60px;
+    text-transform: uppercase;    
+    background-color: rgba(0,0,0,.3);
+    /*border-radius: 50px;*/
+    cursor: pointer;
+}
+.custom-input-file:hover .uploadPhoto { display: block; }
+   
+</style>
 </head>
 <body>
 <div id="wrapper">
@@ -229,7 +271,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				else{
 					?>
 					<li>
-                        <a href="" class=" hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon "></i><span class="nav-label">Lesson 1 : KOSONG</a>
+                        <a href="" class=" hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon "></i><span class="nav-label">Lesson 1 : KOSONG/</span></a>
                         
                     </li>
 					<?php
@@ -240,11 +282,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     
                    
                     <li>
-                        <a href="#" data-toggle="modal" data-target="#settingcourse" class=" hvr-bounce-to-right"><i class="fa fa-cog nav_icon"></i> <span class="nav-label">Settings</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li><a href="signin.html" class=" hvr-bounce-to-right"><i class="fa fa-sign-in nav_icon"></i>Signin</a></li>
-                            <li><a href="signup.html" class=" hvr-bounce-to-right"><i class="fa fa-sign-in nav_icon"></i>Singup</a></li>
-                        </ul>
+                        <a href="#" data-toggle="modal" data-target="#settingcourse" class=" hvr-bounce-to-right"><i class="fa fa-cog nav_icon"></i> <span class="nav-label">Settings</span></a>
+                        
+                    </li>
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#editthumbnail" class=" hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon "></i><span class="nav-label">Edit Thumbnail</span></a>
+                        
                     </li>
                 </ul>
             </div>
@@ -260,7 +303,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<h4>Edit Course</h4>
 							<!--newsletter-->
 							<div class="login-main wthree">
+							 
 							 <form action="<?php echo base_url(); ?>myaccount/add_course/<?php echo $tit_info[3]; ?>" method="post" enctype="multipart/form-data">
+
 							 	<input type="hidden" name="id_title" value="<?php echo $tit_info[2]; ?>">
 							 	<input type="hidden" name="step_number" value="<?php echo $step; ?>">
 								Course Name 
@@ -301,6 +346,41 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	</div>
 	<!-- //Modal setting course -->
+	<!-- Modal edit thumbnail course -->
+		<div class="modal fade" id="editthumbnail" tabindex="-1" role="dialog" >
+		<div class="modal-dialog" role="document">
+			<!-- Modal content-->
+			<div class="modal-content news-w3l">
+				<div class="modal-header">
+							<button type="button" class="close w3l" data-dismiss="modal">&times;</button>
+							<h4>Edit Thumbnail</h4>
+							<!--newsletter-->
+							<div class="login-main wthree">
+							 <form id="formthumbnail" action ="<?php echo base_url();?>myaccount/add_course/<?php echo $tit_info[3]; ?>" method="post" enctype="multipart/form-data">
+						      	<div class="custom-input-file" id="previewavatar" style="background-image:url('<?php echo base_url() ?>assets/images/<?php echo $tit_info[6]; ?>');display: block;margin: 0 auto;">
+                                    <label class="uploadPhoto">
+                                        EDIT
+                                        <input type="file" id="filethumbnail" name="photothumbnail" class="change-avatar changephoto">
+                                    </label>
+                                </div>
+                                <input type="hidden" name="id_title" value="<?php echo $tit_info[2]; ?>">
+							 	<input type="hidden" name="step_number" value="<?php echo $step; ?>">
+								<br/>
+								<!-- Choose Thumbnail -->
+								<!-- <input id="file-upload" name="thumbnail" type="file" class="form-control"/> -->
+								<br>
+								<input type="submit" name="editthumbnail" value="Update Now" class="btn btn-danger pull-right">
+								<br>
+							</form>
+							</div>
+						<!--//newsletter-->			
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //Modal edit thumbnail course -->
+	
+
         <div id="page-wrapper" class="gray-bg dashbard-1">
        <div class="content-main">
  
@@ -409,6 +489,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 }); 
 });
 
+	  
+	
 // 	window.onbeforeunload = function (event) {
 //     var message = 'Important: Please click on \'Save\' button to leave this page.';
 //     if (typeof event == 'undefined') {
@@ -421,6 +503,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 // };
 
 </script>
+
 </body>
 </html>
 

@@ -55,7 +55,7 @@
 		 ?>
 		<div class="col-md-4 eve-agile e1">
 			<div class="eve-sub1">
-				<a href="#" data-toggle="modal" data-target="#myModal5"><img src="<?php echo base_url() ?>assets/images/<?php echo $pcourses->thumbnail ?>" width="350px" height="250px" alt="image"></a>
+				<a href="<?php echo base_url() ?>course/detail_course/<?php echo $pcourses->random_code ?>"><img src="<?php echo base_url() ?>assets/images/<?php echo $pcourses->thumbnail ?>" width="350px" height="250px" alt="image"></a>
 			<h4><a href="#" data-toggle="modal" data-target="#myModal5"><?php echo $pcourses->title ?></a></h4>
 				<?php 
 					if(array_key_exists($pcourses->id_user, $username)) {
@@ -72,7 +72,7 @@
 					<h6><i class="fa fa-heart-o" aria-hidden="true"></i>78</h6>
 				</div>
 				<div class="eve-w3lright e1">
-					<a href="<?php echo base_url(); ?>index.php/course/detail_course/2"><h5>More</h5></a>
+					<a href="<?php echo base_url() ?>course/detail_course/<?php echo $pcourses->random_code ?>"><h5>More</h5></a>
 				</div>
 				<div class="clearfix"></div>	
 			</div>
@@ -120,13 +120,13 @@
 <!-- courses -->
 <div class="event" id="events">
 	<div class="container">
-		<h3 style="text-align: left;">SUGGESTION COURSES</h3>
+		<h3 style="text-align: left;">THUMB UP COURSES</h3>
 		<?php foreach ($list_rcourses as $rcourses) {
 			
 		 ?>
 		<div class="col-md-4 eve-agile e1">
 			<div class="eve-sub1">
-				<a href="#" data-toggle="modal" data-target="#myModal5"><img src="<?php echo base_url() ?>assets/images/<?php echo $rcourses->thumbnail ?>" width="350px" height="250px" alt="image"></a>
+				<a href="<?php echo base_url() ?>course/detail_course/<?php echo $rcourses->random_code ?>"><img src="<?php echo base_url() ?>assets/images/<?php echo $rcourses->thumbnail ?>" width="350px" height="250px" alt="image"></a>
 			<h4><a href="#" data-toggle="modal" data-target="#myModal5"><?php echo $rcourses->title ?></a></h4>
 				<?php 
 					if(array_key_exists($rcourses->id_user, $username)) {
@@ -143,7 +143,7 @@
 					<h6><i class="fa fa-heart-o" aria-hidden="true"></i>78</h6>
 				</div>	
 				<div class="eve-w3lright e1">
-					<a href="<?php echo base_url() ?>#"><h5>More</h5></a>
+					<a href="<?php echo base_url() ?>course/detail_course/<?php echo $rcourses->random_code ?>"><h5>More</h5></a>
 				</div>
 				<div class="clearfix"></div>	
 			</div>

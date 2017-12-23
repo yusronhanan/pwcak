@@ -209,7 +209,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-               <h1> <a class="navbar-brand" href="index.html"><?php echo substr($det->title ,0,5); ?></a></h1>         
+               <h1> <a class="navbar-brand" href="index.html"><?php echo substr($title_info->title ,0,5); ?>..</a></h1>         
 			   </div>
 			 <div class=" border-bottom">
         	<div class="full-left">
@@ -309,10 +309,41 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
 				
-                    <li>
-                        <a href="index.html" class=" hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon " ></i><span class="nav-label"><?php echo $detail->step_title; ?></a>
+                    <!-- <li>
+                        <a href="index.html" class=" hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon " ></i><span class="nav-label"><?php echo $getcontent->step_title; ?></a>
+                    </li> -->
+                   
+                   <?php
+				if (!empty($list_content)) {
+				$i = 1;
+				 foreach ($list_content as $list_c) {
+					?>
+				
+
+					<li>
+                        <a href="" id="go_step" class=" hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon "></i><span class="nav-label">Lesson <?php echo $i++; ?> : <?php echo  $list_c->step_title; ?></a>
+                        <form action="<?php echo base_url(); ?>course/detail_course/<?php echo $title_info->random_code; ?>" id="<?php echo  $list_c->step_number; ?>" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="step_number" value="<?php echo  $list_c->step_number; ?>">
+                        <input type="submit" class="hidden" name="GO" id="goo">
+                        </form>
                     </li>
                    
+					<?php
+				}
+				?>
+				
+				<?php
+
+				}
+				else{
+					?>
+					<li>
+                        <a href="" class=" hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon "></i><span class="nav-label">Lesson 1 : KOSONG/</span></a>
+                        
+                    </li>
+					<?php
+				}
+				 ?>
 					 <!-- <li>
                         <a href="inbox.html" class=" hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon"></i> <span class="nav-label">Lesson 2: Install JDK</span> </a>
                     </li>
@@ -352,9 +383,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		    <div class="banner">
 		   
 				<h2>
-				<a href="index.html"><?php echo $det->title; ?></a>
+				<a href="index.html"><?php echo $title_info->title; ?></a>
 				<i class="fa fa-angle-right"></i>
-				<span>by: <?php echo $name->name; ?></span>
+				<span>by: <?php echo $maker_info->name; ?></span>
 				</h2>
 		    </div>
 		<!--//banner-->
@@ -362,16 +393,49 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="grid-system">
 			<div class="horz-grid">
 		 		<div class="grid-hor">
-		 			<h3 id="grid-example-basic" ><?php echo $detail->step_title;?></h3>
-		 			<p class="" ><?php echo $detail->content; ?></p>
+		 			<h3 id="grid-example-basic" ><?php echo $getcontent->step_title;?></h3>
+		 			<p class="" ><?php echo $getcontent->content; ?></p>
 				</div>
 				<div style="text-align: right; padding-right: 35px">
-					<button type="submit" class="btn btn-danger">Next</button>	
+					<?php if ($next != 0) {
+					?>
+					<a href="" id="go_step"><button type="submit" class="btn btn-danger">Next</button></a>
+					<form action="<?php echo base_url(); ?>course/detail_course/<?php echo $title_info->random_code; ?>" id="<?php echo  $next; ?>" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="step_number" value="<?php echo  $next; ?>">
+                        <input type="submit" class="hidden" name="GO" id="goo">
+                    </form>
+					<?php
+					}
+					else {
+						?>
+					<a href="<?php echo base_url() ?>course"><button class="btn btn-success">Selesai</button></a>
+					<?php 
+					} ?>
+						
 				</div>
 
 				 <div class="btn-group">
-                                <a class="btn btn-default"><i class="fa fa-angle-left"></i></a>
-                                <a class="btn btn-default"><i class="fa fa-angle-right"></i></a>
+				 	<?php if ($before != 0) {
+								?>
+                    <!-- before -->
+				 				
+                                <form action="<?php echo base_url(); ?>course/detail_course/<?php echo $title_info->random_code; ?>" id="<?php echo  $before; ?>" method="post" enctype="multipart/form-data">
+		                        <input type="hidden" name="step_number" value="<?php echo  $before; ?>">
+		                        <input type="submit" class="hidden" name="GO" id="goo">
+                    			</form>
+                                <a href="" id="before_step" class="btn btn-default"><i class="fa fa-angle-left"></i></a>
+                                
+                    			<?php 
+                    		} if ($next != 0) {
+								?>
+                    <!-- next -->
+                                <a href="" id="next_step" class="btn btn-default"><i class="fa fa-angle-right"></i></a>
+                                <form action="<?php echo base_url(); ?>course/detail_course/<?php echo $title_info->random_code; ?>" id="<?php echo  $next; ?>" method="post" enctype="multipart/form-data">
+			                        <input type="hidden" name="step_number" value="<?php echo  $next; ?>">
+			                        <input type="submit" class="hidden" name="GO" id="goo">
+			                    </form>
+			                    <?php 
+					} ?>
                             </div>
 				<!----> 		
 			</div>
@@ -491,6 +555,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<script src="<?php echo base_url(); ?>assets/lesson/js/scripts.js"></script>
 	<!--//scrolling js-->
 	<script src="<?php echo base_url(); ?>assets/lesson/js/bootstrap.min.js"> </script>
+
+	 <script type="text/javascript">
+    	$(document).ready(function(){
+    
+    $("a#go_step").click(function(){
+    $(this).next().children( "#goo" ).click();     
+    return false;
+}); 
+    $("a#next_step").click(function(){
+    $(this).next().children( "#goo" ).click();     
+    return false;
+}); 
+     $("a#before_step").click(function(){
+    $(this).prev().children( "#goo" ).click();     
+    return false;
+}); 
+});
+</script>
 </body>
 </html>
 

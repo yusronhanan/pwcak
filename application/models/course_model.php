@@ -143,6 +143,23 @@ class Course_model extends CI_Model {
        
     }
     
+    public function upvisitor($id_title){
+        $visitor_last = (int) $this->GetData(['id_title'=>$id_title],'course_title')->row('visitor');
+        $visitor_new = $visitor_last + 1;
+        $data=array(
+              'visitor'           => $visitor_new,
+        );
+
+        $this->db->where('id_title',$id_title)
+                ->update('course_title', $data);
+
+      
+        // if ($this->db->affected_rows() > 0) {
+        //     return TRUE;
+        // } else {
+        //     return FALSE;
+        // }
+    }
     
 	public function GetListCourses($keyword){
 		// courses/search course course list
@@ -253,7 +270,14 @@ public function GetDetailCourse($id_course){
     public function GetFirstStep($where) {
         return $this->db->where($where)->order_by('step_number', 'asc')->get('course_content')->row('step_number');
     }
+    public function GetNextStep($where) {
+        return $this->db->where($where)->order_by('step_number')->limit(1,0)->get('course_content')->row('step_number');
+    }
+    public function GetBeforeStep($where) {
+        return $this->db->where($where)->order_by('step_number', 'desc')->limit(1,0)->get('course_content')->row('step_number');
+    }
     
+
     public function GetData($where,$table)
     {
       return $this->db->where($where)->get($table);

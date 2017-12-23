@@ -137,7 +137,7 @@
 		 ?>
 		<div class="col-md-4 eve-agile e1">
 			<div class="eve-sub1">
-				<a href="#" data-toggle="modal" data-target="#myModal5"><img src="<?php echo base_url() ?>assets/images/<?php echo $courses->thumbnail ?>" width="350px" height="250px" alt="image"></a>
+				<a href="<?php echo base_url() ?>course/detail_course/<?php echo $courses->random_code ?>"><img src="<?php echo base_url() ?>assets/images/<?php echo $courses->thumbnail ?>" width="350px" height="250px" alt="image"></a>
 			<h4><a href="#" data-toggle="modal" data-target="#myModal5"><?php echo $courses->title ?></a></h4>
 				<?php 
 					if(array_key_exists($courses->id_user, $username)) {
@@ -154,7 +154,7 @@
 					<h6><i class="fa fa-heart-o" aria-hidden="true"></i>78</h6>
 				</div>	
 				<div class="eve-w3lright e1">
-					<a href="<?php echo base_url(); ?>index.php/lesson"><h5>More</h5></a>
+					<a href="<?php echo base_url() ?>course/detail_course/<?php echo $courses->random_code ?>"><h5>More</h5></a>
 				</div>
 				<div class="clearfix"></div>	
 			</div>

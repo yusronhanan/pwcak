@@ -63,15 +63,78 @@ class Course extends CI_Controller {
 
 	public function detail_course(){
 		if ($this->session->userdata('logged_in') == TRUE) {
-		$id_title = $this->uri->segment(3);
-		$id_course = $this->uri->segment(3);
-		$id_user = $this->uri->segment(3);
-		$data['det'] = $this->course_model->GetDetailTitle($id_title);
-		$data['detail'] = $this->course_model->GetDetailCourse($id_course);
-		$data['name'] = $this->course_model->GetDetailUser($id_user);
+		// $id_title = $this->uri->segment(3);
+		// $id_course = $this->uri->segment(3);
+		// $id_usermaker = $this->uri->segment(3);
+		// $data['det'] = $this->course_model->GetDetailTitle($id_title);
+		// $data['detail'] = $this->course_model->GetDetailCourse($id_course);
+		// $data['name'] = $this->course_model->GetDetailUser($id_usermaker);
 
+		$step_number = $this->input->post('step_number');
+		$id_user = $this->session->userdata('logged_id');
+		
+		$random_code = $this->uri->segment(3);
+	
+		$id_title = $this->course_model->GetData(['random_code'=> $random_code],'course_title')->row('id_title');
+		$getcourse = $this->course_model->GetCourse(['id_title'=>$id_title]);
+
+		$id_usermaker = $getcourse->row('id_user');
+		
+		$list_content = '';
+		$getcontent = '';
+		$step = '';
+		
+		$getmaker = $this->auth_model->GetUser(['id_user' => $id_usermaker])->row();
+		
+		$check_content = $this->course_model->check_content($id_title);
+		$lastid = (int) $this->course_model->GetLastStep(['id_title'=>$id_title]);
+		$firstid = (int) $this->course_model->GetFirstStep(['id_title'=>$id_title]);
+		$nextid = '';
+		$beforeid = '';
+		
+
+		if (empty($step_number)) {
+			if ($check_content == true)  { #step_num exist default 1
+				$getcontent = $this->course_model->GetContent(['id_title' => $id_title, 'step_number' => $firstid])->row();
+				$list_content = $this->course_model->GetListContent(['id_title' => $id_title, 'id_user' => $id_usermaker]);
+				$step = $firstid;
+				$nextid = (int) $this->course_model->GetNextStep(['id_title'=>$id_title,'step_number >'=> $step]);
+				$beforeid = (int) $this->course_model->GetBeforeStep(['id_title'=>$id_title,'step_number <'=> $step]);
+				$upvisitor = $this->course_model->upvisitor($id_title);
+			}
+			else{ #step_num don't exist
+				// $getcontent = $this->course_model->GetContent(['id_title' => $id_title])->row();	
+				// $step = '1';
+				$this->session->set_flashdata('notif_failed','Maaf, content course masih belum tersedia');
+				redirect('course');
+			}
+		}
+		else { #step num by input post
+			$getcontent = $this->course_model->GetContent(['id_title' => $id_title, 'step_number' => $step_number])->row();
+			$list_content = $this->course_model->GetListContent(['id_title' => $id_title, 'id_user' => $id_usermaker]);
+			$step = $step_number;
+			$nextid = (int) $this->course_model->GetNextStep(['id_title'=>$id_title,'step_number >'=> $step]);
+				$beforeid = (int) $this->course_model->GetBeforeStep(['id_title'=>$id_title,'step_number <'=> $step]);
+				// $upvisitor = $this->course_model->upvisitor($id_title);
+		}
+
+		$data = [
+			'title_info' 			=> $getcourse->row(),
+			'maker_info'			=> $getmaker,
+			'getcontent'			=> $getcontent,
+			'step'					=> $step,
+			'list_content'			=> $list_content,		
+			'last'					=> $lastid,
+			'next'					=> $nextid,
+			'before'				=> $beforeid,
+			'list_subject'			=> $this->course_model->GetSubject(),
+			
+			// 'list_subject'		=> $this->course_model->GetSubject(),
+
+		];
 		$this->load->view('lesson_view', $data);
 	}else{
+		$this->session->set_flashdata('notif_failed','Maaf, anda harus login terlebih dahulu untuk menikmati pembelajaran');
 		redirect('home');
 	}
 

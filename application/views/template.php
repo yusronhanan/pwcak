@@ -21,7 +21,12 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //online-fonts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.1/sweetalert2.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.1/sweetalert2.min.css">
-
+<style type="text/css">
+h6.thumb_true {
+	background: #d95459;
+	color:#fff;
+}
+</style>
 </head>
 <body>
 <div class="main-w3layouts" id="home">
@@ -357,7 +362,44 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
                             </script>
                     <?php endif; ?>
 
-
+<script type="text/javascript">
+	$('h6.thumb_in').click(function(event) {
+		<?php	if ($this->session->userdata('logged_in') == TRUE) {  ?>
+		var random_code = $(this).attr('id');
+		// alert(random_code);
+		$.ajax({
+                    url: '<?php echo base_url(); ?>home/thumb_up',
+                    type: 'post',
+                    context: this,
+                    data: {random_code : random_code},
+                    success: function(e){
+                         if(e == "true") {
+                        if($(this).hasClass('thumb_true')){
+                        $(this).removeClass('thumb_true');
+                        }
+                        else{
+                        $(this).addClass('thumb_true');
+                        } 
+                        }
+                        else  {alert('Maaf, thumb_up anda gagal');
+                    }
+				}
+                });
+		<?php }
+		else {
+			?>
+			 swal({
+                       title: "Failed",
+                       text: "Anda harus login terlebih dahulu",
+                       timer: 1500,
+                       showConfirmButton: false,
+                       type: 'warning'
+			});
+			<?php
+		} ?>
+       		
+	});
+</script>
 </body>
 <!-- </div>
 </body> -->

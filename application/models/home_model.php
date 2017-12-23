@@ -3,12 +3,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Home_model extends CI_Model {
 
-// type action 0 - like , 1 - comment , 2 
+// type action  like = 0 , comment = 1 
 
 	public function __construct()
 	{
 		parent::__construct();
-		
+		$this->load->model('course_model');
+		$this->load->model('auth_model');
+		$this->load->model('home_model');
 	}
 	public function GetListPCourses(){
 		// popular course list
@@ -33,7 +35,48 @@ class Home_model extends CI_Model {
             ->get('course_title')
             ->result();
 	}
-	
+	public function thumb_up(){
+		date_default_timezone_set('Asia/Jakarta'); # add your city to set local time zone
+		$now = date('Y-m-d H:i:s');
+		$user_id = $this->session->userdata('logged_id');
+		$username = $this->auth_model->GetUser(['id_user' => $user_id])->row('username');
+		$random_code = $this->input->post('random_code');
+		$id_title = $this->course_model->GetData(['random_code'=> $random_code],'course_title')->row('id_title');
+
+		$query = $this->GetData(['id_title'=>$id_title,'from_id'=>$user_id,'type_action'=>'0'],'user_action');
+        if ($query->num_rows() > 0) {
+           $this->db->where(['id_title'=>$id_title,'from_id'=>$user_id,'type_action'=>'0'])
+           			->delete('user_action');
+        } 
+         else {
+            $data=array(              
+              'id_title'           	  => $id_title,
+              'from_id'           	  => $user_id,
+              'from_username'         => $username,
+              'type_action'           => 0, #type like = 0
+              // 'reply_comment'      => , #buat comment
+              // 'text_comment'       => , #buat comment
+              // 'status'          	  => ,
+              'created_at'            => $now,
+        );
+        $this->db->insert('user_action', $data);
+        }
+		
+        if ($this->db->affected_rows() > 0) {
+            return "true";
+        } else {
+            return "false";
+        }
+
+	}
+	public function GetData($where,$table)
+    {
+      return $this->db->where($where)->get($table);
+    }
+    public function GetLikeAmount($where)
+    {
+      return $this->db->select('COUNT(id_action) as like_amount')->where($where)->get('user_action');
+    }
 
 }
 

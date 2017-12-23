@@ -67,7 +67,12 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
     cursor: pointer;
 }
 .custom-input-file:hover .uploadPhoto { display: block; }
-   
+
+h6.thumb_true {
+	background: #d95459;
+	color:#fff;
+}
+
 </style>
 
 </head>
@@ -511,7 +516,18 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 			<div class="eve-sub2">
 				<div class="eve-w3lleft">
 					<h6><i class="fa fa-comment-o" aria-hidden="true"></i>17</h6>
-					<h6><i class="fa fa-heart-o" aria-hidden="true"></i>78</h6>
+					 <?php 
+					if(array_key_exists($courses->id_title, $like_amount)) {
+					$likes =  $like_amount[$courses->id_title];
+					}
+					$thumb = '';
+					if (!empty($liked)) {
+						if(in_array($courses->id_title, $liked)) {
+						$thumb = 'thumb_true';
+					}
+					}
+					?>
+					<h6 id="<?php echo $courses->random_code ?>" class="thumb_in <?php echo $thumb ?>"><i class="fa fa-thumbs-up" aria-hidden="true"></i><?php echo $likes; ?></h6>
 				</div>
 				<div class="eve-w3lright e1">
 					<a href="<?php echo base_url() ?>myaccount/add_course/<?php echo $courses->random_code ?>"><h5>Edit</h5></a>
@@ -727,6 +743,42 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 		    document.getElementById("formfoto").submit();
 	}  
 	
+	$('h6.thumb_in').click(function(event) {
+		<?php	if ($this->session->userdata('logged_in') == TRUE) {  ?>
+		var random_code = $(this).attr('id');
+		// alert(random_code);
+		$.ajax({
+                    url: '<?php echo base_url(); ?>home/thumb_up',
+                    type: 'post',
+                    context: this,
+                    data: {random_code : random_code},
+                    success: function(e){
+                         if(e == "true") {
+                        if($(this).hasClass('thumb_true')){
+                        $(this).removeClass('thumb_true');
+                        }
+                        else{
+                        $(this).addClass('thumb_true');
+                        } 
+                        }
+                        else  {alert('Maaf, thumb_up anda gagal');
+                    }
+				}
+                });
+		<?php }
+		else {
+			?>
+			 swal({
+                       title: "Failed",
+                       text: "Anda harus login terlebih dahulu",
+                       timer: 1500,
+                       showConfirmButton: false,
+                       type: 'warning'
+			});
+			<?php
+		} ?>
+       		
+	});
 </script>
 
 </body>

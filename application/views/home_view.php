@@ -69,7 +69,18 @@
 			<div class="eve-sub2">
 				<div class="eve-w3lleft">
 					<h6><i class="fa fa-comment-o" aria-hidden="true"></i>17</h6>
-					<h6><i class="fa fa-heart-o" aria-hidden="true"></i>78</h6>
+					<?php 
+					if(array_key_exists($pcourses->id_title, $like_amount)) {
+					$likes =  $like_amount[$pcourses->id_title];
+					}
+					$thumb = '';
+					if (!empty($liked)) {
+						if(in_array($pcourses->id_title, $liked)) {
+						$thumb = 'thumb_true';
+					}
+					}
+					?>
+					<h6 id="<?php echo $pcourses->random_code ?>" class="thumb_in <?php echo $thumb ?>"><i class="fa fa-thumbs-up" aria-hidden="true"></i><?php echo $likes; ?></h6>
 				</div>
 				<div class="eve-w3lright e1">
 					<a href="<?php echo base_url() ?>course/detail_course/<?php echo $pcourses->random_code ?>"><h5>More</h5></a>
@@ -137,10 +148,22 @@
 				</a>, <?php echo $rcourses->created_at ?></h6>
 				<p><?php echo $rcourses->description ?></p>
 			</div>
+
 			<div class="eve-sub2">
 				<div class="eve-w3lleft">
 					<h6><i class="fa fa-comment-o" aria-hidden="true"></i>17</h6>
-					<h6><i class="fa fa-heart-o" aria-hidden="true"></i>78</h6>
+					 <?php 
+					if(array_key_exists($rcourses->id_title, $like_amount)) {
+					$likes =  $like_amount[$rcourses->id_title];
+					}
+					$thumb = '';
+					if (!empty($liked)) {
+						if(in_array($rcourses->id_title, $liked)) {
+						$thumb = 'thumb_true';
+					}
+					}
+					?>
+					<h6 id="<?php echo $rcourses->random_code ?>" class="thumb_in <?php echo $thumb ?>"><i class="fa fa-thumbs-up" aria-hidden="true"></i><?php echo $likes; ?></h6>
 				</div>	
 				<div class="eve-w3lright e1">
 					<a href="<?php echo base_url() ?>course/detail_course/<?php echo $rcourses->random_code ?>"><h5>More</h5></a>

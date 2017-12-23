@@ -151,7 +151,7 @@
 			<div class="eve-sub2">
 				<div class="eve-w3lleft">
 					<h6><i class="fa fa-comment-o" aria-hidden="true"></i>17</h6>
-					<h6><i class="fa fa-heart-o" aria-hidden="true"></i>78</h6>
+					<h6 id="<?php echo $courses->random_code ?>" class="thumb_in"><i class="fa fa-thumbs-up" aria-hidden="true"></i>78</h6>
 				</div>	
 				<div class="eve-w3lright e1">
 					<a href="<?php echo base_url() ?>course/detail_course/<?php echo $courses->random_code ?>"><h5>More</h5></a>

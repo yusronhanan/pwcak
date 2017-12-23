@@ -753,15 +753,17 @@ h6.thumb_true {
                     context: this,
                     data: {random_code : random_code},
                     success: function(e){
-                         if(e == "true") {
-                        if($(this).hasClass('thumb_true')){
-                        $(this).removeClass('thumb_true');
-                        }
-                        else{
-                        $(this).addClass('thumb_true');
-                        } 
-                        }
-                        else  {alert('Maaf, thumb_up anda gagal');
+                          if(e == "false") {alert('Maaf, thumb_up anda gagal');}
+                         
+                         else  {
+                        	if($(this).hasClass('thumb_true')){
+                        	$(this).removeClass('thumb_true');
+                        	$(this).html('<i class="fa fa-thumbs-up" aria-hidden="true"></i>'+e);
+                        	}
+	                        else{
+	                        $(this).addClass('thumb_true');
+	                        $(this).html('<i class="fa fa-thumbs-up" aria-hidden="true"></i>'+e);
+	                        }
                     }
 				}
                 });

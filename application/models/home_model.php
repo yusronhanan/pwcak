@@ -63,7 +63,8 @@ class Home_model extends CI_Model {
         }
 		
         if ($this->db->affected_rows() > 0) {
-            return "true";
+        	$like_amount = $this->GetLikeAmount(['id_title' => $id_title])->row('like_amount');
+            return $like_amount;
         } else {
             return "false";
         }

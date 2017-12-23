@@ -13,6 +13,7 @@ class Course extends CI_Controller {
 	public function index()
 	{
 		$list_courses = '';
+		$user_id = $this->session->userdata('logged_id');
 		$title = $this->input->get('title');
 		$subject = $this->input->get('subject');
 		if (empty($title) && empty($subject)) {
@@ -39,10 +40,21 @@ class Course extends CI_Controller {
 		foreach ($list_courses as $courses) {
 			$username[$courses->id_user] = $this->auth_model->GetUser(['id_user' => $courses->id_user])->row('username');
 		}
+		$like_amount = array();
+		$liked = array();
+		foreach ($list_courses as $courses) {
+			$like_amount[$courses->id_title] = $this->home_model->GetLikeAmount(['id_title' => $courses->id_title])->row('like_amount');
+			if ($this->session->userdata('logged_in') == TRUE) {
+				$liked[] = $this->home_model->GetData(['id_title'=>$courses->id_title,'from_id'=>$user_id,'type_action'=>'0'],'user_action')->row('id_title');
+			}
+			
+		}
 		if (!empty($title) || !empty($subject)) {
 				$data = [
 				'list_subject'		=> $this->course_model->GetSubject(),
 				'username' 		=> $username,
+				'like_amount'	=> $like_amount,
+				'liked'			=> $liked,
 				'list_courses' 	=> $list_courses,
 				'title'		 	=> $title,	//search
 				'subject'		=> $subject, //search
@@ -53,6 +65,8 @@ class Course extends CI_Controller {
 				$data = [
 				'list_subject'		=> $this->course_model->GetSubject(),
 				'username' 		=> $username,
+				'like_amount'	=> $like_amount,
+				'liked'			=> $liked,
 				'list_courses' 	=> $list_courses,
 				'main_view' 	=> 'course_view',
 					];

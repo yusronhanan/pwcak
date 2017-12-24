@@ -782,9 +782,12 @@ h6.thumb_true {
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap-3.1.1.min.js"></script>
 
 <script type="text/javascript">
+	<?php if ($this->session->userdata('logged_id') == $user_info->id_user) { ?>
 	document.getElementById("filefoto").onchange = function() {
 		    document.getElementById("formfoto").submit();
 	}  
+	<?php } ?>
+
 	
 	$('h6.thumb_in').click(function(event) {
 		<?php	if ($this->session->userdata('logged_in') == TRUE) {  ?>
@@ -846,13 +849,13 @@ h6.thumb_true {
                     	 }
                     	 $('span#amountnotif').html(e);
 
-                    	 // unseen_notification();
+                    	 // mini_notif();
                     }
                 });
         	 				
         	});
 		});
-		setInterval(function(){ unseen_notification() }, 3000);
+		setInterval(function(){ mini_notif() }, 3000);
 	</script>
 </body>
 </html>

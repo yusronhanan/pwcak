@@ -395,13 +395,13 @@ h6.thumb_true {
                     	 }
                     	 $('span#amountnotif').html(e);
 
-                    	 // unseen_notification();
+                    	 // mini_notif();
                     }
                 });
         	 				
         	});
 		});
-		setInterval(function(){ unseen_notification() }, 3000);
+		setInterval(function(){ mini_notif() }, 3000);
 	</script>
 </body>
 <!-- </div>

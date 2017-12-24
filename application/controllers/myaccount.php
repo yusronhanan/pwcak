@@ -85,7 +85,7 @@ class Myaccount extends CI_Controller {
 		}
 		else{
 			$this->session->set_flashdata('notif_failed','Maaf, anda harus login terlebih dahulu');
-			redirect('home');
+			redirect('');
 		}	
 	}
 	
@@ -105,7 +105,7 @@ class Myaccount extends CI_Controller {
 		if ($this->session->userdata('logged_in') == TRUE) {
 		$id_user = $this->session->userdata('logged_id');
 		
-		$random_code = $this->uri->segment(3);
+		$random_code = $this->uri->segment(2);
 	
 		$id_title = $this->course_model->GetData(['random_code'=> $random_code],'course_title')->row('id_title');
 		$getcourse = $this->course_model->GetCourse(['id_title'=>$id_title]);
@@ -162,7 +162,7 @@ class Myaccount extends CI_Controller {
 		}
 		else{
 			$this->session->set_flashdata('notif_failed','Maaf, anda harus login terlebih dahulu');
-			redirect('home');
+			redirect('');
 		}
 		
 		}
@@ -244,7 +244,7 @@ class Myaccount extends CI_Controller {
 				}
 				else{
 					$this->session->set_flashdata('notif_failed','Maaf, anda harus login terlebih dahulu');
-					redirect('home');
+					redirect('');
 				}
 			}
 			else{
@@ -331,7 +331,7 @@ class Myaccount extends CI_Controller {
 				}
 				else if ($result == "NOT_LOGIN"){
 					$this->session->set_flashdata('notif_failed','Maaf, anda harus login terlebih dahulu');
-					redirect('home');
+					redirect('');
 				}
 				else {
 					$this->session->set_flashdata('notif_success','Anda sukses menambah course baru');

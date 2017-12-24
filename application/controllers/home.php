@@ -13,6 +13,11 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
+		// $usrnm = $this->uri->segment(2);
+	if (!empty($usrnm)) {
+		$this->user_profile($usrnm);
+	}
+	else {
 		$list_pcourses = $this->home_model->GetListPCourses();
 		$list_rcourses = $this->home_model->GetListRCourses();
 		$user_id = $this->session->userdata('logged_id');
@@ -50,6 +55,7 @@ class Home extends CI_Controller {
  		];
 		$this->load->view('template', $data);
 	}
+}
 
 	public function thumb_up(){
 		if ($this->session->userdata('logged_in') == TRUE) {
@@ -135,6 +141,87 @@ class Home extends CI_Controller {
 			echo $count;
 		}
 
+}
+	public function user_profile($usrnm){
+		// $usrnm = $username;
+		$username = $usrnm;
+		$user_id = $this->auth_model->GetUser(['username' => $username])->row('id_user');
+		if (empty($user_id)) {
+			// redirect('404'); ke not found
+			$this->session->set_flashdata('notif_failed','Maaf, pengguna yang anda cari tidak ditemukan');
+			redirect('');
+		}
+		else{
+
+
+		$list_courses = '';
+
+		$title = $this->input->get('title');
+		$subject = $this->input->get('subject');
+
+		if (empty($title) && empty($subject)) {
+		$list_courses = $this->course_model->GLCMyAccount('');
+		}
+		else if (empty($title)) {
+			if ($subject == "") {
+				$list_courses = $this->course_model->GLCMyAccount("");
+			}
+			else{
+				$list_courses = $this->course_model->GLCMyAccount(["subject "=>$subject]);
+			}
+		}
+		else{
+			if ($subject == "") {
+				$list_courses = $this->course_model->GLCMyAccount(["title LIKE"=>"%".$title."%"]);
+			}
+			else{
+				$list_courses = $this->course_model->GLCMyAccount(["title LIKE"=>"%".$title."%", "subject" => $subject]);
+			}
+			
+		}
+		$username = array();
+		$like_amount = array();
+		$comment_amount = array();
+		$liked = array();
+
+		foreach ($list_courses as $courses) {
+			$username[$courses->id_user] = $this->auth_model->GetUser(['id_user' => $courses->id_user])->row('username');
+			$like_amount[$courses->id_title] = $this->home_model->GetAction('COUNT(id_action) as like_amount',['id_title' => $courses->id_title,'type_action' => '0'])->row('like_amount');
+			$comment_amount[$courses->id_title] = $this->home_model->GetAction('COUNT(id_action) as comment_amount',['id_title' => $courses->id_title,'type_action' => '1'])->row('comment_amount');
+			if ($this->session->userdata('logged_in') == TRUE) {
+				$liked[] = $this->home_model->GetData(['id_title'=>$courses->id_title,'from_id'=>$user_id,'type_action'=>'0'],'user_action')->row('id_title');
+			}
+		}
+		
+		
+		if (!empty($title) || !empty($subject)) {
+				$data = [
+				'list_subject'	=> $this->course_model->GetSubject(),
+				'like_amount'	=> $like_amount,
+				'comment_amount'=> $comment_amount,
+				'liked'			=> $liked,
+				'username' 		=> $username,
+				'list_courses' 	=> $list_courses,
+				'title'		 	=> $title,	//search
+				'subject'		=> $subject, //search
+				'user_info'		=> $this->auth_model->GetUser(['id_user' => $user_id])->row(),
+					];
+		}
+		else{
+				$data = [
+				'list_subject'	=> $this->course_model->GetSubject(),
+				'like_amount'	=> $like_amount,
+				'comment_amount'=> $comment_amount,
+				'liked'			=> $liked,
+				'username' 		=> $username,
+				'list_courses' 	=> $list_courses,
+				'user_info'		=> $this->auth_model->GetUser(['id_user' => $user_id])->row(),
+					];
+		}
+		
+		$this->load->view('account_view', $data);
+		
+	}
 }
 }
 

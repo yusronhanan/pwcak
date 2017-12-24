@@ -50,5 +50,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'home';
+$route['course'] = "course";
+$route['home'] = "home";
+$route['qna'] = "qna";
+$route['myaccount'] = "myaccount";
+$route['notif'] = "notif";
+$route['lesson/(.+)'] = "course/detail_course/$1";
+$route['add_course/(.+)'] = "myaccount/add_course/$1";
+
+$route['(:any)'] = "home/user_profile/$1";
+// $route['(.*)'] = "home/user_profile/$1";  
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

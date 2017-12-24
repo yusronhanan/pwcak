@@ -91,7 +91,7 @@ class Course extends CI_Controller {
 		$step_number = $this->input->post('step_number');
 		$id_user = $this->session->userdata('logged_id');
 		
-		$random_code = $this->uri->segment(3);
+		$random_code = $this->uri->segment(2);
 	
 		$id_title = $this->course_model->GetData(['random_code'=> $random_code],'course_title')->row('id_title');
 		$getcourse = $this->course_model->GetCourse(['id_title'=>$id_title]);
@@ -153,7 +153,7 @@ class Course extends CI_Controller {
 		$this->load->view('lesson_view', $data);
 	}else{
 		$this->session->set_flashdata('notif_failed','Maaf, anda harus login terlebih dahulu untuk menikmati pembelajaran');
-		redirect('home');
+		redirect('');
 	}
 
 	}

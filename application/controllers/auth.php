@@ -12,7 +12,7 @@ class Auth extends CI_Controller {
 	}
 	public function index()
 	{
-		redirect('home');		
+		redirect('');		
 	}
 
 	public function login(){
@@ -26,14 +26,14 @@ class Auth extends CI_Controller {
                     
                     if ($this->auth_model->authentication() == TRUE) {
                         $this->session->set_flashdata('notif_success', 'Anda telah berhasil login, selamat belajar !');
-                        redirect('home');
+                        redirect('');
                     } else {
                         $this->session->set_flashdata('notif_failed', 'Email atau Password anda tidak valid, coba lagi');
-                        redirect('home');
+                        redirect('');
                     }
                 } else {
                 	$this->session->set_flashdata('notif_failed', validation_errors());
-                        redirect('home');
+                        redirect('');
                 }
 	}
 }
@@ -52,15 +52,15 @@ class Auth extends CI_Controller {
 				{
 					
 					$this->session->set_flashdata('notif_success','Anda telah berhasil register, silahkan login!');
-					redirect('home');
+					redirect('');
 				}else{
 					
 					$this->session->set_flashdata('notif_failed','Maaf anda gagal register, silahkan coba lagi!');
-					redirect('home');
+					redirect('');
 				}
 			}else{
 				$this->session->set_flashdata('notif_failed', validation_errors());
-				redirect('home');
+				redirect('');
 			}
 		}
 	}
@@ -69,7 +69,7 @@ class Auth extends CI_Controller {
 	
 	 	public function logout() {
         $this->session->sess_destroy();
-        redirect('home');
+        redirect('');
     }
 
 

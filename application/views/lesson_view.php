@@ -322,7 +322,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 					<li>
                         <a href="" id="go_step" class=" hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon "></i><span class="nav-label">Lesson <?php echo $i++; ?> : <?php echo  $list_c->step_title; ?></a>
-                        <form action="<?php echo base_url(); ?>course/detail_course/<?php echo $title_info->random_code; ?>" id="<?php echo  $list_c->step_number; ?>" method="post" enctype="multipart/form-data">
+                        <form action="<?php echo base_url(); ?>lesson/<?php echo $title_info->random_code; ?>" id="<?php echo  $list_c->step_number; ?>" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="step_number" value="<?php echo  $list_c->step_number; ?>">
                         <input type="submit" class="hidden" name="GO" id="goo">
                         </form>
@@ -400,7 +400,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<?php if ($next != 0) {
 					?>
 					<a href="" id="go_step"><button type="submit" class="btn btn-danger">Next</button></a>
-					<form action="<?php echo base_url(); ?>course/detail_course/<?php echo $title_info->random_code; ?>" id="<?php echo  $next; ?>" method="post" enctype="multipart/form-data">
+					<form action="<?php echo base_url(); ?>lesson/<?php echo $title_info->random_code; ?>" id="<?php echo  $next; ?>" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="step_number" value="<?php echo  $next; ?>">
                         <input type="submit" class="hidden" name="GO" id="goo">
                     </form>
@@ -419,7 +419,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								?>
                     <!-- before -->
 				 				
-                                <form action="<?php echo base_url(); ?>course/detail_course/<?php echo $title_info->random_code; ?>" id="<?php echo  $before; ?>" method="post" enctype="multipart/form-data">
+                                <form action="<?php echo base_url(); ?>lesson/<?php echo $title_info->random_code; ?>" id="<?php echo  $before; ?>" method="post" enctype="multipart/form-data">
 		                        <input type="hidden" name="step_number" value="<?php echo  $before; ?>">
 		                        <input type="submit" class="hidden" name="GO" id="goo">
                     			</form>
@@ -430,7 +430,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								?>
                     <!-- next -->
                                 <a href="" id="next_step" class="btn btn-default"><i class="fa fa-angle-right"></i></a>
-                                <form action="<?php echo base_url(); ?>course/detail_course/<?php echo $title_info->random_code; ?>" id="<?php echo  $next; ?>" method="post" enctype="multipart/form-data">
+                                <form action="<?php echo base_url(); ?>lesson/<?php echo $title_info->random_code; ?>" id="<?php echo  $next; ?>" method="post" enctype="multipart/form-data">
 			                        <input type="hidden" name="step_number" value="<?php echo  $next; ?>">
 			                        <input type="submit" class="hidden" name="GO" id="goo">
 			                    </form>

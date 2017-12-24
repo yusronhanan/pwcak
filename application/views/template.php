@@ -172,7 +172,7 @@ h6.thumb_true {
 						<!-- navbar-header -->
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav navbar-right">
-								<li><a href="<?php echo base_url(); ?>home" class="hvr-underline-from-center active">Home</a></li>
+								<li><a href="<?php echo base_url(); ?>" class="hvr-underline-from-center active">Home</a></li>
 								<li><a href="<?php echo base_url(); ?>course" class="hvr-underline-from-center active">Courses</a></li>
 								<li><a href="<?php echo base_url(); ?>qna" class="hvr-underline-from-center active">QnA</a></li>
 								<!-- <li><a href="#gallery" class="hvr-underline-from-center scroll">Gdjvb</a></li>

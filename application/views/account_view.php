@@ -238,7 +238,7 @@ h6.thumb_true {
 						<!-- navbar-header -->
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav navbar-right">
-								<li><a href="<?php echo base_url(); ?>home" class="hvr-underline-from-center active">Home</a></li>
+								<li><a href="<?php echo base_url(); ?>" class="hvr-underline-from-center active">Home</a></li>
 								<li><a href="<?php echo base_url(); ?>course" class="hvr-underline-from-center active">Courses</a></li>
 								<li><a href="<?php echo base_url(); ?>qna" class="hvr-underline-from-center active">QnA</a></li>
 								<!-- <li><a href="#gallery" class="hvr-underline-from-center scroll">Gdjvb</a></li>
@@ -388,6 +388,8 @@ h6.thumb_true {
                 '.$notif.'
             </div>';
       	  } ?>
+      	  <?php 
+	if ($this->session->userdata('logged_id') == $user_info->id_user) { ?>
 	<div class="btn-group">
 		<a class="btn btn-danger" data-toggle="modal" data-target="#modalpost"><i class="fa fa-plus"></i> </a>
 		<a class="btn btn-danger" data-toggle="modal" data-target="#modalpost">Add Course </a>
@@ -433,11 +435,21 @@ h6.thumb_true {
 			</div>
 		</div>
 	</div>
+	 <?php }
+ ?>
 	<div class="clearfix"></div>
 		<div class="row">
        <div class="col-md-6">
        	<div class="nav nav-justified navbar-nav">
+       		<?php if ($this->session->userdata('logged_id') == $user_info->id_user) {  ?>
        		<form class="navbar-form navbar-search" id="formcourses" method="get" action="<?php echo base_url() ?>myaccount" role="search">
+       			 <?php }
+       			 else{
+       			 	?>
+       			 	<form class="navbar-form navbar-search" id="formcourses" method="get" action="<?php echo base_url() ?><?php echo $user_info->username; ?>" role="search">
+       			 	<?php
+       			 }
+ ?>
                 <div class="input-group">
                                                                                                 
                     <input type="text" id="title" name="title" class="form-control" value="<?php if(!empty($title)) { echo $title; } ?>" placeholder="search courses">
@@ -528,7 +540,7 @@ h6.thumb_true {
 		 ?>
 		<div class="col-md-4 eve-agile e1">
 			<div class="eve-sub1">
-				<a href="<?php echo base_url() ?>course/detail_course/<?php echo $courses->random_code ?>"><img src="<?php echo base_url() ?>assets/images/<?php echo $courses->thumbnail ?>" width="350px" height="250px" alt="image"></a>
+				<a href="<?php echo base_url() ?>lesson/<?php echo $courses->random_code ?>"><img src="<?php echo base_url() ?>assets/images/<?php echo $courses->thumbnail ?>" width="350px" height="250px" alt="image"></a>
 			<h4><a href="#" data-toggle="modal" data-target="#myModal5"><?php echo $courses->title ?></a></h4>
 				<?php 
 					if(array_key_exists($courses->id_user, $username)) {
@@ -561,8 +573,8 @@ h6.thumb_true {
 					<h6 id="<?php echo $courses->random_code ?>" class="thumb_in <?php echo $thumb ?>"><i class="fa fa-thumbs-up" aria-hidden="true"></i><?php echo $likes; ?></h6>
 				</div>
 				<div class="eve-w3lright e1">
-					<a href="<?php echo base_url() ?>myaccount/add_course/<?php echo $courses->random_code ?>"><h5>Edit</h5></a>
-					<a href="<?php echo base_url() ?>course/detail_course/<?php echo $courses->random_code ?>"><h5>Preview</h5></a>
+					<a href="<?php echo base_url() ?>add_course/<?php echo $courses->random_code ?>"><h5>Edit</h5></a>
+					<a href="<?php echo base_url() ?>lesson/<?php echo $courses->random_code ?>"><h5>Preview</h5></a>
 				</div>
 				<div class="clearfix"></div>	
 			</div>

@@ -258,7 +258,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					
 					<li>
                         <a href="" id="go_step" class=" hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon "></i><span class="nav-label">Lesson <?php echo $i++; ?> : <?php echo  $list_c->step_title; ?></a>
-                        <form action="<?php echo base_url(); ?>myaccount/add_course/<?php echo $tit_info[3]; ?>" id="<?php echo  $list_c->step_number; ?>" method="post" enctype="multipart/form-data">
+                        <form action="<?php echo base_url(); ?>add_course/<?php echo $tit_info[3]; ?>" id="<?php echo  $list_c->step_number; ?>" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="step_number" value="<?php echo  $list_c->step_number; ?>">
                         <input type="submit" class="hidden" name="GO" id="goo">
                         </form>
@@ -307,7 +307,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<!--newsletter-->
 							<div class="login-main wthree">
 							 
-							 <form action="<?php echo base_url(); ?>myaccount/add_course/<?php echo $tit_info[3]; ?>" method="post" enctype="multipart/form-data">
+							 <form action="<?php echo base_url(); ?>add_course/<?php echo $tit_info[3]; ?>" method="post" enctype="multipart/form-data">
 
 							 	<input type="hidden" name="id_title" value="<?php echo $tit_info[2]; ?>">
 							 	<input type="hidden" name="step_number" value="<?php echo $step; ?>">
@@ -359,7 +359,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<h4>Edit Thumbnail</h4>
 							<!--newsletter-->
 							<div class="login-main wthree">
-							 <form id="formthumbnail" action ="<?php echo base_url();?>myaccount/add_course/<?php echo $tit_info[3]; ?>" method="post" enctype="multipart/form-data">
+							 <form id="formthumbnail" action ="<?php echo base_url();?>add_course/<?php echo $tit_info[3]; ?>" method="post" enctype="multipart/form-data">
 						      	<div class="custom-input-file" id="previewavatar" style="background-image:url('<?php echo base_url() ?>assets/images/<?php echo $tit_info[6]; ?>');display: block;margin: 0 auto;">
                                     <label class="uploadPhoto">
                                         EDIT
@@ -411,7 +411,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="grid-system">
 			<div class="horz-grid">
 		 		<div class="grid-hor">
-		 			<form action="<?php echo base_url(); ?>myaccount/add_course/<?php echo $tit_info[3]; ?>" method="post" enctype="multipart/form-data">
+		 			<form action="<?php echo base_url(); ?>add_course/<?php echo $tit_info[3]; ?>" method="post" enctype="multipart/form-data">
 		 			<h3 id="grid-example-basic">
 		 			<input type="text" name="step_title" placeholder="Your Title" value="<?php if(!empty($getcontent)){ echo $getcontent->step_title;} ?>" style="padding: 8px;text-align: center;"></h3>
 		 			<br>

@@ -27,6 +27,31 @@ h6.thumb_true {
 	color:#fff;
 }
 </style>
+<script type="text/javascript">
+	function mini_notif() {
+        	var mini_notif = 'mini_notif';
+   	
+            $.ajax({
+    		url:"<?php echo base_url(); ?>home/mini_notif",
+    		method:"POST",
+    		data:{mini_notif:mini_notif},
+    		// dataType:"json",
+    		success:function(e){
+    			var data = e.split("|");
+    			// alert(data);
+    			$('ul#mininotif').html(data[0]);
+    			if (data[1] == '0') {
+                    	 	$('span#amountnotif').addClass('hidden');
+                    	 }
+                  else{
+                    	 		$('span#amountnotif').removeClass('hidden');	
+                    	 }
+    			$('span#amountnotif').html(data[1]);
+    		}
+    	});
+        }
+    window.onload = mini_notif;
+</script>
 </head>
 <body>
 <div class="main-w3layouts" id="home">
@@ -42,8 +67,8 @@ h6.thumb_true {
 				 ?>
 
 				 <li class="dropdown at-drop ">
-		              <a href="#" class="dropdown-toggle dropdown-at " data-toggle="dropdown"><i class="fa fa-globe"></i>NOTIF</a>
-		              <ul class="dropdown-menu menu1" role="menu" style="min-width: 330px;max-height: 300px;overflow-y: scroll;">
+		              <a href="#" id="notifc" class="dropdown-toggle dropdown-at " data-toggle="dropdown"><i class="fa fa-globe"></i>NOTIF<span class="badge" id="amountnotif"></span></a>
+		              <ul class="dropdown-menu menu1" id="mininotif" role="menu" style="min-width: 330px;max-height: 300px;overflow-y: scroll;">
 		                <li><a href="#">
 		               
 		                	<div class="user-new">
@@ -416,6 +441,35 @@ h6.thumb_true {
        		
 	});
 </script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+		$('a#notifc').click(function(event) {
+  		 	var mini_notif = 'notification_null';
+                    	 // $('#amountNotifikasi').html('');
+
+        		
+        	 	$.ajax({
+                    url: '<?php echo base_url(); ?>home/mini_notif',
+                    type: 'post',
+                    data: {mini_notif : mini_notif},
+                    success: function(e){
+                    	 if (e == '0') {
+                    	 	$('span#amountnotif').addClass('hidden');
+                    	 }
+                  		else{
+                    	 		$('span#amountnotif').removeClass('hidden');	
+                    	 }
+                    	 $('span#amountnotif').html(e);
+
+                    	 // unseen_notification();
+                    }
+                });
+        	 				
+        	});
+		});
+		setInterval(function(){ unseen_notification() }, 3000);
+	</script>
 </body>
 <!-- </div>
 </body> -->

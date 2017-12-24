@@ -556,9 +556,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!--//scrolling js-->
 	<script src="<?php echo base_url(); ?>assets/lesson/js/bootstrap.min.js"> </script>
 
+	
 	 <script type="text/javascript">
     	$(document).ready(function(){
-    
+   
     $("a#go_step").click(function(){
     $(this).next().children( "#goo" ).click();     
     return false;
@@ -571,8 +572,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     $(this).prev().children( "#goo" ).click();     
     return false;
 }); 
-});
+//      $(window).load(function() {
+     	
+//         var theHash = "#qJ";
+//         $("html, body").animate({scrollTop:$(theHash).offset().top}, 800);
+//       });
+// });
 </script>
+
 </body>
 </html>
 

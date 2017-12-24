@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Home_model extends CI_Model {
 
-// type action  like = 0 , comment = 1 
+// type action  like title course = 0 , comment title course = 1, like comment = 2, reply comment = 3
 
 	public function __construct()
 	{
@@ -72,6 +72,54 @@ class Home_model extends CI_Model {
         }
 
 	}
+  public function notification(){
+      $user_id = $this->session->userdata('logged_id');
+      $mini_notif = $this->input->post('mini_notif');
+      if (!empty($mini_notif)) {
+       if (count($this->unseen_notification()) > 15) {
+          return $this->db->where('for_id',$user_id)
+              ->order_by('created_at','DESC')
+              // ->limit(15,0)
+              ->get('user_action')
+              ->result();
+      }
+      else{
+        return $this->db->where('for_id',$user_id)
+              ->order_by('created_at','DESC')
+              ->limit(15,0)
+              ->get('user_action')
+              ->result();
+      }
+      }
+      else{
+        return $this->db->where('for_id',$user_id)
+              ->order_by('created_at','DESC')
+              // ->limit(15,0)
+              ->get('user_action')
+              ->result();
+            }
+      }
+
+  public function unseen_notification(){
+      $user_id = $this->session->userdata('logged_id');
+      return $this->db->where('for_id',$user_id)
+              ->where('status','0')
+              ->order_by('created_at','DESC')
+              ->get('user_action')
+              ->result();
+      }
+  public function nullNotification(){
+        $userid = $this->session->userdata('logged_id');
+        $this->db->where('for_id',$userid)
+                 ->where('status','0')
+                 ->update('user_action', array('status' => '1'));
+
+        if ($this->db->affected_rows() > 0) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
 	public function GetData($where,$table)
     {
       return $this->db->where($where)->get($table);

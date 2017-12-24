@@ -46,6 +46,9 @@ class Myaccount extends CI_Controller {
 		$comment_amount = array();
 		$liked = array();
 
+		$subscribed = array();
+		$subs_amount = array();
+
 		foreach ($list_courses as $courses) {
 			$username[$courses->id_user] = $this->auth_model->GetUser(['id_user' => $courses->id_user])->row('username');
 			$like_amount[$courses->id_title] = $this->home_model->GetAction('COUNT(id_action) as like_amount',['id_title' => $courses->id_title,'type_action' => '0'])->row('like_amount');
@@ -54,7 +57,14 @@ class Myaccount extends CI_Controller {
 				$liked[] = $this->home_model->GetData(['id_title'=>$courses->id_title,'from_id'=>$user_id,'type_action'=>'0'],'user_action')->row('id_title');
 			}
 		}
-		
+		if ($this->session->userdata('logged_in') == TRUE) {
+			// foreach ($list_user as $user) { tinggal ganti for id => $user->id_user
+			// $subscribed[] = $this->home_model->GetData(['from_id'=>$userid_in,'for_id'=>$user_id],'user_subscribe')->row('for_id');
+			// $subs_amount[$user->id_user] = $this->home_model->GetSubscribe('COUNT(id_subscribe) as subs_amount',['for_id' => $user->id_user])->row('subs_amount');
+			$subs_amount[$user_id] = $this->home_model->GetSubscribe('COUNT(id_subscribe) as subs_amount',['for_id' => $user_id])->row('subs_amount');
+		// }
+				
+		}
 		
 		if (!empty($title) || !empty($subject)) {
 				$data = [
@@ -67,6 +77,8 @@ class Myaccount extends CI_Controller {
 				'title'		 	=> $title,	//search
 				'subject'		=> $subject, //search
 				'user_info'		=> $this->auth_model->GetUser(['id_user' => $user_id])->row(),
+				// 'subscribed'	=> $subscribed,
+				'subs_amount'	=> $subs_amount,
 					];
 		}
 		else{
@@ -78,6 +90,8 @@ class Myaccount extends CI_Controller {
 				'username' 		=> $username,
 				'list_courses' 	=> $list_courses,
 				'user_info'		=> $this->auth_model->GetUser(['id_user' => $user_id])->row(),
+				// 'subscribed'	=> $subscribed,
+				'subs_amount'	=> $subs_amount,
 					];
 		}
 		

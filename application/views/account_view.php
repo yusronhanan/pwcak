@@ -72,6 +72,13 @@ h6.thumb_true {
 	background: #d95459;
 	color:#fff;
 }
+a.subs_false{
+	color:#fff;
+}
+a.subs_true{
+	color:#d9534f;
+}
+
 
 </style>
 <script type="text/javascript">
@@ -171,8 +178,8 @@ h6.thumb_true {
 							<!--newsletter-->
 							<div class="login-main wthree">
 							  <form action="<?php echo base_url(); ?>auth/login" method="post" enctype="multipart/form-data">
-								<input type="email" placeholder="Email" required="" name="email">
-								<input type="password" placeholder="Password" name="password">
+								<input type="email" placeholder="Email" required="" name="email" class="form-control">
+								<input type="password" placeholder="Password" name="password" class="form-control">
 								<input type="submit" name="submit" value="Login">
 							</form>
 							</div>
@@ -197,12 +204,12 @@ h6.thumb_true {
 							<!--newsletter-->
 							<div class="login-main wthree">
 							<form action="<?php echo base_url(); ?>auth/submit_user" method="post">
-								<input type="text" placeholder="Name" name="name">
-								<input type="email" placeholder="Email" required="" name="email">
-								<input type="text" name="username" placeholder="Username">
-								<input type="password" placeholder="Password" name="password">
-								<input type="text" placeholder="City" name="city">
-								<input type="text" name="bio" placeholder="Bio">
+								<input type="text" placeholder="Name" name="name" class="form-control">
+								<input type="email" placeholder="Email" required="" name="email" class="form-control">
+								<input type="text" name="username" placeholder="Username" class="form-control">
+								<input type="password" placeholder="Password" name="password" class="form-control">
+								<input type="text" placeholder="City" name="city" class="form-control">
+								<input type="text" name="bio" placeholder="Bio" class="form-control">
 								<input type="submit" value="Register Now" name="submit">
 							</form>
 							</div>
@@ -311,13 +318,39 @@ h6.thumb_true {
 									<h3><?php echo $user_info->name; ?></h3>
 									<h4><?php echo $user_info->bio; ?></h4>
 									<h4><?php echo $user_info->city; ?></h4>
-								<?php 
+								<?php
+								$subss_amount = '0';
+								 	if (!empty($subs_amount)) {
+							if(array_key_exists($user_info->id_user, $subs_amount)) {
+							$subss_amount =  $subs_amount[$user_info->id_user];
+							} 
+						}
 								if ($this->session->userdata('logged_id') == $user_info->id_user) {
+
 								 ?>
 								 <button class="btn btn-default"><a href="#" data-toggle="modal" data-target="#edituser"><i class="fa fa-pencil"></i> Edit Account</a></button>
+								 <button class="btn btn-danger"><a href="#" data-toggle="modal" data-target="" class="subs_false"><i class="fa fa-users"></i> Subscriber  <?php echo $subss_amount; ?></a></button>
 								 <?php }
-								 else { ?>
-									<button class="btn btn-default"><a href="#" data-toggle="modal" data-target=""><i class="fa fa-plus"></i>Follow</a></button>
+								 else { 
+							
+						
+								 		$text = 'Subscribe';
+								 		$subs = 'btn-danger'; #button class
+										$a_subs ='subs_false' ; #a class
+										$i_subs ='fa fa-plus'; #i class
+								 	if (!empty($subscribed)) {
+										if(in_array($user_info->id_user, $subscribed)) {
+										$text = 'Disubscribe';
+										$subs = 'btn-default'; #button class
+										$a_subs ='subs_true' ; #a class
+										$i_subs ='fa fa-users'; #i class
+									}
+								}
+							
+								 	?>
+
+									<button class="btn <?php echo $subs; ?> subs_in" id="<?php echo $user_info->id_user; ?>"><a href="#" data-toggle="modal" data-target="" class="<?php echo $a_subs; ?>"><i class="<?php echo $i_subs; ?>"></i> <?php echo $text; ?>  <?php echo $subss_amount; ?></a></button>
+									<!-- <button class="btn btn-default"><a href="#" data-toggle="modal" data-target=""><i class="fa fa-users"></i> Disubscribe  1000</a></button> -->
 								<?php } ?>
 
 								</div>
@@ -827,6 +860,50 @@ h6.thumb_true {
 		} ?>
        		
 	});
+
+	$('button.subs_in').click(function(event) {
+		<?php	if ($this->session->userdata('logged_in') == TRUE) {  ?>
+		var id_user = $(this).attr('id');
+		// alert(id_user);
+		$.ajax({
+                    url: '<?php echo base_url(); ?>home/subs_up',
+                    type: 'post',
+                    context: this,
+                    data: {id_user : id_user},
+                    success: function(e){
+                          if(e == "false") {alert('Maaf, subs_up anda gagal');}
+                         
+                         else  {
+                        	if($(this).hasClass('btn-default')){
+                        	$(this).removeClass('btn-default');
+                        	$(this).addClass('btn-danger');
+                        	
+                        	$(this).html('<a href="#" data-toggle="modal" data-target="" class="subs_false"><i class="fa fa-plus"></i> Subscribe  '+e+'</a>');
+                        	}
+	                        else{
+	                        $(this).removeClass('btn-danger');
+                        	$(this).addClass('btn-default');
+                        	
+                        	$(this).html('<a href="#" data-toggle="modal" data-target="" class="subs_true"><i class="fa fa-users"></i> Disubscribe  '+e+'</a>');
+	                        }
+                    }
+				}
+                });
+		<?php }
+		else {
+			?>
+			 swal({
+                       title: "Failed",
+                       text: "Anda harus login terlebih dahulu",
+                       timer: 1500,
+                       showConfirmButton: false,
+                       type: 'warning'
+			});
+			<?php
+		} ?>
+       		
+	});
+
 </script>
 	<script type="text/javascript">
 		$(document).ready(function(){

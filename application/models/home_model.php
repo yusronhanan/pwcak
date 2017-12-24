@@ -42,6 +42,7 @@ class Home_model extends CI_Model {
 		$username = $this->auth_model->GetUser(['id_user' => $user_id])->row('username');
 		$random_code = $this->input->post('random_code');
 		$id_title = $this->course_model->GetData(['random_code'=> $random_code],'course_title')->row('id_title');
+		$for_id = $this->course_model->GetData(['random_code'=> $random_code],'course_title')->row('id_user');
 
 		$query = $this->GetData(['id_title'=>$id_title,'from_id'=>$user_id,'type_action'=>'0'],'user_action');
         if ($query->num_rows() > 0) {
@@ -53,6 +54,7 @@ class Home_model extends CI_Model {
               'id_title'           	  => $id_title,
               'from_id'           	  => $user_id,
               'from_username'         => $username,
+              'for_id'				  => $for_id,
               'type_action'           => 0, #type like = 0
               // 'reply_comment'      => , #buat comment
               // 'text_comment'       => , #buat comment
@@ -63,7 +65,7 @@ class Home_model extends CI_Model {
         }
 		
         if ($this->db->affected_rows() > 0) {
-        	$like_amount = $this->GetLikeAmount(['id_title' => $id_title])->row('like_amount');
+        	$like_amount = $this->home_model->GetAction('COUNT(id_action) as like_amount',['id_title' => $id_title,'type_action' => '0'])->row('like_amount');
             return $like_amount;
         } else {
             return "false";
@@ -74,10 +76,11 @@ class Home_model extends CI_Model {
     {
       return $this->db->where($where)->get($table);
     }
-    public function GetLikeAmount($where)
+    public function GetAction($select,$where)
     {
-      return $this->db->select('COUNT(id_action) as like_amount')->where($where)->get('user_action');
+      return $this->db->select($select)->where($where)->get('user_action');
     }
+    
 
 }
 

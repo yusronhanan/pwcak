@@ -150,7 +150,12 @@
 			</div>
 			<div class="eve-sub2">
 				<div class="eve-w3lleft">
-					<h6><i class="fa fa-comment-o" aria-hidden="true"></i>17</h6>
+					<?php 
+                    if(array_key_exists($courses->id_title, $comment_amount)) {
+                    $comments =  $comment_amount[$courses->id_title];
+                    }
+                     ?>
+                    <h6><i class="fa fa-comment-o" aria-hidden="true"></i><?php echo $comments; ?></h6>
 					<?php 
                     if(array_key_exists($courses->id_title, $like_amount)) {
                     $likes =  $like_amount[$courses->id_title];

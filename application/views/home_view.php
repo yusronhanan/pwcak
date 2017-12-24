@@ -68,7 +68,12 @@
 			</div>
 			<div class="eve-sub2">
 				<div class="eve-w3lleft">
-					<h6><i class="fa fa-comment-o" aria-hidden="true"></i>17</h6>
+					<?php 
+					if(array_key_exists($pcourses->id_title, $comment_amount)) {
+					$comments =  $comment_amount[$pcourses->id_title];
+					}
+					 ?>
+					<h6><i class="fa fa-comment-o" aria-hidden="true"></i><?php echo $comments; ?></h6>
 					<?php 
 					if(array_key_exists($pcourses->id_title, $like_amount)) {
 					$likes =  $like_amount[$pcourses->id_title];
@@ -151,7 +156,12 @@
 
 			<div class="eve-sub2">
 				<div class="eve-w3lleft">
-					<h6><i class="fa fa-comment-o" aria-hidden="true"></i>17</h6>
+					<?php 
+					if(array_key_exists($rcourses->id_title, $comment_amount)) {
+					$comments =  $comment_amount[$rcourses->id_title];
+					}
+					 ?>
+					<h6><i class="fa fa-comment-o" aria-hidden="true"></i><?php echo $comments; ?></h6>
 					 <?php 
 					if(array_key_exists($rcourses->id_title, $like_amount)) {
 					$likes =  $like_amount[$rcourses->id_title];

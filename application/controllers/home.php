@@ -68,7 +68,7 @@ class Home extends CI_Controller {
 			$output = '';
 			$result=$this->home_model->notification();
 			if(!empty($result)){
-				
+				//loop isi notif
 				foreach ($result as $notification) {
 
 					if ($notification->type_action == '0') {

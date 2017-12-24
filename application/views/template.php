@@ -69,74 +69,7 @@ h6.thumb_true {
 				 <li class="dropdown at-drop ">
 		              <a href="#" id="notifc" class="dropdown-toggle dropdown-at " data-toggle="dropdown"><i class="fa fa-globe"></i>NOTIF<span class="badge" id="amountnotif"></span></a>
 		              <ul class="dropdown-menu menu1" id="mininotif" role="menu" style="min-width: 330px;max-height: 300px;overflow-y: scroll;">
-		                <li><a href="#">
-		               
-		                	<div class="user-new">
-		                	<p><img src="assets\images\t1.jpg" style="width: 35px;height: 35px;border-radius: 20px;margin-right: 5px" > New user registered 
-		                		<img src="assets\images\t1.jpg" style="width: 35px;height: 35px;margin-left: 80px;">
-		                		<!-- <i style="margin-left: 79px" class="fa fa-user-plus"></i> -->
-		                	</p> 
-		                	<span style="margin-left: 40px">40 seconds ago</span>
-		                	</div>
-		                	<!-- <div class="user-new-left">
-		                	<i class="fa fa-user-plus"></i>
-		                	</div> -->
-		                	<div class="clearfix"> </div>
-		                	</a></li>
-
-		                <li><a href="#">
-		                	<div class="user-new">
-		                	<p> <img src="assets\images\t1.jpg" style="width: 35px;height: 35px;border-radius: 20px;margin-right: 5px">Someone special liked this
-		                		<img src="assets\images\t1.jpg" style="width: 35px;height: 35px;margin-left: 48px">
-		                		<!-- <i style="margin-left: 44px" class="fa fa-heart"></i> -->
-		                	</p>
-		                	<span style="margin-left: 40px">3 minutes ago</span>
-		                	</div>
-		                	<!-- <div class="user-new-left">
-		                	<i class="fa fa-heart"></i>
-		                	</div> -->
-		                	<div class="clearfix"> </div>
-		                </a></li>
-
-		                <li><a href="#">
-		                	<div class="user-new">
-		                	<p> <img src="assets\images\t1.jpg" style="width: 35px;height: 35px;border-radius: 20px;margin-right: 5px">John cancelled the event
-		                		<img src="assets\images\t1.jpg" style="width: 35px;height: 35px;margin-left: 57px">
-		                		<!-- <i style="margin-left: 55px" class="fa fa-times"></i>
- -->		                </p>
-		                	<span style="margin-left: 40px">4 hours ago</span>
-		                	</div>
-		                	<!-- <div class="user-new-left">
-		                	<i class="fa fa-times"></i>
-		                	</div> -->
-		                	<div class="clearfix"> </div>
-		                </a></li>
-		                <li><a href="#">
-		                	<div class="user-new">
-		                	<p> <img src="assets\images\t1.jpg" style="width: 35px;height: 35px;border-radius: 20px;margin-right: 5px">The server is status is stable
-		                		<img src="assets\images\t1.jpg" style="width: 35px;height: 35px;margin-left:37px">
-		                		<!-- <i style="margin-left: 38px" class="fa fa-info"></i> -->
-		                	</p>
-		                	<span style="margin-left: 40px">yesterday at 08:30am</span>
-		                	</div>
-		                	<!-- <div class="user-new-left">
-		                	<i class="fa fa-info"></i>
-		                	</div> -->
-		                	<div class="clearfix"> </div>
-		                </a></li>
-		                <li><a href="#">
-		                	<div class="user-new">
-		                	<p> <img src="assets\images\t1.jpg" style="width: 35px;height: 35px;border-radius: 20px;margin-right: 5px">New comments waiting approval
-		                		<img src="assets\images\t1.jpg" style="width: 35px;height: 35px;margin-left: 8px">
-		                		<!-- <i style="margin-left: 8px" class="fa fa-rss"></i> -->
-		                	</p>
-		                	<span style="margin-left: 40px">Last Week</span>
-		                	</div>
-		                	<!-- <div class="user-new-left">
-		                	<i class="fa fa-rss"></i>
-		                	</div> -->
-		                	<div class="clearfix"> </div>
-		                </a></li>
+		                
 		                <li><a href="<?php echo base_url(); ?>notif" class="view" style="margin-left: 40px">View all messages</a></li>
 		              </ul>
 		            </li>
@@ -172,8 +105,8 @@ h6.thumb_true {
 							<!--newsletter-->
 							<div class="login-main wthree">
 							  <form action="<?php echo base_url(); ?>auth/login" method="post" enctype="multipart/form-data">
-								<input type="email" placeholder="Email" required="" name="email">
-								<input type="password" placeholder="Password" name="password">
+								<input type="email" placeholder="Email" required="" name="email" class="form-control">
+								<input type="password" placeholder="Password" name="password" class="form-control">
 								<input type="submit" name="submit" value="Login">
 							</form>
 							</div>
@@ -198,12 +131,12 @@ h6.thumb_true {
 							<!--newsletter-->
 							<div class="login-main wthree">
 							<form action="<?php echo base_url(); ?>auth/submit_user" method="post">
-								<input type="text" placeholder="Name" name="name">
-								<input type="email" placeholder="Email" required="" name="email">
-								<input type="text" name="username" placeholder="Username">
-								<input type="password" placeholder="Password" name="password">
-								<input type="text" placeholder="City" name="city">
-								<input type="text" name="bio" placeholder="Bio">
+								<input type="text" placeholder="Name" name="name" class="form-control">
+								<input type="email" placeholder="Email" required="" name="email" class="form-control">
+								<input type="text" name="username" placeholder="Username" class="form-control">
+								<input type="password" placeholder="Password" name="password" class="form-control">
+								<input type="text" placeholder="City" name="city" class="form-control">
+								<input type="text" name="bio" placeholder="Bio" class="form-control">
 								<input type="submit" value="Register Now" name="submit">
 							</form>
 							</div>

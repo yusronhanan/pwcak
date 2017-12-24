@@ -47,7 +47,7 @@ h6.thumb_true {
 		                <li><a href="#">
 		               
 		                	<div class="user-new">
-		                	<p><img src="assets\images\t1.jpg" style="width: 35px;height: 35px"> New user registered 
+		                	<p><img src="assets\images\t1.jpg" style="width: 35px;height: 35px;border-radius: 20px;margin-right: 5px" > New user registered 
 		                		<img src="assets\images\t1.jpg" style="width: 35px;height: 35px;margin-left: 80px;">
 		                		<!-- <i style="margin-left: 79px" class="fa fa-user-plus"></i> -->
 		                	</p> 
@@ -61,7 +61,7 @@ h6.thumb_true {
 
 		                <li><a href="#">
 		                	<div class="user-new">
-		                	<p> <img src="assets\images\t1.jpg" style="width: 35px;height: 35px">Someone special liked this
+		                	<p> <img src="assets\images\t1.jpg" style="width: 35px;height: 35px;border-radius: 20px;margin-right: 5px">Someone special liked this
 		                		<img src="assets\images\t1.jpg" style="width: 35px;height: 35px;margin-left: 48px">
 		                		<!-- <i style="margin-left: 44px" class="fa fa-heart"></i> -->
 		                	</p>
@@ -75,7 +75,7 @@ h6.thumb_true {
 
 		                <li><a href="#">
 		                	<div class="user-new">
-		                	<p> <img src="assets\images\t1.jpg" style="width: 35px;height: 35px">John cancelled the event
+		                	<p> <img src="assets\images\t1.jpg" style="width: 35px;height: 35px;border-radius: 20px;margin-right: 5px">John cancelled the event
 		                		<img src="assets\images\t1.jpg" style="width: 35px;height: 35px;margin-left: 57px">
 		                		<!-- <i style="margin-left: 55px" class="fa fa-times"></i>
  -->		                </p>
@@ -88,7 +88,7 @@ h6.thumb_true {
 		                </a></li>
 		                <li><a href="#">
 		                	<div class="user-new">
-		                	<p> <img src="assets\images\t1.jpg" style="width: 35px;height: 35px">The server is status is stable
+		                	<p> <img src="assets\images\t1.jpg" style="width: 35px;height: 35px;border-radius: 20px;margin-right: 5px">The server is status is stable
 		                		<img src="assets\images\t1.jpg" style="width: 35px;height: 35px;margin-left:37px">
 		                		<!-- <i style="margin-left: 38px" class="fa fa-info"></i> -->
 		                	</p>
@@ -101,7 +101,7 @@ h6.thumb_true {
 		                </a></li>
 		                <li><a href="#">
 		                	<div class="user-new">
-		                	<p> <img src="assets\images\t1.jpg" style="width: 35px;height: 35px">New comments waiting approval
+		                	<p> <img src="assets\images\t1.jpg" style="width: 35px;height: 35px;border-radius: 20px;margin-right: 5px">New comments waiting approval
 		                		<img src="assets\images\t1.jpg" style="width: 35px;height: 35px;margin-left: 8px">
 		                		<!-- <i style="margin-left: 8px" class="fa fa-rss"></i> -->
 		                	</p>

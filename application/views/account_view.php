@@ -279,11 +279,10 @@ h6.thumb_true {
 									<h3><?php echo $user_info->name; ?></h3>
 									<h4><?php echo $user_info->bio; ?></h4>
 									<h4><?php echo $user_info->city; ?></h4>
-									<br/> <br/> <br/>
 								<?php 
 								if ($this->session->userdata('logged_id') == $user_info->id_user) {
 								 ?>
-								 <button class="btn btn-default"><a href="#" data-toggle="modal" data-target="#edituser"><i class="fa fa-pencil"></i>Edit Account</a></button>
+								 <button class="btn btn-default"><a href="#" data-toggle="modal" data-target="#edituser"><i class="fa fa-pencil"></i> Edit Account</a></button>
 								 <?php }
 								 else { ?>
 									<button class="btn btn-default"><a href="#" data-toggle="modal" data-target=""><i class="fa fa-plus"></i>Follow</a></button>
@@ -312,15 +311,15 @@ h6.thumb_true {
 				<div class="modal-content news-w3l">
 						<div class="modal-header">
 							<button type="button" class="close w3l" data-dismiss="modal">&times;</button>
-							<h4>Edit Profile</h4>
+							<h4> Edit Profile</h4>
 							<!--newsletter-->
 							<div class="login-main wthree">
 							   <form action="<?php echo base_url(); ?>myaccount/edit_user" method="post" enctype="multipart/form-data">
-								<input type="text" placeholder="Name" value="<?php echo $user_info->name ?>" name="name">
-								<input type="email" placeholder="Email" required="" name="email" value="<?php echo $user_info->email ?>">
-								<input type="text" name="username" placeholder="Username" value="<?php echo $user_info->username ?>" disabled>
-								<input type="text" placeholder="City" name="city" value="<?php echo $user_info->city ?>">
-								<input type="text" name="bio" placeholder="Bio" value="<?php echo $user_info->bio ?>">
+								<input type="text" placeholder="Name" value="<?php echo $user_info->name ?>" name="name" class="form-control">
+								<input type="email" placeholder="Email" required="" name="email" value="<?php echo $user_info->email ?>" class="form-control">
+								<input type="text" name="username" placeholder="Username" value="<?php echo $user_info->username ?>" disabled class="form-control">
+								<input type="text" placeholder="City" name="city" value="<?php echo $user_info->city ?>" class="form-control">
+								<input type="text" name="bio" placeholder="Bio" value="<?php echo $user_info->bio ?>" class="form-control">
 								<input type="submit" value="Save" name="submit">
 								
 							</form>
@@ -372,17 +371,16 @@ h6.thumb_true {
 							<!--newsletter-->
 							<div class="login-main wthree">
 							 <form action="<?php echo base_url(); ?>myaccount/newcourse_title" method="post" enctype="multipart/form-data">
-								Course Name 
-								<input type="text" name="coursename" style="border-bottom:none" class="form-control" >
-								Subject 
+								Course Name
+								<input class="form-control" name="coursename" type="text">
+								Subject
 								<select class="form-control" name="subject">
                                 <option value="">All</option>
                                 <?php 
                                 foreach ($list_subject as $sbj) {
                                  ?>
                                     <option value="<?php echo $sbj->value ?>"><?php echo $sbj->text ?></option>
-                                <?php 
-                            
+                                <?php                      
                             } ?>
                                 </select>
                                 Description
@@ -405,19 +403,15 @@ h6.thumb_true {
 	</div>
 	<div class="clearfix"></div>
 		<div class="row">
-<div class="col-md-6">
-
-
-
-        <div class="nav nav-justified navbar-nav">
- 
-            <form class="navbar-form navbar-search" id="formcourses" method="get" action="<?php echo base_url() ?>myaccount" role="search">
+       <div class="col-md-6">
+       	<div class="nav nav-justified navbar-nav">
+       		<form class="navbar-form navbar-search" id="formcourses" method="get" action="<?php echo base_url() ?>myaccount" role="search">
                 <div class="input-group">
                                                                                                 
-                    <input type="text" id="title" name="title" class="form-control" value="<?php if(!empty($title)) { echo $title; } ?>">
+                    <input type="text" id="title" name="title" class="form-control" value="<?php if(!empty($title)) { echo $title; } ?>" placeholder="search courses">
                 
                     <div class="input-group-btn">
-                        <input type="submit"  class="btn btn-search btn-danger" value="Search" id="searchcourses">
+                        <input type="submit"  class="btn btn-search btn-danger btn-secondary" value="Search" id="searchcourses">
                         <!-- <button type="button" class="btn btn-search btn-danger" id="searchcourses">
                             <span class="glyphicon glyphicon-search"></span>
                             <span class="label-icon">Search</span>

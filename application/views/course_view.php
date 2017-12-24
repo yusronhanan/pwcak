@@ -43,7 +43,7 @@
             <form class="navbar-form navbar-search" id="formcourses" method="get" action="<?php echo base_url() ?>course" role="search">
                 <div class="input-group">
                                                                                                 
-                    <input type="text" id="title" name="title" class="form-control" value="<?php if(!empty($title)) { echo $title; } ?>">
+                    <input type="text" id="title" name="title" class="form-control" value="<?php if(!empty($title)) { echo $title; } ?>" placeholder="search courses">
                 
                     <div class="input-group-btn">
                         <input type="submit"  class="btn btn-search btn-danger" value="Search" id="searchcourses">

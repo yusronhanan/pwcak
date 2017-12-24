@@ -17,15 +17,20 @@
 							<div class="container">
 							    <div class="row">
 							        <div class="col-sm-6 col-sm-offset-3">
-							            <div id="imaginary_container"> 
+							            <div id="imaginary_container">
+							            	<form method="" action="">
 							                <div class="input-group stylish-input-group input-append">
 							                    <input type="text" class="form-control"  placeholder="Search" >
-							                    <span class="input-group-addon">
+							                    <div class="input-group-btn">
+                                                <input type="submit"  class="btn btn-search btn-danger btn-secondary" value="Go!" id="#">
+                                            </div>
+							                    <!-- <span class="input-group-addon">
 							                        <button type="submit">
 							                            <span class="glyphicon glyphicon-search"></span>
 							                        </button>  
-							                    </span>
+							                    </span> -->
 							                </div>
+							            </form>
 							            </div>
 							        </div>
 								</div>

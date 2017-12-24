@@ -89,12 +89,8 @@ h1,h2,h3,h4,h5,h6{
 .login-main input[type="text"],.newsletter input[type="email"],.login-main input[type="email"] {
     font-size: 1em;
     color: #000;
-    padding: 0.7em 0em;
-    margin-bottom: 1em;
     display: inline-block;
     outline: none;
-    border: none;
-    border-bottom: 2px solid #000;
     font-family: 'Lato', sans-serif;
 	background: Transparent;
 	width: 100%;
@@ -122,13 +118,9 @@ h1,h2,h3,h4,h5,h6{
 .login-main input[type="password"] {
     font-size: 1em;
     color: #000;
-    padding: 0.7em 0em;
-    margin-bottom: 1em;
     width: 100%;
     display: inline-block;
     outline: none;
-    border: none;
-    border-bottom: 2px solid #000;
     font-family: 'Signika', sans-serif;
 	background: Transparent;
 }
@@ -1404,6 +1396,7 @@ a.face_one i {
 .eve-sub2 {
     background: #eee;
     padding: 0.5em 0em;
+    margin-bottom: 20px;
 }
 .eve-w3lleft {
     float: left;

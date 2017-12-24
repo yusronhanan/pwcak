@@ -250,7 +250,8 @@ h6.thumb_true {
 					          </div> -->
 
 
-	<div class="" style="background:rgba(0, 0, 0, 0.51);">
+	<!-- <div class="" style="background:rgba(0, 0, 0, 0.51);">  <?php echo base_url() ?>assets/images/bg-testing.jpeg-->
+		<div class="" style="background :url('http://placehold.it/1480x538') no-repeat;width: 1349px;height: 538px;background-size:contain;border: 1px solid;">
 				<div class="callbacks_container">
 					<ul class="rslides" id="">
 						<li>

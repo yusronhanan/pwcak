@@ -64,7 +64,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- tab content -->
 <div class="col-md-12 tab-content tab-content-in">
 <div class="tab-pane active text-style" id="tab1">
-  <div class="inbox-right">
+  <div class="col-md-3"> </div>
+  <div class="inbox-right col-md-6">
             
             <div class="mailbox-content">
                <div class="mail-toolbar clearfix">
@@ -313,6 +314,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </table>
                </div>
             </div>
+            <div class="col-md-3"> </div>
 </div>
 
 </div>

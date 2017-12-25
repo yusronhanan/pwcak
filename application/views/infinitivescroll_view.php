@@ -1,3 +1,4 @@
+<!-- load -->
 <script type="text/javascript">
     function load_infinite() {
             var load_infinite = 'load_infinite';

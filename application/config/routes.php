@@ -55,6 +55,7 @@ $route['home'] = "home";
 $route['qna'] = "qna";
 $route['myaccount'] = "myaccount";
 $route['notif'] = "notif";
+$route['infinitive'] = "infinitive";
 $route['lesson/(.+)'] = "course/detail_course/$1";
 $route['add_course/(.+)'] = "myaccount/add_course/$1";
 

@@ -52,6 +52,7 @@ h6.thumb_true {
         }
     window.onload = mini_notif;
 </script>
+
 </head>
 <body>
 <div class="main-w3layouts" id="home">
@@ -193,7 +194,7 @@ h6.thumb_true {
 	<?php $this->load->view($main_view); ?>
 
 	<!-- footer -->
-	<div class="footer" id="footer">
+	<!-- <div class="footer" id="footer">
 		<div class="container">
 			<div class="col-md-4 agileinfo_footer_grid">
 				<h4>About Us</h4>
@@ -227,7 +228,7 @@ h6.thumb_true {
 				<p>© 2017 Educational. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts.</a></p>
 			</div>
 		</div>
-	</div>
+	</div> -->
 
 <!-- //footer -->
 
@@ -406,7 +407,22 @@ h6.thumb_true {
         	});
 		});
 		setInterval(function(){ mini_notif() }, 3000);
+
 	</script>
+	
+	<script type="text/javascript">
+        $(document).ready(function(){
+            $("button#load_infinite").on('click', load_infinite);
+    });
+        $(window).on("scroll", function() {
+    var scrollHeight = $(document).height();
+    var scrollPosition = $(window).height() + $(window).scrollTop();
+    if ((scrollHeight - scrollPosition) / scrollHeight === 0) {
+        // alert('aaa');
+        load_infinite();
+    }
+});
+    </script>
 </body>
 <!-- </div>
 </body> -->

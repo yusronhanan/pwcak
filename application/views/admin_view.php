@@ -36,12 +36,19 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 <div class="main-w3layouts" id="home">
 	<!--top-bar-->
 	<div class="top-search-bar">
-		<div class="header-top-nav">
-			<ul>
+		<ul class="nav navbar-nav navbar-right">
+				<li><a href="<?php echo base_url(); ?>home" class="hvr-underline-from-center active">User Data</a></li>
+				<li><a href="<?php echo base_url(); ?>course" class="hvr-underline-from-center active">Course Data</a></li>
+				<!-- <li><a href="<?php echo base_url(); ?>qna" class="hvr-underline-from-center active">QnA</a></li>
+				<li><a href="#gallery" class="hvr-underline-from-center scroll">Gdjvb</a></li>
+				<li><a href="#team" class="hvr-underline-from-center scroll">Our Team</a></li>
+				<li><a href="#events" class="hvr-underline-from-center scroll">Events</a></li>
+				<li><a href="<?php echo base_url(); ?>myaccount" class="hvr-underline-from-center active">MyAccount</a></li> -->
+			</ul>	
+			<!-- <ul class="nav navbar-nav navbar-left">
 				<li><a href="#" data-toggle="modal" data-target="#myModal3"><i class="fa fa-key" aria-hidden="true"></i>LOGIN</a></li>
 				<li><a href="#" data-toggle="modal" data-target="#myModal4"><i class="fa fa-lock" aria-hidden="true"></i>REGISTER</a></li>
-			</ul>
-		</div>
+			</ul> -->
 	</div>
 	<!-- Modal1 -->
 		
@@ -165,7 +172,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 					          </div> -->
 
 
-	<div class="" style="background:rgba(0, 0, 0, 0.51);">
+	<!-- <div class="" style="background:rgba(0, 0, 0, 0.51);">
 				<div class="callbacks_container">
 					<ul class="rslides" id="">
 						<li>
@@ -192,22 +199,22 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 							
 					</ul>
 				</div>
-				<div class="clearfix"></div>
+				<div class="clearfix"></div> -->
 
 		<!-- //Slider -->
-	</div>
-
+	<!-- </div>
+ -->
 
 	<!-- Modal99 -->
-		<div class="modal fade" id="myModal99" tabindex="-1" role="dialog" >
-			<div class="modal-dialog" role="document">
+		<!-- <div class="modal fade" id="myModal99" tabindex="-1" role="dialog" >
+			<div class="modal-dialog" role="document"> -->
 			<!-- Modal content-->
-				<div class="modal-content news-w3l">
+				<!-- <div class="modal-content news-w3l">
 						<div class="modal-header">
 							<button type="button" class="close w3l" data-dismiss="modal">&times;</button>
-							<h4>Edit Profile</h4>
+							<h4>Edit Profile</h4> -->
 							<!--newsletter-->
-							<div class="login-main wthree">
+							<!-- <div class="login-main wthree">
 								<form action="#" method="post">
 									<h5> Nama </h5> <input type="text" value="namanya" name="nama">
 									<h5> Bio </h5> <input type="text" value="bionya" name="bio">
@@ -219,7 +226,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 				</div>
 			</div>
 		</div>
-			<div class="clearfix"></div>
+			<div class="clearfix"></div> -->
 	<!-- //Modal99 -->
 
 </div>
@@ -252,7 +259,10 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
                 </ul>
                 <br/> <br/>
                 <div class="tab-content">
-
+                   <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
+                   	<div class="panel panel-default">
+                   		<div class="panel-heading">User Data</div>
+                   		<div class="panel-body">
 	                <div class="table-responsive tab-pane fade in active" id="usr">
 	                    <table class="table table-hover">
 	                        <thead>
@@ -269,68 +279,39 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 	                        </thead>
 	                        <tbody>
 	                            <tr>
-	                                <td>1</td>
-	                                <td>U001</td>
-	                                <td>yusronhanan@gmail.com</td>
-	                                <td>yus</td>
-	                                <td>situbondo</td>
-	                                <td>mboh</td>
+	                            	<?php
+	                            	$no = 1;
+	                            	foreach($user as $data){
+	                            		echo '
+	                                <td>'.$no.'</td>
+	                                <td>'.$data->id_user.'</td>
+	                                <td>'.$data->email.'</td>
+	                                <td>'.$data->username.'</td>
+	                                <td>'.$data->city.'</td>
+	                                <td>'.$data->bio.'</td>
 	                                <td colspan="2"> 
 	                                <button class = "btn btn-primary"><a href="#" data-toggle="modal" data-target="#myModalEdit" style="color: white"><i class="fa fa-edit"></i> Edit </a></button>
+	                       			
+	                       			<button class = "btn btn-success"><a href="#" data-toggle="modal" data-target="#myModalView" style="color: white"><i class="glyphicon glyphicon-eye-open"></i> View </a></button>
 	                       			<button class = "btn btn-danger"><i class="fa fa-trash-o"></i> Delete </button>
-	                       			<button class = "btn btn-primary"><a href="#" data-toggle="modal" data-target="#myModalView" style="color: white"><i class="glyphicon glyphicon-eye-open"></i> View </a></button>
 	                                </td>
 	                                <td> </td>
-	                            </tr>
-	                            <tr>
-	                                <td>2</td>
-	                                <td>U002</td>
-	                                <td>qoriatulmasfufah@gmail.com</td>
-	                                <td>qor</td>
-	                                <td>ngawi</td>
-	                                <td>iya</td>
-	                                <td colspan="2"> 
-	                                <button class = "btn btn-primary"><a href="#" data-toggle="modal" data-target="#myModalEdit" style="color: white"><i class="fa fa-edit"></i> Edit </a></button>
-	                       			<button class = "btn btn-danger"><i class="fa fa-trash-o"></i> Delete </button> 
-	                       			<button class = "btn btn-primary"><a href="#" data-toggle="modal" data-target="#myModalView" style="color: white"><i class="glyphicon glyphicon-eye-open"></i> View </a></button>
-	                                </td>
-	                                <td> </td>
-	                            </tr>
-	                            <tr>
-	                                <td>3</td>
-	                                <td>U003</td>
-	                                <td>aryabayu@gmail.com</td>
-	                                <td>yab</td>
-	                                <td>pare</td>
-	                                <td>itu</td>
-	                                <td colspan="2"> 
-	                                 <button class = "btn btn-primary"><a href="#" data-toggle="modal" data-target="#myModalEdit" style="color: white"><i class="fa fa-edit"></i> Edit </a></button>
-	                       			<button class = "btn btn-danger"><i class="fa fa-trash-o"></i> Delete </button>  
-	                       			<button class = "btn btn-primary"><a href="#" data-toggle="modal" data-target="#myModalView" style="color: white"><i class="glyphicon glyphicon-eye-open"></i> View </a></button>
-	                                </td>
-	                                <td> </td>
-	                            </tr>
-	                            <tr>
-	                                <td>4</td>
-	                                <td>U004</td>
-	                                <td>karinawidhiagmail.com</td>
-	                                <td>rin</td>
-	                                <td>sidoarjo</td>
-	                                <td>apa</td>
-	                                <td colspan="2"> 
-	                                <button class = "btn btn-primary"><a href="#" data-toggle="modal" data-target="#myModalEdit" style="color: white"><i class="fa fa-edit"></i> Edit </a></button>
-	                       			<button class = "btn btn-danger"><i class="fa fa-trash-o"></i> Delete </button>  
-	                       			<button class = "btn btn-primary"><a href="#" data-toggle="modal" data-target="#myModalView" style="color: white"><i class="glyphicon glyphicon-eye-open"></i> View </a></button>
-	                                </td>
-	                                <td> </td>
-	                            </tr>
-	                        </tbody>
-	                    </table>
-	                </div>
+	                            </tr>';
+	                            $no++;
+	                        }
+	                        ?>
+	                    </tr>
+	                </tbody>
+	            </table>
+	        </div>
+	        </div>
+	    </div>
+	                            
 	                <!-- /.table-responsive -->
 	                
 
 	                <!--Modal edit-->
+
 						<div class="modal fade" id="myModalEdit" tabindex="-1" role="dialog" >
 							<div class="modal-dialog" role="document">
 							<!-- Modal content-->
@@ -383,87 +364,61 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 							<div class="clearfix"></div>
 					<!-- Modal lihat -->
 
-
-	                <div class="table-responsive tab-pane fade" id="crse">
+                   <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
+                   	<div class="panel panel-default">
+                   		<div class="panel-heading">Course Data</div>
+                   		<div class="panel-body">
+	                <div class="table-responsive tab-pane fade in active" id="crse">
 	                    <table class="table table-hover">
 	                        <thead>
 	                            <tr>
 	                                <th>No</th>
 	                                <th>ID User</th>
-	                                <th>Date</th>
+	                                <th>Title</th>
 	                                <th>Category</th>
-	                                <th>Course</th>
+	                                <th>Date</th>
 	                                <th colspan="2">Action</th>
 	                                <th></th>
 	                            </tr>
 	                        </thead>
 	                        <tbody>
 	                            <tr>
-	                                <td>1</td>
-	                                <td>U001</td>
-	                                <td>18-11-17</td>
-	                                <td>Mathematics</td>
-	                                <td>Hasil Course</td>
+	                            	<?php 
+	                            	$no = 1;
+	                            	foreach($course as $data){
+
+	                            	echo '
+	                                <td>'.++$start.'</td>
+	                                <td>'.$data->id_user.'</td>
+	                                <td>'.$data->title.'</td>
+	                                <td>'.$data->subject.'</td>
+	                                <td>'.$data->created_at.'</td>
 	                                <td colspan="2"> 
 	                                <button class = "btn btn-info"><i class="glyphicon glyphicon-ok-sign"></i> Approve </button>
 	                       			<button class = "btn btn-warning"><i class="glyphicon glyphicon-remove-sign"></i> Decline </button>
+	                       			<a href="" class = "btn btn-success"><i class="glyphicon glyphicon-eye-open"></i> View </a>
 	                       			<button class = "btn btn-danger"><i class="fa fa-trash-o"></i> Delete </button>  
 	                                </td>
 	                                <td> </td>
-	                            </tr>
-	                            <tr>
-	                                <td>2</td>
-	                                <td>U002</td>
-	                                <td>23-11-17</td>
-	                                <td>Android</td>
-	                                <td>Hasil Course</td>
-	                                <td colspan="2"> 
-	                                <button class = "btn btn-info"><i class="glyphicon glyphicon-ok-sign"></i> Approve </button>
-	                       			<button class = "btn btn-warning"><i class="glyphicon glyphicon-remove-sign"></i> Decline </button>
-	                       			<button class = "btn btn-danger"><i class="fa fa-trash-o"></i> Delete </button>  
-	                                </td>
-	                                <td> </td>
-	                            </tr>
-	                            <tr>
-	                                <td>3</td>
-	                                <td>U003</td>
-	                                <td>01-12-17</td>
-	                                <td>Web Design</td>
-	                                <td>Hasil Course</td>
-	                                <td colspan="2"> 
-	                                <button class = "btn btn-info"><i class="glyphicon glyphicon-ok-sign"></i> Approve </button>
-	                       			<button class = "btn btn-warning"><i class="glyphicon glyphicon-remove-sign"></i> Decline </button>
-	                       			<button class = "btn btn-danger"><i class="fa fa-trash-o"></i> Delete </button>  
-	                                </td>
-	                                <td> </td>
-	                            </tr>
-	                            <tr>
-	                                <td>4</td>
-	                                <td>U004</td>
-	                                <td>09-12-17</td>
-	                                <td>English</td>
-	                                <td>Hasil Course</td>
-	                                <td colspan="2"> 
-	                                <button class = "btn btn-info"><i class="glyphicon glyphicon-ok-sign"></i> Approve </button>
-	                       			<button class = "btn btn-warning"><i class="glyphicon glyphicon-remove-sign"></i> Decline </button>
-	                       			<button class = "btn btn-danger"><i class="fa fa-trash-o"></i> Delete </button>  
-	                                </td>
-	                                <td> </td>
-	                            </tr>
-	                        </tbody>
-	                    </table>
+	                            </tr> '
+	                           ;
+	                           $no++;
+	                       }
+	                       ?>
+	                          			</tr>
+	                        		</tbody>
+	                    		</table>
+	                    	<?php echo $pagination; ?>
+	                	</div>
 	                </div>
+	            </div>
+	        </div>
 	                <!-- /.table-responsive -->
-
                 </div>
-
-                
             </div>
             <!-- /.panel-body -->
-        
+    	</div>
     </div>
-
-	</div>
 </div>
 
 	 

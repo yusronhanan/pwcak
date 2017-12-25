@@ -11,8 +11,12 @@ class Qna extends CI_Controller {
 	}
 	public function index()
 	{
+		$user_id = $this->session->userdata('logged_id');
+		$username_id = $this->auth_model->GetUser(['id_user' => $user_id])->row('username');
 				$data = [
 				'main_view'  => 'qna_view',
+
+				'username_id'	=> $username_id,
 		 		];
 				$this->load->view('template', $data);
 	}

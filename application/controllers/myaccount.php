@@ -16,6 +16,8 @@ class Myaccount extends CI_Controller {
 	{
 		if ($this->session->userdata('logged_in') == TRUE) {
 		$user_id = $this->session->userdata('logged_id');
+		$username_id = $this->auth_model->GetUser(['id_user' => $user_id])->row('username');
+		
 		$list_courses = '';
 
 		$title = $this->input->get('title');
@@ -79,6 +81,7 @@ class Myaccount extends CI_Controller {
 				'user_info'		=> $this->auth_model->GetUser(['id_user' => $user_id])->row(),
 				// 'subscribed'	=> $subscribed,
 				'subs_amount'	=> $subs_amount,
+				'username_id'	=> $username_id,
 					];
 		}
 		else{
@@ -92,6 +95,7 @@ class Myaccount extends CI_Controller {
 				'user_info'		=> $this->auth_model->GetUser(['id_user' => $user_id])->row(),
 				// 'subscribed'	=> $subscribed,
 				'subs_amount'	=> $subs_amount,
+				'username_id'	=> $username_id,
 					];
 		}
 		
@@ -118,7 +122,7 @@ class Myaccount extends CI_Controller {
 		$step_number = $this->input->post('step_number');
 		if ($this->session->userdata('logged_in') == TRUE) {
 		$id_user = $this->session->userdata('logged_id');
-		
+		$username_id = $this->auth_model->GetUser(['id_user' => $id_user])->row('username');
 		$random_code = $this->uri->segment(2);
 	
 		$id_title = $this->course_model->GetData(['random_code'=> $random_code],'course_title')->row('id_title');
@@ -170,7 +174,7 @@ class Myaccount extends CI_Controller {
 		}
 		else{
 			$this->session->set_flashdata('notif_failed','Maaf, anda bukan course maker dari course ini.');
-			redirect('myaccount');
+			redirect('/'.$username_id);
 		}
 		
 		}
@@ -183,6 +187,9 @@ class Myaccount extends CI_Controller {
 	
 	}
 	public function submit_content(){
+			$id_user = $this->session->userdata('logged_id');
+			$username_id = $this->auth_model->GetUser(['id_user' => $id_user])->row('username');
+						
 			$this->form_validation->set_rules('id_title', 'ID Title', 'trim|required');
 			$this->form_validation->set_rules('step_title', 'Step Title', 'required');
 			$this->form_validation->set_rules('step_number','Step Number','trim|required');
@@ -196,7 +203,7 @@ class Myaccount extends CI_Controller {
 						$newnumber = $lastnumber + 1; 
 						// $this->session->set_flashdata('notif_success','Anda sukses menambah step baru');
 						// $this->session->set_flashdata('new_step', $newnumber);
-						// redirect('myaccount/add_course/'.$random_code);
+						// redirect('add_course/'.$random_code);
 
 						
 						$id_title = $this->input->post('id_title');
@@ -227,7 +234,7 @@ class Myaccount extends CI_Controller {
 					}
 					else if (!empty($this->input->post('save'))) {
 						$this->session->set_flashdata('notif_success','Anda sukses menyimpan data');
-						// redirect('myaccount/add_course/'.$random_code);
+						// redirect('add_course/'.$random_code);
 						$getcontent = $this->course_model->GetContent(['id_title' => $id_title, 'step_number' => $this->input->post('step_number')])->row();
 						$data = [
 						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject').'|'.$getcourse->row('thumbnail'),
@@ -247,14 +254,14 @@ class Myaccount extends CI_Controller {
 					else{
 						$this->session->set_flashdata('notif_success','Anda sukses menambahkan menyimpan course anda');
 					
-						redirect('myaccount');	
+						redirect('/'.$username_id);	
 					}
 
 					
 
 				}else if($this->course_model->add_course_content() == FALSE) {
 					$this->session->set_flashdata('notif_failed','Maaf, ada kesalahan. Coba lagi');
-					redirect('myaccount');
+					redirect('/'.$username_id);
 				}
 				else{
 					$this->session->set_flashdata('notif_failed','Maaf, anda harus login terlebih dahulu');
@@ -263,12 +270,14 @@ class Myaccount extends CI_Controller {
 			}
 			else{
 					$this->session->set_flashdata('notif',validation_errors());
-					redirect('myaccount/add_course/'.$this->input->post('id_title'));
+					redirect('add_course/'.$this->input->post('id_title'));
 			}
 	}
 
 	public function edit_user(){
 		if($this->input->post('submit')) {
+			$id_user = $this->session->userdata('logged_id');
+			$username_id = $this->auth_model->GetUser(['id_user' => $id_user])->row('username');
 
 			$this->form_validation->set_rules('name','Name','required');
 			$this->form_validation->set_rules('email','Email','trim|required');
@@ -282,20 +291,24 @@ class Myaccount extends CI_Controller {
 				{
 					
 					$this->session->set_flashdata('notif_success','Selamat, Anda telah berhasil update data anda!');
-					redirect('myaccount');
+					
+						redirect('/'.$username_id);
 				}else{
 					
 					$this->session->set_flashdata('notif_failed','Maaf anda gagal update data anda, silahkan coba lagi!');
-					redirect('myaccount');
+					redirect('/'.$username_id);
 				}
 			}else{
 				$this->session->set_flashdata('notif', validation_errors());
-				redirect('myaccount');
+				redirect('/'.$username_id);
 			}
 		}
 	}
 
 	public function editphoto(){
+		$id_user = $this->session->userdata('logged_id');
+			$username_id = $this->auth_model->GetUser(['id_user' => $id_user])->row('username');
+
 				$config['upload_path'] = './assets/images';
                 $config['allowed_types'] = 'jpg|png';
                 $config['max_size']  = '2000';
@@ -307,22 +320,24 @@ class Myaccount extends CI_Controller {
 				$result = $this->auth_model->editphoto($this->upload->data());
 				if($result == false) {
 					$this->session->set_flashdata('notif_failed','Maaf, ada kesalahan. Coba lagi');
-					redirect('myaccount');
+					redirect('/'.$username_id);
 				}
 				else {
 					$this->session->set_flashdata('notif_success','Anda sukses mengedit foto profile');
-					redirect('myaccount');
+					redirect('/'.$username_id);
 				}
 			
 			}  
 			else{
 				$this->session->set_flashdata('notif', $this->upload->display_errors());
-				redirect('myaccount');
+				redirect('/'.$username_id);
                 }
 	}
 	public function newcourse_title(){
 
 		if($this->input->post('submit')){
+			$id_user = $this->session->userdata('logged_id');
+			$username_id = $this->auth_model->GetUser(['id_user' => $id_user])->row('username');
 
 			$this->form_validation->set_rules('coursename', 'Course Name', 'required');
 			$this->form_validation->set_rules('subject','Subject','trim|required');
@@ -341,7 +356,7 @@ class Myaccount extends CI_Controller {
 				$result = $this->course_model->add_course_title($this->upload->data());
 				if($result == FALSE) {
 					$this->session->set_flashdata('notif_failed','Maaf, ada kesalahan. Coba lagi');
-					redirect('myaccount');
+					redirect('/'.$username_id);
 				}
 				else if ($result == "NOT_LOGIN"){
 					$this->session->set_flashdata('notif_failed','Maaf, anda harus login terlebih dahulu');
@@ -349,17 +364,17 @@ class Myaccount extends CI_Controller {
 				}
 				else {
 					$this->session->set_flashdata('notif_success','Anda sukses menambah course baru');
-					redirect('myaccount/add_course/'.$result);
+					redirect('add_course/'.$result);
 				}
 			
 			}  
 			else{
 				$this->session->set_flashdata('notif', $this->upload->display_errors());
-				redirect('myaccount');
+				redirect('/'.$username_id);
                 }
 		}else{
 					$this->session->set_flashdata('notif',validation_errors());
-					redirect('myaccount');
+					redirect('/'.$username_id);
 
 			}
 		}
@@ -518,6 +533,115 @@ class Myaccount extends CI_Controller {
 		
 
 		}
+		public function user_profile($usrnm){
+		// $usrnm = $username;
+		$username = $usrnm;
+		$user_id = $this->auth_model->GetUser(['username' => $username])->row('id_user');
+		$userid_in = $this->session->userdata('logged_id');
+		if (empty($user_id)) {
+			// redirect('404'); ke not found
+			$this->session->set_flashdata('notif_failed','Maaf, pengguna yang anda cari tidak ditemukan');
+			redirect('');
+		}
+		else{
+
+		if ($user_id == $userid_in) {
+			$this->index();
+		}
+		else{
+
+
+		$list_courses = '';
+		$list_user = '';
+
+		$title = $this->input->get('title');
+		$subject = $this->input->get('subject');
+
+		if (empty($title) && empty($subject)) {
+		$list_courses = $this->course_model->GLCUserAccount('',$user_id);
+		}
+		else if (empty($title)) {
+			if ($subject == "") {
+				$list_courses = $this->course_model->GLCUserAccount("",$user_id);
+			}
+			else{
+				$list_courses = $this->course_model->GLCUserAccount(["subject "=>$subject],$user_id);
+			}
+		}
+		else{
+			if ($subject == "") {
+				$list_courses = $this->course_model->GLCUserAccount(["title LIKE"=>"%".$title."%"],$user_id);
+			}
+			else{
+				$list_courses = $this->course_model->GLCUserAccount(["title LIKE"=>"%".$title."%", "subject" => $subject],$user_id);
+			}
+			
+		}
+		$username = array();
+		$like_amount = array();
+		$comment_amount = array();
+		$liked = array();
+
+		// $list_user = ;
+		$subscribed = array();
+		$subs_amount = array();
+
+		foreach ($list_courses as $courses) {
+			$username[$courses->id_user] = $this->auth_model->GetUser(['id_user' => $courses->id_user])->row('username');
+			$like_amount[$courses->id_title] = $this->home_model->GetAction('COUNT(id_action) as like_amount',['id_title' => $courses->id_title,'type_action' => '0'])->row('like_amount');
+			$comment_amount[$courses->id_title] = $this->home_model->GetAction('COUNT(id_action) as comment_amount',['id_title' => $courses->id_title,'type_action' => '1'])->row('comment_amount');
+			if ($this->session->userdata('logged_in') == TRUE) {
+				$liked[] = $this->home_model->GetData(['id_title'=>$courses->id_title,'from_id'=>$userid_in,'type_action'=>'0'],'user_action')->row('id_title');
+			}
+		}
+
+		if ($this->session->userdata('logged_in') == TRUE) {
+			// foreach ($list_user as $user) { tinggal ganti for id => $user->id_user
+			$subscribed[] = $this->home_model->GetData(['from_id'=>$userid_in,'for_id'=>$user_id],'user_subscribe')->row('for_id');
+			// $subs_amount[$user->id_user] = $this->home_model->GetSubscribe('COUNT(id_subscribe) as subs_amount',['for_id' => $user->id_user])->row('subs_amount');
+			$subs_amount[$user_id] = $this->home_model->GetSubscribe('COUNT(id_subscribe) as subs_amount',['for_id' => $user_id])->row('subs_amount');
+		// }
+				
+		}
+		
+
+		
+		
+		if (!empty($title) || !empty($subject)) {
+				$data = [
+				'list_subject'	=> $this->course_model->GetSubject(),
+				'like_amount'	=> $like_amount,
+				'comment_amount'=> $comment_amount,
+				'liked'			=> $liked,
+				'username' 		=> $username,
+				'list_courses' 	=> $list_courses,
+				'title'		 	=> $title,	//search
+				'subject'		=> $subject, //search
+				'user_info'		=> $this->auth_model->GetUser(['id_user' => $user_id])->row(),
+				'subscribed'	=> $subscribed,
+				'subs_amount'	=> $subs_amount,
+				'username_id'	=> $usrnm,
+					];
+		}
+		else{
+				$data = [
+				'list_subject'	=> $this->course_model->GetSubject(),
+				'like_amount'	=> $like_amount,
+				'comment_amount'=> $comment_amount,
+				'liked'			=> $liked,
+				'username' 		=> $username,
+				'list_courses' 	=> $list_courses,
+				'user_info'		=> $this->auth_model->GetUser(['id_user' => $user_id])->row(),
+				'subscribed'	=> $subscribed,
+				'subs_amount'	=> $subs_amount,
+				'username_id'	=> $usrnm,
+					];
+		}
+		
+		$this->load->view('account_view', $data);
+		}
+	}
+}
 	}
 	
 

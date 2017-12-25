@@ -251,7 +251,10 @@ a.subs_true{
 								<!-- <li><a href="#gallery" class="hvr-underline-from-center scroll">Gdjvb</a></li>
 								<li><a href="#team" class="hvr-underline-from-center scroll">Our Team</a></li>
 								<li><a href="#events" class="hvr-underline-from-center scroll">Events</a></li> -->
-								<li><a href="<?php echo base_url(); ?>myaccount" class="hvr-underline-from-center active">MyAccount</a></li>
+								<?php if ($this->session->userdata('logged_in') == TRUE) { ?>
+								<li><a href="<?php echo base_url().$username_id; ?>" class="hvr-underline-from-center active">MyAccount</a>
+								</li>
+								<?php } ?>
 							</ul>
 						</div>
 						<div class="clearfix"> </div>	
@@ -310,7 +313,7 @@ a.subs_true{
 								 <?php }
 								 else { ?>
 								<div>
-						          <img src="<?php echo base_url() ?>assets/images/<?php echo $user_info->photo; ?>" width="200px" height="200px" alt="" class="img-responsive profile-photo" style="border-radius: 50%; float: left;" />
+						          <img src="<?php echo base_url() ?>assets/images/<?php echo $user_info->photo; ?>" alt="" class="img-responsive profile-photo" style="border-radius: 50%; float: left;" height="200px" width="200px" />
 						      	</div>
 						      	<?php } ?>
 

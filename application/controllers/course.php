@@ -14,6 +14,8 @@ class Course extends CI_Controller {
 	{
 		$list_courses = '';
 		$user_id = $this->session->userdata('logged_id');
+		$username_id = $this->auth_model->GetUser(['id_user' => $user_id])->row('username');
+
 		$title = $this->input->get('title');
 		$subject = $this->input->get('subject');
 		if (empty($title) && empty($subject)) {
@@ -62,6 +64,7 @@ class Course extends CI_Controller {
 				'title'		 	=> $title,	//search
 				'subject'		=> $subject, //search
 				'main_view'  	=> 'course_view',
+				'username_id'	=> $username_id,
 					];
 		}
 		else{
@@ -73,6 +76,7 @@ class Course extends CI_Controller {
 				'liked'			=> $liked,
 				'list_courses' 	=> $list_courses,
 				'main_view' 	=> 'course_view',
+				'username_id'	=> $username_id,
 					];
 		}
 		

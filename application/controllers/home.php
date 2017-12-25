@@ -17,7 +17,8 @@ class Home extends CI_Controller {
 		$list_pcourses = $this->home_model->GetListPCourses();
 		$list_rcourses = $this->home_model->GetListRCourses();
 		$user_id = $this->session->userdata('logged_id');
-
+		$username_id = $this->auth_model->GetUser(['id_user' => $user_id])->row('username');
+						
 		$username = array();
 		$like_amount = array();
 		$comment_amount = array();
@@ -48,6 +49,7 @@ class Home extends CI_Controller {
 		'list_rcourses' => $list_rcourses,
  		'list_pcourses' => $list_pcourses,
 		'main_view'     => 'home_view',
+		'username_id'	=> $username_id,
  		];
 		$this->load->view('template', $data);
 	
@@ -195,108 +197,7 @@ class Home extends CI_Controller {
 		}
 
 }
-	public function user_profile($usrnm){
-		// $usrnm = $username;
-		$username = $usrnm;
-		$user_id = $this->auth_model->GetUser(['username' => $username])->row('id_user');
-		$userid_in = $this->session->userdata('logged_id');
-		if (empty($user_id)) {
-			// redirect('404'); ke not found
-			$this->session->set_flashdata('notif_failed','Maaf, pengguna yang anda cari tidak ditemukan');
-			redirect('');
-		}
-		else{
-
-
-		$list_courses = '';
-		$list_user = '';
-
-		$title = $this->input->get('title');
-		$subject = $this->input->get('subject');
-
-		if (empty($title) && empty($subject)) {
-		$list_courses = $this->course_model->GLCUserAccount('',$user_id);
-		}
-		else if (empty($title)) {
-			if ($subject == "") {
-				$list_courses = $this->course_model->GLCUserAccount("",$user_id);
-			}
-			else{
-				$list_courses = $this->course_model->GLCUserAccount(["subject "=>$subject],$user_id);
-			}
-		}
-		else{
-			if ($subject == "") {
-				$list_courses = $this->course_model->GLCUserAccount(["title LIKE"=>"%".$title."%"],$user_id);
-			}
-			else{
-				$list_courses = $this->course_model->GLCUserAccount(["title LIKE"=>"%".$title."%", "subject" => $subject],$user_id);
-			}
-			
-		}
-		$username = array();
-		$like_amount = array();
-		$comment_amount = array();
-		$liked = array();
-
-		// $list_user = ;
-		$subscribed = array();
-		$subs_amount = array();
-
-		foreach ($list_courses as $courses) {
-			$username[$courses->id_user] = $this->auth_model->GetUser(['id_user' => $courses->id_user])->row('username');
-			$like_amount[$courses->id_title] = $this->home_model->GetAction('COUNT(id_action) as like_amount',['id_title' => $courses->id_title,'type_action' => '0'])->row('like_amount');
-			$comment_amount[$courses->id_title] = $this->home_model->GetAction('COUNT(id_action) as comment_amount',['id_title' => $courses->id_title,'type_action' => '1'])->row('comment_amount');
-			if ($this->session->userdata('logged_in') == TRUE) {
-				$liked[] = $this->home_model->GetData(['id_title'=>$courses->id_title,'from_id'=>$userid_in,'type_action'=>'0'],'user_action')->row('id_title');
-			}
-		}
-
-		if ($this->session->userdata('logged_in') == TRUE) {
-			// foreach ($list_user as $user) { tinggal ganti for id => $user->id_user
-			$subscribed[] = $this->home_model->GetData(['from_id'=>$userid_in,'for_id'=>$user_id],'user_subscribe')->row('for_id');
-			// $subs_amount[$user->id_user] = $this->home_model->GetSubscribe('COUNT(id_subscribe) as subs_amount',['for_id' => $user->id_user])->row('subs_amount');
-			$subs_amount[$user_id] = $this->home_model->GetSubscribe('COUNT(id_subscribe) as subs_amount',['for_id' => $user_id])->row('subs_amount');
-		// }
-				
-		}
-		
-
-		
-		
-		if (!empty($title) || !empty($subject)) {
-				$data = [
-				'list_subject'	=> $this->course_model->GetSubject(),
-				'like_amount'	=> $like_amount,
-				'comment_amount'=> $comment_amount,
-				'liked'			=> $liked,
-				'username' 		=> $username,
-				'list_courses' 	=> $list_courses,
-				'title'		 	=> $title,	//search
-				'subject'		=> $subject, //search
-				'user_info'		=> $this->auth_model->GetUser(['id_user' => $user_id])->row(),
-				'subscribed'	=> $subscribed,
-				'subs_amount'	=> $subs_amount,
-					];
-		}
-		else{
-				$data = [
-				'list_subject'	=> $this->course_model->GetSubject(),
-				'like_amount'	=> $like_amount,
-				'comment_amount'=> $comment_amount,
-				'liked'			=> $liked,
-				'username' 		=> $username,
-				'list_courses' 	=> $list_courses,
-				'user_info'		=> $this->auth_model->GetUser(['id_user' => $user_id])->row(),
-				'subscribed'	=> $subscribed,
-				'subs_amount'	=> $subs_amount,
-					];
-		}
-		
-		$this->load->view('account_view', $data);
-		
-	}
-}
+	
 }
 
 /* End of file controllername.php */

@@ -124,7 +124,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </td>
                             <td class="table-text">
                                 <h6> Yusron Hanan</h6>
-                                <p>Mulai mengikuti Anda</p>
+                                <p>Started following you</p>
                             </td>
                             <td class="march">
                                24 Des 17 
@@ -141,7 +141,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </td>
                             <td class="table-text">
                                 <h6> Uyab</h6>
-                                <p>Mengucapkan terima kasih</p>
+                                <p>Giving thanks</p>
                             </td>
                             <td class="march">
                                 23 Des 17
@@ -157,9 +157,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </td>
                             <td class="table-text">
                                 <h6> Qori</h6>
-                                <p>Memberi komentar pada course anda</p>
+                                <p>Giving comment</p>
                                 <div style="height: 50px;width: 425px;border: 1px solid #BDBDBD;border-radius: 4px;margin-top: 5px">
-                                   
+                                <b> @karin </b> leave a comment <br/>
+                                   "This course is really helpful:)"
                                 </div>
                             </td>
                             <td class="march">
@@ -176,7 +177,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </td>
                             <td class="table-text">
                                 <h6> Karin</h6>
-                                <p>Mulai mengikuti Anda</p>
+                                <p>Started following you</p>
                             </td>
                             <td class="march">
                               18 Des 17 
@@ -192,7 +193,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </td>
                             <td class="table-text">
                                 <h6> Lily</h6>
-                                <p>Memberi komentar pada course anda</p>
+                                <p>Giving comment</p>
                                 <div style="height: 50px;width: 425px;border: 1px solid #E0E0E0;border-radius: 4px;margin-top: 5px">
                                    
                                 </div>

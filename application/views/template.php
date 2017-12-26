@@ -26,6 +26,10 @@ h6.thumb_true {
 	background: #d95459;
 	color:#fff;
 }
+.hvr:hover{
+	background: #E0E0E0;
+	color: b
+}
 </style>
 <script type="text/javascript">
 	function mini_notif() {
@@ -69,10 +73,13 @@ h6.thumb_true {
 
 				 <li class="dropdown at-drop ">
 		              <a href="#" id="notifc" class="dropdown-toggle dropdown-at " data-toggle="dropdown"><i class="fa fa-globe"></i>NOTIF<span class="badge" id="amountnotif"></span></a>
-		              <ul class="dropdown-menu menu1" id="mininotif" role="menu" style="min-width: 330px;max-height: 300px;overflow-y: scroll;">
+		              <ul class="dropdown-menu menu1" id="mininotif" role="menu" style="min-width: 100px;max-height: 300px;overflow-y: scroll; text-align: -webkit-match-parent;">
 		                
-		                <li><a href="<?php echo base_url(); ?>notif" class="view" style="margin-left: 40px">View all messages</a></li>
+		                <!-- <li><a href="<?php echo base_url(); ?>notif" class="view" style="margin-left: 40px">View all messages</a></li> -->
 		              </ul>
+		              <!-- <ul class="hvr" style="padding: 10px; text-align: center;">
+		                <li><div><a href="<?php echo base_url(); ?>notif" class="view" style="margin: 25px; text-align: center; color: black;">View all notifications</a></div></li>
+		               </ul> -->
 		            </li>
 
 				<li><a href="<?php echo base_url() ?>auth/logout" ><i class="fa fa-close" aria-hidden="true"></i>LOGOUT</a></li>

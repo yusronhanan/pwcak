@@ -190,5 +190,101 @@
 </div>
 
 <!-- //courses -->
+<hr/>
+<!--about-->
+<div id="about" class="about">
+	<div class="container">
+			<h1>About <span>us</span></h1>
+			<!-- <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod ut enim ad tempor incididunt ut labore et dolore magna aliqua.</h2> -->
+			<div class="specialty-grids-top">
+				<div class="col-md-3 service-box" style="visibility: visible; -webkit-animation-delay: 0.4s;">
+					<figure class="icon">
+						<span class="glyphicon glyphicon-education a1" aria-hidden="true"></span>
+					</figure>
+					<h5>Yusron Hanan Zain</h5>
+					<p>Sed ut perspiciis iste natus error sit voluptatem accusantium doloremque laudantium elerisque ipsum vehicula pharetra.</p>
+				</div>
+				<div class="col-md-3 service-box wow bounceIn animated" data-wow-delay="0.4s" style="visibility: visible; -webkit-animation-delay: 0.4s;">
+					<figure class="icon">
+						<span class="glyphicon glyphicon-home a2" aria-hidden="true"></span>
+					</figure>
+					<h5>Arya Bayu Ageng</h5>
+					<p>Sed ut perspiciis iste natus error sit voluptatem accusantium doloremque laudantium elerisque ipsum vehicula pharetra.</p>
+				</div>
+				<div class="col-md-3 service-box wow bounceIn animated" data-wow-delay="0.4s" style="visibility: visible; -webkit-animation-delay: 0.4s;">
+					<figure class="icon">
+						 <span class="glyphicon glyphicon-leaf a3" aria-hidden="true"></span>						
+					</figure>
+					<h5>Karina Widhia</h5>
+					<p>Sed ut perspiciis iste natus error sit voluptatem accusantium doloremque laudantium elerisque ipsum vehicula pharetra.</p>
+				</div>
+				<div class="col-md-3 service-box wow bounceIn animated" data-wow-delay="0.4s" style="visibility: visible; -webkit-animation-delay: 0.4s;">
+					<figure class="icon">
+						 <span class="glyphicon glyphicon-leaf a3" aria-hidden="true"></span>						
+					</figure>
+					<h5>Qoriatul Masfufah</h5>
+					<p>Sed ut perspiciis iste natus error sit voluptatem accusantium doloremque laudantium elerisque ipsum vehicula pharetra.</p>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			
+				<div class="clearfix"></div>
+			</div>
+	</div>
+	<div class="clearfix"></div>
+<!--//about-->
+
+<!--test-->
+	<div id="testimonials" class="review">
+		<div class="container">
+		<h3 class="title-w3"> About Us </h3>
+				<div class="test-monials">
+				<!--//screen-gallery-->
+						<div class="sreen-gallery-cursual">
+							
+						       <div id="owl-demo" class="owl-carousel">
+					                 <div class="item-owl">
+					                	<div class="test-review">
+										<p><img src="<?php echo base_url(); ?>assets/images/left-quote.png" alt="">Lorem ipsum dolor sit ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<img src="<?php echo base_url(); ?>assets/images/right-quote.png" alt=""></p>
+											<div class="img-agile">
+												<img src="<?php echo base_url(); ?>assets/images/t1.jpg" class="img-responsive" alt=""/>
+											</div>
+											  <h5>Arya</h5>
+					                	    </div>
+					                </div>
+					                 <div class="item-owl">
+					                	<div class="test-review">
+										 <p> <img src="<?php echo base_url(); ?>assets/images/left-quote.png" alt="">Lorem ipsum dolor sit ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<img src="<?php echo base_url(); ?>assets/images/right-quote.png" alt=""></p>
+						                	<div class="img-agile">
+											<img src="<?php echo base_url(); ?>assets/images/t2.jpg" class="img-responsive" alt=""/>
+											</div>
+											<h5>Karin</h5>
+					                	</div>
+					                </div>
+					                <div class="item-owl">
+					                	<div class="test-review">
+										 <p> <img src="<?php echo base_url(); ?>assets/images/left-quote.png" alt="">Lorem ipsum dolor sit ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<img src="<?php echo base_url(); ?>assets/images/right-quote.png" alt=""></p>
+						                	<div class="img-agile">
+											<img src="<?php echo base_url(); ?>assets/images/t2.jpg" class="img-responsive" alt=""/>
+											</div>
+											<h5>Qori</h5>
+					                	</div>
+					                </div>
+					                 <div class="item-owl">
+					                	<div class="test-review">
+										     <p><img src="<?php echo base_url(); ?>assets/images/left-quote.png" alt="">Lorem ipsum dolor sit ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<img src="<?php echo base_url(); ?>assets/images/right-quote.png" alt=""></p>
+						                	<div class="img-agile">
+											<img src="<?php echo base_url(); ?>assets/images/t3.jpg" class="img-responsive" alt=""/>
+											</div>
+											<h5>Yusron</h5>
+					                	</div>
+					                </div>
+				              </div>
+						<!--//screen-gallery-->
+					</div>
+				</div>
+			</div>
+		</div>
+<!--//test-->
 
 

@@ -26,7 +26,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href="<?php echo base_url(); ?>assets/lesson/css/custom.css" rel="stylesheet">
 <script src="<?php echo base_url(); ?>assets/lesson/js/custom.js"></script>
 <script src="<?php echo base_url(); ?>assets/lesson/js/screenfull.js"></script>
-<link href="<?php echo base_url(); ?>http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+<!-- <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet"> -->
 		<script>
 		$(function () {
 			$('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
@@ -46,113 +46,161 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		});
 		</script>
 
-<style type="text/css">
-        
-.panel-shadow {
-    box-shadow: rgba(0, 0, 0, 0.3) 7px 7px 7px;
-}
-.panel-white {
-  border: 1px solid #dddddd;
-}
-.panel-white  .panel-heading {
-  color: #333;
-  background-color: #fff;
-  border-color: #ddd;
-}
-.panel-white  .panel-footer {
-  background-color: #fff;
-  border-color: #ddd;
-}
 
-.post .post-heading {
-  height: 95px;
-  padding: 20px 15px;
-}
-.post .post-heading .avatar {
-  width: 60px;
-  height: 60px;
+    <!-- <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'> -->
+<style class="cp-pen-styles">
+/*html, body {*/
+/*  background-color: #f0f2fa;*/
+/*  font-family: "PT Sans", "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif;*/
+/*  color: #555f77;*/
+/*  -webkit-font-smoothing: antialiased;*/
+/*}*/
+
+input, textarea {
+  outline: none;
+  border: none;
   display: block;
-  margin-right: 15px;
-}
-.post .post-heading .meta .title {
-  margin-bottom: 0;
-}
-.post .post-heading .meta .title a {
-  color: black;
-}
-.post .post-heading .meta .title a:hover {
-  color: #aaaaaa;
-}
-.post .post-heading .meta .time {
-  margin-top: 8px;
-  color: #999;
-}
-.post .post-image .image {
-  width: 100%;
-  height: auto;
-}
-.post .post-description {
-  padding: 15px;
-}
-.post .post-description p {
-  font-size: 14px;
-}
-.post .post-description .stats {
-  margin-top: 20px;
-}
-.post .post-description .stats .stat-item {
-  display: inline-block;
-  margin-right: 15px;
-}
-.post .post-description .stats .stat-item .icon {
-  margin-right: 8px;
-}
-.post .post-footer {
-  border-top: 1px solid #ddd;
-  padding: 15px;
-}
-.post .post-footer .input-group-addon a {
-  color: #454545;
-}
-.post .post-footer .comments-list {
+  margin: 0;
   padding: 0;
-  margin-top: 20px;
-  list-style-type: none;
+  -webkit-font-smoothing: antialiased;
+  font-family: "PT Sans", "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif;
+  font-size: 1rem;
+  color: #555f77;
 }
-.post .post-footer .comments-list .comment {
-  display: block;
-  width: 100%;
-  margin: 20px 0;
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+  color: #ced2db;
 }
-.post .post-footer .comments-list .comment .avatar {
-  width: 35px;
-  height: 35px;
+input::-moz-placeholder, textarea::-moz-placeholder {
+  color: #ced2db;
 }
-.post .post-footer .comments-list .comment .comment-heading {
-  display: block;
-  width: 100%;
+input:-moz-placeholder, textarea:-moz-placeholder {
+  color: #ced2db;
 }
-.post .post-footer .comments-list .comment .comment-heading .user {
-  font-size: 14px;
-  font-weight: bold;
-  display: inline;
-  margin-top: 0;
-  margin-right: 10px;
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+  color: #ced2db;
 }
-.post .post-footer .comments-list .comment .comment-heading .time {
-  font-size: 12px;
-  color: #aaa;
-  margin-top: 0;
-  display: inline;
-}
-.post .post-footer .comments-list .comment .comment-body {
-  margin-left: 50px;
-}
-.post .post-footer .comments-list .comment > .comments-list {
-  margin-left: 50px;
-}
-    </style>
 
+p {
+  line-height: 1.3125rem;
+}
+
+.comments {
+  /*margin: 2.5rem auto 0;*/
+  max-width: 60.75rem;
+  padding: 0 1.25rem;
+}
+
+.comment-wrap {
+  margin-bottom: 1.25rem;
+  display: table;
+  width: 100%;
+  min-height: 5.3125rem;
+}
+.comment-reply {
+  margin-bottom: 1.25rem;
+  display: table;
+  width: 90%;
+  min-height: 5.3125rem;
+  margin-left: 70px
+}
+.comment-judul {
+  margin-left: 3.5rem;
+  margin-bottom: : 2.5rem;
+  /*display: table;*/
+  /*width: 100%;*/
+  /*min-height: 2.3125rem;*/
+}
+.comment-button {
+  margin-bottom: 1.25rem;
+  /*display: table;*/
+  /*width: 100%;*/
+  min-height: 2.5125rem;
+}
+
+.photo {
+  padding-top: 0.625rem;
+  display: table-cell;
+  width: 3.5rem;
+}
+.photo .avatar {
+  height: 2.25rem;
+  width: 2.25rem;
+  border-radius: 50%;
+  background-size: contain;
+}
+.photo .ava-me {
+	height: 2.25rem;
+  width: 2.25rem;
+  border-radius: 50%;
+  background-size: contain;
+  background-repeat: no-repeat;
+
+	<?php 
+	$avame = base_url().'assets/images/'.$maker_info->photo;
+	 ?>
+background-image: url('<?php echo $avame ?>');
+}
+
+
+.comment-block {
+  padding: 1rem;
+  background-color: #fff;
+  display: table-cell;
+  vertical-align: top;
+  border-radius: 0.1875rem;
+  
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+}
+.comment-block textarea {
+  width: 100%;
+  resize: none;
+}
+
+.comment-text {
+  margin-bottom: 1.25rem;
+
+}
+
+.bottom-comment {
+  color: #acb4c2;
+  font-size: 0.875rem;
+}
+
+
+.comment-date {
+  float: left;
+}
+
+.comment-actions {
+  float: right;
+}
+.comment-actions li {
+  display: inline;
+  margin: -2px;
+  cursor: pointer;
+}
+.comment-actions li.complain {
+  padding-right: 0.75rem;
+  border-right: 1px solid #e1e5eb;
+}
+.comment-actions li.reply {
+  padding-left: 0.75rem;
+  padding-right: 0.125rem;
+}
+.comment-actions li:hover {
+  color: #d9534f;
+}
+span.userspan:hover{
+	color:#1e5d92;	
+}
+
+i.del_reply{
+	color:#acb4c2;	
+}
+i.del_reply:hover{
+	color:black;
+}
+</style>
 <!----->
 
 <!--pie-chart--->
@@ -446,102 +494,104 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="horz-grid">
 		 		<div class="grid-hor">
 		 			<div style="padding-left: 15px">
-					    <h3>Comment<br><p/>
+					    <h3>Popular discussion of this course <br><p/>
 					</div>
-		 			<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+		 			<!-- <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"> -->
 					<div class="container">
 					    <div class="row">
-					    	<div class="col-sm-8">
-					            <div class="panel panel-white post ">
-					                <div class="post-heading">
-					                    <div class="pull-left image">
-					                        <img src="http://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar" alt="user profile image" name="img_content">
-					                    </div>
-					                    <div class="pull-left meta">
-					                        <div class="title h5">
-					                            <a href="#" name="from_username"><b>Ryan Haywood</b></a>
-					                            Add comment.
-					                        </div>
-					                        <h6 class="text-muted time" name="created_at">1 minute ago</h6>
-					                    </div>
-					                </div> 
-					                <div class="post-description" name="">
-					                <input type="text" name="title_comment" placeholder= "Add Comment Title ..." style="padding: 5px; border: none;" > 
-					                   <textarea name="post_comment" style="margin-top:10px;margin-bottom:5px;width:715px;height:78px;padding:10px;" placeholder="Add Your Comment here ..."></textarea>
-					                    <!-- <div class="stats">
-					                        <a href="#" class="btn btn-default stat-item">
-					                            <i class="fa fa-thumbs-up icon"></i>2
-					                        </a>
-					                        <a href="#" class="btn btn-default stat-item">
-					                            <i class="fa fa-thumbs-down icon"></i>12
-					                        </a>
-					                    </div> -->
-					                    <input class="btn btn-info" type="submit" value="Post">
-					                </div>
-					            </div>
-					        </div>
-					        <div class="col-sm-8">
-					            <div class="panel panel-white post ">
-					                <div class="post-heading">
-					                	
-					                    <div class="pull-left image">
-					                        <img src="http://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar" alt="user profile image" name="img_content">
-					                    </div>
-					                    <div class="pull-left meta">
-					                        <div class="title h5">
-					                            <a href="#" name="user_comment"><b>Ryan Haywood</b></a>
-					                            made a post.
-					                        </div>
-					                        <h6 class="text-muted time" name="time_comment">1 minute ago</h6>
-					                    </div>
-					                </div> 
-					                <div class="post-description" name=""> 
-					                    <p>Bootdey is a gallery of free snippets resources templates and utilities for bootstrap css hmtl js framework. Codes for developers and web designers</p>
-					                    <div class="stats">
-					                        <a href="#" class="btn btn-default stat-item">
-					                            <i class="fa fa-thumbs-up icon"></i>2
-					                        </a>
-					                        <a href="#" class="btn btn-default stat-item">
-					                            <i class="fa fa-thumbs-down icon"></i>12
-					                        </a>
-					                    </div>
-					                </div>
-					            </div>
-					        </div>
-					        <div class="col-sm-8">
-					            <div class="panel panel-white post">
-					                <div class="post-heading">
-					                    <div class="pull-left image">
-					                        <img src="http://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar" alt="user profile image">
-					                    </div>
-					                    <div class="pull-left meta">
-					                        <div class="title h5">
-					                            <a href="#"><b>Ryan Haywood</b></a>
-					                            made a post.
-					                        </div>
-					                        <h6 class="text-muted time">1 minute ago</h6>
-					                    </div>
-					                </div> 
-					                <div class="post-description"> 
-					                    <p>Bootdey is a gallery of free snippets resources templates and utilities for bootstrap css hmtl js framework. Codes for developers and web designers</p>
-					                    <div class="stats">
-					                        <a href="#" class="btn btn-default stat-item">
-					                            <i class="fa fa-thumbs-up icon"></i>2
-					                        </a>
-					                        <a href="#" class="btn btn-default stat-item">
-					                            <i class="fa fa-thumbs-down icon"></i>12
-					                        </a>
-					                    </div>
-					                </div>
-					            </div>
-					        </div>
-					    </div>
-					</div>
-		 			
-				</div>
+					    	<div class="comments">
 		
+		
+		<?php foreach ($list_comment_2top as $comment) {
+			?>
+			<div class="comment-wrap">
+				<div class="photo">
+						<div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg')"></div>
+
+				</div>
+				<div class="comment-block">
+					<h5 style="color: #d9534f;"><?php  echo $comment->subject ?> <a href=""><span style="font-size: 0.875rem;" class="userspan">@username</span></a>
+						<?php  
+							if ($this->session->userdata('logged_id') == $comment->from_id) {
+								?>
+								<span class="badge" style="font-size: 0.875rem;background-color:#d9534f;">you</span>
+							<?php
+							}
+							else if($comment->from_id == $maker_info->id_user){
+								?>
+								<span class="badge" style="font-size: 0.875rem;background-color:#d9534f;">creator</span>
+							<?php
+							}
+						 ?>
+						</h5>
+					<!-- <div class="bottom-comment"> -->
+						<ul class="comment-actions">
+										<li class="reply" title="Go to this discussion"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></li>
+								</ul>
+					<!-- </div> -->
+						<p class="comment-text" style="color:black;"><?php echo $comment->text_comment ?></p>
+						<div class="bottom-comment">
+								<div class="comment-date"><?php
+								$this->load->helper('date');
+								$timestamp = strtotime($comment->created_at);
+								// $nowstr = strtotime(time());
+							
+								$time = timespan($timestamp, time()) . ' ago';
+								echo $time;
+								   ?></div>
+								<ul class="comment-actions">
+										<li class="reply"><i class="fa fa-thumbs-up" aria-hidden="true"></i> 20</li>
+										<li class="reply"><i class="fa fa-thumbs-down" aria-hidden="true"></i> 3</li>
+										<li class="reply" id="reply-c"><i class="fa fa-reply" aria-hidden="true"></i> 56</li>
+
+										<li class="reply" id="<?php echo $comment->id_action ?>"><i class="fa fa-trash" aria-hidden="true"></i></li>
+								</ul>
+									</div>
+								
+				</div>
+		</div>
+		<div class='comment-reply hidden'>
+				<div class='photo'>
+				<div class='ava-me'>
+			</div>
+			</div>
+			<div class='comment-block'>
+				<ul class='comment-actions'>
+				<li class='reply' id='dell_reply' title='Delete'><i class='fa fa-trash' aria-hidden='true'>
+			</i>
+			</li>
+			</ul>
+			<form action=''><textarea name='subject' id='subject' cols='30' rows='1' placeholder='Subject'></textarea>
+				<hr>
+			<textarea name='text_comment' id='text_comment' cols='30' rows='3' placeholder='Comment Text'></textarea>
+			</form>
+			<ul class='comment-actions'>
+				<li class='reply' title='Send' id="1">
+				<i class='fa fa-paper-plane' aria-hidden='true'>
+			</i></li>
+			</ul>
 			</div>
 		</div>
+		<?php
+		} ?>
+
+		
+		
+		
+		<div class="pull-right">
+		<a href="<?php echo base_url()?>discuss" ><button class="btn btn-danger pull-right" style="border-radius:50px;"><i class="fa fa-chevron-right" aria-hidden="true"></i></button></a>
+		<br>
+		<p>to make new discussion,<br> see discussion in detail</p>
+</div>
+
+		
+</div>
+
+</div>
+
+					    	
+					    </div>
+				
 
 	 
 		<!---->
@@ -571,7 +621,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
      $("a#before_step").click(function(){
     $(this).prev().children( "#goo" ).click();     
     return false;
+});
 }); 
+
 //      $(window).load(function() {
      	
 //         var theHash = "#qJ";
@@ -579,7 +631,91 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 //       });
 // });
 </script>
+<script type="text/javascript">
+		$(document).ready(function(){
+			
+		$('li#reply-c').click(function(event) {
+  		 	var here = $(this).parent().parent().parent().parent();
+        		// $(this).parent().parent().parent().parent()
+        		if (here.next().hasClass('hidden')) {
+        		here.next().removeClass('hidden');
+        	}				
+        	});
+		
+		});
+	
+	</script>
+	<script type="text/javascript">
+		$("li#dell_reply").click(function(event) {
+				var here = $(this).parent().parent().parent();
+				if (!here.hasClass('hidden')) {
+        		here.addClass('hidden');
+        	}
+		});	
+		$("li[title=Send]").click(function(event) {
+		
+			var subject = $(this).parent().prev().find('textarea#subject').val();
+  		 	var text_comment = $(this).parent().prev().find('textarea#text_comment').val();
+  		 	var reply_id = $(this).attr('id');
+  		 	var id_title = <?php echo $title_info->id_title; ?>
+  		 	// alert(subject+' '+text_comment+' '+reply_id);
+  		 		$.ajax({
+                    url: '<?php echo base_url(); ?>course/comment_up',
+                    type: 'post',
+                    context: this,
+                    data: {subject : subject, text_comment :text_comment  , reply_comment:reply_id, type_comment:'3',id_title:id_title},
+                    success: function(e){
+                    	 if (e == "false") {
 
+                    	 }
+                  		else{
+                    	 	var data = e.split("|");
+                    	 		var divcomment_re = $(this).parent().parent().parent();
+                    	 		divcomment_re.addClass('hidden');
+                    	 		$(this).parent().prev().children("textarea#subject, textarea#text_comment").val("");
+
+                    	 		// 0 subject,1 username, 2 text_comment, 3 created at, 4 total reply comment, 5 id action
+                    	 		<?php if($this->session->userdata('logged_id') == $title_info->id_user){ ?>
+                    	 			divcomment_re.after('<div class="comment-reply"><div class="photo"><div class="ava-me)"></div></div><div class="comment-block"><h5 style="color: #d9534f;">'+data[0]+'<a href=""><span style="font-size: 0.875rem;" class="userspan">@'+data[1]+'</span></a><span class="badge" style="font-size: 0.875rem;background-color:#d9534f;">creator</span></h5><ul class="comment-actions"><li class="reply" title="Go to this discussion"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></li></ul><p class="comment-text" style="color:black;">'+data[2]+'</p><div class="bottom-comment"><div class="comment-date">'+data[3]+'</div><ul class="comment-actions"><li class="reply"><i class="fa fa-thumbs-up" aria-hidden="true"></i> </li><li class="reply"><i class="fa fa-thumbs-down" aria-hidden="true"></i> </li><li class="reply delete" id="'+data[5]+'"><i class="fa fa-trash"  aria-hidden="true"></i></li></ul></div></div></div>');
+                    	 		<?php } else if($this->session->userdata('logged_id') == $maker_info->id_user) { ?>
+                    	 			divcomment_re.after('<div class="comment-reply"><div class="photo"><div class="ava-me)"></div></div><div class="comment-block"><h5 style="color: #d9534f;">'+data[0]+'<a href=""><span style="font-size: 0.875rem;" class="userspan">@'+data[1]+'</span></a><span class="badge" style="font-size: 0.875rem;background-color:#d9534f;">you</span></h5><ul class="comment-actions"><li class="reply" title="Go to this discussion"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></li></ul><p class="comment-text" style="color:black;">'+data[2]+'</p><div class="bottom-comment"><div class="comment-date">'+data[3]+'</div><ul class="comment-actions"><li class="reply"><i class="fa fa-thumbs-up" aria-hidden="true"></i> </li><li class="reply"><i class="fa fa-thumbs-down" aria-hidden="true"></i> </li><li class="reply delete" id="'+data[5]+'"><i class="fa fa-trash"  aria-hidden="true"></i></li></ul></div></div></div>');
+                    	 		<?php } else { ?>
+                    	 		divcomment_re.after('<div class="comment-reply"><div class="photo"><div class="ava-me)"></div></div><div class="comment-block"><h5 style="color: #d9534f;">'+data[0]+'<a href=""><span style="font-size: 0.875rem;" class="userspan">@'+data[1]+'</span></a></h5><ul class="comment-actions"><li class="reply" title="Go to this discussion"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></li></ul><p class="comment-text" style="color:black;">'+data[2]+'</p><div class="bottom-comment"><div class="comment-date">'+data[3]+'</div><ul class="comment-actions"><li class="reply"><i class="fa fa-thumbs-up" aria-hidden="true"></i> </li><li class="reply"><i class="fa fa-thumbs-down" aria-hidden="true"></i> </li><li class="reply delete" id="'+data[5]+'"><i class="fa fa-trash"  aria-hidden="true"></i></li></ul></div></div></div>');
+                    	 		<?php } ?>
+						 }
+                    	divcomment_re.prev().children().children().children().children('li#reply-c').html('<i class="fa fa-reply" aria-hidden="true"></i> '+data[4]+'');
+                    	
+                    	 divcomment_re.next().children().children().children().children('li.delete').on('click', delete_comment);
+
+                    	 // mini_notif();
+                    }
+                });
+		});	
+			
+			function delete_comment(){
+				if (confirm('Are you sure you want to delete this?')) {
+				var id_action = $(this).attr('id');
+				var here = $(this).parent().parent().parent().parent();
+				// alert(id_action);
+					$.ajax({
+                    url: '<?php echo base_url(); ?>course/action_delete',
+                    type: 'post',
+                    context: this,
+                    data: {id_action : id_action},
+                    success: function(e){
+                    	 if (e == "false") {
+                    	 	alert('gagal');
+                    	 }
+                  		else{
+                    	 	here.remove();
+					}
+				}	
+					});	
+			}
+		}
+			
+		
+	</script>
 </body>
 </html>
 

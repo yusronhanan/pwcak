@@ -9,6 +9,7 @@ class Course extends CI_Controller {
 		$this->load->model('course_model');
 		$this->load->model('auth_model');
 		$this->load->model('home_model');	
+
 	}
 	public function index()
 	{
@@ -82,7 +83,33 @@ class Course extends CI_Controller {
 		
 		$this->load->view('template', $data);
 	}
-
+	public function comment_up(){
+		if ($this->session->userdata('logged_in') == TRUE) {
+			$result=$this->course_model->comment_in();
+			echo $result;
+		}
+		// else{
+			// echo "NOT_LOGIN";
+		// }
+	}
+	public function action_delete(){ //delete comment, dsb
+		if ($this->session->userdata('logged_in') == TRUE) {
+			// $reply_idd = $this->course_model->GetData(['id_action'=> $this->input->post('id_action')],'id_action')->row('reply_id');
+			$result=$this->course_model->action_del();
+			echo $result;
+			// if ($result == "true") {
+			// 	$reply_amount = $this->home_model->GetAction('COUNT(id_action) as comment_amount',['reply_id'=>$reply_idd])->row('comment_amount');
+			// 	echo $reply_amount;
+			// }
+			// else{
+			// 	echo $result;
+			// }
+			
+		}
+		// else{
+			// echo "NOT_LOGIN";
+		// }
+	}
 	public function detail_course(){
 		if ($this->session->userdata('logged_in') == TRUE) {
 		// $id_title = $this->uri->segment(3);
@@ -106,6 +133,9 @@ class Course extends CI_Controller {
 		$getcontent = '';
 		$step = '';
 		
+		$list_comment_2top= $this->home_model->GetLimitAction('*',['id_title' => $id_title,'type_action' => '1'],2,0)->result(); #blm top
+
+		// $list_comment_3= $this->home_model->GetAction('*',['id_title' => $id_title,'type_action' => '3'])->result();
 		$getmaker = $this->auth_model->GetUser(['id_user' => $id_usermaker])->row();
 		
 		$check_content = $this->course_model->check_content($id_title);
@@ -149,6 +179,8 @@ class Course extends CI_Controller {
 			'last'					=> $lastid,
 			'next'					=> $nextid,
 			'before'				=> $beforeid,
+			'list_comment_2top'		=> $list_comment_2top,
+			// 'list_comment_3'		=> $list_comment_3,
 			'list_subject'			=> $this->course_model->GetSubject(),
 			
 			// 'list_subject'		=> $this->course_model->GetSubject(),

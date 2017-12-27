@@ -9,6 +9,7 @@ class Auth_model extends CI_Model {
         $password = $this->input->post('password');
         $role = $this->GetUser(['email'=>$email])->row('role');
         $id = $this->GetUser(['email'=>$email])->row('id_user');
+        $username = $this->GetUser(['email'=>$email])->row('username');
         
 
         $query = $this->GetUser(['email'=>$email,'password'=>$password]);
@@ -16,7 +17,8 @@ class Auth_model extends CI_Model {
             $data = [
                 'logged_id'     => $id,
                 'role'         => $role,
-                'logged_in'     => TRUE
+                'username'      => $username,
+                'logged_in'     => TRUE,
             ];
             $this->session->set_userdata( $data );
             return TRUE;

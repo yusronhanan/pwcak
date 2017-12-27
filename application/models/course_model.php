@@ -2,11 +2,13 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Course_model extends CI_Model {
+// type action  like title course = 0 , comment title course = 1, like comment = 2, reply comment = 3
 
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->helper('string');
+		// $this->load->helper('string');
+        $this->load->helper('date');
 	}
 	public function add_course_content(){
 		date_default_timezone_set('Asia/Jakarta'); # add your city to set local time zone
@@ -302,7 +304,74 @@ public function GetDetailCourse($id_course){
      //     return $this->db->get('course_content')
      //                     ->result();
      // }
+     public function comment_in(){
+    date_default_timezone_set('Asia/Jakarta'); # add your city to set local time zone
+    $now = date('Y-m-d H:i:s');
+    $user_id = $this->session->userdata('logged_id');
+    $username = $this->auth_model->GetUser(['id_user' => $user_id])->row('username');
+    $id_title = $this->input->post('id_title');
+    $for_id = $this->course_model->GetData(['id_title'=> $id_title],'course_title')->row('id_user');
+    $for_username = $this->auth_model->GetUser(['id_user' => $for_id])->row('username');
+    
+    $type_comment = $this->input->post('type_comment');
+    $text_comment = $this->input->post('text_comment');
+    $subject = $this->input->post('subject');
+    $reply_comment = $this->input->post('reply_comment');
+    if (empty($reply_comment)) {
+        $reply_id = NULL;
+    }
+    else {
+        $reply_id = $reply_comment;
+    }
+    // $query = $this->GetData(['id_title'=>$id_title,'from_id'=>$user_id,'type_action'=>'0'],'user_action');
+        
+           
+        
+            $data=array(              
+              'id_title'              => $id_title,
+              'from_id'               => $user_id,
+              'from_username'         => $username,
+              'for_id'                => $for_id,
+              'type_action'           => $type_comment, #1, #type like = 0
+              'reply_id'              => $reply_id, #buat comment
+              'subject'               => $subject,
+              'text_comment'          => $text_comment, #buat comment
+              // 'status'             => ,
+              'created_at'            => $now,
+        );
+        $this->db->insert('user_action', $data);
+        $timestamp = strtotime($now);
+        $nowstr = strtotime($now);
+             
+        $time = timespan($timestamp, $now) . ' ago';
+    
+        if ($this->db->affected_rows() > 0) {
+            if (!empty($reply_comment)) {
+            // 0 subject,1 username, 2 text_comment, 3 created at, 4 total reply comment,5 id action
+                $reply_amount = $this->home_model->GetAction('COUNT(id_action) as comment_amount',['id_title' => $id_title,'reply_id'=>$reply_id])->row('comment_amount');
+                $id_action = $this->course_model->GetData(['subject'=> $subject,'text_comment'=>$text_comment,'created_at'=>$now,'reply_id'=>$reply_id,'from_id'=>$user_id],'user_action')->row('id_action');
+                return $subject.'|'.$username.'|'.$text_comment.'|'.$time.'|'.$reply_amount.'|'.$id_action;
+            }
+            else{
+                return "true";
+            }
+        } else {
+            return "false";
+        }
 
+  }
+  public function action_del(){ //delete comment, dsb
+                $id_action = $this->input->post('id_action');
+                $this->db->where(['id_action'=>$id_action])
+                ->delete('user_action');
+                if ($this->db->affected_rows() > 0) {
+                return "true";
+                }
+                else{
+                return "false";
+                }
+        }
+  
      public function GetLastStep($where) {
         return $this->db->where($where)->order_by('step_number', 'desc')->get('course_content')->row('step_number');
     }

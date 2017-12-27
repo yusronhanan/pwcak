@@ -64,6 +64,7 @@ class Home extends CI_Controller {
 			// echo "NOT_LOGIN";
 		// }
 	}
+	
 	public function subs_up(){
 		if ($this->session->userdata('logged_in') == TRUE) {
 			$result=$this->home_model->subs_up();
@@ -89,7 +90,7 @@ class Home extends CI_Controller {
 				foreach ($result as $notification) {
 
 					if ($notification->type_action == '0') {
-						$link = base_url().'course/detail_course/'.$notification->id_title;
+						$link = base_url().'lesson/'.$notification->id_title;
 						$thumbnail = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('thumbnail');
 						$course_title = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('title');
 						$word = 'like your course ('.$course_title.')';
@@ -97,10 +98,22 @@ class Home extends CI_Controller {
 					}
 
 					else if ($notification->type_action == '1') {
-						$link = base_url().'course/detail_course/'.$notification->id_title; #+direct to comment place
+						$link = base_url().'lesson/'.$notification->id_title; #+direct to comment place
 						$thumbnail = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('thumbnail');
 						$course_title = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('title');
 						$word = 'give comment on your course ('.$course_title.')';
+					}
+					else if ($notification->type_action == '2') {
+						$link = base_url().'lesson/'.$notification->id_title; #+direct to comment place
+						$thumbnail = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('thumbnail');
+						$course_title = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('title');
+						$word = 'like your comment in discussion ('.$course_title.')';
+					}
+					else if ($notification->type_action == '3') {
+						$link = base_url().'lesson/'.$notification->id_title; #+direct to comment place
+						$thumbnail = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('thumbnail');
+						$course_title = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('title');
+						$word = 'reply comment on your following discussion ('.$course_title.')';
 					}
 				$imguser  = $this->home_model->GetData(['id_user'=>$notification->from_id],'user')->row('photo'); 
 				$username = $this->home_model->GetData(['id_user'=>$notification->from_id],'user')->row('username'); 

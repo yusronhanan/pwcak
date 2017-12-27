@@ -206,6 +206,10 @@ class Home_model extends CI_Model {
         }
     }
 
+    // public function GetDiscussTerbanyak($id_title,$limit){
+    //   $query = 'SELECT *, COUNT(reply_id) as total from user_action WHERE type_action = 3 AND WHERE id_title = '.$id_title.' GROUP BY id_title
+    // ORDER BY id_action DESC LIMIT '.$limit;
+    // }
 	public function GetData($where,$table)
     {
       return $this->db->where($where)->get($table);
@@ -213,6 +217,10 @@ class Home_model extends CI_Model {
     public function GetAction($select,$where)
     {
       return $this->db->select($select)->where($where)->get('user_action');
+    }
+    public function GetLimitAction($select,$where,$limit,$start)
+    {
+      return $this->db->select($select)->where($where)->limit($limit,$start)->get('user_action');
     }
     public function GetSubscribe($select,$where)
     {

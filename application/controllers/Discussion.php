@@ -20,12 +20,14 @@ class Discussion extends CI_Controller {
 		 		];
 				$this->load->view('template', $data);
 	}
-	public function answer()
+	public function detail_discuss()
 	{
 		$user_id = $this->session->userdata('logged_id');
 		$username_id = $this->auth_model->GetUser(['id_user' => $user_id])->row('username');
 				$data = [
-				'main_view'  => 'answer_view',
+				// 'main_view'  => 'answer_view',
+				'main_view'  => 'detail_discuss',
+
 
 				'username_id'	=> $username_id,
 		 		];

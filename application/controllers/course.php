@@ -144,6 +144,24 @@ class Course extends CI_Controller {
 		$nextid = '';
 		$beforeid = '';
 		
+		$username = array(); #comment
+		$like_amount = array(); #comment type 2
+		$dislike_amount = array(); #comment  type 4
+		$reply_amount = array(); #comment (reply comment) type 3
+		$liked = array(); #comment type 2
+		$disliked = array(); #comment type 4
+
+		foreach ($list_comment_2top as $comment) {
+			$username[$comment->from_id] = $this->auth_model->GetUser(['id_user' => $comment->from_id])->row('username');
+			$like_amount[$comment->id_action] = $this->home_model->GetAction('COUNT(id_action) as like_amount',['reply_id' => $comment->id_action,'type_action' => '2'])->row('like_amount');
+			$dislike_amount[$comment->id_action] = $this->home_model->GetAction('COUNT(id_action) as dislike_amount',['reply_id' => $comment->id_action,'type_action' => '4'])->row('dislike_amount');
+			$reply_amount[$comment->id_action] = $this->home_model->GetAction('COUNT(id_action) as reply_amount',['reply_id' => $comment->id_action,'type_action' => '3'])->row('reply_amount');
+			
+			if ($this->session->userdata('logged_in') == TRUE) {
+				$liked[] = $this->home_model->GetData(['reply_id' => $comment->id_action,'from_id'=>$id_user,'type_action'=>'2'],'user_action')->row('reply_id');
+				$disliked[] = $this->home_model->GetData(['reply_id' => $comment->id_action,'from_id'=>$id_user,'type_action'=>'4'],'user_action')->row('reply_id');
+			}
+		}
 
 		if (empty($step_number)) {
 			if ($check_content == true)  { #step_num exist default 1
@@ -180,11 +198,15 @@ class Course extends CI_Controller {
 			'next'					=> $nextid,
 			'before'				=> $beforeid,
 			'list_comment_2top'		=> $list_comment_2top,
-			// 'list_comment_3'		=> $list_comment_3,
 			'list_subject'			=> $this->course_model->GetSubject(),
 			
-			// 'list_subject'		=> $this->course_model->GetSubject(),
-
+			// array
+			'username' 				=> $username,
+			'like_amount' 			=> $like_amount,
+			'dislike_amount' 		=> $dislike_amount,
+			'reply_amount' 			=> $reply_amount, 
+			'liked'					=> $liked, 	
+			'disliked'				=> $disliked,
 		];
 		$this->load->view('lesson_view', $data);
 	}else{

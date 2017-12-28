@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Qna extends CI_Controller {
+class Discussion extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
@@ -15,6 +15,17 @@ class Qna extends CI_Controller {
 		$username_id = $this->auth_model->GetUser(['id_user' => $user_id])->row('username');
 				$data = [
 				'main_view'  => 'qna_view',
+
+				'username_id'	=> $username_id,
+		 		];
+				$this->load->view('template', $data);
+	}
+	public function answer()
+	{
+		$user_id = $this->session->userdata('logged_id');
+		$username_id = $this->auth_model->GetUser(['id_user' => $user_id])->row('username');
+				$data = [
+				'main_view'  => 'answer_view',
 
 				'username_id'	=> $username_id,
 		 		];

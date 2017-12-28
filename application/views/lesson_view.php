@@ -190,6 +190,13 @@ background-image: url('<?php echo $avame ?>');
 .comment-actions li:hover {
   color: #d9534f;
 }
+.thumb_true {
+	color: #d9534f;
+}
+.thumb_true :hover{
+	color: #acb4c2;
+}
+
 span.userspan:hover{
 	color:#1e5d92;	
 }
@@ -493,6 +500,9 @@ i.del_reply:hover{
 		<div class="grid-system">
 			<div class="horz-grid">
 		 		<div class="grid-hor">
+		 			<?php if (!empty($list_comment_2top)) { ?>
+
+		 			
 		 			<div style="padding-left: 15px">
 					    <h3>Popular discussion of this course <br><p/>
 					</div>
@@ -510,7 +520,11 @@ i.del_reply:hover{
 
 				</div>
 				<div class="comment-block">
-					<h5 style="color: #d9534f;"><?php  echo $comment->subject ?> <a href=""><span style="font-size: 0.875rem;" class="userspan">@username</span></a>
+					<?php 
+					if(array_key_exists($comment->from_id, $username)) {
+					$usrnm =  $username[$comment->from_id];
+					}?>
+					<h5 style="color: #d9534f;"><?php  echo $comment->subject ?> <a href="<?php echo base_url().$usrnm; ?>"><span style="font-size: 0.875rem;" class="userspan"><?php echo $usrnm; ?></span></a>
 						<?php  
 							if ($this->session->userdata('logged_id') == $comment->from_id) {
 								?>
@@ -540,11 +554,35 @@ i.del_reply:hover{
 								echo $time;
 								   ?></div>
 								<ul class="comment-actions">
-										<li class="reply"><i class="fa fa-thumbs-up" aria-hidden="true"></i> 20</li>
-										<li class="reply"><i class="fa fa-thumbs-down" aria-hidden="true"></i> 3</li>
-										<li class="reply" id="reply-c"><i class="fa fa-reply" aria-hidden="true"></i> 56</li>
-
+					<?php 
+                    if(array_key_exists($comment->id_action, $like_amount)) {
+                    $likes =  $like_amount[$comment->id_action];
+                    }
+                    $thumb = '';
+                    if (!empty($liked)) {
+                        if(in_array($comment->id_action, $liked)) {
+                        $thumb = 'thumb_true';
+                    }
+                    }
+                    if(array_key_exists($comment->id_action, $dislike_amount)) {
+                    	$dislikes =  $dislike_amount[$comment->id_action];
+                    }
+                    $thumb = '';
+                    if (!empty($disliked)) {
+                        if(in_array($comment->id_action, $disliked)) {
+                        $thumb = 'thumb_true';
+                    }
+                    }
+                     if(array_key_exists($comment->id_action, $reply_amount)) {
+                    	$replies =  $reply_amount[$comment->id_action];
+                    }
+                    ?>
+										<li class="reply <?php echo $thumb; ?>"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <?php echo $likes; ?></li>
+										<li class="reply <?php echo $thumb; ?>"><i class="fa fa-thumbs-down" aria-hidden="true"></i> <?php echo $dislikes; ?></li>
+										<li class="reply" id="reply-c"><i class="fa fa-reply" aria-hidden="true"></i> <?php echo $replies; ?></li>
+										<?php if($this->session->userdata('logged_id') == $comment->from_id) { ?>
 										<li class="reply" id="<?php echo $comment->id_action ?>"><i class="fa fa-trash" aria-hidden="true"></i></li>
+										<?php } ?>
 								</ul>
 									</div>
 								
@@ -561,12 +599,13 @@ i.del_reply:hover{
 			</i>
 			</li>
 			</ul>
-			<form action=''><textarea name='subject' id='subject' cols='30' rows='1' placeholder='Subject'></textarea>
+			<form action=''>
+				<textarea name='subject' id='subject' cols='30' rows='1' placeholder='Subject'></textarea>
 				<hr>
 			<textarea name='text_comment' id='text_comment' cols='30' rows='3' placeholder='Comment Text'></textarea>
 			</form>
 			<ul class='comment-actions'>
-				<li class='reply' title='Send' id="1">
+				<li class='reply' title='Send' id="<?php echo $comment->id_action ?>">
 				<i class='fa fa-paper-plane' aria-hidden='true'>
 			</i></li>
 			</ul>
@@ -574,9 +613,20 @@ i.del_reply:hover{
 		</div>
 		<?php
 		} ?>
+		<?php } 
+		else{
+		?><div class="container">
+					    <div class="row">
+			 <div id="about" class="about">
+			    <div class="container">
+			            <h1> <span>Waw!</span></h1>
+			            <h2>There is no discussion, let's make!</h2>
+			    </div>
+			</div>
 
-		
-		
+		</div>
+	</div>
+		<?php } ?>
 		
 		<div class="pull-right">
 		<a href="<?php echo base_url()?>discuss" ><button class="btn btn-danger pull-right" style="border-radius:50px;"><i class="fa fa-chevron-right" aria-hidden="true"></i></button></a>

@@ -3,8 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Home_model extends CI_Model {
 
-// type action  like title course = 0 , comment title course = 1, like comment = 2, reply comment = 3
-
+// type action  like title course = 0 , comment title course = 1, like(thumb up) comment = 2, reply comment = 3, dislike thumb down comment 4,
+  // 0, 1 - reply_id = null ; 2, 3, 4 reply id depend id_action of comment - reply_id not null;
 	public function __construct()
 	{
 		parent::__construct();

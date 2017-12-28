@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Course_model extends CI_Model {
-// type action  like title course = 0 , comment title course = 1, like comment = 2, reply comment = 3
+// type action  like title course = 0 , comment title course = 1, like(thumb up) comment = 2, reply comment = 3,dislike thumb down comment 4,
 
 	public function __construct()
 	{
@@ -348,7 +348,7 @@ public function GetDetailCourse($id_course){
         if ($this->db->affected_rows() > 0) {
             if (!empty($reply_comment)) {
             // 0 subject,1 username, 2 text_comment, 3 created at, 4 total reply comment,5 id action
-                $reply_amount = $this->home_model->GetAction('COUNT(id_action) as comment_amount',['id_title' => $id_title,'reply_id'=>$reply_id])->row('comment_amount');
+                $reply_amount = $this->home_model->GetAction('COUNT(id_action) as comment_amount',['id_title' => $id_title,'reply_id'=>$reply_id,'type_action' => '3'])->row('comment_amount');
                 $id_action = $this->course_model->GetData(['subject'=> $subject,'text_comment'=>$text_comment,'created_at'=>$now,'reply_id'=>$reply_id,'from_id'=>$user_id],'user_action')->row('id_action');
                 return $subject.'|'.$username.'|'.$text_comment.'|'.$time.'|'.$reply_amount.'|'.$id_action;
             }

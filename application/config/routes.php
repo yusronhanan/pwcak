@@ -60,6 +60,7 @@ $route['infinitive'] = "infinitive";
 $route['admin']= "admin";
 $route['lesson/(.+)'] = "course/detail_course/$1";
 $route['add_course/(.+)'] = "myaccount/add_course/$1";
+$route['eror404'] = "eror404";
 
 $route['(:any)'] = "myaccount/user_profile/$1";
 // $route['(.*)'] = "home/user_profile/$1";  

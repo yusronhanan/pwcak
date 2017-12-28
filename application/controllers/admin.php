@@ -122,10 +122,18 @@ class Admin extends CI_Controller {
  				redirect('admin');
  		}
  	}
+ }
+
+ 	public function logout_admin(){
+ 		$data=array(
+ 			'email' => '',
+ 		    'role' => FALSE
+ 		);
+ 		$this->session->sess_destroy();
+ 		redirect('home');
+ 	}
 }
 
-
-}
 
 /* End of file admin.php */
 /* Location: ./application/controllers/admin.php */

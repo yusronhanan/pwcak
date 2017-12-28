@@ -332,6 +332,7 @@ a.subs_true{
 
 								 ?>
 								 <button class="btn btn-default"><a href="#" data-toggle="modal" data-target="#edituser"><i class="fa fa-pencil"></i> Edit Account</a></button>
+								 <button class="btn btn-success"><a href="#" style="color: white;"><i class="fa fa-image"></i> Edit Background</a></button>
 								 <button class="btn btn-danger"><a href="#" data-toggle="modal" data-target="" class="subs_false"><i class="fa fa-users"></i> Subscriber  <?php echo $subss_amount; ?></a></button>
 								 <?php }
 								 else { 
@@ -355,7 +356,7 @@ a.subs_true{
 									<button class="btn <?php echo $subs; ?> subs_in" id="<?php echo $user_info->id_user; ?>"><a href="#" data-toggle="modal" data-target="" class="<?php echo $a_subs; ?>"><i class="<?php echo $i_subs; ?>"></i> <?php echo $text; ?>  <?php echo $subss_amount; ?></a></button>
 									<!-- <button class="btn btn-default"><a href="#" data-toggle="modal" data-target=""><i class="fa fa-users"></i> Disubscribe  1000</a></button> -->
 								<?php } ?>
-
+                                 
 								</div>
 								
 							</div>

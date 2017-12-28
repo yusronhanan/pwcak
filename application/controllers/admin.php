@@ -10,15 +10,17 @@ class Admin extends CI_Controller {
 
 	public function index()
 	{
+		if($this->session->userdata('role') == 1){
 		// $data['user'] = $this->admin_model->get_data_user();
 		// // $data['course'] = $this->admin_model->get_data_course();
 
 		$data['main_view'] = 'dashboard';
 		$this->load->view('admin_view1',$data);
-		
+		}
 	}
 
 	public function get_user(){
+		if($this->session->userdata('role') == 1){
 		// if($this->session->userdata('admin_login')==TRUE){
 			$data['main_view'] = 'user_data';
 			// $data['user'] = $this->admin_model->get_data_user();
@@ -57,9 +59,11 @@ class Admin extends CI_Controller {
 			$data['start'] = $start;
 			$this->load->view('admin_view1',$data);
 		// }
+		}
 	}
 
 	public function get_course(){
+		if($this->session->userdata('role') == 1){
 		// if($this->session->userdata('admin_login') == TRUE){
 			$data['main_view'] = 'course_data';
 			$this->load->library('pagination');
@@ -95,25 +99,31 @@ class Admin extends CI_Controller {
 			$this->load->view('admin_view1',$data);
 
 		// }
+		}
 	}
 
 	public function user_delete(){
+		if($this->session->userdata('role') == 1){
 		$id_user=$this->uri->segment(3);
  		if($this->admin_model->delete_user($id_user)==TRUE){
  				redirect('admin/get_user');
  		}else{
  				redirect('admin');
  		}
-	}
+ 	}
+}
 
 	public function course_delete(){
+		if($this->session->userdata('role') == 1){
 		$id_title=$this->uri->segment(3);
  		if($this->admin_model->delete_course($id_title)==TRUE){
  				redirect('admin/get_course');
  		}else{
  				redirect('admin');
  		}
-	}
+ 	}
+}
+
 
 }
 

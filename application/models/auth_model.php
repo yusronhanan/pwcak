@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Auth_model extends CI_Model {
-// type action  like title course = 0 , comment title course = 1, like(thumb up) comment = 2, reply comment = 3,dislike thumb down comment 4,
+
 	
 	public function authentication(){
         $email = $this->input->post('email');
@@ -16,7 +16,7 @@ class Auth_model extends CI_Model {
         if ($query->num_rows() > 0) {
             $data = [
                 'logged_id'     => $id,
-                'role'         => $role,
+                'role'          => $role,
                 'username'      => $username,
                 'logged_in'     => TRUE,
             ];
@@ -25,6 +25,26 @@ class Auth_model extends CI_Model {
         } 
          else {
             return FALSE;
+        }
+    }
+
+    public function auth_admin(){
+        $email = $this->input->post('email');
+        $password = $this->input->post('password');
+
+        $query=$this->db->where('email',$email)
+                        ->where('password',$password)
+                        ->get('user');
+        
+        if($query->num_rows()>0){
+            $data=array(
+                'email' => $email,
+                'role' => $query->row()->role
+                );
+            $this->session->set_userdata($data);
+            return true;
+        }else{
+            return false;
         }
     }
     public function register_user(){

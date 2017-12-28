@@ -86,7 +86,7 @@ h6.thumb_true {
 				<?php 
 				}
 				else { ?>
-				
+				<li><a href="#" data-toggle="modal" data-target="#myModal5"><i class="fa fa-user" aria-hidden="true"></i>ADMIN</a></li>
 				<li><a href="#" data-toggle="modal" data-target="#myModal3"><i class="fa fa-key" aria-hidden="true"></i>LOGIN</a></li>
 				<li><a href="#" data-toggle="modal" data-target="#myModal4"><i class="fa fa-lock" aria-hidden="true"></i>REGISTER</a></li>
 				
@@ -103,7 +103,7 @@ h6.thumb_true {
 	<!-- Modal3 -->
 		
 				
-				<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" >
+			<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" >
 			<div class="modal-dialog" role="document">
 			<!-- Modal content-->
 				<div class="modal-content news-w3l">
@@ -191,11 +191,33 @@ h6.thumb_true {
 									</li>
 								<?php } ?>
 								
+								
 							</ul>
 						</div>
 						<div class="clearfix"> </div>	
 				</nav>
 			</div>
+
+			<div class="modal fade" id="myModal5" tabindex="-1" role="dialog" >
+			<div class="modal-dialog" role="document">
+			<!-- Modal content-->
+				<div class="modal-content news-w3l">
+						<div class="modal-header">
+							<button type="button" class="close w3l" data-dismiss="modal">&times;</button>
+							<h4>Login Admin</h4>
+							<!--newsletter-->
+							<div class="login-main wthree">
+							  <form action="<?php echo base_url(); ?>auth/admin_auth" method="post" enctype="multipart/form-data">
+								<input type="email" placeholder="Email" required="" name="email" class="form-control">
+								<input type="password" placeholder="Password" name="password" class="form-control">
+								<input type="submit" name="submit" value="Login">
+							</form>
+							</div>
+						<!--//newsletter-->			
+						</div>
+					</div>
+				</div>
+			 </div>
 	<!-- //navigation -->
 
 	<?php $this->load->view($main_view); ?>

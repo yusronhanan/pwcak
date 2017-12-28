@@ -37,6 +37,23 @@ class Auth extends CI_Controller {
                 }
 	}
 }
+		
+		public function admin_auth(){
+ 		if($this->input->post('submit')==TRUE){
+
+ 			$this->form_validation->set_rules('email','Email','required');
+ 			$this->form_validation->set_rules('password','Password','required');
+
+ 			if($this->form_validation->run()==TRUE)
+ 				if($this->auth_model->auth_admin() == TRUE){
+ 					redirect('admin');
+ 				}else{
+ 					$this->session->set_flashdata('notif_failed', 'Email atau Password anda tidak valid, coba lagi');
+ 					redirect('home');
+ 				}
+ 			}
+ 		}
+
 		public function submit_user(){
 		if($this->input->post('submit')) {
 

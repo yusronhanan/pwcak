@@ -7,7 +7,7 @@ class Course_model extends CI_Model {
 	public function __construct()
 	{
 		parent::__construct();
-		// $this->load->helper('string');
+		$this->load->helper('string');
         $this->load->helper('date');
 	}
 	public function add_course_content(){

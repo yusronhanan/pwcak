@@ -367,7 +367,7 @@ a.subs_true{
               <ul class="nav navbar-nav navbar-right">
                 <li><a href="<?php echo base_url(); ?>" class="hvr-underline-from-center active">Home</a></li>
                 <li><a href="<?php echo base_url(); ?>course" class="hvr-underline-from-center active">Courses</a></li>
-                <li><a href="<?php echo base_url(); ?>qna" class="hvr-underline-from-center active">QnA</a></li>
+                <li><a href="<?php echo base_url(); ?>discussion" class="hvr-underline-from-center active">Discussion</a></li>
                 <!-- <li><a href="#gallery" class="hvr-underline-from-center scroll">Gdjvb</a></li>
                 <li><a href="#team" class="hvr-underline-from-center scroll">Our Team</a></li>
                 <li><a href="#events" class="hvr-underline-from-center scroll">Events</a></li> -->

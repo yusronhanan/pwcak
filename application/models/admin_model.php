@@ -47,4 +47,27 @@ class Admin_model extends CI_Model {
 		return $this->db->from('course_title')
 		                ->count_all_results();
 	}
+	
+	public function delete_user($id_user){
+		return $this->db->where('id_user',$id_user)
+		                ->delete('user');
+
+		if($this->db->affected_rows()>0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function delete_course($id_title){
+
+		return $this->db->where('id_title',$id_title)
+                        ->delete('course_title');
+
+        if($this->db->affected_rows()>0){
+        	return true;
+        }else{
+        	return false;
+        }
+	}
 }

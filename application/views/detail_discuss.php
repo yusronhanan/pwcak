@@ -687,11 +687,11 @@ a.subs_true{
       </div>
       </div>
       <div class='comment-block'>
-        <ul class='comment-actions'>
+        <!-- <ul class='comment-actions'>
         <li class='reply' id='dell_reply' title='Delete'><i class='fa fa-trash' aria-hidden='true'>
       </i>
       </li>
-      </ul>
+      </ul> -->
       <form action=''>
         <textarea name='subject' id='subject' cols='30' rows='1' placeholder='Subject'></textarea>
         <hr>

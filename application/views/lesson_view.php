@@ -567,21 +567,21 @@ i.del_reply:hover{
                     if(array_key_exists($comment->id_action, $dislike_amount)) {
                     	$dislikes =  $dislike_amount[$comment->id_action];
                     }
-                    $thumb = '';
+                    $thumbb = '';
                     if (!empty($disliked)) {
                         if(in_array($comment->id_action, $disliked)) {
-                        $thumb = 'thumb_true';
+                        $thumbb = 'thumb_true';
                     }
                     }
                      if(array_key_exists($comment->id_action, $reply_amount)) {
                     	$replies =  $reply_amount[$comment->id_action];
                     }
                     ?>
-										<li class="reply <?php echo $thumb; ?>"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <?php echo $likes; ?></li>
-										<li class="reply <?php echo $thumb; ?>"><i class="fa fa-thumbs-down" aria-hidden="true"></i> <?php echo $dislikes; ?></li>
+										<li class="reply likes_comment <?php echo $thumb; ?>" id="<?php echo $comment->id_action ?>"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <?php echo $likes; ?></li>
+										<li class="reply dislikes_comment <?php echo $thumbb; ?>" id="<?php echo $comment->id_action ?>"><i class="fa fa-thumbs-down" aria-hidden="true"></i> <?php echo $dislikes; ?></li>
 										<li class="reply" id="reply-c"><i class="fa fa-reply" aria-hidden="true"></i> <?php echo $replies; ?></li>
 										<?php if($this->session->userdata('logged_id') == $comment->from_id) { ?>
-										<li class="reply" id="<?php echo $comment->id_action ?>"><i class="fa fa-trash" aria-hidden="true"></i></li>
+										<li class="reply delete" id="<?php echo $comment->id_action ?>"><i class="fa fa-trash" aria-hidden="true"></i></li>
 										<?php } ?>
 								</ul>
 									</div>
@@ -629,7 +629,7 @@ i.del_reply:hover{
 		<?php } ?>
 		
 		<div class="pull-right">
-		<a href="<?php echo base_url()?>discuss" ><button class="btn btn-danger pull-right" style="border-radius:50px;"><i class="fa fa-chevron-right" aria-hidden="true"></i></button></a>
+		<a href="<?php echo base_url()?>discuss/<?php echo $title_info->random_code ?>" ><button class="btn btn-danger pull-right" style="border-radius:50px;"><i class="fa fa-chevron-right" aria-hidden="true"></i></button></a>
 		<br>
 		<p>to make new discussion,<br> see discussion in detail</p>
 </div>
@@ -696,6 +696,7 @@ i.del_reply:hover{
 	
 	</script>
 	<script type="text/javascript">
+		 $("li.delete").on('click', delete_comment);
 		$("li#dell_reply").click(function(event) {
 				var here = $(this).parent().parent().parent();
 				if (!here.hasClass('hidden')) {
@@ -724,18 +725,24 @@ i.del_reply:hover{
                     	 		divcomment_re.addClass('hidden');
                     	 		$(this).parent().prev().children("textarea#subject, textarea#text_comment").val("");
 
-                    	 		// 0 subject,1 username, 2 text_comment, 3 created at, 4 total reply comment, 5 id action
-                    	 		<?php if($this->session->userdata('logged_id') == $title_info->id_user){ ?>
-                    	 			divcomment_re.after('<div class="comment-reply"><div class="photo"><div class="ava-me)"></div></div><div class="comment-block"><h5 style="color: #d9534f;">'+data[0]+'<a href=""><span style="font-size: 0.875rem;" class="userspan">@'+data[1]+'</span></a><span class="badge" style="font-size: 0.875rem;background-color:#d9534f;">creator</span></h5><ul class="comment-actions"><li class="reply" title="Go to this discussion"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></li></ul><p class="comment-text" style="color:black;">'+data[2]+'</p><div class="bottom-comment"><div class="comment-date">'+data[3]+'</div><ul class="comment-actions"><li class="reply"><i class="fa fa-thumbs-up" aria-hidden="true"></i> </li><li class="reply"><i class="fa fa-thumbs-down" aria-hidden="true"></i> </li><li class="reply delete" id="'+data[5]+'"><i class="fa fa-trash"  aria-hidden="true"></i></li></ul></div></div></div>');
-                    	 		<?php } else if($this->session->userdata('logged_id') == $maker_info->id_user) { ?>
-                    	 			divcomment_re.after('<div class="comment-reply"><div class="photo"><div class="ava-me)"></div></div><div class="comment-block"><h5 style="color: #d9534f;">'+data[0]+'<a href=""><span style="font-size: 0.875rem;" class="userspan">@'+data[1]+'</span></a><span class="badge" style="font-size: 0.875rem;background-color:#d9534f;">you</span></h5><ul class="comment-actions"><li class="reply" title="Go to this discussion"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></li></ul><p class="comment-text" style="color:black;">'+data[2]+'</p><div class="bottom-comment"><div class="comment-date">'+data[3]+'</div><ul class="comment-actions"><li class="reply"><i class="fa fa-thumbs-up" aria-hidden="true"></i> </li><li class="reply"><i class="fa fa-thumbs-down" aria-hidden="true"></i> </li><li class="reply delete" id="'+data[5]+'"><i class="fa fa-trash"  aria-hidden="true"></i></li></ul></div></div></div>');
-                    	 		<?php } else { ?>
-                    	 		divcomment_re.after('<div class="comment-reply"><div class="photo"><div class="ava-me)"></div></div><div class="comment-block"><h5 style="color: #d9534f;">'+data[0]+'<a href=""><span style="font-size: 0.875rem;" class="userspan">@'+data[1]+'</span></a></h5><ul class="comment-actions"><li class="reply" title="Go to this discussion"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></li></ul><p class="comment-text" style="color:black;">'+data[2]+'</p><div class="bottom-comment"><div class="comment-date">'+data[3]+'</div><ul class="comment-actions"><li class="reply"><i class="fa fa-thumbs-up" aria-hidden="true"></i> </li><li class="reply"><i class="fa fa-thumbs-down" aria-hidden="true"></i> </li><li class="reply delete" id="'+data[5]+'"><i class="fa fa-trash"  aria-hidden="true"></i></li></ul></div></div></div>');
-                    	 		<?php } ?>
+                    	 		// 0 subject,1 username, 2 text_comment, 3 created at, 4 total reply comment, 5 id action, 6 id_user
+                    	 		var id_in = <?php echo $this->session->userdata('logged_id')?>;
+                    	 		var maker_info_id = <?php echo $maker_info->id_user?>;
+                    	 		if(id_in == data[6]){ 
+                    	 			divcomment_re.after('<div class="comment-reply"><div class="photo"><div class="ava-me"></div></div><div class="comment-block"><h5 style="color: #d9534f;">'+data[0]+'<a href=""><span style="font-size: 0.875rem;" class="userspan">@'+data[1]+'</span></a><span class="badge" style="font-size: 0.875rem;background-color:#d9534f;">you</span></h5><ul class="comment-actions"><li class="reply" title="Go to this discussion"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></li></ul><p class="comment-text" style="color:black;">'+data[2]+'</p><div class="bottom-comment"><div class="comment-date">'+data[3]+'</div><ul class="comment-actions"><li class="reply likes_comment" id="'+data[5]+'"><i class="fa fa-thumbs-up" aria-hidden="true"></i> </li><li class="reply dislikes_comment" id="'+data[5]+'"><i class="fa fa-thumbs-down" aria-hidden="true"></i> </li><li class="reply delete" id="'+data[5]+'"><i class="fa fa-trash"  aria-hidden="true"></i></li></ul></div></div></div>');
+                    	 		}
+                    	 		else if(id_in == maker_info_id) {
+                    	 			divcomment_re.after('<div class="comment-reply"><div class="photo"><div class="ava-me"></div></div><div class="comment-block"><h5 style="color: #d9534f;">'+data[0]+'<a href=""><span style="font-size: 0.875rem;" class="userspan">@'+data[1]+'</span></a><span class="badge" style="font-size: 0.875rem;background-color:#d9534f;">creator</span></h5><ul class="comment-actions"><li class="reply" title="Go to this discussion"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></li></ul><p class="comment-text" style="color:black;">'+data[2]+'</p><div class="bottom-comment"><div class="comment-date">'+data[3]+'</div><ul class="comment-actions"><li class="reply likes_comment" id="'+data[5]+'"><i class="fa fa-thumbs-up" aria-hidden="true"></i> </li><li class="reply dislikes_comment" id="'+data[5]+'"><i class="fa fa-thumbs-down" aria-hidden="true"></i> </li><li class="reply delete" id="'+data[5]+'"><i class="fa fa-trash"  aria-hidden="true"></i></li></ul></div></div></div>');
+                    	 		}
+                    	 		 else { 
+                    	 		divcomment_re.after('<div class="comment-reply"><div class="photo"><div class="ava-me"></div></div><div class="comment-block"><h5 style="color: #d9534f;">'+data[0]+'<a href=""><span style="font-size: 0.875rem;" class="userspan">@'+data[1]+'</span></a></h5><ul class="comment-actions"><li class="reply" title="Go to this discussion"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></li></ul><p class="comment-text" style="color:black;">'+data[2]+'</p><div class="bottom-comment"><div class="comment-date">'+data[3]+'</div><ul class="comment-actions"><li class="reply likes_comment" id="'+data[5]+'"><i class="fa fa-thumbs-up" aria-hidden="true"></i> </li><li class="reply dislikes_comment" id="'+data[5]+'"><i class="fa fa-thumbs-down" aria-hidden="true"></i> </li><li class="reply delete" id="'+data[5]+'"><i class="fa fa-trash"  aria-hidden="true"></i></li></ul></div></div></div>');
+                    	 		 } 
 						 }
                     	divcomment_re.prev().children().children().children().children('li#reply-c').html('<i class="fa fa-reply" aria-hidden="true"></i> '+data[4]+'');
                     	
                     	 divcomment_re.next().children().children().children().children('li.delete').on('click', delete_comment);
+                    	 divcomment_re.next().children().children().children().children('li.likes_comment').on('click', likes_comment);
+                    	 divcomment_re.next().children().children().children().children('li.dislikes_comment').on('click', dislikes_comment);
 
                     	 // mini_notif();
                     }
@@ -766,6 +773,100 @@ i.del_reply:hover{
 			
 		
 	</script>
+	<script type="text/javascript">
+	$("li.likes_comment").on('click', likes_comment);
+	$("li.dislikes_comment").on('click', dislikes_comment);
+		
+	function likes_comment(){
+			<?php	if ($this->session->userdata('logged_in') == TRUE) {  ?>
+
+		var id_action = $(this).attr('id');
+		var id_title = <?php echo $title_info->id_title; ?>;
+		// alert(id_action + id_title);
+		$.ajax({
+                    url: '<?php echo base_url(); ?>home/thumb_comment',
+                    type: 'post',
+                    context: this,
+                    data: {id_action : id_action, id_title : id_title, type_action : '2',type_delete :'4'},
+                    success: function(e){
+                         if(e == "false") {alert('Maaf, thumb_up anda gagal');}
+                         
+                         else  {
+                         	var data = e.split("|");
+                        	if($(this).hasClass('thumb_true')){
+                        	$(this).removeClass('thumb_true');
+                        	$(this).html('<i class="fa fa-thumbs-up" aria-hidden="true"></i>'+data[0]);
+                        	}
+	                        else{
+	                        $(this).addClass('thumb_true');
+	                        $(this).next().removeClass('thumb_true');
+	                        $(this).next().html('<i class="fa fa-thumbs-down" aria-hidden="true"></i>'+data[1]);
+	                        $(this).html('<i class="fa fa-thumbs-up" aria-hidden="true"></i>'+data[0]);
+	                        }
+                    }
+				}
+                });
+		<?php }
+		else {
+			?>
+			 swal({
+                       title: "Failed",
+                       text: "Anda harus login terlebih dahulu",
+                       timer: 1500,
+                       showConfirmButton: false,
+                       type: 'warning'
+			});
+			<?php
+		} ?>
+       		
+	}
+		
+	function dislikes_comment(){
+				<?php	if ($this->session->userdata('logged_in') == TRUE) {  ?>
+
+		var id_action = $(this).attr('id');
+		var id_title = <?php echo $title_info->id_title; ?>;
+		// alert(id_action + id_title);
+		$.ajax({
+                    url: '<?php echo base_url(); ?>home/thumb_comment',
+                    type: 'post',
+                    context: this,
+                    data: {id_action : id_action, id_title : id_title, type_action : '4',type_delet :'2'},
+                    success: function(e){
+                         if(e == "false") {alert('Maaf, thumb_up anda gagal');}
+                         
+                         else  {
+                         	var data = e.split("|");
+                        	
+                        if($(this).hasClass('thumb_true')){
+                        	$(this).removeClass('thumb_true');
+
+                        	$(this).html('<i class="fa fa-thumbs-down" aria-hidden="true"></i>'+data[0]);
+                        	}
+	                        else{
+	                        $(this).addClass('thumb_true');
+	                        $(this).prev().removeClass('thumb_true');
+	                        $(this).prev().html('<i class="fa fa-thumbs-up" aria-hidden="true"></i>'+data[1]);
+	                        $(this).html('<i class="fa fa-thumbs-down" aria-hidden="true"></i>'+data[0]);
+	                        }
+                    }
+				}
+                });
+		<?php }
+		else {
+			?>
+			 swal({
+                       title: "Failed",
+                       text: "Anda harus login terlebih dahulu",
+                       timer: 1500,
+                       showConfirmButton: false,
+                       type: 'warning'
+			});
+			<?php
+		} ?>
+	}
+	
+</script>
 </body>
 </html>
 

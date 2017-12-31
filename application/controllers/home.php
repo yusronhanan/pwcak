@@ -64,6 +64,12 @@ class Home extends CI_Controller {
 			// echo "NOT_LOGIN";
 		// }
 	}
+	public function thumb_comment(){
+		if ($this->session->userdata('logged_in') == TRUE) {
+			$result=$this->home_model->thumb_comment();
+			echo $result;
+		}
+	}
 	
 	public function subs_up(){
 		if ($this->session->userdata('logged_in') == TRUE) {

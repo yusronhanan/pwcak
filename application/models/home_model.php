@@ -54,7 +54,7 @@ class Home_model extends CI_Model {
               'id_title'           	  => $id_title,
               'from_id'           	  => $user_id,
               'from_username'         => $username,
-              'for_id'				  => $for_id,
+              'for_id'				          => $for_id,
               'type_action'           => 0, #type like = 0
               // 'reply_comment'      => , #buat comment
               // 'text_comment'       => , #buat comment
@@ -72,6 +72,49 @@ class Home_model extends CI_Model {
         }
 
 	}
+  public function thumb_comment(){
+    date_default_timezone_set('Asia/Jakarta'); # add your city to set local time zone
+    $now = date('Y-m-d H:i:s');
+    $user_id = $this->session->userdata('logged_id');
+    $username = $this->auth_model->GetUser(['id_user' => $user_id])->row('username');
+    // $random_code = $this->input->post('random_code');
+    $reply_id = $this->input->post('id_action');
+    
+    $id_title = $this->input->post('id_title');
+    $type_action = $this->input->post('type_action');
+    $type_delete = $this->input->post('type_delete'); #if click like, dislike delete, and reverse
+    $for_id = $this->course_model->GetData(['id_title'=>$id_title],'course_title')->row('id_user');
+
+    $query = $this->GetData(['id_title'=>$id_title,'from_id'=>$user_id,'type_action'=>$type_action,'reply_id' => $reply_id],'user_action');
+        if ($query->num_rows() > 0) {
+           $this->db->where(['id_title'=>$id_title,'from_id'=>$user_id,'type_action'=>$type_action,'reply_id' => $reply_id])
+                ->delete('user_action');
+        } 
+         else {
+            $data=array(              
+              'id_title'              => $id_title,
+              'from_id'               => $user_id,
+              'from_username'         => $username,
+              'for_id'                => $for_id,
+              'type_action'           => $type_action, #type like = 0
+              'reply_id'              => $reply_id,
+              // 'text_comment'       => , #buat comment
+              // 'status'             => ,
+              'created_at'            => $now,
+        );
+        $this->db->insert('user_action', $data);
+        }
+    
+        if ($this->db->affected_rows() > 0) {
+          $this->db->where(['id_title'=>$id_title,'from_id'=>$user_id,'type_action'=>$type_delete,'reply_id' => $reply_id])
+                ->delete('user_action');
+          $like_amount = $this->home_model->GetAction('COUNT(id_action) as like_amount',['id_title'=>$id_title,'from_id'=>$user_id,'type_action'=>$type_action,'reply_id' => $reply_id])->row('like_amount'); #like and dislike
+          $other_amount = $this->home_model->GetAction('COUNT(id_action) as like_amount',['id_title'=>$id_title,'from_id'=>$user_id,'type_action'=>$type_delete,'reply_id' => $reply_id])->row('like_amount'); #other amount
+            return $like_amount.'|'.$other_amount;
+        } else {
+            return "false";
+        }
+  }
   
   public function subs_up(){
     date_default_timezone_set('Asia/Jakarta'); # add your city to set local time zone

@@ -429,7 +429,7 @@ h6.thumb_true {
                     	 }
                     	 $('span#amountnotif').html(e);
 
-                    	 // mini_notif();
+                    	 
                     }
                 });
         	 				

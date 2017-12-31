@@ -332,7 +332,7 @@ public function GetDetailCourse($id_course){
               'from_id'               => $user_id,
               'from_username'         => $username,
               'for_id'                => $for_id,
-              'type_action'           => $type_comment, #1, #type like = 0
+              'type_action'           => $type_comment, #1/3
               'reply_id'              => $reply_id, #buat comment
               'subject'               => $subject,
               'text_comment'          => $text_comment, #buat comment
@@ -346,14 +346,15 @@ public function GetDetailCourse($id_course){
         $time = timespan($timestamp, $now) . ' ago';
     
         if ($this->db->affected_rows() > 0) {
-            if (!empty($reply_comment)) {
+            if ($type_comment == '3') {
             // 0 subject,1 username, 2 text_comment, 3 created at, 4 total reply comment,5 id action
                 $reply_amount = $this->home_model->GetAction('COUNT(id_action) as comment_amount',['id_title' => $id_title,'reply_id'=>$reply_id,'type_action' => '3'])->row('comment_amount');
                 $id_action = $this->course_model->GetData(['subject'=> $subject,'text_comment'=>$text_comment,'created_at'=>$now,'reply_id'=>$reply_id,'from_id'=>$user_id],'user_action')->row('id_action');
-                return $subject.'|'.$username.'|'.$text_comment.'|'.$time.'|'.$reply_amount.'|'.$id_action;
+                return $subject.'|'.$username.'|'.$text_comment.'|'.$time.'|'.$reply_amount.'|'.$id_action.'|'.$user_id;
             }
-            else{
-                return "true";
+            else if($type_comment == '1'){
+                $id_action = $this->course_model->GetData(['subject'=> $subject,'text_comment'=>$text_comment,'created_at'=>$now,'reply_id'=>$reply_id,'from_id'=>$user_id],'user_action')->row('id_action');
+                return $subject.'|'.$username.'|'.$text_comment.'|'.$time.'|'.$id_action.'|'.$user_id;
             }
         } else {
             return "false";

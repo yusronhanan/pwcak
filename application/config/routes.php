@@ -53,17 +53,19 @@ $route['default_controller'] = 'home';
 $route['course'] = "course";
 $route['home'] = "home";
 $route['discussion'] = "discussion";
-$route['discuss'] = "discussion/detail_discuss";
+
 $route['myaccount'] = "myaccount";
 $route['notif'] = "notif";
 $route['infinitive'] = "infinitive";
 $route['admin']= "admin";
+$route['eror404'] = "eror404";
+
 $route['lesson/(.+)'] = "course/detail_course/$1";
 $route['add_course/(.+)'] = "myaccount/add_course/$1";
-$route['eror404'] = "eror404";
+$route['discuss/(.+)'] = "discussion/detail_discuss/$1";
 
 $route['(:any)'] = "myaccount/user_profile/$1";
 // $route['(.*)'] = "home/user_profile/$1";  
-$route['404_override'] = '';
+$route['404_override'] = 'eror404';
 $route['translate_uri_dashes'] = FALSE;
 

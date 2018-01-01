@@ -35,7 +35,7 @@ class Home_model extends CI_Model {
             ->get('course_title')
             ->result();
 	}
-	public function thumb_up(){
+	public function thumb_up(){ 
 		date_default_timezone_set('Asia/Jakarta'); # add your city to set local time zone
 		$now = date('Y-m-d H:i:s');
 		$user_id = $this->session->userdata('logged_id');
@@ -99,7 +99,7 @@ class Home_model extends CI_Model {
               'type_action'           => $type_action, #type like = 0
               'reply_id'              => $reply_id,
               // 'text_comment'       => , #buat comment
-              'status'                => '0',=> ,
+              'status'                => '0',
               'created_at'            => $now,
         );
         $this->db->insert('user_action', $data);

@@ -1525,7 +1525,7 @@ a.subs_true{
                     url: '<?php echo base_url(); ?>home/thumb_comment',
                     type: 'post',
                     context: this,
-                    data: {id_action : id_action, id_title : id_title, type_action : '4',type_delet :'2'},
+                    data: {id_action : id_action, id_title : id_title, type_action : '4',type_delete :'2'},
                     success: function(e){
                          if(e == "false") {alert('Maaf, thumb_up anda gagal');}
                          
@@ -1535,13 +1535,13 @@ a.subs_true{
                         if($(this).hasClass('thumb_true')){
                           $(this).removeClass('thumb_true');
 
-                          $(this).html('<i class="fa fa-thumbs-down" aria-hidden="true"></i>'+data[0]);
+                          $(this).html('<i class="fa fa-thumbs-down" aria-hidden="true"></i>'+data[1]);
                           }
                           else{
                           $(this).addClass('thumb_true');
                           $(this).prev().removeClass('thumb_true');
-                          $(this).prev().html('<i class="fa fa-thumbs-up" aria-hidden="true"></i>'+data[1]);
-                          $(this).html('<i class="fa fa-thumbs-down" aria-hidden="true"></i>'+data[0]);
+                          $(this).prev().html('<i class="fa fa-thumbs-up" aria-hidden="true"></i>'+data[0]);
+                          $(this).html('<i class="fa fa-thumbs-down" aria-hidden="true"></i>'+data[1]);
                           }
                     }
         }

@@ -323,46 +323,6 @@ public function GetDetailCourse($id_course){
     else {
         $reply_id = $reply_comment;
     }
-    $for_user = array();
-    if ($type_comment == '1') {
-        $list_comment= $this->home_model->GetAction('*',['id_title' => $id_title,'type_action' => '1'])->result();
-        
-        // if (!in_array($for_id, $for_user)){
-                    // if ($user_id != $for_id) {
-                        $for_user[] = $for_id; #course maker
-                    // }
-        // } 
-        foreach ($list_comment as $comment) {
-                if (!in_array($comment->from_id, $for_user)){
-                    // if ($user_id != $comment->from_id) {
-                        $for_user[] = $comment->from_id;
-                    // }
-        }
-        $for_array = implode(" ",$for_user);
-    }
-    }
-    else if ($type_comment == '3') {
-        $list_reply_comment= $this->home_model->GetAction('*',['id_title' => $id_title,'type_action' => '3','reply_id'=>$reply_id])->result();
-        $id_user_reply = $this->GetData(['id_action'=>$reply_id],'user_action')->row('from_id');
-        // if (!in_array($for_id, $for_user)){
-                    // if ($user_id != $for_id) {
-                        $for_user[] = $for_id; #course maker
-                    // }
-        // }
-        if (!in_array($id_user_reply, $for_user)){
-                    // if ($user_id != $id_user_reply) {
-                        $for_user[] = $id_user_reply;  #comment maker
-                    // }
-        }
-        foreach ($list_reply_comment as $reply_comment) {
-                if (!in_array($reply_comment->from_id, $for_user)){
-                    // if ($user_id != $reply_comment->from_id) {
-                        $for_user[] = $reply_comment->from_id;
-                    // }
-        }
-        $for_array = implode(" ",$for_user);
-    }
-    }
     // $query = $this->GetData(['id_title'=>$id_title,'from_id'=>$user_id,'type_action'=>'0'],'user_action');
         
            
@@ -371,12 +331,12 @@ public function GetDetailCourse($id_course){
               'id_title'              => $id_title,
               'from_id'               => $user_id,
               'from_username'         => $username,
-              'for_id'                => $for_array,
+              'for_id'                => $for_id,
               'type_action'           => $type_comment, #1/3
               'reply_id'              => $reply_id, #buat comment
               'subject'               => $subject,
               'text_comment'          => $text_comment, #buat comment
-              'status'                => '0',
+              // 'status'             => ,
               'created_at'            => $now,
         );
         $this->db->insert('user_action', $data);

@@ -58,7 +58,7 @@ class Home_model extends CI_Model {
               'type_action'           => 0, #type like = 0
               // 'reply_comment'      => , #buat comment
               // 'text_comment'       => , #buat comment
-              'status'          	    => '0',
+              // 'status'          	  => '0',
               'created_at'            => $now,
         );
         $this->db->insert('user_action', $data);
@@ -99,7 +99,7 @@ class Home_model extends CI_Model {
               'type_action'           => $type_action, #type like = 0
               'reply_id'              => $reply_id,
               // 'text_comment'       => , #buat comment
-              'status'                => '0',
+              // 'status'                => '0',
               'created_at'            => $now,
         );
         $this->db->insert('user_action', $data);
@@ -108,9 +108,9 @@ class Home_model extends CI_Model {
         if ($this->db->affected_rows() > 0) {
           $this->db->where(['id_title'=>$id_title,'from_id'=>$user_id,'type_action'=>$type_delete,'reply_id' => $reply_id])
                 ->delete('user_action');
-          $like_amount = $this->home_model->GetAction('COUNT(id_action) as like_amount',['id_title'=>$id_title,'from_id'=>$user_id,'type_action'=>$type_action,'reply_id' => $reply_id])->row('like_amount'); #like and dislike
-          $other_amount = $this->home_model->GetAction('COUNT(id_action) as like_amount',['id_title'=>$id_title,'from_id'=>$user_id,'type_action'=>$type_delete,'reply_id' => $reply_id])->row('like_amount'); #other amount
-            return $like_amount.'|'.$other_amount;
+          $like_amount = $this->home_model->GetAction('COUNT(id_action) as like_amount',['id_title'=>$id_title,'type_action'=>'2','reply_id' => $reply_id])->row('like_amount'); #like and dislike
+          $dislike_amount = $this->home_model->GetAction('COUNT(id_action) as like_amount',['id_title'=>$id_title,'type_action'=>'4','reply_id' => $reply_id])->row('like_amount'); #other amount
+            return $like_amount.'|'.$dislike_amount;
         } else {
             return "false";
         }

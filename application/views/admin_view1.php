@@ -33,12 +33,12 @@
 
             <ul class="nav navbar-top-links navbar-right">
             
-                  <!--  <li><a href="<?php echo base_url(); ?>index.php/t_anggota/">Tambah Anggota</a>
+                  <!--  <li><a href="<?php echo base_url(); ?>t_anggota/">Tambah Anggota</a>
                    </li>
-                   <li><a href="<?php echo base_url(); ?>index.php/t_buku/">Tambah Buku</a></li>
+                   <li><a href="<?php echo base_url(); ?>t_buku/">Tambah Buku</a></li>
                   
 
-                   <li><a href="<?php echo base_url(); ?>index.php/t_transaksi/">Tambah transaksi</a>
+                   <li><a href="<?php echo base_url(); ?>t_transaksi/">Tambah transaksi</a>
                    </li> -->
                 
                 
@@ -52,7 +52,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="<?php echo base_url(); ?>index.php/admin/logout_admin"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="<?php echo base_url(); ?>admin/logout_admin"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -77,28 +77,28 @@
                         </li>
                         
                         <li>
-                        <a href="<?php echo base_url(); ?>index.php/admin/"><i class="fa fa-home fa-fw">
+                        <a href="<?php echo base_url(); ?>admin/"><i class="fa fa-home fa-fw">
                         </i>Home</a>
                         </li>
                     
                        
                         <li>
-                            <a href="<?php echo base_url(); ?>index.php/admin/get_user"><i class="glyphicon glyphicon-user"></i> Data User</a>
+                            <a href="<?php echo base_url(); ?>admin/get_user"><i class="glyphicon glyphicon-user"></i> Data User</a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url(); ?>index.php/admin/get_course"><i class="glyphicon glyphicon-book"></i> Data Course</a>
+                            <a href="<?php echo base_url(); ?>admin/get_course"><i class="glyphicon glyphicon-book"></i> Data Course</a>
                         </li>
                        
                        
                         <!-- <li>
-                            <a href="<?php echo base_url();?>index.php/admin/get_data_transaksi/"><i class="glyphicon glyphicon-search"></i> Peminjaman</a>
+                            <a href="<?php echo base_url();?>admin/get_data_transaksi/"><i class="glyphicon glyphicon-search"></i> Peminjaman</a>
                         
                         </li>
                       
 
 
                         <li>
-                            <a href="<?php echo base_url(); ?>index.php/admin/data_admin/"><i class="glyphicon glyphicon-user"></i> Data Admin</a>
+                            <a href="<?php echo base_url(); ?>admin/data_admin/"><i class="glyphicon glyphicon-user"></i> Data Admin</a>
                         </li> -->
                        
                     </ul>

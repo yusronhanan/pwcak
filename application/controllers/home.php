@@ -93,10 +93,13 @@ class Home extends CI_Controller {
 				
 			if(!empty($result)){
 				//loop isi notif
+// type action  like title course = 0 , comment title course = 1, like(thumb up) comment = 2, reply comment = 3, dislike thumb down comment 4,
+  // 0, 1 - reply_id = null ; 2, 3, 4 reply id depend id_action of comment - reply_id not null;
+	
 				foreach ($result as $notification) {
-
+					$random_code = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('random_code');
 					if ($notification->type_action == '0') {
-						$link = base_url().'lesson/'.$notification->id_title;
+						$link = base_url().'lesson/'.$random_code;
 						$thumbnail = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('thumbnail');
 						$course_title = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('title');
 						$word = 'like your course ('.$course_title.')';
@@ -104,22 +107,28 @@ class Home extends CI_Controller {
 					}
 
 					else if ($notification->type_action == '1') {
-						$link = base_url().'lesson/'.$notification->id_title; #+direct to comment place
+						$link = base_url().'lesson/'.$random_code; #+direct to comment place
 						$thumbnail = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('thumbnail');
 						$course_title = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('title');
 						$word = 'give comment on your course ('.$course_title.')';
 					}
 					else if ($notification->type_action == '2') {
-						$link = base_url().'lesson/'.$notification->id_title; #+direct to comment place
+						$link = base_url().'discuss/'.$random_code; #+direct to comment place
 						$thumbnail = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('thumbnail');
 						$course_title = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('title');
 						$word = 'like your comment in discussion ('.$course_title.')';
 					}
 					else if ($notification->type_action == '3') {
-						$link = base_url().'lesson/'.$notification->id_title; #+direct to comment place
+						$link = base_url().'discuss/'.$random_code; #+direct to comment place
 						$thumbnail = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('thumbnail');
 						$course_title = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('title');
 						$word = 'reply comment on your following discussion ('.$course_title.')';
+					}
+					else if ($notification->type_action == '4') {
+						$link = base_url().'discuss/'.$random_code; #+direct to comment place
+						$thumbnail = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('thumbnail');
+						$course_title = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('title');
+						$word = 'dislike your comment in discussion ('.$course_title.')';
 					}
 				$imguser  = $this->home_model->GetData(['id_user'=>$notification->from_id],'user')->row('photo'); 
 				$username = $this->home_model->GetData(['id_user'=>$notification->from_id],'user')->row('username'); 

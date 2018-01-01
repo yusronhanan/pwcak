@@ -129,13 +129,13 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 						<!-- navbar-header -->
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav navbar-right">
-								<li><a href="<?php echo base_url(); ?>index.php/home" class="hvr-underline-from-center active">Home</a></li>
-								<li><a href="<?php echo base_url(); ?>index.php/course" class="hvr-underline-from-center active">Courses</a></li>
-								<li><a href="<?php echo base_url(); ?>index.php/qna" class="hvr-underline-from-center active">QnA</a></li>
+								<li><a href="<?php echo base_url(); ?>home" class="hvr-underline-from-center active">Home</a></li>
+								<li><a href="<?php echo base_url(); ?>course" class="hvr-underline-from-center active">Courses</a></li>
+								<li><a href="<?php echo base_url(); ?>qna" class="hvr-underline-from-center active">QnA</a></li>
 								<!-- <li><a href="#gallery" class="hvr-underline-from-center scroll">Gdjvb</a></li>
 								<li><a href="#team" class="hvr-underline-from-center scroll">Our Team</a></li>
 								<li><a href="#events" class="hvr-underline-from-center scroll">Events</a></li> -->
-								<li><a href="<?php echo base_url(); ?>index.php/myaccount" class="hvr-underline-from-center active">MyAccount</a></li>
+								<li><a href="<?php echo base_url(); ?>myaccount" class="hvr-underline-from-center active">MyAccount</a></li>
 							</ul>
 						</div>
 						<div class="clearfix"> </div>	
@@ -436,8 +436,8 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 			<div class="col-md-4 agileinfo_footer_grid mid-w3l nav2">
 				<h4>Options</h4>
 				<ul>
-					<li><a href="<?php echo base_url(); ?>index.php/home" class="active">Home</a></li>
-					<li><a href="<?php echo base_url(); ?>index.php/course" class="active">Course</a></li>
+					<li><a href="<?php echo base_url(); ?>home" class="active">Home</a></li>
+					<li><a href="<?php echo base_url(); ?>course" class="active">Course</a></li>
 					<li><a href="#services" class="scroll">QnA</a></li>
 					<li><a href="#gallery" class="scroll">My Account</a></li>
 				</ul>

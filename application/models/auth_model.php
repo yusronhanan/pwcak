@@ -28,25 +28,25 @@ class Auth_model extends CI_Model {
         }
     }
 
-    public function auth_admin(){
-        $email = $this->input->post('email');
-        $password = $this->input->post('password');
+    // public function auth_admin(){
+    //     $email = $this->input->post('email');
+    //     $password = $this->input->post('password');
 
-        $query=$this->db->where('email',$email)
-                        ->where('password',$password)
-                        ->get('user');
+    //     $query=$this->db->where('email',$email)
+    //                     ->where('password',$password)
+    //                     ->get('user');
         
-        if($query->num_rows()>0){
-            $data=array(
-                'email' => $email,
-                'role' => $query->row()->role
-                );
-            $this->session->set_userdata($data);
-            return true;
-        }else{
-            return false;
-        }
-    }
+    //     if($query->num_rows()>0){
+    //         $data=array(
+    //             'email' => $email,
+    //             'role' => $query->row()->role
+    //             );
+    //         $this->session->set_userdata($data);
+    //         return true;
+    //     }else{
+    //         return false;
+    //     }
+    // }
     public function register_user(){
 
         date_default_timezone_set('Asia/Jakarta'); # add your city to set local time zone

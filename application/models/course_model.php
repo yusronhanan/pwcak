@@ -336,7 +336,7 @@ public function GetDetailCourse($id_course){
               'reply_id'              => $reply_id, #buat comment
               'subject'               => $subject,
               'text_comment'          => $text_comment, #buat comment
-              // 'status'             => ,
+              'status'                  => '0',
               'created_at'            => $now,
         );
         $this->db->insert('user_action', $data);

@@ -112,6 +112,10 @@ class Discussion extends CI_Controller {
 				
 				$this->load->view('detail_discuss', $data);
 	}
+	else{
+		$this->session->set_flashdata('notif_failed', 'Maaf, anda harus login terlebih dahulu');
+		redirect('');
+	}
 }
 }
 

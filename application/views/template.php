@@ -86,7 +86,7 @@ h6.thumb_true {
 				<?php 
 				}
 				else { ?>
-				<li><a href="#" data-toggle="modal" data-target="#myModal5"><i class="fa fa-user" aria-hidden="true"></i>ADMIN</a></li>
+				<!-- <li><a href="#" data-toggle="modal" data-target="#myModal5"><i class="fa fa-user" aria-hidden="true"></i>ADMIN</a></li> -->
 				<li><a href="#" data-toggle="modal" data-target="#myModal3"><i class="fa fa-key" aria-hidden="true"></i>LOGIN</a></li>
 				<li><a href="#" data-toggle="modal" data-target="#myModal4"><i class="fa fa-lock" aria-hidden="true"></i>REGISTER</a></li>
 				
@@ -189,7 +189,10 @@ h6.thumb_true {
 								<?php if ($this->session->userdata('logged_in') == TRUE) { ?>
 								<li><a href="<?php echo base_url().$username_id; ?>" class="hvr-underline-from-center active">MyAccount</a>
 									</li>
-								<?php } ?>
+								<?php if ($this->session->userdata('role') == '1') { ?>
+								<li><a href="<?php echo base_url() ?>admin" class="hvr-underline-from-center active">Admin</a>
+									</li>
+								<?php } } ?>
 								
 								
 							</ul>

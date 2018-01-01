@@ -125,12 +125,12 @@ class Admin extends CI_Controller {
  }
 
  	public function logout_admin(){
- 		$data=array(
- 			'email' => '',
- 		    'role' => FALSE
- 		);
+ 		// $data=array(
+ 		// 	'email' => '',
+ 		//     'role' => FALSE
+ 		// );
  		$this->session->sess_destroy();
- 		redirect('home');
+ 		redirect('');
  	}
 }
 

@@ -54,11 +54,11 @@ class Home_model extends CI_Model {
               'id_title'           	  => $id_title,
               'from_id'           	  => $user_id,
               'from_username'         => $username,
-              'for_id'				          => $for_id,
+              'for_id'				        => $for_id,
               'type_action'           => 0, #type like = 0
               // 'reply_comment'      => , #buat comment
               // 'text_comment'       => , #buat comment
-              // 'status'          	  => ,
+              'status'          	    => '0',
               'created_at'            => $now,
         );
         $this->db->insert('user_action', $data);
@@ -99,7 +99,7 @@ class Home_model extends CI_Model {
               'type_action'           => $type_action, #type like = 0
               'reply_id'              => $reply_id,
               // 'text_comment'       => , #buat comment
-              // 'status'             => ,
+              'status'                => '0',=> ,
               'created_at'            => $now,
         );
         $this->db->insert('user_action', $data);
@@ -182,14 +182,16 @@ class Home_model extends CI_Model {
       $mini_notif = $this->input->post('mini_notif');
       if (!empty($mini_notif)) {
        if (count($this->unseen_notification()) > 15) {
-          return $this->db->where('for_id',$user_id)
+          return $this->db->like('for_id',$user_id, 'both')
+          // ->where('for_id',$user_id)
               ->order_by('created_at','DESC')
               // ->limit(15,0)
               ->get('user_action')
               ->result();
       }
       else{
-        return $this->db->where('for_id',$user_id)
+        return $this->db->like('for_id',$user_id, 'both')
+        // ->where('for_id',$user_id)
               ->order_by('created_at','DESC')
               ->limit(15,0)
               ->get('user_action')

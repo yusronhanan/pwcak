@@ -442,19 +442,7 @@ h6.thumb_true {
 
 	</script>
 	
-	<script type="text/javascript">
-        $(document).ready(function(){
-            $("button#load_infinite").on('click', load_infinite);
-    });
-        $(window).on("scroll", function() {
-    var scrollHeight = $(document).height();
-    var scrollPosition = $(window).height() + $(window).scrollTop();
-    if ((scrollHeight - scrollPosition) / scrollHeight === 0) {
-        // alert('aaa');
-        load_infinite();
-    }
-});
-    </script>
+	
 </body>
 <!-- </div>
 </body> -->

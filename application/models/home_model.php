@@ -35,7 +35,7 @@ class Home_model extends CI_Model {
             ->get('course_title')
             ->result();
 	}
-	public function thumb_up(){ 
+	public function thumb_up(){  #like course
 		date_default_timezone_set('Asia/Jakarta'); # add your city to set local time zone
 		$now = date('Y-m-d H:i:s');
 		$user_id = $this->session->userdata('logged_id');
@@ -46,6 +46,10 @@ class Home_model extends CI_Model {
 
 		$query = $this->GetData(['id_title'=>$id_title,'from_id'=>$user_id,'type_action'=>'0'],'user_action');
         if ($query->num_rows() > 0) {
+          // $id_action= $query->row('id_action');
+    
+          $this->db->where(['id_action'=>$query->row('id_action')])
+                ->delete('notification');
            $this->db->where(['id_title'=>$id_title,'from_id'=>$user_id,'type_action'=>'0'])
            			->delete('user_action');
         } 
@@ -62,6 +66,15 @@ class Home_model extends CI_Model {
               'created_at'            => $now,
         );
         $this->db->insert('user_action', $data);
+        $id_action= $this->GetData(['id_title'=>$id_title,'from_id'=>$user_id,'type_action'=>'0'],'user_action')->row('id_action');
+        if ($for_id != $user_id) {
+        $notif = array(              
+              'id_action'              => $id_action,
+              'for_id'                 => $for_id,
+        );
+         $this->db->insert('notification', $notif);
+          
+        }
         }
 		
         if ($this->db->affected_rows() > 0) {
@@ -83,10 +96,12 @@ class Home_model extends CI_Model {
     $id_title = $this->input->post('id_title');
     $type_action = $this->input->post('type_action');
     $type_delete = $this->input->post('type_delete'); #if click like, dislike delete, and reverse
-    $for_id = $this->course_model->GetData(['id_title'=>$id_title],'course_title')->row('id_user');
+    $for_id = $this->course_model->GetData(['id_action'=>$reply_id],'user_action')->row('from_id');
 
     $query = $this->GetData(['id_title'=>$id_title,'from_id'=>$user_id,'type_action'=>$type_action,'reply_id' => $reply_id],'user_action');
         if ($query->num_rows() > 0) {
+           $this->db->where(['id_action'=>$query->row('id_action')])
+                ->delete('notification');
            $this->db->where(['id_title'=>$id_title,'from_id'=>$user_id,'type_action'=>$type_action,'reply_id' => $reply_id])
                 ->delete('user_action');
         } 
@@ -103,9 +118,21 @@ class Home_model extends CI_Model {
               'created_at'            => $now,
         );
         $this->db->insert('user_action', $data);
+        $id_action= $this->GetData(['id_title'=>$id_title,'from_id'=>$user_id,'type_action'=>$type_action,'reply_id' => $reply_id],'user_action')->row('id_action');
+        if ($for_id != $user_id) {
+        $notif = array(              
+              'id_action'              => $id_action,
+              'for_id'                 => $for_id,
+        );
+         $this->db->insert('notification', $notif);
+          
+        }
         }
     
         if ($this->db->affected_rows() > 0) {
+          $id_action_delete = $this->GetData(['id_title'=>$id_title,'from_id'=>$user_id,'type_action'=>$type_delete,'reply_id' => $reply_id],'user_action')->row('id_action');
+          $this->db->where(['id_action'=>$id_action_delete])
+                ->delete('notification');
           $this->db->where(['id_title'=>$id_title,'from_id'=>$user_id,'type_action'=>$type_delete,'reply_id' => $reply_id])
                 ->delete('user_action');
           $like_amount = $this->home_model->GetAction('COUNT(id_action) as like_amount',['id_title'=>$id_title,'type_action'=>'2','reply_id' => $reply_id])->row('like_amount'); #like and dislike
@@ -182,27 +209,33 @@ class Home_model extends CI_Model {
       $mini_notif = $this->input->post('mini_notif');
       if (!empty($mini_notif)) {
        if (count($this->unseen_notification()) > 15) {
-          return $this->db->like('for_id',$user_id, 'both')
+          return $this->db->where('for_id',$user_id)
           // ->where('for_id',$user_id)
-              ->order_by('created_at','DESC')
+              // ->order_by('created_at','DESC')
               // ->limit(15,0)
-              ->get('user_action')
+              // ->get('user_action')
+              ->order_by('id_notif','DESC')
+              ->get('notification')
               ->result();
       }
       else{
-        return $this->db->like('for_id',$user_id, 'both')
+        return $this->db->where('for_id',$user_id)
         // ->where('for_id',$user_id)
-              ->order_by('created_at','DESC')
+              // ->order_by('created_at','DESC')
               ->limit(15,0)
-              ->get('user_action')
+              // ->get('user_action')
+              ->order_by('id_notif','DESC')
+              ->get('notification')
               ->result();
       }
       }
       else{
         return $this->db->where('for_id',$user_id)
-              ->order_by('created_at','DESC')
+              // ->order_by('created_at','DESC')
               // ->limit(15,0)
-              ->get('user_action')
+              // ->get('user_action')
+              ->order_by('id_notif','DESC')
+              ->get('notification')
               ->result();
             }
       }
@@ -212,8 +245,9 @@ class Home_model extends CI_Model {
       $user_id = $this->session->userdata('logged_id');
       return $this->db->where('for_id',$user_id)
               ->where('status','0')
-              ->order_by('created_at','DESC')
-              ->get('user_action')
+              // ->order_by('created_at','DESC')
+              ->get('notification')
+              // ->get('user_action')
               ->result();
       }
 
@@ -230,7 +264,8 @@ class Home_model extends CI_Model {
         $userid = $this->session->userdata('logged_id');
         $this->db->where('for_id',$userid)
                  ->where('status','0')
-                 ->update('user_action', array('status' => '1'));
+                 // ->update('user_action', array('status' => '1'));
+                 ->update('notification', array('status' => '1'));
 
         if ($this->db->affected_rows() > 0) {
             return TRUE;

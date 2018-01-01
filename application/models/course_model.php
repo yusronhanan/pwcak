@@ -310,8 +310,7 @@ public function GetDetailCourse($id_course){
     $user_id = $this->session->userdata('logged_id');
     $username = $this->auth_model->GetUser(['id_user' => $user_id])->row('username');
     $id_title = $this->input->post('id_title');
-    $for_id = $this->course_model->GetData(['id_title'=> $id_title],'course_title')->row('id_user');
-    $for_username = $this->auth_model->GetUser(['id_user' => $for_id])->row('username');
+    $id_usermaker = $this->course_model->GetData(['id_title'=> $id_title],'course_title')->row('id_user');
     
     $type_comment = $this->input->post('type_comment');
     $text_comment = $this->input->post('text_comment');
@@ -319,19 +318,20 @@ public function GetDetailCourse($id_course){
     $reply_comment = $this->input->post('reply_comment');
     if (empty($reply_comment)) {
         $reply_id = NULL;
+        // $for_id = $id_usermaker;
     }
     else {
         $reply_id = $reply_comment;
+        // $for_id = $id_user_reply;
     }
+    
     // $query = $this->GetData(['id_title'=>$id_title,'from_id'=>$user_id,'type_action'=>'0'],'user_action');
-        
-           
         
             $data=array(              
               'id_title'              => $id_title,
               'from_id'               => $user_id,
               'from_username'         => $username,
-              'for_id'                => $for_id,
+              'for_id'                => $id_usermaker,
               'type_action'           => $type_comment, #1/3
               'reply_id'              => $reply_id, #buat comment
               'subject'               => $subject,
@@ -344,8 +344,58 @@ public function GetDetailCourse($id_course){
         $nowstr = strtotime($now);
              
         $time = timespan($timestamp, $now) . ' ago';
-    
+        // notif
+        $for_id = array();
+        $insert_notif = array();
+    if ($type_comment == '1') #comment on course 
+    {
+        $getcomment = $this->home_model->GetAction('*',['id_title' => $id_title,'type_action' => '1'])->result();
+        if ($user_id != $id_usermaker) {
+        $for_id[] = $id_usermaker;
+    }
+        foreach ($getcomment as $comment) {
+                if (!in_array($comment->from_id, $for_id)){
+                    if ($user_id != $comment->from_id) {
+                        $for_id[] = $comment->from_id;
+                    }
+            
+        }
+        }
+
+    }
+    else if($type_comment == '3') #comment reply comment
+    {
+        $getcomment = $this->home_model->GetAction('*',['id_title' => $id_title,'type_action' => '3','reply_id'=>$reply_id])->result();
+        $id_replyid = $this->home_model->GetAction('*',['id_action' => $reply_id])->row('from_id');
+        if ($user_id != $id_replyid) {
+        $for_id[] = $id_replyid;
+        }
+        foreach ($getcomment as $comment) {
+                if (!in_array($comment->from_id, $for_id)){
+                    if ($user_id != $comment->from_id) {
+                        $for_id[] = $comment->from_id;
+                    }
+            
+        }
+        }
+
+    }
+        if (!empty($for_id)) {
+
+        $id_action =  $this->home_model->GetAction('*',['id_title'=> $id_title,'from_id'=> $user_id,'from_username'=> $username,'for_id'=> $id_usermaker,'type_action'=> $type_comment,'reply_id'=> $reply_id,'subject'=> $subject,'text_comment'=> $text_comment,'created_at'=> $now,])->row('id_action');
+
+        for($i = 0; $i < count($for_id); $i++)
+        {
+            $insert_notif[] = array(
+            'id_action' => $id_action,
+            'for_id'    => $for_id[$i],
+            );
+        }
+         $this->db->insert_batch('notification', $insert_notif);
+     }
+    // notif end
         if ($this->db->affected_rows() > 0) {
+
             if ($type_comment == '3') {
             // 0 subject,1 username, 2 text_comment, 3 created at, 4 total reply comment,5 id action
                 $reply_amount = $this->home_model->GetAction('COUNT(id_action) as comment_amount',['id_title' => $id_title,'reply_id'=>$reply_id,'type_action' => '3'])->row('comment_amount');

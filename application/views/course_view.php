@@ -208,5 +208,17 @@
         <button class="btn btn-danger" id="load_infinite">LOAD PLEASE</button>
 	</div>
 </div>
-
+<script type="text/javascript">
+        $(document).ready(function(){
+            $("button#load_infinite").on('click', load_infinite);
+    });
+        $(window).on("scroll", function() {
+    var scrollHeight = $(document).height();
+    var scrollPosition = $(window).height() + $(window).scrollTop();
+    if ((scrollHeight - scrollPosition) / scrollHeight === 0) {
+        // alert('aaa');
+        load_infinite();
+    }
+});
+    </script>
 <!-- //courses -->

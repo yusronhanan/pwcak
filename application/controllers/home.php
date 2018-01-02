@@ -51,7 +51,7 @@ class Home extends CI_Controller {
 		'main_view'     => 'home_view',
 		'username_id'	=> $username_id,
  		];
-		$this->load->view('template', $data);
+		$this->load->view('templet', $data);
 	
 }
 

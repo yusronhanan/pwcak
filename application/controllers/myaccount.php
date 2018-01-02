@@ -96,10 +96,10 @@ class Myaccount extends CI_Controller {
 				// 'subscribed'	=> $subscribed,
 				'subs_amount'	=> $subs_amount,
 				'username_id'	=> $username_id,
+				'main_view'		=> 'acc_view',
 					];
 		}
-		
-		$this->load->view('acc_view', $data);
+		$this->load->view('templet', $data);
 		}
 		else{
 			$this->session->set_flashdata('notif_failed','Maaf, anda harus login terlebih dahulu');

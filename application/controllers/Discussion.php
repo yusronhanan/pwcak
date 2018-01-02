@@ -105,7 +105,7 @@ class Discussion extends CI_Controller {
 			'reply_amount' 			=> $reply_amount, 
 			'liked'					=> $liked, 	
 			'disliked'				=> $disliked,
-
+		
 			'subscribed'			=> $subscribed,
 			'subs_amount'			=> $subs_amount,
 		];

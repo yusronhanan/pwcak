@@ -29,13 +29,13 @@
     <link href="//fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i&subset=latin-ext" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Covered+By+Your+Grace" rel="stylesheet">
 
-
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.1/sweetalert2.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.1/sweetalert2.min.css">
 
     <style type="text/css">
     	body{margin-top:20px;
-      background:#eee;
+      /*background:#eee*/;
       }
       /* PROJECTS */
       .project-people,
@@ -385,6 +385,58 @@
 
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-right" style="width: 800px">
+
+        
+
+          <li class="dropdown dropdown-notifications">
+            <a href="#notifications-panel" class="dropdown-toggle" data-toggle="dropdown">
+              <i data-count="2" class="<?php if ($this->session->userdata('logged_in') == TRUE) {
+                echo 'glyphicon glyphicon-user';
+                }
+                else {
+                  echo 'glyphicon glyphicon-log-in';
+                  } ?>"></i>
+            </a>
+
+            <div class="dropdown-container dropdown-position-bottomright" style="width: 100px">
+
+              <ul class="dropdown-menu">
+                <?php 
+        if ($this->session->userdata('logged_in') == TRUE) {
+          
+         ?>
+                <li class="notification">
+                  <a href="<?php echo base_url().$username_id; ?>" class="">
+                    <strong class="notification-title"><i class="fa fa-user" aria-hidden="true"></i>My Account</strong></a>
+                    <a href="<?php echo base_url() ?>auth/logout"><div class="media">
+                        <strong class="notification-title"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</strong>
+                    </div></a>
+                </li>
+                <?php 
+                }
+                else { ?>
+                <li class="notification">
+                    <a data-toggle="modal" data-target="#myModal3"><div class="media">
+       
+                        <strong class="notification-title"><i class="fa fa-key" aria-hidden="true"></i>Login</strong>
+                    </div></a>
+                </li>
+                <li class="notification">
+                    <a data-toggle="modal" data-target="#myModal4"><div class="media">
+       
+                        <strong class="notification-title"><i class="fa fa-lock" aria-hidden="true"></i>Register</strong>
+                    </div> </a>
+                </li>
+                <?php } ?>
+
+              </ul>
+
+
+
+            </div>
+          </li> <!-- /dropdown -->
+
+          <?php if ($this->session->userdata('logged_in') == TRUE) { ?>
           <li class="dropdown dropdown-notifications">
             <a href="#notifications-panel" class="dropdown-toggle" data-toggle="dropdown">
               <i data-count="2" class="glyphicon glyphicon-bell notification-icon"></i>
@@ -465,39 +517,12 @@
 
             </div><!-- /dropdown-container -->
           </li><!-- /dropdown -->
-
-          <li class="dropdown dropdown-notifications">
-            <a href="#notifications-panel" class="dropdown-toggle" data-toggle="dropdown">
-              <i data-count="2" class="glyphicon glyphicon-user"></i>
-            </a>
-
-            <div class="dropdown-container dropdown-position-bottomright" style="width: 100px">
-
-              <ul class="dropdown-menu">
-                <li class="notification">
-                    <a data-toggle="modal" data-target="#myModal3"><div class="media">
-       
-                        <strong class="notification-title"><i class="fa fa-key" aria-hidden="true"></i>Login</strong>
-                    </div></a>
-                </li>
-                <li class="notification">
-                    <a data-toggle="modal" data-target="#myModal4"><div class="media">
-       
-                        <strong class="notification-title"><i class="fa fa-lock" aria-hidden="true"></i>Register</strong>
-                    </div> </a>
-                </li>
-              </ul>
+          <?php } ?>
 
 
-
-            </div>
-          </li> <!-- /dropdown -->
-
-          <?php if ($this->session->userdata('logged_in') == TRUE) { ?>
-          <li class="active"><a href="<?php echo base_url().$username_id; ?>" class="active">My Account</a></li>
           <?php if ($this->session->userdata('role') == '1') { ?>
           <li><a href="<?php echo base_url() ?>admin" class="active">Admin</a></li>
-                <?php } } ?>
+                <?php } ?>
           <li><a href="<?php echo base_url(); ?>discussion" class="active">Discussion</a></li>
           <li><a href="<?php echo base_url(); ?>course" class="active">Course</a></li>
           <li><a href="<?php echo base_url(); ?>" class="active">Home</a></li>         

@@ -51,7 +51,7 @@ class Home extends CI_Controller {
 		'main_view'     => 'home_view',
 		'username_id'	=> $username_id,
  		];
-		$this->load->view('template', $data);
+		$this->load->view('templet', $data);
 	
 }
 
@@ -97,45 +97,44 @@ class Home extends CI_Controller {
   // 0, 1 - reply_id = null ; 2, 3, 4 reply id depend id_action of comment - reply_id not null;
 	
 				foreach ($result as $notif) {
-					$notification = $this->home_model->GetData(['id_action'=>$notif->id_action],'user_action');
-
-										$random_code = $this->home_model->GetData(['id_title'=>$notification->row('id_title')],'course_title')->row('random_code');
-					if ($notification->row('type_action') == '0') {
+					$notification = $this->home_model->GetData(['id_action'=>$notif->id_action],'user_action')->row();
+					$random_code = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('random_code');
+					if ($notification->type_action == '0') {
 						$link = base_url().'lesson/'.$random_code;
-						$thumbnail = $this->home_model->GetData(['id_title'=>$notification->row('id_title')],'course_title')->row('thumbnail');
-						$course_title = $this->home_model->GetData(['id_title'=>$notification->row('id_title')],'course_title')->row('title');
+						$thumbnail = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('thumbnail');
+						$course_title = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('title');
 						$word = 'like your course ('.$course_title.')';
 
 					}
 
-					else if ($notification->row('type_action') == '1') {
+					else if ($notification->type_action == '1') {
 						$link = base_url().'lesson/'.$random_code; #+direct to comment place
-						$thumbnail = $this->home_model->GetData(['id_title'=>$notification->row('id_title')],'course_title')->row('thumbnail');
-						$course_title = $this->home_model->GetData(['id_title'=>$notification->row('id_title')],'course_title')->row('title');
+						$thumbnail = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('thumbnail');
+						$course_title = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('title');
 						$word = 'give comment on your course ('.$course_title.')';
 					}
-					else if ($notification->row('type_action') == '2') {
+					else if ($notification->type_action == '2') {
 						$link = base_url().'discuss/'.$random_code; #+direct to comment place
-						$thumbnail = $this->home_model->GetData(['id_title'=>$notification->row('id_title')],'course_title')->row('thumbnail');
-						$course_title = $this->home_model->GetData(['id_title'=>$notification->row('id_title')],'course_title')->row('title');
+						$thumbnail = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('thumbnail');
+						$course_title = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('title');
 						$word = 'like your comment in discussion ('.$course_title.')';
 					}
-					else if ($notification->row('type_action') == '3') {
+					else if ($notification->type_action == '3') {
 						$link = base_url().'discuss/'.$random_code; #+direct to comment place
-						$thumbnail = $this->home_model->GetData(['id_title'=>$notification->row('id_title')],'course_title')->row('thumbnail');
-						$course_title = $this->home_model->GetData(['id_title'=>$notification->row('id_title')],'course_title')->row('title');
+						$thumbnail = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('thumbnail');
+						$course_title = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('title');
 						$word = 'reply comment on your following discussion ('.$course_title.')';
 					}
-					else if ($notification->row('type_action') == '4') {
+					else if ($notification->type_action == '4') {
 						$link = base_url().'discuss/'.$random_code; #+direct to comment place
-						$thumbnail = $this->home_model->GetData(['id_title'=>$notification->row('id_title')],'course_title')->row('thumbnail');
-						$course_title = $this->home_model->GetData(['id_title'=>$notification->row('id_title')],'course_title')->row('title');
+						$thumbnail = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('thumbnail');
+						$course_title = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('title');
 						$word = 'dislike your comment in discussion ('.$course_title.')';
 					}
-				$imguser  = $this->home_model->GetData(['id_user'=>$notification->row('from_id')],'user')->row('photo'); 
-				$username = $this->home_model->GetData(['id_user'=>$notification->row('from_id')],'user')->row('username'); 
+				$imguser  = $this->home_model->GetData(['id_user'=>$notification->from_id],'user')->row('photo'); 
+				$username = $this->home_model->GetData(['id_user'=>$notification->from_id],'user')->row('username'); 
 				
-				$timestamp = strtotime($notification->row('created_at'));
+				$timestamp = strtotime($notification->created_at);
 				$nowstr = strtotime($now);
 					
 				$time = timespan($timestamp, $now) . ' ago';
@@ -144,7 +143,7 @@ class Home extends CI_Controller {
 				 <li><a href="'.$link.'">
 		               
 		                	<div class="user-new">
-		                	<p><img src="'.base_url().'assets/images/'.$imguser.'" style="width: 35px;height: 35px;border-radius: 20px;margin-right: 5px" > @'.$username.' '.$word.$notif->id_notif.'  
+		                	<p><img src="'.base_url().'assets/images/'.$imguser.'" style="width: 35px;height: 35px;border-radius: 20px;margin-right: 5px" > @'.$username.' '.$word.'  
 		                		<img src="'.base_url().'assets/images/'.$thumbnail.'" style="width: 35px;height: 35px;margin-left: 80px;">
 		                		<!-- <i style="margin-left: 79px" class="fa fa-user-plus"></i> -->
 		                	</p> 

@@ -318,11 +318,9 @@ public function GetDetailCourse($id_course){
     $reply_comment = $this->input->post('reply_comment');
     if (empty($reply_comment)) {
         $reply_id = NULL;
-        // $for_id = $id_usermaker;
     }
     else {
         $reply_id = $reply_comment;
-        // $for_id = $id_user_reply;
     }
     
     // $query = $this->GetData(['id_title'=>$id_title,'from_id'=>$user_id,'type_action'=>'0'],'user_action');
@@ -388,7 +386,7 @@ public function GetDetailCourse($id_course){
         {
             $insert_notif[] = array(
             'id_action' => $id_action,
-            'for_id'    => $for_id[$i],
+            'for_id'    => $for_id[$i]
             );
         }
          $this->db->insert_batch('notification', $insert_notif);

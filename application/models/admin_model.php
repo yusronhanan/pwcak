@@ -30,10 +30,11 @@ class Admin_model extends CI_Model {
 
 	// }
 
-	public function get_data_user(){
-		return $this->db->order_by('id_user','ASC')
-		         ->get('user')
-		         ->result();
+	public function get_data_user($limit,$mulai){
+		return $this->db->limit($limit,$mulai)
+						->order_by('id_user','ASC')	
+				        ->get('user')
+				        ->result();
 	}
 
 	public function get_data_course($limit,$start){
@@ -45,6 +46,11 @@ class Admin_model extends CI_Model {
 
 	public function total(){
 		return $this->db->from('course_title')
+		                ->count_all_results();
+	}
+
+	public function total_user(){
+		return $this->db->from('user')
 		                ->count_all_results();
 	}
 	
@@ -69,5 +75,38 @@ class Admin_model extends CI_Model {
         }else{
         	return false;
         }
+	}
+
+	public function get_detail_user(){
+		$id_detail = $this->input->post('id');
+		return $this->db->where('id_user',$id_detail)
+						->get('user')
+						->row();
+	}
+
+	public function get_detail_course(){
+		$id_detail = $this->input->post('id');
+		return $this->db->where('id_title',$id_detail)
+						->get('course_title')
+						->row();
+	}
+
+	public function edit_user($id_user){
+		$data=array(
+			'email' => $this->input->post('email'),
+			'username' => $this->input->post('username'),
+			'city' => $this->input->post('city'),
+			'bio' => $this->input->post('bio')
+		);
+
+		$this->db->where('id_user',$id_user)
+				 ->update('user',$data);
+
+				 if($this->db->affected_rows()>0){
+				 	return TRUE;
+				 }else{
+				 	return FALSE;
+				 }
+
 	}
 }

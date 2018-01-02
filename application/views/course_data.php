@@ -30,8 +30,9 @@
 	                                <td colspan="2"> 
 	                                <button class = "btn btn-info"><i class="glyphicon glyphicon-ok-sign"></i> Approve </button>
 	                       			<button class = "btn btn-warning"><i class="glyphicon glyphicon-remove-sign"></i> Decline </button>
-	                       			<a href="#" class = "btn btn-success" data-toggle="modal" data-target="#viewCourse"><i class="glyphicon glyphicon-eye-open"></i> View </a>
-	                       			<a href="'.base_url().'index.php/admin/course_delete/'.$data->id_title.'" class = "btn btn-danger"><i class="fa fa-trash-o"></i> Delete </button>  
+	                       			<input type="hidden" id="id_course" value="" class="form-control"> 
+	                       			<button type="button" href="#" id="'.$data->id_title.'" class = "btn btn-success view" data-toggle="modal" data-target="#viewCourse"><i class="glyphicon glyphicon-eye-open"></i> View </a>
+	                       			<button type="button" href="'.base_url().'index.php/admin/course_delete/'.$data->id_title.'" class = "btn btn-danger" style="margin-left:5px;"><i class="fa fa-trash-o"></i> Delete </button>  
 	                                </td>
 	                                <td> </td>
 	                            </tr> '
@@ -53,26 +54,28 @@
         <div class="modal-content">
             <div class="modal-header">
                 <a href="#" data-dismiss="modal" class="class pull-right"><span class="glyphicon glyphicon-remove"></span></a>
-                <h3 class="modal-title">HTML5 is a markup language</h3>
+                <h3 class="modal-title" id="id_title"></h3>
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-6 product_img">
-                        <img src="http://img.bbystatic.com/BestBuy_US/images/products/5613/5613060_sd.jpg" class="img-responsive">
+                    <div class="col-md-12 product_img">
+                        <img src="http://img.bbystatic.com/BestBuy_US/images/products/5613/5613060_sd.jpg" class="img-responsive" id="image_id"
                     </div>
-                    <div class="col-md-6 product_content">
-                        <h4>Product Id: <span>51526</span></h4>
-                        <div class="rating">
+                    <div class="col-md-12 product_content">
+                        <h4>Title ID : <span id="title_id"></span></h4>
+                        <!-- <div class="rating">
                             <span class="glyphicon glyphicon-star"></span>
                             <span class="glyphicon glyphicon-star"></span>
                             <span class="glyphicon glyphicon-star"></span>
                             <span class="glyphicon glyphicon-star"></span>
                             <span class="glyphicon glyphicon-star"></span>
                             (10 reviews)
-                        </div>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                        <h3 class="cost"><span class="glyphicon glyphicon-usd"></span> 75.00 <small class="pre-cost"><span class="glyphicon glyphicon-usd"></span> 60.00</small></h3>
-                        <div class="row">
+                        </div> -->
+                        <h4>Description :</h4> <p id="description_id"></p>
+                        <h4>Catergory   :</h4> <span><h5 id="subject_id"></h5></span>
+                        <h4>Created at  :</h4> <span><h5 id="date_id"></h5></span>
+                        <h4>Visitor     :</h4> <span><h5 id="visitor_id"></h5></span>
+                       <!--  <div class="row">
                             <div class="col-md-4 col-sm-6 col-xs-12">
                                 <select class="form-control" name="select">
                                     <option value="" selected="">Color</option>
@@ -81,9 +84,9 @@
                                     <option value="gold">Gold</option>
                                     <option value="rose gold">Rose Gold</option>
                                     </select>
-                            </div>
+                            </div> -->
                             <!-- end col -->
-                            <div class="col-md-4 col-sm-6 col-xs-12">
+                            <!-- <div class="col-md-4 col-sm-6 col-xs-12">
                                 <select class="form-control" name="select">
                                     <option value="">Capacity</option>
                                     <option value="">16GB</option>
@@ -91,22 +94,22 @@
                                     <option value="">64GB</option>
                                     <option value="">128GB</option>
                                 </select>
-                            </div>
+                            </div> -->
                             <!-- end col -->
-                            <div class="col-md-4 col-sm-12">
+                            <!-- <div class="col-md-4 col-sm-12">
                                 <select class="form-control" name="select">
                                     <option value="" selected="">QTY</option>
                                     <option value="">1</option>
                                     <option value="">2</option>
                                     <option value="">3</option>
                                 </select>
-                            </div>
+                            </div> -->
                             <!-- end col -->
-                        </div>
+                        <!-- </div> -->
                         <div class="space-ten"></div>
                         <div class="btn-ground">
-                            <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart"></span> Add To Cart</button>
-                            <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-heart"></span> Add To Wishlist</button>
+                            <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-heart"></span></button>
+                            <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-link"></span></button>
                         </div>
                     </div>
                 </div>
@@ -114,3 +117,32 @@
         </div>
     </div>
 </div>
+					<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery-2.1.4.min.js"></script>
+						<script type="text/javascript">
+						$("button.view").click(function(event) {
+					    var id_user = $(this).attr('id');
+					    // alert(product_id);
+					    if (id_user != "") {
+					        $.ajax({
+					            url: "<?php echo base_url()?>admin/detcourse/"+ id_user,
+					            type: 'post',
+					            data: {
+					                id: id_user
+					            },
+					            success: function(e) {
+					                var data = e.split("|");
+					                // $('#id_user').attr('href', '<?php echo base_url()?>Page/edit_product/' + data[0]);
+					                $('span#title_id').html(data[0]);
+					                $('h3#id_title').html(data[1]); 
+					                $('p#description_id').html(data[5]);
+					                $('h5#subject_id').html(data[2]);
+					                $('img#image_id').attr('src','<?php echo base_url(); ?>assets/images/' + data[4]);
+					                $('h5#date_id').html(data[3]);
+					                $('h5#visitor_id').html(data[6]);
+					            }
+					        });
+					    } else {
+					        $('#pro_name').html();
+					    }
+					});
+					</script>

@@ -16,6 +16,8 @@ class Admin extends CI_Controller {
 
 		$data['main_view'] = 'dashboard';
 		$this->load->view('admin_view1',$data);
+		}else{
+			redirect('home');
 		}
 	}
 
@@ -23,15 +25,12 @@ class Admin extends CI_Controller {
 		if($this->session->userdata('role') == 1){
 		// if($this->session->userdata('admin_login')==TRUE){
 			$data['main_view'] = 'user_data';
-			// $data['user'] = $this->admin_model->get_data_user();
-			// $this->load->view('admin_view1',$data);
-
 
 			$this->load->library('pagination');
 
 		    $config['base_url'] = base_url().'index.php/admin/get_user';
-			$config['total_rows'] = $this->admin_model->total();
-			$config['per_page'] = 5;
+			$config['total_rows'] = $this->admin_model->total_user();
+			$config['per_page'] = 3;
 			$config['uri_segment'] =3;
 			$config['full_tag_open'] = "<ul class='pagination'>";
 			$config['full_tag_close'] ="</ul>";
@@ -50,15 +49,17 @@ class Admin extends CI_Controller {
 
 			$this->pagination->initialize($config);
 
-			$start = $this->uri->segment(3,0);
+			$mulai = $this->uri->segment(3,0);
 
-			$rows = $this->admin_model->get_data_user($config['per_page'],$start);
+			$rows = $this->admin_model->get_data_user($config['per_page'],$mulai);
 
 			$data['user'] = $rows;
 			$data['pagination'] = $this->pagination->create_links();
-			$data['start'] = $start;
+			$data['mulai'] = $mulai;
 			$this->load->view('admin_view1',$data);
 		// }
+		}else{
+			redirect('home');
 		}
 	}
 
@@ -99,6 +100,8 @@ class Admin extends CI_Controller {
 			$this->load->view('admin_view1',$data);
 
 		// }
+		}else{
+			redirect('home');
 		}
 	}
 
@@ -110,7 +113,9 @@ class Admin extends CI_Controller {
  		}else{
  				redirect('admin');
  		}
- 	}
+ 	}else{
+			redirect('home');
+		}
 }
 
 	public function course_delete(){
@@ -121,7 +126,9 @@ class Admin extends CI_Controller {
  		}else{
  				redirect('admin');
  		}
- 	}
+ 	}else{
+			redirect('home');
+		}
  }
 
  	public function logout_admin(){
@@ -132,7 +139,40 @@ class Admin extends CI_Controller {
  		$this->session->sess_destroy();
  		redirect('');
  	}
+
+ 	// public function detail_user(){
+ 	// 	if($this->session->userdata('role')==1){
+ 	// 		$id_detail = $this->uri->segment(3);
+ 	// 		$data['detail'] = $this->admin_model->get_detail_user($id_detail);
+ 	// 		$this->load->view('admin_view1',$data);
+ 	// 	}else{
+ 	// 		redirect('home');
+ 	// 	}
+ 	// }
+ 
+
+ 	public function detUser(){
+ 		if($this->session->userdata('role')==1){
+ 		    $data 	= $this->admin_model->get_detail_user();
+			echo $data->id_user."|".$data->email."|".$data->username."|".$data->city."|".$data->bio;
+		}
+		else{
+			redirect('home');
+		}
+	}
+
+	public function detCourse(){
+ 		if($this->session->userdata('role')==1){
+ 		    $data = $this->admin_model->get_detail_course();
+			echo $data->id_title."|".$data->title."|".$data->subject."|".$data->created_at."|".$data->thumbnail."|".$data->description."|".$data->visitor;
+		}
+		else{
+			$this->session->set_flashdata('failed','Anda telah logout sebelumnya');
+			redirect('home');
+		}
+	}
 }
+
 
 
 /* End of file admin.php */

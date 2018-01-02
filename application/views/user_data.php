@@ -22,17 +22,21 @@
 	                            	<?php
 	                            	$no = 1;
 	                            	foreach($user as $data){
+
 	                            		echo '
-	                                <td>'.$no.'</td>
+	                                <td>'.++$mulai.'</td>
 	                                <td>'.$data->id_user.'</td>
 	                                <td>'.$data->email.'</td>
 	                                <td>'.$data->username.'</td>
 	                                <td>'.$data->city.'</td>
 	                                <td>'.$data->bio.'</td>
-	                                <td colspan="2"> 
-	                                <button class = "btn btn-primary"><a href="#" data-toggle="modal" data-target="#myModalEdit" style="color: white"><i class="fa fa-edit"></i> Edit </a></button>
-	                       			
-	                       			<button class = "btn btn-success"><a href="#" data-toggle="modal" data-target="#myModalView" style="color: white"><i class="glyphicon glyphicon-eye-open"></i> View </a></button>
+	                                <td colspan="2">
+	                                <input type="hidden" name="id_user" placeholder="ID User" class="form-control" value=""> 
+	                                <button type="button
+	                                " href="#" class="btn btn-info view"
+	                                id="'.$data->id_user.'" data-toggle="modal" data-target="#myModalView" style="color: white"><i class="glyphicon glyphicon-eye-open"></i> Detail </a></button>
+	                                <input type="hidden" name="id_user" placeholder="ID User" class="form-control" value=""> 
+	                       			<button type="button" href="#" id="'.$data->id_user.'" class="btn btn-success update" data-toggle="modal" data-target="#myModalEdit" style="color: white"><i class="fa fa-edit"></i> Edit </a></button>
 	                       			<a href="'.base_url().'index.php/admin/user_delete/'.$data->id_user.'" class = "btn btn-danger"><i class="fa fa-trash-o"></i> Delete </button>
 	                                </td>
 	                                <td> </td>
@@ -43,6 +47,7 @@
 	                    </tr>
 	                </tbody>
 	            </table>
+	            <?php echo $pagination; ?>
 	        </div>
 	        </div>
 	    </div>
@@ -52,53 +57,213 @@
 
 	                <!--Modal edit-->
 
-						<div class="modal fade" id="myModalEdit" tabindex="-1" role="dialog" >
-							<div class="modal-dialog" role="document">
+						<!-- <div class="modal fade" id="myModalEdit" tabindex="-1" role="dialog" >
+							<div class="modal-dialog" role="document"> -->
 							<!-- Modal content-->
-								<div class="modal-content news-w3l">
+								<!-- <div class="modal-content news-w3l">
 										<div class="modal-header">
 											<button type="button" class="close w3l" data-dismiss="modal">&times;</button>
-											<h4>Edit Profile</h4>
+											<h4>Edit Profile</h4> -->
 											<!--newsletter-->
-											<div class="login-main wthree">
+											
+											<!-- <div class="login-main wthree">
 												<form action="#" method="post">
-													<h5> Email User </h5> <input type="text" value="emailnya" name="email">
-													<h5> Username </h5> <input type="text" value="usernamenya" name="Username">
-													<h5> City </h5> <input type="text" value="kotanya" name="city">
-													<h5> Bio </h5> <input type="text" value="bionya" name="bio">
-
-													<input type="submit" value="Save">
+													
+													<?php 
+											       foreach ($detail as $data) {?>
+													<h5> Email User </h5> <input type="text"  name="email" class="form-control" id="email_id" value="<?php echo $data['email']; ?>">
+													<h5> Username </h5> <input type="text"  name="Username" class="form-control" id="username_id" value="<?php echo $data['username']; ?>">
+													<h5> City </h5> <input type="text"  name="city" class="form-control" id="city_id" value="<?php echo $data['city']; ?>">
+													<h5> Bio </h5> <input type="text" name="bio" class="form-control" id="bio_id"
+													value="<?php echo $data['bio']; ?>"><br>
 												</form>
+												<?php } ?>
 											</div>		
 										</div>
 								</div>
 							</div>
-						</div>
+						</div> -->
+
+<div aria-hidden="true" aria-labelledby="myModalView" role="dialog" tabindex="-1" id="myModalView" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">Detail Data</h4>
+            </div>
+            <form class="form-horizontal" action="#" method="post" enctype="multipart/form-data" role="form">
+	            <div class="modal-body">
+	                    <div class="form-group">
+	                        <label class="col-lg-2 col-sm-2 control-label">Email</label>
+	                        <div class="col-lg-10">
+	                        	<input type="hidden" id="id" name="id">
+	                            <input type="text" class="form-control" id="email_id" name="nama" placeholder="" disabled>
+	                        </div>
+	                    </div>
+	                    <div class="form-group">
+	                        <label class="col-lg-2 col-sm-2 control-label">Username</label>
+	                        <div class="col-lg-10">
+	                        	<input type="text" class="form-control" id="username_id" name="alamat" placeholder="" disabled>
+	                        </div>
+	                    </div>
+	                    <div class="form-group">
+	                        <label class="col-lg-2 col-sm-2 control-label">City</label>
+	                        <div class="col-lg-10">
+	                            <input type="text" class="form-control" id="city_id" name="pekerjaan" placeholder="" disabled>
+	                        </div>
+	                    </div>
+	                    <div class="form-group">
+	                        <label class="col-lg-2 col-sm-2 control-label">Bio</label>
+	                        <div class="col-lg-10">
+	                            <input type="text" class="form-control" id="bio_id" name="pekerjaan" placeholder="" disabled>
+	                        </div>
+	                    </div>
+	                    
+	                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 							<div class="clearfix"></div>
 					<!-- Modal edit -->
 
 
 					<!--Modal lihat-->
-						<div class="modal fade" id="myModalView" tabindex="-1" role="dialog" >
-							<div class="modal-dialog" role="document">
+						<!-- <div class="modal fade" id="myModalView" tabindex="-1" role="dialog" >
+							<div class="modal-dialog" role="document"> -->
 							<!-- Modal content-->
-								<div class="modal-content news-w3l">
+								<!-- <div class="modal-content news-w3l">
 										<div class="modal-header">
 											<button type="button" class="close w3l" data-dismiss="modal">&times;</button>
-											<h4>Detail User</h4>
+											<h4>Detail User</h4> -->
 											<!--newsletter-->
-											<div class="login-main wthree">
+											<!-- <div class="login-main wthree">
 												<form action="#" method="post">
-													<h5> Email User </h5> <input type="text" disabled value="emailnya" name="email">
-													<h5> Username </h5> <input type="text" disabled value="usernamenya" name="Username">
-													<h5> City </h5> <input type="text" disabled value="kotanya" name="city">
-													<h5> Bio </h5> <input type="text" disabled value="bionya" name="bio">
+													<h5> Email User </h5> <input type="text" disabled value="" name="email" id="email_id" class="form-control">
+													<h5> Username </h5> <input type="text" disabled value="" name="Username" id="username_id" class="form-control">
+													<h5> City </h5> <input type="text" disabled value="" name="city" id="city_id" class="form-control">
+													<h5> Bio </h5> <input type="text" disabled value="" name="bio" id="bio_id" class="form-control"> -->
 
 													<!-- <input type="submit" value="Save"> -->
-												</form>
+												<!-- </form>
 											</div>		
 										</div>
 								</div>
 							</div>
-						</div>
+						</div> -->
+<!-- Modal Ubah -->
+<div aria-hidden="true" aria-labelledby="myModalView" role="dialog" tabindex="-1" id="myModalEdit" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">Ubah Data</h4>
+            </div>
+            <form class="form-horizontal" action="<?php echo base_url('admin/ubah')?>" method="post" enctype="multipart/form-data" role="form">
+	            <div class="modal-body">
+	                    <div class="form-group">
+	                        <label class="col-lg-2 col-sm-2 control-label">Email</label>
+	                        <div class="col-lg-10">
+	                        	<input type="hidden" id="id" name="id">
+	                            <input type="text" class="form-control" id="email_id" name="nama" placeholder="Tuliskan Nama">
+	                        </div>
+	                    </div>
+	                    <div class="form-group">
+	                        <label class="col-lg-2 col-sm-2 control-label">Username</label>
+	                        <div class="col-lg-10">
+	                        	<input type="text" class="form-control" id="username_id" name="alamat" placeholder="Tuliskan Alamat">
+	                        </div>
+	                    </div>
+	                    <div class="form-group">
+	                        <label class="col-lg-2 col-sm-2 control-label">City</label>
+	                        <div class="col-lg-10">
+	                            <input type="text" class="form-control" id="city_id" name="pekerjaan" placeholder="Tuliskan Pekerjaan">
+	                        </div>
+	                    </div>
+	                    <div class="form-group">
+	                        <label class="col-lg-2 col-sm-2 control-label">Bio</label>
+	                        <div class="col-lg-10">
+	                            <input type="text" class="form-control" id="bio_id" name="pekerjaan" placeholder="Tuliskan Pekerjaan">
+	                        </div>
+	                    </div>
+	                    
+	                </div>
+	                <div class="modal-footer">
+	                    <button class="btn btn-info" type="submit"> Simpan&nbsp;</button>
+	                    <button type="button" class="btn btn-warning" data-dismiss="modal"> Batal</button>
+	                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 							<div class="clearfix"></div>
+
+						<!-- <script type="text/javascript">
+								$(document).ready(function() {
+						        $('#myModalView').on('show.bs.modal', function (event) {
+						            var div = $(event.relatedTarget) // Tombol dimana modal di tampilkan
+						            var modal          = $(this)
+					 
+						            // Isi nilai pada field
+						            modal.find('#email_id').attr("value",div.data('email'));
+						            modal.find('#username_id').attr("value",div.data('username'));
+						            modal.find('#city_id').attr("value",div.data('city'));
+						            modal.find('#bio_id').attr("value",div.data('bio'));
+						        });
+						    });
+							
+							</script> -->
+						<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery-2.1.4.min.js"></script>
+						<script type="text/javascript">
+						$("button.view").click(function(event) {
+					    var id_user = $(this).attr('id');
+					    // alert(product_id);
+					    if (id_user != "") {
+					        $.ajax({
+					            url: "<?php echo base_url()?>admin/detuser/"+ id_user,
+					            type: 'post',
+					            data: {
+					                id: id_user
+					            },
+					            success: function(e) {
+					                var data = e.split("|");
+					                // $('#id_user').attr('href', '<?php echo base_url()?>Page/edit_product/' + data[0]);
+					                $('input#email_id').attr('value',data[1]);
+					                $('input#username_id').attr('value',data[2]);
+					                $('input#city_id').attr('value',data[3]);
+					                $('input#bio_id').attr('value',data[4]);
+					            }
+					        });
+					    } else {
+					        $('#pro_name').html();
+					    }
+					});
+
+						$("button.update").click(function(event) {
+					    var id_user = $(this).attr('id');
+					    // alert(product_id);
+					    if (id_user != "") {
+					        $.ajax({
+					            url: "<?php echo base_url()?>admin/detuser/"+ id_user,
+					            type: 'post',
+					            data: {
+					                id: id_user
+					            },
+					            success: function(e) {
+					                var data = e.split("|");
+					                // $('#id_user').attr('href', '<?php echo base_url()?>Page/edit_product/' + data[0]);
+					                $('input#email_id').attr('value',data[1]);
+					                $('input#username_id').attr('value',data[2]);
+					                $('input#city_id').attr('value',data[3]);
+					                $('input#bio_id').attr('value',data[4]);
+					            }
+					        });
+					    } else {
+					        $('#pro_name').html();
+					    }
+					});
+
+ 
+						 </script>

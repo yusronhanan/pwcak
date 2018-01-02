@@ -42,7 +42,7 @@
 			</div>
 		<!-- //Slider -->
 	</div>
-</div>
+
 <!--main-content-->
 
 

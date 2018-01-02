@@ -81,7 +81,7 @@ class Course extends CI_Controller {
 					];
 		}
 		
-		$this->load->view('template', $data);
+		$this->load->view('templet', $data);
 	}
 	public function comment_up(){
 		if ($this->session->userdata('logged_in') == TRUE) {

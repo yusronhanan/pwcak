@@ -99,7 +99,7 @@ class Myaccount extends CI_Controller {
 					];
 		}
 		
-		$this->load->view('account_view', $data);
+		$this->load->view('acc_view', $data);
 		}
 		else{
 			$this->session->set_flashdata('notif_failed','Maaf, anda harus login terlebih dahulu');
@@ -638,7 +638,7 @@ class Myaccount extends CI_Controller {
 					];
 		}
 		
-		$this->load->view('account_view', $data);
+		$this->load->view('acc_view', $data);
 		}
 	}
 }

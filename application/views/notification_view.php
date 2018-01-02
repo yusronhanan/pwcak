@@ -58,7 +58,189 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             
         });
         </script>
+    <style>
+        .project-people,
+        .project-actions {
+          text-align: right;
+          vertical-align: middle;
+        }
+        dd.project-people {
+          text-align: left;
+          margin-top: 5px;
+        }
+        .project-people img {
+          width: 32px;
+          height: 32px;
+        }
+        .project-title a {
+          font-size: 14px;
+          color: #676a6c;
+          font-weight: 600;
+        }
+        .project-list table tr td {
+          border-top: none;
+          border-bottom: 1px solid #e7eaec;
+          padding: 15px 10px;
+          vertical-align: middle;
+        }
+        .project-manager .tag-list li a {
+          font-size: 10px;
+          background-color: white;
+          padding: 5px 12px;
+          color: inherit;
+          border-radius: 2px;
+          border: 1px solid #e7eaec;
+          margin-right: 5px;
+          margin-top: 5px;
+          display: block;
+        }
+        .project-files li a {
+          font-size: 11px;
+          color: #676a6c;
+          margin-left: 10px;
+          line-height: 22px;
+        }
 
+        /* PROFILE */
+        .profile-content {
+          border-top: none !important;
+        }
+        .profile-stats {
+          margin-right: 10px;
+        }
+        .profile-image {
+          width: 120px;
+          float: left;
+        }
+        .profile-image img {
+          width: 96px;
+          height: 96px;
+        }
+        .profile-info {
+          margin-left: 120px;
+        }
+        .feed-activity-list .feed-element {
+          border-bottom: 1px solid #e7eaec;
+        }
+        .feed-element:first-child {
+          margin-top: 0;
+        }
+        .feed-element {
+          padding-bottom: 15px;
+        }
+        .feed-element,
+        .feed-element .media {
+          margin-top: 15px;
+        }
+        .feed-element,
+        .media-body {
+          overflow: hidden;
+        }
+        .feed-element > .pull-left {
+          margin-right: 10px;
+        }
+        .feed-element img.img-circle,
+        .dropdown-messages-box img.img-circle {
+          width: 38px;
+          height: 38px;
+        }
+        .feed-element .well {
+          border: 1px solid #e7eaec;
+          box-shadow: none;
+          margin-top: 10px;
+          margin-bottom: 5px;
+          padding: 10px 20px;
+          font-size: 11px;
+          line-height: 16px;
+        }
+        .feed-element .actions {
+          margin-top: 10px;
+        }
+        .feed-element .photos {
+          margin: 10px 0;
+        }
+        .feed-photo {
+          max-height: 180px;
+          border-radius: 4px;
+          overflow: hidden;
+          margin-right: 10px;
+          margin-bottom: 10px;
+        }
+        .file-list li {
+          padding: 5px 10px;
+          font-size: 11px;
+          border-radius: 2px;
+          border: 1px solid #e7eaec;
+          margin-bottom: 5px;
+        }
+        .file-list li a {
+          color: inherit;
+        }
+        .file-list li a:hover {
+          color: #1ab394;
+        }
+        .user-friends img {
+          width: 42px;
+          height: 42px;
+          margin-bottom: 5px;
+          margin-right: 5px;
+        }
+
+        .ibox {
+          clear: both;
+          margin-bottom: 25px;
+          margin-top: 0;
+          padding: 0;
+        }
+        .ibox.collapsed .ibox-content {
+          display: none;
+        }
+        .ibox.collapsed .fa.fa-chevron-up:before {
+          content: "\f078";
+        }
+        .ibox.collapsed .fa.fa-chevron-down:before {
+          content: "\f077";
+        }
+        .ibox:after,
+        .ibox:before {
+          display: table;
+        }
+        .ibox-title {
+          -moz-border-bottom-colors: none;
+          -moz-border-left-colors: none;
+          -moz-border-right-colors: none;
+          -moz-border-top-colors: none;
+          background-color: #ffffff;
+          border-color: #e7eaec;
+          border-image: none;
+          border-style: solid solid none;
+          border-width: 3px 0 0;
+          color: inherit;
+          margin-bottom: 0;
+          padding: 14px 15px 7px;
+          min-height: 48px;
+        }
+        .ibox-content {
+          background-color: #ffffff;
+          color: inherit;
+          padding: 15px 20px 20px 20px;
+          border-color: #e7eaec;
+          border-image: none;
+          border-style: solid solid none;
+          border-width: 1px 0;
+        }
+        .ibox-footer {
+          color: inherit;
+          border-top: 1px solid #e7eaec;
+          font-size: 90%;
+          background: #ffffff;
+          padding: 10px 15px;
+        }
+        ul.notes li,
+        ul.tag-list li {
+          list-style: none;
+        }
+    </style>
 </head>
 <body>
 <div id="wrapper">
@@ -117,208 +299,81 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 
                </div>
                 <table class="table">
-                    <tbody>
-                        <tr class="table-row">
-                            <td class="table-img">
-                               <img src="<?php echo base_url(); ?>assets/lesson/images/in.jpg" alt="" />
-                            </td>
-                            <td class="table-text">
-                                <h6> Yusron Hanan</h6>
-                                <p>Started following you</p>
-                            </td>
-                            <td class="march">
-                               24 Des 17 
-                            </td>
-                          
-                             <td >
-                             <i class="fa fa-plus-square-o icon-state-warning"></i>
-                                
-                            </td>
-                        </tr>
-                       <tr class="table-row">
-                            <td class="table-img">
-                               <img src="<?php echo base_url(); ?>assets/lesson/images/in1.jpg" alt="" />
-                            </td>
-                            <td class="table-text">
-                                <h6> Uyab</h6>
-                                <p>Giving thanks</p>
-                            </td>
-                            <td class="march">
-                                23 Des 17
-                            </td>
-                          
-                             <td >
-                               <i class="fa fa-user icon-state-warning"></i>
-                            </td>
-                        </tr>
-                        <tr class="table-row">
-                            <td class="table-img">
-                               <img src="<?php echo base_url(); ?>assets/lesson/images/in2.jpg" alt="" />
-                            </td>
-                            <td class="table-text">
-                                <h6> Qori</h6>
-                                <p>Giving comment</p>
-                                <div style="height: 50px;width: 425px;border: 1px solid #BDBDBD;border-radius: 4px;margin-top: 5px">
-                                <b> @karin </b> leave a comment <br/>
-                                   "This course is really helpful:)"
+
+                    <div class="feed-activity-list">
+                        <div class="feed-element">
+                            <a href="#" class="pull-left">
+                                <img alt="image" class="img-circle" src="https://bootdey.com/img/Content/avatar/avatar6.png">
+                            </a>
+                            <div class="media-body ">
+                                <small class="pull-right">2h ago</small>
+                                <strong>Mark Johnson</strong> posted message on <strong>Monica Smith</strong> site. <br>
+                                <small class="text-muted">Today 2:10 pm - 12.06.2014</small>
+                                <div class="well">
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                                    Over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
                                 </div>
-                            </td>
-                            <td class="march">
-                                21 Des 17
-                            </td>
-                          
-                             <td >
-                               <i class="fa  fa-comment-o icon-state-warning"></i>
-                            </td>
-                        </tr>
-                        <tr class="table-row">
-                            <td class="table-img">
-                               <img src="<?php echo base_url(); ?>assets/lesson/images/in3.jpg" alt="" />
-                            </td>
-                            <td class="table-text">
-                                <h6> Karin</h6>
-                                <p>Started following you</p>
-                            </td>
-                            <td class="march">
-                              18 Des 17 
-                            </td>
-                          
-                             <td >
-                               <i class="fa fa-plus-square-o icon-state-warning"></i>
-                            </td>
-                        </tr>
-                        <tr class="table-row">
-                            <td class="table-img">
-                               <img src="<?php echo base_url(); ?>assets/lesson/images/in4.jpg" alt="" />
-                            </td>
-                            <td class="table-text">
-                                <h6> Lily</h6>
-                                <p>Giving comment</p>
-                                <div style="height: 50px;width: 425px;border: 1px solid #E0E0E0;border-radius: 4px;margin-top: 5px">
-                                   
+                            </div>
+                        </div>
+                        <div class="feed-element">
+                            <a href="#" class="pull-left">
+                                <img alt="image" class="img-circle" src="https://bootdey.com/img/Content/avatar/avatar6.png">
+                            </a>
+                            <div class="media-body ">
+                                <small class="pull-right">2h ago</small>
+                                <strong>Janet Rosowski</strong> add 1 photo on <strong>Monica Smith</strong>. <br>
+                                <small class="text-muted">2 days ago at 8:30am</small>
+                            </div>
+                        </div>
+                        <div class="feed-element">
+                            <a href="#" class="pull-left">
+                                <img alt="image" class="img-circle" src="https://bootdey.com/img/Content/avatar/avatar5.png">
+                            </a>
+                            <div class="media-body ">
+                                <small class="pull-right text-navy">5h ago</small>
+                                <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>
+                                <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
+                                <div class="actions">
+                                    <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> Like </a>
+                                    <a class="btn btn-xs btn-white"><i class="fa fa-heart"></i> Love</a>
                                 </div>
-                            </td>
-                            <td class="march">
-                                in 4 days 
-                            </td>
-                          
-                             <td >
-                               <i class="fa fa-star-half-o icon-state-warning"></i>
-                            </td>
-                        </tr>
-                        <tr class="table-row">
-                            <td class="table-img">
-                               <img src="<?php echo base_url(); ?>assets/lesson/images/in5.jpg" alt="" />
-                            </td>
-                            <td class="table-text">
-                                <h6> Lorem ipsum</h6>
-                                <p>Nullam quis risus eget urna mollis ornare vel eu leo</p>
-                            </td>
-                            <td class="march">
-                                in 3 days  
-                            </td>
-                          
-                             <td >
-                               <i class="fa fa-star-half-o icon-state-warning"></i>
-                            </td>
-                        </tr>
-                        <tr class="table-row">
-                            <td class="table-img">
-                               <img src="<?php echo base_url(); ?>assets/lesson/images/in6.jpg" alt="" />
-                            </td>
-                            <td class="table-text">
-                                <h6> Lorem ipsum</h6>
-                                <p>Nullam quis risus eget urna mollis ornare vel eu leo</p>
-                            </td>
-                            <td class="march">
-                               in 2 days  
-                            </td>
-                          
-                             <td >
-                               <i class="fa fa-star-half-o icon-state-warning"></i>
-                            </td>
-                        </tr>
-                        <tr class="table-row">
-                            <td class="table-img">
-                               <img src="<?php echo base_url(); ?>assets/lesson/images/in7.jpg" alt="" />
-                            </td>
-                            <td class="table-text">
-                                <h6> Lorem ipsum</h6>
-                                <p>Nullam quis risus eget urna mollis ornare vel eu leo</p>
-                            </td>
-                            <td class="march">
-                                in 2 days 
-                            </td>
-                          
-                             <td >
-                               <i class="fa fa-star-half-o icon-state-warning"></i>
-                            </td>
-                        </tr>
-                        <tr class="table-row">
-                            <td class="table-img">
-                               <img src="<?php echo base_url(); ?>assets/lesson/images/in8.jpg" alt="" />
-                            </td>
-                            <td class="table-text">
-                                <h6> Lorem ipsum</h6>
-                                <p>Nullam quis risus eget urna mollis ornare vel eu leo</p>
-                            </td>
-                            <td class="march">
-                                in 2 days 
-                            </td>
-                          
-                             <td >
-                               <i class="fa fa-star-half-o icon-state-warning"></i>
-                            </td>
-                        </tr>
-                        <tr class="table-row">
-                            <td class="table-img">
-                               <img src="<?php echo base_url(); ?>assets/lesson/images/in9.jpg" alt="" />
-                            </td>
-                            <td class="table-text">
-                                <h6> Lorem ipsum</h6>
-                                <p>Nullam quis risus eget urna mollis ornare vel eu leo</p>
-                            </td>
-                            <td class="march">
-                                in 2 days 
-                            </td>
-                          
-                             <td >
-                               <i class="fa fa-star-half-o icon-state-warning"></i>
-                            </td>
-                        </tr>
-                        <tr class="table-row">
-                            <td class="table-img">
-                               <img src="<?php echo base_url(); ?>assets/lesson/images/in10.jpg" alt="" />
-                            </td>
-                            <td class="table-text">
-                                <h6> Lorem ipsum</h6>
-                                <p>Nullam quis risus eget urna mollis ornare vel eu leo</p>
-                            </td>
-                            <td class="march">
-                                in 1 days 
-                            </td>
-                          
-                             <td >
-                               <i class="fa fa-star-half-o icon-state-warning"></i>
-                            </td>
-                        </tr>
-                        <tr class="table-row">
-                            <td class="table-img">
-                               <img src="<?php echo base_url(); ?>assets/lesson/images/in11.jpg" alt="" />
-                            </td>
-                            <td class="table-text">
-                                <h6> Lorem ipsum</h6>
-                                <p>Nullam quis risus eget urna mollis ornare vel eu leo</p>
-                            </td>
-                            <td class="march">
-                                in 1 days 
-                            </td>
-                          
-                             <td >
-                               <i class="fa fa-star-half-o icon-state-warning"></i>
-                            </td>
-                        </tr>
-                    </tbody>
+                            </div>
+                        </div>
+                        <div class="feed-element">
+                            <a href="#" class="pull-left">
+                                <img alt="image" class="img-circle" src="https://bootdey.com/img/Content/avatar/avatar5.png">
+                            </a>
+                            <div class="media-body ">
+                                <small class="pull-right">2h ago</small>
+                                <strong>Kim Smith</strong> posted message on <strong>Monica Smith</strong> site. <br>
+                                <small class="text-muted">Yesterday 5:20 pm - 12.06.2014</small>
+                                <div class="well">
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                                    Over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                                </div>
+                            </div>
+                        </div>
+                        <div class="feed-element">
+                            <a href="#" class="pull-left">
+                                <img alt="image" class="img-circle" src="https://bootdey.com/img/Content/avatar/avatar5.png">
+                            </a>
+                            <div class="media-body ">
+                                <small class="pull-right">23h ago</small>
+                                <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>
+                                <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
+                            </div>
+                        </div>
+                        <div class="feed-element">
+                            <a href="#" class="pull-left">
+                                <img alt="image" class="img-circle" src="https://bootdey.com/img/Content/avatar/avatar1.png">
+                            </a>
+                            <div class="media-body ">
+                                <small class="pull-right">46h ago</small>
+                                <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
+                                <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
+                            </div>
+                        </div>
+                    </div>
                 </table>
                </div>
             </div>

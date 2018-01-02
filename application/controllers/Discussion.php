@@ -18,7 +18,7 @@ class Discussion extends CI_Controller {
 
 				'username_id'	=> $username_id,
 		 		];
-				$this->load->view('template', $data);
+				$this->load->view('templet', $data);
 	}
 	public function detail_discuss()
 	{

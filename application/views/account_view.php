@@ -302,7 +302,7 @@ a.subs_true{
 								<?php 
 								if ($this->session->userdata('logged_id') == $user_info->id_user) {
 								 ?>
-								 <form id="formfoto" action ="<?php echo base_url();?>myaccount/editphoto" method="post" enctype="multipart/form-data">
+								 <form id="formfoto" class="col-md-5" action ="<?php echo base_url();?>myaccount/editphoto" method="post" enctype="multipart/form-data">
 						      	<div class="custom-input-file" id="previewavatar" style="background-image:url('<?php echo base_url() ?>assets/images/<?php echo $user_info->photo; ?>');border-radius: 50%; float: left;">
                                     <label class="uploadPhoto">
                                         Edit
@@ -317,21 +317,24 @@ a.subs_true{
 						      	</div>
 						      	<?php } ?>
 
-								<div>
+								<div class="col-md-5">
 									<h3><?php echo $user_info->name; ?></h3>
 									<h4><?php echo $user_info->bio; ?></h4>
 									<h4><?php echo $user_info->city; ?></h4>
 								<?php
 								$subss_amount = '0';
 								 	if (!empty($subs_amount)) {
-							if(array_key_exists($user_info->id_user, $subs_amount)) {
-							$subss_amount =  $subs_amount[$user_info->id_user];
-							} 
-						}
+										if(array_key_exists($user_info->id_user, $subs_amount)) {
+										$subss_amount =  $subs_amount[$user_info->id_user];
+										} 
+									}
 								if ($this->session->userdata('logged_id') == $user_info->id_user) {
 
 								 ?>
-								 <button class="btn btn-default"><a href="#" data-toggle="modal" data-target="#edituser"><i class="fa fa-pencil"></i> Edit Account</a></button>
+								 </div>
+								 
+								<div class="col-md-2">
+									<button class="btn btn-default"><a href="#" data-toggle="modal" data-target="#edituser"><i class="fa fa-pencil"></i> Edit Account</a></button>
 								 <button class="btn btn-success"><a href="#" style="color: white;"><i class="fa fa-image"></i> Edit Background</a></button>
 								 <button class="btn btn-danger"><a href="#" data-toggle="modal" data-target="" class="subs_false"><i class="fa fa-users"></i> Subscriber  <?php echo $subss_amount; ?></a></button>
 								 <?php }
@@ -356,7 +359,6 @@ a.subs_true{
 									<button class="btn <?php echo $subs; ?> subs_in" id="<?php echo $user_info->id_user; ?>"><a href="#" data-toggle="modal" data-target="" class="<?php echo $a_subs; ?>"><i class="<?php echo $i_subs; ?>"></i> <?php echo $text; ?>  <?php echo $subss_amount; ?></a></button>
 									<!-- <button class="btn btn-default"><a href="#" data-toggle="modal" data-target=""><i class="fa fa-users"></i> Disubscribe  1000</a></button> -->
 								<?php } ?>
-                                 
 								</div>
 								
 							</div>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 31 Des 2017 pada 04.23
+-- Generation Time: 03 Jan 2018 pada 02.32
 -- Versi Server: 10.1.13-MariaDB
 -- PHP Version: 7.0.8
 
@@ -120,7 +120,6 @@ CREATE TABLE `course_title` (
 --
 
 INSERT INTO `course_title` (`id_title`, `id_user`, `title`, `subject`, `description`, `thumbnail`, `created_at`, `last_update`, `verified`, `visitor`, `random_code`) VALUES
-(1, 1, 'DUMMY LEARNING', 'mat', 'Ini dumy dummy dumy', 'dummy.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 10, '67hsjaha'),
 (2, 2, 'DUMMY LEARNING 2', 'mat', 'Ini dumy dummy dumy', 'e2.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 0, '989asdjk'),
 (3, 3, 'DUMMY LEARNING 3', 'mat', 'Ini dumy dummy dumy', 'dummy.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 0, '8y18jads'),
 (4, 3, 'DUMMY LEARNING 4', 'mat', 'Ini dumy dummy dumy', 'dummy.jpg', '2017-12-07 18:39:31', '2017-12-08 20:48:52', 0, 0, 'jsadjh78a'),
@@ -142,11 +141,74 @@ INSERT INTO `course_title` (`id_title`, `id_user`, `title`, `subject`, `descript
 (20, 1, 'asdasdasdsadsad', 'bi', ' adsaasdsadsadasdsad', 'lokasi.png', '2017-12-10 14:18:44', '2017-12-10 14:18:44', 0, 0, 'asssajh890'),
 (21, 1, 'tes 1', 'mat', ' tes1 tes1tes1tes   tes1t', '99005-OLBLCU-379.jpg', '2017-12-10 14:45:27', '2017-12-10 14:45:27', 0, 0, 'ansdhsa89'),
 (23, 1, 'title test 2', 'mat', ' adsasdsdsd', 'DEPAN1.png', '2017-12-21 15:15:54', '2017-12-21 15:15:54', 0, 0, 'asdsadq24sd'),
-(24, 1, 'dcaatitle course', 'mat', ' adsaaasasdasdAAAd', 'BELAKANG1.png', '2017-12-21 15:28:34', '2017-12-22 22:55:53', 0, 483, 'DB1EzYWA7qJ'),
+(24, 1, 'dcaatitle course', 'mat', ' adsaaasasdasdAAAd', 'BELAKANG1.png', '2017-12-21 15:28:34', '2017-12-22 22:55:53', 0, 487, 'DB1EzYWA7qJ'),
 (25, 1, 'tes lagi 3', 'mat', ' adsadasasd', '204.jpg', '2017-12-21 15:33:55', '2017-12-21 15:33:55', 0, 0, 'EfKOv81GU56'),
 (26, 1, 'dasdas', 'bi', ' asdasds', '2041.jpg', '2017-12-22 16:12:10', '2017-12-22 16:12:10', 0, 0, 'G2B7nfbRjhV'),
 (27, 1, 'coba add via /username', 'mat', ' asdsadasd', 'movingTowardHealthierU_icon.jpg', '2017-12-25 10:43:04', '2017-12-25 10:43:04', 0, 0, 'YzDSJPr1kaQ'),
 (28, 1, 'coba test helper', 'mat', ' assadasdsasad', 'movingTowardHealthierU_icon1.jpg', '2017-12-28 10:30:45', '2017-12-28 10:30:45', 0, 0, 'cUMqvu2TpXz');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `notification`
+--
+
+CREATE TABLE `notification` (
+  `id_notif` int(11) NOT NULL,
+  `id_action` int(11) NOT NULL,
+  `for_id` int(11) NOT NULL,
+  `status` int(2) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `notification`
+--
+
+INSERT INTO `notification` (`id_notif`, `id_action`, `for_id`, `status`) VALUES
+(6, 399, 0, 0),
+(8, 401, 0, 0),
+(17, 415, 0, 0),
+(22, 420, 0, 0),
+(24, 435, 1, 1),
+(25, 435, 3, 1),
+(26, 444, 3, 1),
+(27, 445, 2, 0),
+(28, 446, 3, 1),
+(29, 446, 2, 0),
+(33, 450, 3, 1),
+(34, 452, 3, 1),
+(35, 453, 3, 1),
+(36, 454, 3, 1),
+(38, 456, 3, 1),
+(42, 460, 3, 1),
+(44, 462, 2, 0),
+(46, 464, 4, 0),
+(48, 466, 2, 0),
+(51, 469, 2, 0),
+(52, 470, 2, 0),
+(53, 471, 3, 1),
+(54, 471, 2, 0),
+(55, 471, 4, 0),
+(56, 472, 3, 1),
+(57, 472, 2, 0),
+(58, 479, 3, 1),
+(59, 479, 2, 0),
+(60, 481, 3, 1),
+(61, 481, 2, 0),
+(62, 481, 4, 0),
+(63, 482, 3, 1),
+(64, 482, 2, 0),
+(65, 482, 4, 0),
+(66, 483, 3, 1),
+(67, 483, 2, 0),
+(68, 485, 3, 1),
+(69, 485, 2, 0),
+(70, 488, 3, 1),
+(71, 488, 2, 0),
+(72, 488, 4, 0),
+(73, 489, 2, 0),
+(74, 490, 3, 0),
+(75, 490, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -196,7 +258,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `email`, `username`, `password`, `name`, `city`, `bio`, `photo`, `role`, `hash_validation`, `created_at`, `last_update`) VALUES
-(1, 'yusronzain@gmail.com', 'yusron', 'yusron', 'Yusron Hanan Zain Vidi Imtinan', 'malang - situbond', 'web developerrr', 'DEPAN5.png', 0, '09718937138ajknakjsjas', '0000-00-00 00:00:00', '2017-12-26 10:53:57'),
+(1, 'yusronzain@gmail.com', 'yusron', 'yusron', 'Yusron Hanan Zain Vidi Imtinan', 'malang - situbond', 'web developerrr', 'DEPAN5.png', 1, '09718937138ajknakjsjas', '0000-00-00 00:00:00', '2017-12-26 10:53:57'),
 (2, 'qori@gmail.com', 'qori', 'qoriatul', 'Yusron', 'ngawi', 'ngawi coy', 'github.png', 1, '', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (3, 'karin@gmail.com', 'karin', 'karin', 'karin', 'sda', 'sda', 'github.png', 0, '', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (4, 'bayu@gmail.com', 'bayu', 'bayu', 'bayu', 'kdr', 'kdr', 'github.png', 0, '', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
@@ -226,55 +288,59 @@ CREATE TABLE `user_action` (
 --
 
 INSERT INTO `user_action` (`id_action`, `id_title`, `from_id`, `from_username`, `for_id`, `type_action`, `reply_id`, `subject`, `text_comment`, `status`, `created_at`) VALUES
-(67, 20, 1, 'yusron', 1, 1, NULL, 'adsaassa', 'asdasd', 1, '2017-12-24 12:32:01'),
-(68, 20, 1, 'yusron', 3, 1, NULL, 'asdasd', 'asdasdsaasdsad', 1, '2017-12-23 20:39:26'),
-(69, 20, 1, 'yusron', 1, 1, NULL, 'asdasdasdsa', 'asdasdsa', 1, '2017-12-24 15:14:38'),
-(74, 20, 1, 'yusron', 1, 2, 67, NULL, NULL, 1, '2017-12-24 20:42:06'),
-(77, 20, 1, 'yusron', 3, 4, 67, NULL, NULL, 1, '2017-12-24 20:46:44'),
-(78, 20, 1, 'yusron', 3, 3, 67, 'asdsa', 'asdasdsasdasad', 1, '2017-12-24 20:46:50'),
-(79, 20, 1, 'yusron', 3, 3, 67, 'asdsadsadsad', 'asdasdsa', 1, '2017-12-24 20:46:54'),
-(80, 20, 3, 'karin', 3, 3, 67, 'asdsadasda', 'asdsadsa', 1, '2017-12-24 20:47:10'),
-(81, 20, 3, 'karin', 3, 3, 67, 'asdasd', 'asdsadsadsad', 1, '2017-12-24 20:47:19'),
-(82, 20, 3, 'karin', 3, 3, 67, 'asdassd', 'asdsads', 1, '2017-12-24 20:48:53'),
-(83, 24, 1, 'yusron', 1, 1, NULL, 'weqweqwe', 'aaaa', 1, '2017-12-27 05:47:38'),
-(90, 24, 1, 'yusron', 1, 3, 86, 'sadsa', 'asdsadsadsa', 1, '2017-12-27 05:56:32'),
-(97, 24, 1, 'yusron', 1, 3, 84, 'asdasdsad', 'asdasdasdsadasd', 1, '2017-12-27 21:10:46'),
-(98, 24, 1, 'yusron', 1, 3, 1, 'adasd', 'asdsadassad', 1, '2017-12-27 21:11:13'),
-(101, 24, 1, 'yusron', 1, 3, 1, 'asdsa', 'asdasdasd', 1, '2017-12-27 21:13:58'),
-(102, 24, 1, 'yusron', 1, 3, 1, 'asdsa', 'asdasasd', 1, '2017-12-27 21:14:52'),
-(104, 24, 1, 'yusron', 1, 3, 1, 'assadsaasdas', 'aasdas', 1, '2017-12-27 21:28:22'),
-(105, 24, 1, 'yusron', 1, 3, 1, 'asdsad', 'asdasdsadasdasdasd', 1, '2017-12-27 21:31:45'),
-(106, 24, 1, 'yusron', 1, 3, 1, 'asdsa', 'asdasdsa', 1, '2017-12-27 21:35:04'),
-(107, 24, 1, 'yusron', 1, 3, 1, 'asdsa', 'asdsad', 1, '2017-12-27 21:35:30'),
-(109, 24, 1, 'yusron', 1, 3, 83, 'asdas', 'asdasdasdsadasdsa', 1, '2017-12-28 08:34:19'),
-(139, 24, 1, 'yusron', 1, 2, 84, NULL, NULL, 0, '2017-12-31 05:43:27'),
-(156, 24, 1, 'yusron', 1, 2, NULL, NULL, NULL, 0, '2017-12-31 06:50:44'),
-(165, 24, 1, 'yusron', 1, 2, 157, NULL, NULL, 0, '2017-12-31 06:53:11'),
-(172, 24, 1, 'yusron', 1, 2, 166, NULL, NULL, 0, '2017-12-31 06:53:48'),
-(174, 24, 1, 'yusron', 1, 2, 109, NULL, NULL, 0, '2017-12-31 07:58:07'),
-(176, 24, 1, 'yusron', 1, 3, 83, 'sadassdasad', 'sadsa', 0, '2017-12-31 08:00:35'),
-(177, 24, 1, 'yusron', 1, 4, 109, NULL, NULL, 0, '2017-12-31 08:06:47'),
-(179, 24, 1, 'yusron', 1, 3, 83, 'sada', 'asdsadsa', 0, '2017-12-31 08:09:39'),
-(187, 24, 1, 'yusron', 1, 2, 83, NULL, NULL, 0, '2017-12-31 08:13:40'),
-(188, 24, 1, 'yusron', 1, 4, 83, NULL, NULL, 0, '2017-12-31 08:13:41'),
-(192, 24, 1, 'yusron', 1, 1, NULL, 'asdasd111', 'asdasdasd', 0, '2017-12-31 09:06:21'),
-(196, 24, 1, 'yusron', 1, 2, 192, NULL, NULL, 0, '2017-12-31 09:06:33'),
-(198, 24, 1, 'yusron', 1, 1, NULL, 'asdsad', 'sadsadsa', 0, '2017-12-31 09:21:55'),
-(201, 24, 1, 'yusron', 1, 1, NULL, 'asdsa', 'sadsadassad', 0, '2017-12-31 09:24:38'),
-(202, 24, 1, 'yusron', 1, 4, 192, NULL, NULL, 0, '2017-12-31 09:25:26'),
-(205, 24, 1, 'yusron', 1, 2, 201, NULL, NULL, 0, '2017-12-31 09:25:31'),
-(208, 24, 1, 'yusron', 1, 2, 206, NULL, NULL, 0, '2017-12-31 09:25:38'),
-(210, 24, 1, 'yusron', 1, 1, NULL, 'sadsa', 'sadsasadasd', 0, '2017-12-31 09:32:35'),
-(211, 24, 1, 'yusron', 1, 3, 1, 'sadasdsa', 'sadsaasdsad', 0, '2017-12-31 09:32:41'),
-(212, 24, 1, 'yusron', 1, 2, 211, NULL, NULL, 0, '2017-12-31 09:32:43'),
-(213, 24, 1, 'yusron', 1, 4, 211, NULL, NULL, 0, '2017-12-31 09:32:44'),
-(214, 24, 3, 'karin', 1, 1, NULL, 'asd', 'asdasdasd', 0, '2017-12-31 10:05:05'),
-(215, 24, 3, 'karin', 1, 3, 3, 'sadsa', 'sadsadsadsa', 0, '2017-12-31 10:05:12'),
-(216, 24, 3, 'karin', 1, 4, 214, NULL, NULL, 0, '2017-12-31 10:05:14'),
-(218, 24, 3, 'karin', 1, 2, 215, NULL, NULL, 0, '2017-12-31 10:05:16'),
-(220, 24, 3, 'karin', 1, 2, 192, NULL, NULL, 0, '2017-12-31 10:20:46'),
-(221, 24, 3, 'karin', 1, 2, 176, NULL, NULL, 0, '2017-12-31 10:20:49'),
-(222, 24, 3, 'karin', 1, 4, 109, NULL, NULL, 0, '2017-12-31 10:20:50');
+(399, 3, 3, 'karin', 3, 0, NULL, NULL, NULL, 0, '2018-01-01 16:25:24'),
+(401, 4, 3, 'karin', 3, 0, NULL, NULL, NULL, 0, '2018-01-01 16:26:26'),
+(403, 6, 3, 'karin', 3, 0, NULL, NULL, NULL, 0, '2018-01-01 16:26:48'),
+(406, 10, 3, 'karin', 3, 0, NULL, NULL, NULL, 0, '2018-01-01 16:26:51'),
+(415, 24, 3, 'karin', 1, 4, 83, NULL, NULL, 0, '2018-01-01 16:56:29'),
+(420, 24, 3, 'karin', 2, 4, 176, NULL, NULL, 0, '2018-01-01 17:03:05'),
+(421, 24, 3, 'karin', 1, 1, NULL, 'coba 1', 'cobaa2', 0, '2018-01-01 17:44:10'),
+(435, 24, 2, 'qori', 1, 1, NULL, 'aasd', 'adsasd', 0, '2018-01-01 18:02:49'),
+(436, 24, 2, 'qori', 1, 3, 2, 'asd', 'asasdasasdsa', 0, '2018-01-01 18:14:18'),
+(437, 24, 2, 'qori', 1, 3, 2, 'asd', 'asasdasasdsa', 0, '2018-01-01 18:14:18'),
+(438, 24, 2, 'qori', 1, 3, 2, 'asd', 'asasdasasdsa', 0, '2018-01-01 18:14:19'),
+(439, 24, 2, 'qori', 1, 3, 2, 'asd', 'asasdasasdsa', 0, '2018-01-01 18:14:24'),
+(440, 24, 2, 'qori', 1, 3, 2, 'asd', 'asasdasasdsa', 0, '2018-01-01 18:14:24'),
+(441, 24, 2, 'qori', 1, 3, 435, 'asd', 'asdasdasd', 0, '2018-01-01 18:14:57'),
+(442, 24, 2, 'qori', 1, 3, 435, 'asdas', 'adasdasd', 0, '2018-01-01 18:15:11'),
+(443, 24, 2, 'qori', 1, 3, 435, 'asd', 'asdasdasd', 0, '2018-01-01 18:17:44'),
+(444, 24, 2, 'qori', 1, 3, 421, 'asdsa', 'asdasdasds2222', 0, '2018-01-01 18:18:16'),
+(445, 24, 4, 'bayu', 2, 2, 444, NULL, NULL, 0, '2018-01-01 18:19:37'),
+(446, 24, 4, 'bayu', 1, 3, 421, 'asdas222', 'asdasdasd', 0, '2018-01-01 18:19:45'),
+(450, 6, 1, 'yusron', 3, 0, NULL, NULL, NULL, 0, '2018-01-02 06:55:41'),
+(451, 9, 1, 'yusron', 1, 0, NULL, NULL, NULL, 0, '2018-01-02 06:55:42'),
+(452, 10, 1, 'yusron', 3, 0, NULL, NULL, NULL, 0, '2018-01-02 06:55:42'),
+(453, 13, 1, 'yusron', 3, 0, NULL, NULL, NULL, 0, '2018-01-02 06:55:45'),
+(454, 3, 1, 'yusron', 3, 0, NULL, NULL, NULL, 0, '2018-01-02 06:55:49'),
+(456, 7, 1, 'yusron', 3, 0, NULL, NULL, NULL, 0, '2018-01-02 06:55:54'),
+(460, 4, 1, 'yusron', 3, 0, NULL, NULL, NULL, 0, '2018-01-02 06:56:00'),
+(462, 24, 1, 'yusron', 2, 4, 444, NULL, NULL, 0, '2018-01-02 06:56:41'),
+(464, 24, 1, 'yusron', 4, 4, 446, NULL, NULL, 0, '2018-01-02 06:56:42'),
+(466, 24, 1, 'yusron', 2, 4, 435, NULL, NULL, 0, '2018-01-02 06:56:45'),
+(469, 24, 1, 'yusron', 2, 2, 441, NULL, NULL, 0, '2018-01-02 06:56:47'),
+(471, 24, 1, 'yusron', 1, 3, 421, 'sad', 'sadsasad', 0, '2018-01-02 06:57:04'),
+(472, 24, 1, 'yusron', 1, 1, NULL, 'asd', 'sadasdas', 0, '2018-01-02 06:57:08'),
+(473, 24, 1, 'yusron', 1, 3, 1, 'sad', 'sadsadsad', 0, '2018-01-02 06:57:13'),
+(474, 24, 1, 'yusron', 1, 3, 1, 'sad', 'sadsadsad', 0, '2018-01-02 06:57:13'),
+(475, 24, 1, 'yusron', 1, 3, 1, 'sad', 'sadsadsad', 0, '2018-01-02 06:57:14'),
+(476, 24, 1, 'yusron', 1, 3, 1, 'sad', 'sadsadsad', 0, '2018-01-02 06:57:14'),
+(477, 24, 1, 'yusron', 1, 3, 1, 'sad', 'sadsadsad', 0, '2018-01-02 06:57:14'),
+(478, 24, 1, 'yusron', 1, 3, 1, 'sad', 'sadsadsad', 0, '2018-01-02 06:57:19'),
+(479, 24, 1, 'yusron', 1, 1, NULL, '', '', 0, '2018-01-02 06:57:56'),
+(480, 24, 1, 'yusron', 1, 3, 1, 'asd', 'asdasdsad', 0, '2018-01-02 06:58:08'),
+(481, 24, 1, 'yusron', 1, 3, 421, 'asd', 'asdsad', 0, '2018-01-02 07:03:46'),
+(482, 24, 1, 'yusron', 1, 3, 421, 'sad', 'sadasd', 0, '2018-01-02 07:03:54'),
+(483, 24, 1, 'yusron', 1, 1, NULL, 'asd', 'asdsadasdsa', 0, '2018-01-02 07:04:05'),
+(484, 24, 1, 'yusron', 1, 3, 1, 'asd2222', 'saddassadsadasasd', 0, '2018-01-02 07:04:24'),
+(485, 24, 1, 'yusron', 1, 1, NULL, 'asd', 'sadasasdsda', 0, '2018-01-02 07:09:55'),
+(486, 24, 1, 'yusron', 1, 3, 485, 'ads', 'sadasdsa', 0, '2018-01-02 07:10:04'),
+(487, 24, 1, 'yusron', 1, 3, 485, 'asd', 'asdasd', 0, '2018-01-02 07:10:17'),
+(488, 24, 1, 'yusron', 1, 3, 421, 'asd', 'sadasdsad', 0, '2018-01-02 07:10:21'),
+(489, 2, 3, 'karin', 2, 0, NULL, NULL, NULL, 0, '2018-01-02 08:19:21'),
+(490, 24, 1, 'yusron', 1, 1, NULL, 'asd', 'asdasd', 0, '2018-01-03 06:41:38'),
+(491, 24, 1, 'yusron', 1, 3, 490, 'asd', 'asdasd', 0, '2018-01-03 06:41:42'),
+(493, 24, 1, 'yusron', 1, 4, 491, NULL, NULL, 0, '2018-01-03 06:41:44'),
+(495, 24, 1, 'yusron', 1, 4, 490, NULL, NULL, 0, '2018-01-03 06:41:45');
 
 -- --------------------------------------------------------
 
@@ -299,8 +365,8 @@ CREATE TABLE `user_subscribe` (
 INSERT INTO `user_subscribe` (`id_subscribe`, `from_id`, `for_id`, `from_username`, `for_username`, `status`, `created_at`) VALUES
 (8, 1, 3, 'yusron', 'karin', 1, '2017-12-24 23:04:32'),
 (9, 4, 3, 'bayu', 'karin', 1, '2017-12-24 23:05:14'),
-(23, 3, 3, 'karin', 'karin', 0, '2017-12-31 10:12:08'),
-(24, 3, 1, 'karin', 'yusron', 0, '2017-12-31 10:16:24');
+(23, 3, 3, 'karin', 'karin', 1, '2017-12-31 10:12:08'),
+(26, 2, 1, 'qori', 'yusron', 1, '2017-12-31 10:34:52');
 
 --
 -- Indexes for dumped tables
@@ -323,6 +389,12 @@ ALTER TABLE `course_content`
 --
 ALTER TABLE `course_title`
   ADD PRIMARY KEY (`id_title`);
+
+--
+-- Indexes for table `notification`
+--
+ALTER TABLE `notification`
+  ADD PRIMARY KEY (`id_notif`);
 
 --
 -- Indexes for table `qna`
@@ -369,6 +441,11 @@ ALTER TABLE `course_content`
 ALTER TABLE `course_title`
   MODIFY `id_title` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 --
+-- AUTO_INCREMENT for table `notification`
+--
+ALTER TABLE `notification`
+  MODIFY `id_notif` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+--
 -- AUTO_INCREMENT for table `qna`
 --
 ALTER TABLE `qna`
@@ -382,12 +459,12 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `user_action`
 --
 ALTER TABLE `user_action`
-  MODIFY `id_action` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=223;
+  MODIFY `id_action` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=496;
 --
 -- AUTO_INCREMENT for table `user_subscribe`
 --
 ALTER TABLE `user_subscribe`
-  MODIFY `id_subscribe` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_subscribe` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

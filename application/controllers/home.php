@@ -92,45 +92,65 @@ class Home extends CI_Controller {
 			if (!empty($result) || !empty($result2)) {
 				
 			if(!empty($result)){
-				//loop isi notif
-// type action  like title course = 0 , comment title course = 1, like(thumb up) comment = 2, reply comment = 3, dislike thumb down comment 4,
-  // 0, 1 - reply_id = null ; 2, 3, 4 reply id depend id_action of comment - reply_id not null;
-	
 				foreach ($result as $notif) {
 					$notification = $this->home_model->GetData(['id_action'=>$notif->id_action],'user_action')->row();
 					$random_code = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('random_code');
 					if ($notification->type_action == '0') {
-						$link = base_url().'lesson/'.$random_code;
+						// $link = base_url().'lesson/'.$random_code;
 						$thumbnail = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('thumbnail');
 						$course_title = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('title');
-						$word = 'like your course ('.$course_title.')';
-
+						$word = 'liked your course';
+						$go_word = $course_title;
+						$go_link = base_url().'lesson/'.$random_code;
+						$desc_notif ='<i style="margin-left: 79px" class="fa fa-thumb-up subsss"></i>';
 					}
 
 					else if ($notification->type_action == '1') {
-						$link = base_url().'lesson/'.$random_code; #+direct to comment place
+						// $link = base_url().'lesson/'.$random_code; #+direct to comment 
 						$thumbnail = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('thumbnail');
 						$course_title = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('title');
-						$word = 'give comment on your course ('.$course_title.')';
+						$word = 'commented on your discussion course';
+						$go_word = $course_title;
+						$go_link = base_url().'discuss/'.$random_code;
+						$desc_notif = '<p class="notification-desc">'.$notification->text_comment.'</p>';
 					}
 					else if ($notification->type_action == '2') {
-						$link = base_url().'discuss/'.$random_code; #+direct to comment place
+						// $link = base_url().'discuss/'.$random_code; #liked to comment 
 						$thumbnail = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('thumbnail');
 						$course_title = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('title');
-						$word = 'like your comment in discussion ('.$course_title.')';
+						$word = 'liked your comment on discussion course';
+						$go_word = $course_title;
+						$go_link = base_url().'discuss/'.$random_code;
+						$desc_notif ='<i style="margin-left: 79px" class="fa fa-thumb-up subsss"></i>';
 					}
 					else if ($notification->type_action == '3') {
-						$link = base_url().'discuss/'.$random_code; #+direct to comment place
+						// $link = base_url().'discuss/'.$random_code; #reply to comment
 						$thumbnail = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('thumbnail');
 						$course_title = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('title');
-						$word = 'reply comment on your following discussion ('.$course_title.')';
+						$word = 'reply comment on discussion course';
+						$go_word = $course_title;
+						$go_link = base_url().'discuss/'.$random_code;
+						$desc_notif = '<p class="notification-desc">'.$notification->text_comment.'</p>';
 					}
 					else if ($notification->type_action == '4') {
-						$link = base_url().'discuss/'.$random_code; #+direct to comment place
+						// $link = base_url().'discuss/'.$random_code; #disliked to comment 
 						$thumbnail = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('thumbnail');
 						$course_title = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('title');
-						$word = 'dislike your comment in discussion ('.$course_title.')';
+						$word = 'disliked your comment on discussion course';
+						$go_word = $course_title;
+						$go_link = base_url().'discuss/'.$random_code;
+						$desc_notif ='<i style="margin-left: 79px" class="fa fa-thumb-down subsss"></i>';
 					}
+					else if ($notification->type_action == '5') { #enroll course
+						// $link = base_url().'lesson/'.$random_code; 
+						$thumbnail = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('thumbnail');
+						$course_title = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('title');
+						$word = 'enroll your course';
+						$go_word = $course_title;
+						$go_link = base_url().'lesson/'.$random_code;
+						$desc_notif ='<i style="margin-left: 79px" class="fa fa-graduation-cap subsss"></i>';
+					}
+
 				$imguser  = $this->home_model->GetData(['id_user'=>$notification->from_id],'user')->row('photo'); 
 				$username = $this->home_model->GetData(['id_user'=>$notification->from_id],'user')->row('username'); 
 				
@@ -140,21 +160,24 @@ class Home extends CI_Controller {
 				$time = timespan($timestamp, $now) . ' ago';
 
 				$output .= '
-				 <li><a href="'.$link.'">
-		               
-		                	<div class="user-new">
-		                	<p><img src="'.base_url().'assets/images/'.$imguser.'" style="width: 35px;height: 35px;border-radius: 20px;margin-right: 5px" > @'.$username.' '.$word.'  
-		                		<img src="'.base_url().'assets/images/'.$thumbnail.'" style="width: 35px;height: 35px;margin-left: 80px;">
-		                		<!-- <i style="margin-left: 79px" class="fa fa-user-plus"></i> -->
-		                	</p> 
-		                	<span style="margin-left: 40px">'.$time.'</span>
-		                	</div>
-		                	<!-- <div class="user-new-left">
-		                	<i class="fa fa-user-plus"></i>
-		                	</div> -->
-		                	<div class="clearfix"> </div>
-		                	</a></li>';	
-
+				 <li class="notification">
+                    <div class="media">
+                      <div class="media-left">
+                        <div class="media-object">
+                          <img src="'.base_url().'assets/images/'.$imguser.'" class="img-circle" alt="Name" width="50px" height="50px">
+                        </div>
+                      </div>
+                      <div class="media-body">
+                        <strong class="notification-title"><a href="'.base_url().$username.'" class="go_link">'.$username.'</a> '.$word.'  <a href="'.$go_link.'" class="go_link">'.$go_word.'</a></strong></strong>
+                        '.$desc_notif.'
+                        
+						
+                        <div class="notification-meta">
+                          <small class="timestamp">'.$time.'</small>
+                        </div>
+                      </div>
+                    </div>
+                </li>';	
 				}
 				
 			}
@@ -165,7 +188,7 @@ class Home extends CI_Controller {
 						$link = base_url().$notif_subscribe->from_username; #+direct to user profile
 						// $thumbnail = $this->home_model->GetData(['id_title'=>$notif_subscribe->id_title],'course_title')->row('thumbnail');
 						// $course_title = $this->home_model->GetData(['id_title'=>$notif_subscribe->id_title],'course_title')->row('title');
-						$word = $notif_subscribe->from_username.' subscribed you';
+						$word = ' subscribed you';
 					
 						$imguser  = $this->home_model->GetData(['id_user'=>$notif_subscribe->from_id],'user')->row('photo'); 
 						
@@ -175,25 +198,29 @@ class Home extends CI_Controller {
 						$time = timespan($timestamp, $now) . ' ago';
 
 						$output .= '
-				 <li><a href="'.$link.'">
-		               
-		                	<div class="user-new">
-		                	<p><img src="'.base_url().'assets/images/'.$imguser.'" style="width: 35px;height: 35px;border-radius: 20px;margin-right: 5px" > @'.$word.'  
-		                		<!-- <img src="'.base_url().'assets/images/" style="width: 35px;height: 35px;margin-left: 80px;"> -->
-		                		<i style="margin-left: 79px" class="fa fa-user-plus"></i> 
-		                	</p> 
-		                	<span style="margin-left: 40px">'.$time.'</span>
-		                	</div>
-		                	<!-- <div class="user-new-left">
-		                	<i class="fa fa-user-plus"></i>
-		                	</div> -->
-		                	<div class="clearfix"> </div>
-		                	</a></li>';	
+				 <li class="notification">
+                    <div class="media">
+                      <div class="media-left">
+                        <div class="media-object">
+                          <img src="'.base_url().'assets/images/'.$imguser.'" class="img-circle" alt="'.$notif_subscribe->from_username.'" width="50px" height="50px">
+                        </div>
+                      </div>
+                      <div class="media-body">
+                        <strong class="notification-title"><a href="'.base_url().$username.'" class="go_link">'.$username.'</a> '.$word.'  <i style="margin-left: 79px" class="fa fa-user-plus subsss"></i> </strong>
+                        
+
+                        <div class="notification-meta">
+                          <small class="timestamp">'.$time.'</small>
+                        </div>
+                      </div>
+                    </div>
+                </li>
+';	
 
 				}
 				
 			}
-			$output .= ' <li><a href="'.base_url().'notif" class="view" style="margin-left: 40px">View all notification</a></li>';
+			
 		}
 			else{
 				$output .= ' <li>Tidak ada notifikasi</li>
@@ -224,6 +251,216 @@ class Home extends CI_Controller {
 					}
 			echo $count;
 		}
+
+}
+	public function big_notif(){
+		$big_notif = $this->input->post('big_notif');
+		date_default_timezone_set('Asia/Jakarta'); # add your city to set local time zone
+		$now = date('Y-m-d H:i:s');
+		if ($big_notif != '') {
+			$output = '';
+			$result=$this->home_model->notification(); #table user_action
+			$result2=$this->home_model->subscribe(); #table user_subscribe
+			if (!empty($result) || !empty($result2)) {
+				
+			if(!empty($result)){
+				//loop isi notif
+// type action  like title course = 0 , comment title course = 1, like(thumb up) comment = 2, reply comment = 3, dislike thumb down comment 4, 5 enroll course
+  // 0, 1 - reply_id = null ; 2, 3, 4, 5 reply id depend id_action of comment - reply_id not null;
+	
+				foreach ($result as $notif) {
+					$notification = $this->home_model->GetData(['id_action'=>$notif->id_action],'user_action')->row();
+					$random_code = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('random_code');
+					if ($notification->type_action == '0') {
+						// $link = base_url().'lesson/'.$random_code;
+						$thumbnail = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('thumbnail');
+						$course_title = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('title');
+						$word = 'liked your course';
+						$go_word = $course_title;
+						$go_link = base_url().'lesson/'.$random_code;
+					}
+
+					else if ($notification->type_action == '1') {
+						// $link = base_url().'lesson/'.$random_code; #+direct to comment 
+						$thumbnail = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('thumbnail');
+						$course_title = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('title');
+						$word = 'commented on your discussion course';
+						$go_word = $course_title;
+						$go_link = base_url().'discuss/'.$random_code;
+					}
+					else if ($notification->type_action == '2') {
+						// $link = base_url().'discuss/'.$random_code; #liked to comment 
+						$thumbnail = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('thumbnail');
+						$course_title = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('title');
+						$word = 'liked your comment on discussion course';
+						$go_word = $course_title;
+						$go_link = base_url().'discuss/'.$random_code;
+					}
+					else if ($notification->type_action == '3') {
+						// $link = base_url().'discuss/'.$random_code; #reply to comment
+						$thumbnail = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('thumbnail');
+						$course_title = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('title');
+						$word = 'reply comment on discussion course';
+						$go_word = $course_title;
+						$go_link = base_url().'discuss/'.$random_code;
+					}
+					else if ($notification->type_action == '4') {
+						// $link = base_url().'discuss/'.$random_code; #disliked to comment 
+						$thumbnail = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('thumbnail');
+						$course_title = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('title');
+						$word = 'disliked your comment on discussion course';
+						$go_word = $course_title;
+						$go_link = base_url().'discuss/'.$random_code;
+					}
+					else if ($notification->type_action == '5') { #enroll course
+						// $link = base_url().'lesson/'.$random_code; 
+						$thumbnail = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('thumbnail');
+						$course_title = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('title');
+						$word = 'enroll your course';
+						$go_word = $course_title;
+						$go_link = base_url().'lesson/'.$random_code;
+					}
+				$imguser  = $this->home_model->GetData(['id_user'=>$notification->from_id],'user')->row('photo'); 
+				$username = $this->home_model->GetData(['id_user'=>$notification->from_id],'user')->row('username'); 
+				
+
+				$timestamp = strtotime($notification->created_at);
+				$nowstr = strtotime($now);
+					
+				$time = timespan($timestamp, $now) . ' ago';
+
+				if ($notification->type_action == '0') {
+					$output .= '<div class="feed-element">
+                                        <a href="#" class="pull-left">
+                                            <img alt="image" class="img-circle" src="'.base_url().'assets/images/'.$imguser.'">
+                                        </a>
+                                        <div class="media-body ">
+                                            <small class="pull-right">'.$time.'</small>
+                                            <strong><a href="'.base_url().$username.'" class="go_link">'.$username.'</a> </strong> '.$word.' <strong><a href="'.$go_link.'" class="go_link">'.$go_word.'</a></strong>. <br>
+                                            <small class="text-muted">at '.$notification->created_at.'</small>
+                                        </div>
+                                    </div>';
+				}
+				else if ($notification->type_action == '1') {
+					$output .= ' <div class="feed-element">
+                                        <a href="#" class="pull-left">
+                                            <img alt="image" class="img-circle" src="'.base_url().'assets/images/'.$imguser.'">
+                                        </a>
+                                        <div class="media-body ">
+                                            <small class="pull-right">'.$time.'</small>
+                                            <strong><a href="'.base_url().$username.'" class="go_link">'.$username.'</a> </strong> '.$word.' <strong><a href="'.$go_link.'" class="go_link">'.$go_word.'</a></strong> <br>
+                                            <small class="text-muted">at '.$notification->created_at.'</small>
+                                            <div class="well">
+                                            	<strong>'.$notification->subject.'</strong> <br>
+                                                '.$notification->text_comment.'
+                                            </div>
+                                        </div>
+                                    </div>';
+				}
+				else if ($notification->type_action == '2') {
+					$output .= '<div class="feed-element">
+                                        <a href="#" class="pull-left">
+                                            <img alt="image" class="img-circle" src="'.base_url().'assets/images/'.$imguser.'">
+                                        </a>
+                                        <div class="media-body ">
+                                            <small class="pull-right">'.$time.'</small>
+                                            <strong><a href="'.base_url().$username.'" class="go_link">'.$username.'</a> </strong> '.$word.' <strong><a href="'.$go_link.'" class="go_link">'.$go_word.'</a></strong>. <br>
+                                            <small class="text-muted">at '.$notification->created_at.'</small>
+                                        </div>
+                                    </div>';
+				}
+				else if ($notification->type_action == '3') {
+					$output .= ' <div class="feed-element">
+                                        <a href="#" class="pull-left">
+                                            <img alt="image" class="img-circle" src="'.base_url().'assets/images/'.$imguser.'">
+                                        </a>
+                                        <div class="media-body ">
+                                            <small class="pull-right">'.$time.'</small>
+                                            <strong><a href="'.base_url().$username.'" class="go_link">'.$username.'</a> </strong> '.$word.' <strong><a href="'.$go_link.'" class="go_link">'.$go_word.'</a></strong> <br>
+                                            <small class="text-muted">at '.$notification->created_at.'</small>
+                                            <div class="well">
+                                            	<strong>'.$notification->subject.'</strong> <br>
+                                                '.$notification->text_comment.'
+                                            </div>
+                                        </div>
+                                    </div>';
+				}
+				else if ($notification->type_action == '4') {
+					$output .= '<div class="feed-element">
+                                        <a href="#" class="pull-left">
+                                            <img alt="image" class="img-circle" src="'.base_url().'assets/images/'.$imguser.'">
+                                        </a>
+                                        <div class="media-body ">
+                                            <small class="pull-right">'.$time.'</small>
+                                            <strong><a href="'.base_url().$username.'" class="go_link">'.$username.'</a> </strong> '.$word.' <strong><a href="'.$go_link.'" class="go_link">'.$go_word.'</a></strong>. <br>
+                                            <small class="text-muted">at '.$notification->created_at.'</small>
+                                        </div>
+                                    </div>';
+				}
+				else if ($notification->type_action == '5') {
+					$output .= '<div class="feed-element">
+                                        <a href="#" class="pull-left">
+                                            <img alt="image" class="img-circle" src="'.base_url().'assets/images/'.$imguser.'">
+                                        </a>
+                                        <div class="media-body ">
+                                            <small class="pull-right">'.$time.'</small>
+                                            <strong><a href="'.base_url().$username.'" class="go_link">'.$username.'</a> </strong> '.$word.' <strong><a href="'.$go_link.'" class="go_link">'.$go_word.'</a></strong>. <br>
+                                            <small class="text-muted">at '.$notification->created_at.'</small>
+                                        </div>
+                                    </div>';
+				}
+
+					
+				}
+				
+			}
+			if(!empty($result2)){
+				//loop isi notif
+				foreach ($result2 as $notif_subscribe) {
+
+						$link = base_url().$notif_subscribe->from_username; #+direct to user profile
+						// $thumbnail = $this->home_model->GetData(['id_title'=>$notif_subscribe->id_title],'course_title')->row('thumbnail');
+						// $course_title = $this->home_model->GetData(['id_title'=>$notif_subscribe->id_title],'course_title')->row('title');
+						$word = ' started subscribed ';
+					
+						$imguser  = $this->home_model->GetData(['id_user'=>$notif_subscribe->from_id],'user')->row('photo'); 
+						
+						$timestamp = strtotime($notif_subscribe->created_at);
+						$nowstr = strtotime($now);
+							
+						$time = timespan($timestamp, $now) . ' ago';
+
+						$output .= '<div class="feed-element">
+                                        <a href="#" class="pull-left">
+                                            <img alt="image" class="img-circle" src="'.base_url().'assets/images/'.$imguser.'">
+                                        </a>
+                                        <div class="media-body ">
+                                            <small class="pull-right">'.$time.'</small>
+                                            <strong><a href="'.base_url().$username.'" class="go_link">'.$username.' </a></strong> '.$word.' <strong>you</strong>. <br>
+                                            <small class="text-muted">at '.$notif_subscribe->created_at.'</small>
+                                        </div>
+                                    </div>';	
+
+				}
+				
+			}
+			
+		}
+			else{
+				$output .= '';;
+				}
+
+			// $count_action = count($this->home_model->unseen_notification()); #table user_action
+			// $count_subscribe = count($this->home_model->unseen_subscribe()); #table user_subscribe
+			// $count = $count_action+$count_subscribe;
+			// $data = array(
+			// 	'notification' => $output,
+			// 	'amountNotifikasi' => $count
+			// );.'|'.$count
+			echo $output;
+
+		}
+		
 
 }
 	

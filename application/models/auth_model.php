@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Auth_model extends CI_Model {
 
-	
+	// type action  like title course = 0 , comment title course = 1, like(thumb up) comment = 2, reply comment = 3,dislike thumb down comment 4, enroll course 5
 	public function authentication(){
         $email = $this->input->post('email');
         $password = $this->input->post('password');

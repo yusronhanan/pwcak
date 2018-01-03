@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Course_model extends CI_Model {
-// type action  like title course = 0 , comment title course = 1, like(thumb up) comment = 2, reply comment = 3,dislike thumb down comment 4,
+// type action  like title course = 0 , comment title course = 1, like(thumb up) comment = 2, reply comment = 3,dislike thumb down comment 4, enroll course 5
 
 	public function __construct()
 	{
@@ -146,16 +146,62 @@ class Course_model extends CI_Model {
     }
     
     public function upvisitor($id_title){
+        date_default_timezone_set('Asia/Jakarta'); # add your city to set local time zone
+        $now = date('Y-m-d H:i:s');
+
         $visitor_last = (int) $this->GetData(['id_title'=>$id_title],'course_title')->row('visitor');
         $visitor_new = $visitor_last + 1;
-        $data=array(
+    
+        $user_id = $this->session->userdata('logged_id');
+        $username = $this->session->userdata('username');
+        $id_usermaker = $this->course_model->GetData(['id_title'=> $id_title],'course_title')->row('id_user');
+    
+        $query = $this->db->where(['id_title'=> $id_title,'from_id'=>$user_id,'for_id'=>$id_usermaker,'type_action'=>'5'])
+                          ->get('user_action');
+        
+        
+        if($query->num_rows() > 0)
+        {
+            $data=array(
               'visitor'           => $visitor_new,
         );
-
-        $this->db->where('id_title',$id_title)
+            $this->db->where('id_title',$id_title)
                 ->update('course_title', $data);
+        }
+        else{
+            if ($user_id != $id_usermaker) {
+          $data=array(
+              'visitor'           => $visitor_new,
+        );      
+            $this->db->where('id_title',$id_title)
+                ->update('course_title', $data);
+            $enroll=array(
+              'id_title'           => $id_title,
+              'from_id'            => $user_id,
+              'from_username'      => $username,
+              'for_id'             => $id_usermaker,
+              'type_action'        => '5',
+              'created_at'         => $now,
+        );
+            
+             $this->db->insert('user_action', $enroll);
+             $id_action =  $this->home_model->GetAction('*',['id_title'=> $id_title,'from_id'=>$user_id,'for_id'=>$id_usermaker,'type_action'=>'5'])->row('id_action');
+             $insert_notif = array(
+            'id_action' => $id_action,
+            'for_id'    => $id_usermaker,
+            );
+        
+         $this->db->insert('notification', $insert_notif);
 
+        
       
+            }
+        }
+        // else
+        // {
+        //     return false;
+        // }
+        
         // if ($this->db->affected_rows() > 0) {
         //     return TRUE;
         // } else {

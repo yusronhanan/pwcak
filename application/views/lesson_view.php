@@ -287,7 +287,7 @@ i.del_reply:hover{
 		              <a href="#" class="dropdown-toggle dropdown-at" data-toggle="dropdown"><span class=" name-caret"><?php
 		              $names = explode(" ",$getuser_in->name);
 
-		               echo $names[0]; ?><i class="caret"></i></span><img src="<?php echo base_url() ?>assets/images/<?php echo $user_info->photo; ?>" style="border-radius: 50px;"></a>
+		               echo $names[0]; ?><i class="caret"></i></span><img src="<?php echo base_url() ?>assets/images/<?php echo $getuser_in->photo; ?>" style="border-radius: 50px;" width="50px" height="50px"></a>
 		              <ul class="dropdown-menu " role="menu">
 		                <li><a href="<?php echo base_url(); ?>"><i class="fa fa-home"></i>Home</a></li>
 		                <li><a href="<?php echo base_url().$getuser_in->username; ?>"><i class="fa fa-user" target="_blank"></i>My Account</a></li>

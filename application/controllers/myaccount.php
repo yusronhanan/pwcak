@@ -635,10 +635,11 @@ class Myaccount extends CI_Controller {
 				'subscribed'	=> $subscribed,
 				'subs_amount'	=> $subs_amount,
 				'username_id'	=> $usrnm,
+				'main_view'		=> 'acc_view',
 					];
 		}
 		
-		$this->load->view('acc_view', $data);
+		$this->load->view('templet', $data);
 		}
 	}
 }

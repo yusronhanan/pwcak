@@ -268,6 +268,12 @@
       a.subs_true{
         color:#d9534f;
       }
+      a.go_link{
+        color: #d95459;
+      }
+      .subsss{
+        color:#d9534f;
+      }
       </style>
       <script type="text/javascript">
         function mini_notif() {
@@ -282,13 +288,17 @@
                 var data = e.split("|");
                 // alert(data);
                 $('ul#mininotif').html(data[0]);
-                if (data[1] == '0') {
-                              $('span#amountnotif').addClass('hidden');
-                             }
-                        else{
-                                $('span#amountnotif').removeClass('hidden');  
-                             }
-                $('span#amountnotif').html(data[1]);
+                  if (data[1] == '0') {
+                     $('i#count_notif').attr('data-count','0');
+                     $('i#count_notif').removeClass('notification-icon');
+                     $('h3#h_notif').html('Notifications (0)');
+                   }
+                  else{
+                      $('i#count_notif').attr('data-count',data[1]);
+                      $('i#count_notif').addClass('notification-icon');
+                      $('h3#h_notif').html('Notifications ('+data[1]+')');
+                   }
+                
               }
             });
               }
@@ -390,7 +400,7 @@
 
           <li class="dropdown dropdown-notifications">
             <a href="#notifications-panel" class="dropdown-toggle" data-toggle="dropdown">
-              <i data-count="2" class="<?php if ($this->session->userdata('logged_in') == TRUE) {
+              <i data-count="0" class="<?php if ($this->session->userdata('logged_in') == TRUE) {
                 echo 'glyphicon glyphicon-user';
                 }
                 else {
@@ -406,7 +416,7 @@
           
          ?>
                 <li class="notification">
-                  <a href="<?php echo base_url().$username_id; ?>" class="">
+                  <a href="<?php echo base_url().$this->session->userdata('username'); ?>" class="">
                     <strong class="notification-title"><i class="fa fa-user" aria-hidden="true"></i>My Account</strong></a>
                     <a href="<?php echo base_url() ?>auth/logout"><div class="media">
                         <strong class="notification-title"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</strong>
@@ -439,75 +449,22 @@
           <?php if ($this->session->userdata('logged_in') == TRUE) { ?>
           <li class="dropdown dropdown-notifications">
             <a href="#notifications-panel" class="dropdown-toggle" data-toggle="dropdown">
-              <i data-count="2" class="glyphicon glyphicon-bell notification-icon"></i>
+              <!-- class notification-icon di <i> -->
+              <i data-count="0" id="count_notif" class="glyphicon glyphicon-bell"></i>
             </a>
 
             <div class="dropdown-container dropdown-position-bottomright">
 
               <div class="dropdown-toolbar">
                 <div class="dropdown-toolbar-actions">
-                  <a href="#">Mark all as read</a>
+                  <a href="#" id="notifc">Mark all as read</a>
                 </div>
-                <h3 class="dropdown-toolbar-title">Notifications (2)</h3>
+                <h3 class="dropdown-toolbar-title" id="h_notif">Notifications (0)</h3>
               </div><!-- /dropdown-toolbar -->
 
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu" id="mininotif">
                   <!-- <ul class="notifications"> -->
-                <li class="notification">
-                    <div class="media">
-                      <div class="media-left">
-                        <div class="media-object">
-                          <img data-src="holder.js/50x50?bg=cccccc" class="img-circle" alt="Name">
-                        </div>
-                      </div>
-                      <div class="media-body">
-                        <strong class="notification-title"><a href="#">Dave Lister</a> commented on <a href="#">DWARF-13 - Maintenance</a></strong>
-                        <p class="notification-desc">I totally don't wanna do it. Rimmer can do it.</p>
-
-                        <div class="notification-meta">
-                          <small class="timestamp">27. 11. 2015, 15:00</small>
-                        </div>
-                      </div>
-                    </div>
-                </li>
-
-                <li class="notification">
-                    <div class="media">
-                      <div class="media-left">
-                        <div class="media-object">
-                          <img data-src="holder.js/50x50?bg=cccccc" class="img-circle" alt="Name">
-                        </div>
-                      </div>
-                      <div class="media-body">
-                        <strong class="notification-title"><a href="#">Nikola Tesla</a> resolved <a href="#">T-14 - Awesome stuff</a></strong>
-
-                        <p class="notification-desc">Resolution: Fixed, Work log: 4h</p>
-
-                        <div class="notification-meta">
-                          <small class="timestamp">27. 10. 2015, 08:00</small>
-                        </div>
-
-                      </div>
-                    </div>
-                </li>
-
-                <li class="notification">
-                    <div class="media">
-                      <div class="media-left">
-                        <div class="media-object">
-                          <img data-src="holder.js/50x50?bg=cccccc" class="img-circle" alt="Name">
-                        </div>
-                      </div>
-                      <div class="media-body">
-                        <strong class="notification-title"><a href="#">James Bond</a> resolved <a href="#">B-007 - Desolve Spectre organization</a></strong>
-
-                        <div class="notification-meta">
-                          <small class="timestamp">1. 9. 2015, 08:00</small>
-                        </div>
-
-                      </div>
-                    </div>
-                </li>
+                
               <!-- </ul> -->
             </ul>
 
@@ -676,23 +633,22 @@
 
     $('a#notifc').click(function(event) {
         var mini_notif = 'notification_null';
-                       // $('#amountNotifikasi').html('');
-
             
             $.ajax({
                     url: '<?php echo base_url(); ?>home/mini_notif',
                     type: 'post',
                     data: {mini_notif : mini_notif},
                     success: function(e){
-                       if (e == '0') {
-                        $('span#amountnotif').addClass('hidden');
+                       if (e == 0) {
+                         $('i#count_notif').attr('data-count',"0");
+                         $('i#count_notif').removeClass('notification-icon');
+                        $('h3#h_notif').html('Notifications (0)');
                        }
                       else{
-                          $('span#amountnotif').removeClass('hidden');  
+                          $('i#count_notif').attr('data-count',e);
+                          $('i#count_notif').addClass('notification-icon');
+                          $('h3#h_notif').html('Notifications ('+e+')');
                        }
-                       $('span#amountnotif').html(e);
-
-                       
                     }
                 });
                   

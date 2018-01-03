@@ -446,31 +446,6 @@ a.subs_true{
   color:#d9534f;
 }
 </style>
-<script type="text/javascript">
-  function mini_notif() {
-          var mini_notif = 'mini_notif';
-    
-            $.ajax({
-        url:"<?php echo base_url(); ?>home/mini_notif",
-        method:"POST",
-        data:{mini_notif:mini_notif},
-        // dataType:"json",
-        success:function(e){
-          var data = e.split("|");
-          // alert(data);
-          $('ul#mininotif').html(data[0]);
-          if (data[1] == '0') {
-                        $('span#amountnotif').addClass('hidden');
-                       }
-                  else{
-                          $('span#amountnotif').removeClass('hidden');  
-                       }
-          $('span#amountnotif').html(data[1]);
-        }
-      });
-        }
-    window.onload = mini_notif;
-</script>
 </head>
 <body>
   <?php if ($this->session->flashdata('notif_success')): ?>
@@ -1422,47 +1397,7 @@ a.subs_true{
 <!--<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap-3.1.1.min.js"></script>-->
 
 <script type="text/javascript">
- 
 
-  
-  $('h6.thumb_in').click(function(event) {
-    <?php if ($this->session->userdata('logged_in') == TRUE) {  ?>
-    var random_code = $(this).attr('id');
-    // alert(random_code);
-    $.ajax({
-                    url: '<?php echo base_url(); ?>home/thumb_up',
-                    type: 'post',
-                    context: this,
-                    data: {random_code : random_code},
-                    success: function(e){
-                          if(e == "false") {alert('Maaf, thumb_up anda gagal');}
-                         
-                         else  {
-                          if($(this).hasClass('thumb_true')){
-                          $(this).removeClass('thumb_true');
-                          $(this).html('<i class="fa fa-thumbs-up" aria-hidden="true"></i>'+e);
-                          }
-                          else{
-                          $(this).addClass('thumb_true');
-                          $(this).html('<i class="fa fa-thumbs-up" aria-hidden="true"></i>'+e);
-                          }
-                    }
-        }
-                });
-    <?php }
-    else {
-      ?>
-       swal({
-                       title: "Failed",
-                       text: "Anda harus login terlebih dahulu",
-                       timer: 1500,
-                       showConfirmButton: false,
-                       type: 'warning'
-      });
-      <?php
-    } ?>
-          
-  });
 
   $('button.subs_in').click(function(event) {
     <?php if ($this->session->userdata('logged_in') == TRUE) {  ?>
@@ -1508,35 +1443,7 @@ a.subs_true{
   });
 
 </script>
-  <script type="text/javascript">
-    $(document).ready(function(){
-
-    $('a#notifc').click(function(event) {
-        var mini_notif = 'notification_null';
-                       // $('#amountNotifikasi').html('');
-
-            
-            $.ajax({
-                    url: '<?php echo base_url(); ?>home/mini_notif',
-                    type: 'post',
-                    data: {mini_notif : mini_notif},
-                    success: function(e){
-                       if (e == '0') {
-                        $('span#amountnotif').addClass('hidden');
-                       }
-                      else{
-                          $('span#amountnotif').removeClass('hidden');  
-                       }
-                       $('span#amountnotif').html(e);
-
-                       // mini_notif();
-                    }
-                });
-                  
-          });
-    });
-    setInterval(function(){ mini_notif() }, 3000);
-  </script>
+ 
   <script type="text/javascript">
     $(document).ready(function(){
       $("li#reply-c").on('click', reply_c);

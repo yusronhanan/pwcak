@@ -172,6 +172,7 @@ class Course extends CI_Controller {
 				$nextid = (int) $this->course_model->GetNextStep(['id_title'=>$id_title,'step_number >'=> $step]);
 				$beforeid = (int) $this->course_model->GetBeforeStep(['id_title'=>$id_title,'step_number <'=> $step]);
 				$upvisitor = $this->course_model->upvisitor($id_title);
+
 			}
 			else{ #step_num don't exist
 				// $getcontent = $this->course_model->GetContent(['id_title' => $id_title])->row();	

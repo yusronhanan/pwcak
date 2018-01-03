@@ -28,8 +28,7 @@
 	                                <td>'.$data->subject.'</td>
 	                                <td>'.$data->created_at.'</td>
 	                                <td colspan="2"> 
-	                                <button class = "btn btn-info"><i class="glyphicon glyphicon-ok-sign"></i> Approve </button>
-	                       			<button class = "btn btn-warning"><i class="glyphicon glyphicon-remove-sign"></i> Decline </button>
+	                                <button class = "btn btn-info"><i class="glyphicon glyphicon-ok-sign"></i> Pick </button>
 	                       			<input type="hidden" id="id_course" value="" class="form-control"> 
 	                       			<button type="button" href="#" id="'.$data->id_title.'" class = "btn btn-success view" data-toggle="modal" data-target="#viewCourse"><i class="glyphicon glyphicon-eye-open"></i> View </a>
 	                       			<button type="button" href="'.base_url().'index.php/admin/course_delete/'.$data->id_title.'" class = "btn btn-danger" style="margin-left:5px;"><i class="fa fa-trash-o"></i> Delete </button>  

@@ -167,9 +167,61 @@ class Admin extends CI_Controller {
 			echo $data->id_title."|".$data->title."|".$data->subject."|".$data->created_at."|".$data->thumbnail."|".$data->description."|".$data->visitor;
 		}
 		else{
-			$this->session->set_flashdata('failed','Anda telah logout sebelumnya');
+			$this->session->set_flashdata('notif_failed','Anda telah logout sebelumnya');
 			redirect('home');
 		}
+	}
+
+	// public function editUser(){
+	// 	if($this->session->userdata('role')==1){
+	// 		if($this->input->post('submit')==TRUE){
+
+	// 			$this->form_validation->set_rules('email','Email','required|trim');
+	// 			$this->form_validation->set_rules('username','Username','required|trim');
+	// 			$this->form_validation->set_rules('city','City','required|trim');
+	// 			$this->form_validation->set_rules('bio','Bio','required|trim');
+
+	// 			if($this->form_validation->run()==TRUE){
+	// 				if($this->admin_model->edit_user()==TRUE){
+
+
+	// 				}
+	// 			}
+	// 		}
+	// 	}
+	// }
+
+	public function updateUser(){
+		if($this->session->userdata('role')==1){
+
+			$result = $this->admin_model->update_user();
+			if($result == 'TRUE'){
+			$data = $this->admin_model->GetData(array("id_user"=>$this->input->post('id')),'user');
+			echo $data->id_user."|".$data->email."|".$data->username."|".$data->city."|".$data->bio;
+		    }else{
+		    	echo 'FALSE';
+		    }
+		}else{
+			redirect('home');
+		}
+
+	// 	$id=$this->session->userdata('role');
+	// 	$us=$this->admin_model->GetData(array("id_user"=>$id),'user');
+	// 	$id=$this->uri->segment(3);
+        
+	// 	$data=[
+
+	// 		'email' => $us->email,
+	// 		'username' => $us->username,
+	// 		'city' => $us->city,
+	// 		'bio' => $us->bio,
+	// 	];
+        
+	// 	$this->load->view('admin_view1',$data);
+	// 	}else{
+	// 		redirect('home');
+	// 	}
+	// }
 	}
 }
 

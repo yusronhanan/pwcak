@@ -91,22 +91,27 @@ class Admin_model extends CI_Model {
 						->row();
 	}
 
-	public function edit_user($id_user){
+	public function update_user(){
+		$id_user = $this->input->post('id');
 		$data=array(
+			
 			'email' => $this->input->post('email'),
 			'username' => $this->input->post('username'),
 			'city' => $this->input->post('city'),
 			'bio' => $this->input->post('bio')
 		);
-
 		$this->db->where('id_user',$id_user)
 				 ->update('user',$data);
 
 				 if($this->db->affected_rows()>0){
-				 	return TRUE;
+				 	return 'TRUE';
 				 }else{
-				 	return FALSE;
+				 	return 'FALSE';
 				 }
 
+	}
+
+	public function GetData($where,$table){
+		return $this->db->where($where)->get($table)->row();
 	}
 }

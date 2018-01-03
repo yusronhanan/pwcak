@@ -1,3 +1,11 @@
+<style type="text/css">
+	.modalmadul{
+		margin:5px;
+
+	}
+
+</style>
+
 <div class="tab-content">
                    <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
                    	<div class="panel panel-default">
@@ -31,7 +39,7 @@
 	                                <td>'.$data->city.'</td>
 	                                <td>'.$data->bio.'</td>
 	                                <td colspan="2">
-	                                <input type="hidden" name="id_user" placeholder="ID User" class="form-control" value=""> 
+	                                <input type="hidden" name="id_user" placeholder="ID User" class="form-control" value="">
 	                                <button type="button
 	                                " href="#" class="btn btn-info view"
 	                                id="'.$data->id_user.'" data-toggle="modal" data-target="#myModalView" style="color: white"><i class="glyphicon glyphicon-eye-open"></i> Detail </a></button>
@@ -39,7 +47,7 @@
 	                       			<button type="button" href="#" id="'.$data->id_user.'" class="btn btn-success update" data-toggle="modal" data-target="#myModalEdit" style="color: white"><i class="fa fa-edit"></i> Edit </a></button>
 	                       			<a href="'.base_url().'index.php/admin/user_delete/'.$data->id_user.'" class = "btn btn-danger"><i class="fa fa-trash-o"></i> Delete </button>
 	                                </td>
-	                                <td> </td>
+	                                
 	                            </tr>';
 	                            $no++;
 	                        }
@@ -160,40 +168,43 @@
                 <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
                 <h4 class="modal-title">Ubah Data</h4>
             </div>
-            <form class="form-horizontal" action="<?php echo base_url('admin/ubah')?>" method="post" enctype="multipart/form-data" role="form">
+            <form class="form-horizontal" action="" method="post" enctype="multipart/form-data" role="form">
 	            <div class="modal-body">
 	                    <div class="form-group">
 	                        <label class="col-lg-2 col-sm-2 control-label">Email</label>
 	                        <div class="col-lg-10">
 	                        	<input type="hidden" id="id" name="id">
-	                            <input type="text" class="form-control" id="email_id" name="nama" placeholder="Tuliskan Nama">
+	                            <input type="text" class="form-control" id="email_idd" name="nama" placeholder="Tuliskan Nama">
 	                        </div>
 	                    </div>
+	                    <br>
 	                    <div class="form-group">
 	                        <label class="col-lg-2 col-sm-2 control-label">Username</label>
 	                        <div class="col-lg-10">
-	                        	<input type="text" class="form-control" id="username_id" name="alamat" placeholder="Tuliskan Alamat">
+	                        	<input type="text" class="form-control" id="username_idd" name="alamat" placeholder="Tuliskan Alamat">
 	                        </div>
 	                    </div>
+	                    <br>
 	                    <div class="form-group">
 	                        <label class="col-lg-2 col-sm-2 control-label">City</label>
 	                        <div class="col-lg-10">
-	                            <input type="text" class="form-control" id="city_id" name="pekerjaan" placeholder="Tuliskan Pekerjaan">
+	                            <input type="text" class="form-control" id="city_idd" name="pekerjaan" placeholder="Tuliskan Pekerjaan">
 	                        </div>
 	                    </div>
+	                    <br>
 	                    <div class="form-group">
 	                        <label class="col-lg-2 col-sm-2 control-label">Bio</label>
 	                        <div class="col-lg-10">
-	                            <input type="text" class="form-control" id="bio_id" name="pekerjaan" placeholder="Tuliskan Pekerjaan">
+	                            <input type="text" class="form-control" id="bio_idd" name="pekerjaan" placeholder="Tuliskan Pekerjaan">
 	                        </div>
 	                    </div>
-	                    
+	                    <br>
 	                </div>
 	                <div class="modal-footer">
-	                    <button class="btn btn-info" type="submit"> Simpan&nbsp;</button>
-	                    <button type="button" class="btn btn-warning" data-dismiss="modal"> Batal</button>
+	                    <a class="btn btn-info updateclass" href="#" id=""> Simpan&nbsp;</a>
+	                    <a class="btn btn-warning" data-dismiss="modal"> Batal</a>
 	                </div>
-                </form>
+                </form?
             </div>
         </div>
     </div>
@@ -246,18 +257,61 @@
 					    // alert(product_id);
 					    if (id_user != "") {
 					        $.ajax({
-					            url: "<?php echo base_url()?>admin/detuser/"+ id_user,
+					            url: "<?php echo base_url()?>admin/detuser",
 					            type: 'post',
 					            data: {
 					                id: id_user
 					            },
 					            success: function(e) {
 					                var data = e.split("|");
-					                // $('#id_user').attr('href', '<?php echo base_url()?>Page/edit_product/' + data[0]);
-					                $('input#email_id').attr('value',data[1]);
-					                $('input#username_id').attr('value',data[2]);
-					                $('input#city_id').attr('value',data[3]);
-					                $('input#bio_id').attr('value',data[4]);
+					                $('a.updateclass').attr('id',data[0]);
+					                $('input#email_idd').attr('value',data[1]);
+					                $('input#username_idd').attr('value',data[2]);
+					                $('input#city_idd').attr('value',data[3]);
+					                $('input#bio_idd').attr('value',data[4]);
+					            }
+					        });
+					    } else {
+					        $('#pro_name').html();
+					    }
+					});
+
+						$("a.updateclass").click(function(event) {
+					    var id_user =  $(this).attr('id');
+					    var email =    $('input#email_idd').val();
+					    var username = $('input#username_idd').val();
+					    var city =     $('input#city_idd').val();
+					    var bio =      $('input#bio_idd').val();
+					    var bd =       $('button.view#'+id_user).parent();
+					    // alert(id_user+email+username+city+bio);
+					    // alert(product_id);
+					    if (id_user != "") {
+					        $.ajax({
+					            url: "<?php echo base_url()?>admin/updateUser/",
+					            type: 'post',
+					            data: {
+					                id: id_user,
+					                email : email,
+					                username:username,
+					                city:city,
+					                bio:bio,
+					            },
+					            success: function(e) {
+					                var data = e.split("|");
+					                // $('a.update_id').attr('href', '<?php echo base_url()?>admin/updateUser/'+ data[0]);
+					                // alert(e)
+					                $('input#email_idd').attr('value',data[1]);
+					                $('input#username_idd').attr('value',data[2]);
+					                $('input#city_idd').attr('value',data[3]);
+					                $('input#bio_idd').attr('value',data[4]);
+					                $('div#myModalEdit').modal('hide');
+
+
+					                bd.prev().prev().prev().prev().html(data[1]);
+					                bd.prev().prev().prev().html(data[2]);
+					                bd.prev().prev().html(data[3]);
+					                bd.prev().html(data[4]);
+
 					            }
 					        });
 					    } else {

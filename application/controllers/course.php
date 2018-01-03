@@ -137,6 +137,7 @@ class Course extends CI_Controller {
 
 		// $list_comment_3= $this->home_model->GetAction('*',['id_title' => $id_title,'type_action' => '3'])->result();
 		$getmaker = $this->auth_model->GetUser(['id_user' => $id_usermaker])->row();
+		$getuser_in = $this->auth_model->GetUser(['id_user' => $id_user])->row();
 		
 		$check_content = $this->course_model->check_content($id_title);
 		$lastid = (int) $this->course_model->GetLastStep(['id_title'=>$id_title]);
@@ -199,7 +200,7 @@ class Course extends CI_Controller {
 			'before'				=> $beforeid,
 			'list_comment_2top'		=> $list_comment_2top,
 			'list_subject'			=> $this->course_model->GetSubject(),
-			
+			'getuser_in'			=> $getuser_in,
 			// array
 			'username' 				=> $username,
 			'like_amount' 			=> $like_amount,

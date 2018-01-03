@@ -625,16 +625,9 @@
                             </script>
                     <?php endif; ?>
 <!-- <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
-<script type="text/javascript">
-  
-</script>
 
 <script type="text/javascript">
-  <?php if ($this->session->userdata('logged_id') == $user_info->id_user) { ?>
-  document.getElementById("filefoto").onchange = function() {
-        document.getElementById("formfoto").submit();
-  }  
-  <?php } ?>
+
 
   
   $('h6.thumb_in').click(function(event) {
@@ -676,48 +669,6 @@
           
   });
 
-  $('button.subs_in').click(function(event) {
-    <?php if ($this->session->userdata('logged_in') == TRUE) {  ?>
-    var id_user = $(this).attr('id');
-    // alert(id_user);
-    $.ajax({
-                    url: '<?php echo base_url(); ?>home/subs_up',
-                    type: 'post',
-                    context: this,
-                    data: {id_user : id_user},
-                    success: function(e){
-                          if(e == "false") {alert('Maaf, subs_up anda gagal');}
-                         
-                         else  {
-                          if($(this).hasClass('btn-default')){
-                          $(this).removeClass('btn-default');
-                          $(this).addClass('btn-danger');
-                          
-                          $(this).html('<a href="#" data-toggle="modal" data-target="" class="subs_false"><i class="fa fa-plus"></i> Subscribe  '+e+'</a>');
-                          }
-                          else{
-                          $(this).removeClass('btn-danger');
-                          $(this).addClass('btn-default');
-                          
-                          $(this).html('<a href="#" data-toggle="modal" data-target="" class="subs_true"><i class="fa fa-users"></i> Disubscribe  '+e+'</a>');
-                          }
-                    }
-        }
-                });
-    <?php }
-    else {
-      ?>
-       swal({
-                       title: "Failed",
-                       text: "Anda harus login terlebih dahulu",
-                       timer: 1500,
-                       showConfirmButton: false,
-                       type: 'warning'
-      });
-      <?php
-    } ?>
-          
-  });
 
 </script>
 <script type="text/javascript">

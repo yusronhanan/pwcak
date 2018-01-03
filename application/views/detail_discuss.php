@@ -9,7 +9,7 @@
 <head>
 <title>Courses</title>
 <!-- Meta tag Keywords -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Educational Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
 Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
@@ -21,15 +21,27 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all">
 <link href="<?php echo base_url(); ?>assets/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
 <!-- //css files -->
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
 <!-- online-fonts -->
 <link href="//fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i&subset=latin-ext" rel="stylesheet">
 <link href="//fonts.googleapis.com/css?family=Covered+By+Your+Grace" rel="stylesheet">
 <!-- //online-fonts -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.1/sweetalert2.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  
+  
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.1/sweetalert2.min.css">
+<link href="<?php echo base_url(); ?>assets/css/bootstrap-notifications.min.css" rel="stylesheet" type="text/css" media="all">
+
+<link href="<?php echo base_url() ?>assets/css/netdna-bootstrap.min.css" rel="stylesheet">
 
 <style type="text/css">
   .custom-input-file {
@@ -489,13 +501,213 @@ a.subs_true{
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
 
-      
+      <?php 
+        if ($this->session->userdata('logged_in') != TRUE) { ?>
+
+      <!-- Modal3 -->       
+      <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" >
+      <div class="modal-dialog" role="document">
+      <!-- Modal content-->
+        <div class="modal-content news-w3l">
+            <div class="modal-header">
+              <button type="button" class="close w3l" data-dismiss="modal">&times;</button>
+              <h4>Login Your Account</h4>
+              <!--newsletter-->
+              <div class="login-main wthree">
+                <form action="<?php echo base_url(); ?>auth/login" method="post" enctype="multipart/form-data">
+                <input type="email" placeholder="Email" required="" name="email" class="form-control">
+                <input type="password" placeholder="Password" name="password" class="form-control">
+                <input type="submit" name="submit" value="Login">
+              </form>
+              </div>
+            <!--//newsletter-->     
+            </div>
+          </div>
+        </div>
+       </div>
+      <div class="clearfix"></div>
+  <!-- //Modal3 -->
+
+      <!-- Modal4 -->
+    <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" >
+      <div class="modal-dialog" role="document">
+      <!-- Modal content-->
+        <div class="modal-content news-w3l">
+            <div class="modal-header">
+              <button type="button" class="close w3l" data-dismiss="modal">&times;</button>
+              <h4>Register Now</h4>
+              <!--newsletter-->
+              <div class="login-main wthree">
+              <form action="<?php echo base_url(); ?>auth/submit_user" method="post">
+                <input type="text" placeholder="Name" name="name" class="form-control">
+                <input type="email" placeholder="Email" required="" name="email" class="form-control">
+                <input type="text" name="username" placeholder="Username" class="form-control">
+                <input type="password" placeholder="Password" name="password" class="form-control">
+                <input type="text" placeholder="City" name="city" class="form-control">
+                <input type="text" name="bio" placeholder="Bio" class="form-control">
+                <input type="submit" value="Register Now" name="submit">
+              </form>
+              </div>
+            <!--//newsletter-->     
+            </div>
+          </div>
+        </div>
+       </div>
+       <?php } ?>
+      <div class="clearfix"></div>
+
+  <!-- //Modal4-->
 
           <div class="">
             <a class="navbar-brand" href="#">T-Learning</a>
           </div>
 
+          <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right" style="width: 800px">
+
+        
+
+          <li class="dropdown dropdown-notifications">
+            <a href="#notifications-panel" class="dropdown-toggle" data-toggle="dropdown">
+              <i data-count="2" class="<?php if ($this->session->userdata('logged_in') == TRUE) {
+                echo 'glyphicon glyphicon-user';
+                }
+                else {
+                  echo 'glyphicon glyphicon-log-in';
+                  } ?>"></i>
+            </a>
+
+            <div class="dropdown-container dropdown-position-bottomright" style="width: 100px">
+
+              <ul class="dropdown-menu">
+                <?php 
+        if ($this->session->userdata('logged_in') == TRUE) {
           
+         ?>
+                <li class="notification">
+                  <a href="<?php echo base_url().$username_id; ?>" class="">
+                    <strong class="notification-title"><i class="fa fa-user" aria-hidden="true"></i>My Account</strong></a>
+                    <a href="<?php echo base_url() ?>auth/logout"><div class="media">
+                        <strong class="notification-title"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</strong>
+                    </div></a>
+                </li>
+                <?php 
+                }
+                else { ?>
+                <li class="notification">
+                    <a data-toggle="modal" data-target="#myModal3"><div class="media">
+       
+                        <strong class="notification-title"><i class="fa fa-key" aria-hidden="true"></i>Login</strong>
+                    </div></a>
+                </li>
+                <li class="notification">
+                    <a data-toggle="modal" data-target="#myModal4"><div class="media">
+       
+                        <strong class="notification-title"><i class="fa fa-lock" aria-hidden="true"></i>Register</strong>
+                    </div> </a>
+                </li>
+                <?php } ?>
+
+              </ul>
+
+
+
+            </div>
+          </li> <!-- /dropdown -->
+
+          <?php if ($this->session->userdata('logged_in') == TRUE) { ?>
+          <li class="dropdown dropdown-notifications">
+            <a href="#notifications-panel" class="dropdown-toggle" data-toggle="dropdown">
+              <i data-count="2" class="glyphicon glyphicon-bell notification-icon"></i>
+            </a>
+
+            <div class="dropdown-container dropdown-position-bottomright">
+
+              <div class="dropdown-toolbar">
+                <div class="dropdown-toolbar-actions">
+                  <a href="#">Mark all as read</a>
+                </div>
+                <h3 class="dropdown-toolbar-title">Notifications (2)</h3>
+              </div><!-- /dropdown-toolbar -->
+
+              <ul class="dropdown-menu">
+                  <!-- <ul class="notifications"> -->
+                <li class="notification">
+                    <div class="media">
+                      <div class="media-left">
+                        <div class="media-object">
+                          <img data-src="holder.js/50x50?bg=cccccc" class="img-circle" alt="Name">
+                        </div>
+                      </div>
+                      <div class="media-body">
+                        <strong class="notification-title"><a href="#">Dave Lister</a> commented on <a href="#">DWARF-13 - Maintenance</a></strong>
+                        <p class="notification-desc">I totally don't wanna do it. Rimmer can do it.</p>
+
+                        <div class="notification-meta">
+                          <small class="timestamp">27. 11. 2015, 15:00</small>
+                        </div>
+                      </div>
+                    </div>
+                </li>
+
+                <li class="notification">
+                    <div class="media">
+                      <div class="media-left">
+                        <div class="media-object">
+                          <img data-src="holder.js/50x50?bg=cccccc" class="img-circle" alt="Name">
+                        </div>
+                      </div>
+                      <div class="media-body">
+                        <strong class="notification-title"><a href="#">Nikola Tesla</a> resolved <a href="#">T-14 - Awesome stuff</a></strong>
+
+                        <p class="notification-desc">Resolution: Fixed, Work log: 4h</p>
+
+                        <div class="notification-meta">
+                          <small class="timestamp">27. 10. 2015, 08:00</small>
+                        </div>
+
+                      </div>
+                    </div>
+                </li>
+
+                <li class="notification">
+                    <div class="media">
+                      <div class="media-left">
+                        <div class="media-object">
+                          <img data-src="holder.js/50x50?bg=cccccc" class="img-circle" alt="Name">
+                        </div>
+                      </div>
+                      <div class="media-body">
+                        <strong class="notification-title"><a href="#">James Bond</a> resolved <a href="#">B-007 - Desolve Spectre organization</a></strong>
+
+                        <div class="notification-meta">
+                          <small class="timestamp">1. 9. 2015, 08:00</small>
+                        </div>
+
+                      </div>
+                    </div>
+                </li>
+              <!-- </ul> -->
+            </ul>
+
+              <div class="dropdown-footer text-center">
+                <a href="#">View All</a>
+              </div><!-- /dropdown-footer -->
+
+            </div><!-- /dropdown-container -->
+          </li><!-- /dropdown -->
+          <?php } ?>
+
+
+          <?php if ($this->session->userdata('role') == '1') { ?>
+          <li><a href="<?php echo base_url() ?>admin" class="active">Admin</a></li>
+                <?php } ?>
+          <li><a href="<?php echo base_url(); ?>discussion" class="active">Discussion</a></li>
+          <li><a href="<?php echo base_url(); ?>course" class="active">Course</a></li>
+          <li><a href="<?php echo base_url(); ?>" class="active">Home</a></li>         
+          
+        </ul>
+      </div>
 
     </div>
   </nav>
@@ -1207,7 +1419,7 @@ a.subs_true{
     <a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
   <!-- //smooth scrolling -->
   <!--// bottom-top -->
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap-3.1.1.min.js"></script>
+<!--<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap-3.1.1.min.js"></script>-->
 
 <script type="text/javascript">
  

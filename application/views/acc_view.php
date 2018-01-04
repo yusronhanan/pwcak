@@ -120,7 +120,9 @@
                                 <div class="panel-options">
                                     <ul class="nav nav-tabs">
                                         <li class="active"><a href="#tab-1" data-toggle="tab" aria-expanded="false">List Course</a></li>
+                                        <?php if ($this->session->userdata('logged_id') == $user_info->id_user) { ?>
                                         <li class=""><a href="#tab-2" data-toggle="tab" aria-expanded="false">All Notifications</a></li>
+                                        <?php }  ?>
                                         <li class=""><a href="#tab-3" data-toggle="tab" aria-expanded="true">Last activity</a></li>
                                     </ul>
                                 </div>
@@ -269,7 +271,7 @@
           
       </script>
 <?php }  ?>
-<!-- <script type="text/javascript">
+<script type="text/javascript">
    function big_activity() {
                 var big_activity = <?php echo $user_info->id_user ?>;
           
@@ -286,7 +288,7 @@
             });
               }
               window.onload = big_activity;
-</script> -->
+</script>
 <script type="text/javascript">
 <?php if ($this->session->userdata('logged_id') == $user_info->id_user) { ?>
   document.getElementById("filefoto").onchange = function() {
@@ -338,4 +340,5 @@
           
   });
   setInterval(function(){ big_notif() }, 5000);
+  setInterval(function(){ big_activity() }, 5000);
 </script>

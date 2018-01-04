@@ -533,18 +533,19 @@ a.subs_true{
 
   <!-- //Modal4-->
 
-          <div class="">
+         <div class="">
             <a class="navbar-brand" href="#">T-Learning</a>
           </div>
 
-          <div class="collapse navbar-collapse">
+
+      <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-right" style="width: 800px">
 
         
 
           <li class="dropdown dropdown-notifications">
             <a href="#notifications-panel" class="dropdown-toggle" data-toggle="dropdown">
-              <i data-count="2" class="<?php if ($this->session->userdata('logged_in') == TRUE) {
+              <i data-count="0" class="<?php if ($this->session->userdata('logged_in') == TRUE) {
                 echo 'glyphicon glyphicon-user';
                 }
                 else {
@@ -560,7 +561,7 @@ a.subs_true{
           
          ?>
                 <li class="notification">
-                  <a href="<?php echo base_url().$username_id; ?>" class="">
+                  <a href="<?php echo base_url().$this->session->userdata('username'); ?>" class="">
                     <strong class="notification-title"><i class="fa fa-user" aria-hidden="true"></i>My Account</strong></a>
                     <a href="<?php echo base_url() ?>auth/logout"><div class="media">
                         <strong class="notification-title"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</strong>
@@ -593,75 +594,22 @@ a.subs_true{
           <?php if ($this->session->userdata('logged_in') == TRUE) { ?>
           <li class="dropdown dropdown-notifications">
             <a href="#notifications-panel" class="dropdown-toggle" data-toggle="dropdown">
-              <i data-count="2" class="glyphicon glyphicon-bell notification-icon"></i>
+              <!-- class notification-icon di <i> -->
+              <i data-count="0" id="count_notif" class="glyphicon glyphicon-bell"></i>
             </a>
 
             <div class="dropdown-container dropdown-position-bottomright">
 
               <div class="dropdown-toolbar">
                 <div class="dropdown-toolbar-actions">
-                  <a href="#">Mark all as read</a>
+                  <a href="#" id="notifc">Mark all as read</a>
                 </div>
-                <h3 class="dropdown-toolbar-title">Notifications (2)</h3>
+                <h3 class="dropdown-toolbar-title" id="h_notif">Notifications (0)</h3>
               </div><!-- /dropdown-toolbar -->
 
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu" id="mininotif">
                   <!-- <ul class="notifications"> -->
-                <li class="notification">
-                    <div class="media">
-                      <div class="media-left">
-                        <div class="media-object">
-                          <img data-src="holder.js/50x50?bg=cccccc" class="img-circle" alt="Name">
-                        </div>
-                      </div>
-                      <div class="media-body">
-                        <strong class="notification-title"><a href="#">Dave Lister</a> commented on <a href="#">DWARF-13 - Maintenance</a></strong>
-                        <p class="notification-desc">I totally don't wanna do it. Rimmer can do it.</p>
-
-                        <div class="notification-meta">
-                          <small class="timestamp">27. 11. 2015, 15:00</small>
-                        </div>
-                      </div>
-                    </div>
-                </li>
-
-                <li class="notification">
-                    <div class="media">
-                      <div class="media-left">
-                        <div class="media-object">
-                          <img data-src="holder.js/50x50?bg=cccccc" class="img-circle" alt="Name">
-                        </div>
-                      </div>
-                      <div class="media-body">
-                        <strong class="notification-title"><a href="#">Nikola Tesla</a> resolved <a href="#">T-14 - Awesome stuff</a></strong>
-
-                        <p class="notification-desc">Resolution: Fixed, Work log: 4h</p>
-
-                        <div class="notification-meta">
-                          <small class="timestamp">27. 10. 2015, 08:00</small>
-                        </div>
-
-                      </div>
-                    </div>
-                </li>
-
-                <li class="notification">
-                    <div class="media">
-                      <div class="media-left">
-                        <div class="media-object">
-                          <img data-src="holder.js/50x50?bg=cccccc" class="img-circle" alt="Name">
-                        </div>
-                      </div>
-                      <div class="media-body">
-                        <strong class="notification-title"><a href="#">James Bond</a> resolved <a href="#">B-007 - Desolve Spectre organization</a></strong>
-
-                        <div class="notification-meta">
-                          <small class="timestamp">1. 9. 2015, 08:00</small>
-                        </div>
-
-                      </div>
-                    </div>
-                </li>
+                
               <!-- </ul> -->
             </ul>
 
@@ -683,10 +631,8 @@ a.subs_true{
           
         </ul>
       </div>
-
     </div>
   </nav>
-
   <!-- sini -->
 
 <div class="container">
@@ -1479,6 +1425,7 @@ a.subs_true{
         var reply_id = $(this).attr('id');
         var id_title = <?php echo $title_info->id_title; ?>;
         // alert(subject+' '+text_comment+' '+reply_id);
+        if ($.trim(subject).length > 0 && $.trim(text_comment).length > 0) {
           $.ajax({
                     url: '<?php echo base_url(); ?>course/comment_up',
                     type: 'post',
@@ -1498,13 +1445,13 @@ a.subs_true{
                             var id_in = <?php echo $this->session->userdata('logged_id')?>;
                           var maker_info_id = <?php echo $maker_info->id_user?>;
                           if(id_in == data[6]){ 
-                            divcomment_re.after('<div class="comment-reply"><div class="photo"><div class="ava-me"></div></div><div class="comment-block"><h5 style="color: #d9534f;">'+data[0]+'<a href=""><span style="font-size: 0.875rem;" class="userspan">@'+data[1]+'</span></a><span class="badge" style="font-size: 0.875rem;background-color:#d9534f;">you</span></h5><ul class="comment-actions"><li class="reply" title="Go to this discussion"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></li></ul><p class="comment-text" style="color:black;">'+data[2]+'</p><div class="bottom-comment"><div class="comment-date">'+data[3]+'</div><ul class="comment-actions"><li class="reply likes_comment" id="'+data[5]+'"><i class="fa fa-thumbs-up" aria-hidden="true"></i> </li><li class="reply dislikes_comment" id="'+data[5]+'"><i class="fa fa-thumbs-down" aria-hidden="true"></i> </li><li class="reply delete" id="'+data[5]+'"><i class="fa fa-trash"  aria-hidden="true"></i></li></ul></div></div></div>');
+                            divcomment_re.after('<div class="comment-reply"><div class="photo"><div class="ava-me"></div></div><div class="comment-block"><h5 style="color: #d9534f;">'+data[0]+'<a href=""><span style="font-size: 1.5rem;" class="userspan">@'+data[1]+'</span></a><span class="badge" style="font-size: 1.5rem;background-color:#d9534f;">you</span></h5><ul class="comment-actions"><li class="reply" title="Go to this discussion"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></li></ul><p class="comment-text" style="color:black;">'+data[2]+'</p><div class="bottom-comment"><div class="comment-date">'+data[3]+'</div><ul class="comment-actions"><li class="reply likes_comment" id="'+data[5]+'"><i class="fa fa-thumbs-up" aria-hidden="true"></i> </li><li class="reply dislikes_comment" id="'+data[5]+'"><i class="fa fa-thumbs-down" aria-hidden="true"></i> </li><li class="reply delete" id="'+data[5]+'"><i class="fa fa-trash"  aria-hidden="true"></i></li></ul></div></div></div>');
                           }
                           else if(id_in == maker_info_id) {
-                            divcomment_re.after('<div class="comment-reply"><div class="photo"><div class="ava-me"></div></div><div class="comment-block"><h5 style="color: #d9534f;">'+data[0]+'<a href=""><span style="font-size: 0.875rem;" class="userspan">@'+data[1]+'</span></a><span class="badge" style="font-size: 0.875rem;background-color:#d9534f;">creator</span></h5><ul class="comment-actions"><li class="reply" title="Go to this discussion"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></li></ul><p class="comment-text" style="color:black;">'+data[2]+'</p><div class="bottom-comment"><div class="comment-date">'+data[3]+'</div><ul class="comment-actions"><li class="reply likes_comment" id="'+data[5]+'"><i class="fa fa-thumbs-up" aria-hidden="true"></i> </li><li class="reply dislikes_comment" id="'+data[5]+'"><i class="fa fa-thumbs-down" aria-hidden="true"></i> </li><li class="reply delete" id="'+data[5]+'"><i class="fa fa-trash"  aria-hidden="true"></i></li></ul></div></div></div>');
+                            divcomment_re.after('<div class="comment-reply"><div class="photo"><div class="ava-me"></div></div><div class="comment-block"><h5 style="color: #d9534f;">'+data[0]+'<a href=""><span style="font-size: 1.5rem;" class="userspan">@'+data[1]+'</span></a><span class="badge" style="font-size: 1.5rem;background-color:#d9534f;">creator</span></h5><ul class="comment-actions"><li class="reply" title="Go to this discussion"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></li></ul><p class="comment-text" style="color:black;">'+data[2]+'</p><div class="bottom-comment"><div class="comment-date">'+data[3]+'</div><ul class="comment-actions"><li class="reply likes_comment" id="'+data[5]+'"><i class="fa fa-thumbs-up" aria-hidden="true"></i> </li><li class="reply dislikes_comment" id="'+data[5]+'"><i class="fa fa-thumbs-down" aria-hidden="true"></i> </li><li class="reply delete" id="'+data[5]+'"><i class="fa fa-trash"  aria-hidden="true"></i></li></ul></div></div></div>');
                           }
                            else { 
-                          divcomment_re.after('<div class="comment-reply"><div class="photo"><div class="ava-me"></div></div><div class="comment-block"><h5 style="color: #d9534f;">'+data[0]+'<a href=""><span style="font-size: 0.875rem;" class="userspan">@'+data[1]+'</span></a></h5><ul class="comment-actions"><li class="reply" title="Go to this discussion"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></li></ul><p class="comment-text" style="color:black;">'+data[2]+'</p><div class="bottom-comment"><div class="comment-date">'+data[3]+'</div><ul class="comment-actions"><li class="reply likes_comment" id="'+data[5]+'"><i class="fa fa-thumbs-up" aria-hidden="true"></i> </li><li class="reply dislikes_comment" id="'+data[5]+'"><i class="fa fa-thumbs-down" aria-hidden="true"></i> </li><li class="reply delete" id="'+data[5]+'"><i class="fa fa-trash"  aria-hidden="true"></i></li></ul></div></div></div>');
+                          divcomment_re.after('<div class="comment-reply"><div class="photo"><div class="ava-me"></div></div><div class="comment-block"><h5 style="color: #d9534f;">'+data[0]+'<a href=""><span style="font-size: 1.5rem;" class="userspan">@'+data[1]+'</span></a></h5><ul class="comment-actions"><li class="reply" title="Go to this discussion"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></li></ul><p class="comment-text" style="color:black;">'+data[2]+'</p><div class="bottom-comment"><div class="comment-date">'+data[3]+'</div><ul class="comment-actions"><li class="reply likes_comment" id="'+data[5]+'"><i class="fa fa-thumbs-up" aria-hidden="true"></i> </li><li class="reply dislikes_comment" id="'+data[5]+'"><i class="fa fa-thumbs-down" aria-hidden="true"></i> </li><li class="reply delete" id="'+data[5]+'"><i class="fa fa-trash"  aria-hidden="true"></i></li></ul></div></div></div>');
                            } 
              }
                       divcomment_re.prev().children().children().children().children('li#reply-c').html('<i class="fa fa-reply" aria-hidden="true"></i> '+data[4]+'');
@@ -1515,6 +1462,16 @@ a.subs_true{
 
                     }
                 });
+}
+else{
+    swal({
+                       title: "Warning",
+                       text: "Subject dan Comment tidak boleh kosong",
+                       timer: 1500,
+                       showConfirmButton: false,
+                       type: 'warning'
+      });
+  }
     }
     
     $("li[title=New]").click(function(event) {
@@ -1523,6 +1480,7 @@ a.subs_true{
         var text_comment = $(this).parent().prev().find('textarea#text_comment').val();
         var id_title = <?php echo $title_info->id_title; ?>;
         // alert(subject+' '+text_comment+' '+reply_id);
+         if ($.trim(subject).length > 0 && $.trim(text_comment).length > 0) {
           $.ajax({
                     url: '<?php echo base_url(); ?>course/comment_up',
                     type: 'post',
@@ -1542,13 +1500,13 @@ a.subs_true{
                             var id_in = <?php echo $this->session->userdata('logged_id')?>;
                           var maker_info_id = <?php echo $maker_info->id_user?>;
                           if(id_in == data[5]){ 
-                            divcomment_re.after('<div class="comment-wrap"><div class="photo"><div class="ava-me"></div></div><div class="comment-block"><h5 style="color: #d9534f;">'+data[0]+'<a href=""><span style="font-size: 0.875rem;" class="userspan">@'+data[1]+'</span></a><span class="badge" style="font-size: 0.875rem;background-color:#d9534f;">you</span></h5><ul class="comment-actions"><li class="reply" title="Go to this discussion"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></li></ul><p class="comment-text" style="color:black;">'+data[2]+'</p><div class="bottom-comment"><div class="comment-date">'+data[3]+'</div><ul class="comment-actions"><li class="reply likes_comment" id="'+data[4]+'"><i class="fa fa-thumbs-up" aria-hidden="true"></i> </li><li class="reply dislikes_comment" id="'+data[4]+'"><i class="fa fa-thumbs-down" aria-hidden="true"></i> </li><li class="reply" id="reply-c"><i class="fa fa-reply" aria-hidden="true"></i> </li><li class="reply delete" id="'+data[4]+'"><i class="fa fa-trash"  aria-hidden="true"></i></li></ul></div></div></div><div class="comment-reply hidden"><div class="photo"><div class="ava-me"></div></div><div class="comment-block"><ul class="comment-actions"><li class="reply" id="dell_reply" title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></li></ul><form action=""> <textarea name="subject" id="subject" cols="30" rows="1" placeholder="Subject"></textarea><hr><textarea name="text_comment" id="text_comment" cols="30" rows="3" placeholder="Comment Text"></textarea></form><ul class="comment-actions"><li class="reply" title="Send" id="'+data[4]+'"><i class="fa fa-paper-plane" aria-hidden="true"></i></li></ul></div></div>');
+                            divcomment_re.after('<div class="comment-wrap"><div class="photo"><div class="ava-me"></div></div><div class="comment-block"><h5 style="color: #d9534f;">'+data[0]+'<a href=""><span style="font-size: 1.5rem;" class="userspan">@'+data[1]+'</span></a><span class="badge" style="font-size: 1.5rem;background-color:#d9534f;">you</span></h5><ul class="comment-actions"><li class="reply" title="Go to this discussion"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></li></ul><p class="comment-text" style="color:black;">'+data[2]+'</p><div class="bottom-comment"><div class="comment-date">'+data[3]+'</div><ul class="comment-actions"><li class="reply likes_comment" id="'+data[4]+'"><i class="fa fa-thumbs-up" aria-hidden="true"></i> </li><li class="reply dislikes_comment" id="'+data[4]+'"><i class="fa fa-thumbs-down" aria-hidden="true"></i> </li><li class="reply" id="reply-c"><i class="fa fa-reply" aria-hidden="true"></i> </li><li class="reply delete" id="'+data[4]+'"><i class="fa fa-trash"  aria-hidden="true"></i></li></ul></div></div></div><div class="comment-reply hidden"><div class="photo"><div class="ava-me"></div></div><div class="comment-block"><ul class="comment-actions"><li class="reply" id="dell_reply" title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></li></ul><form action=""> <textarea name="subject" id="subject" cols="30" rows="1" placeholder="Subject"></textarea><hr><textarea name="text_comment" id="text_comment" cols="30" rows="3" placeholder="Comment Text"></textarea></form><ul class="comment-actions"><li class="reply" title="Send" id="'+data[4]+'"><i class="fa fa-paper-plane" aria-hidden="true"></i></li></ul></div></div>');
                           }
                           else if(id_in == maker_info_id) {
-                            divcomment_re.after('<div class="comment-wrap"><div class="photo"><div class="ava-me"></div></div><div class="comment-block"><h5 style="color: #d9534f;">'+data[0]+'<a href=""><span style="font-size: 0.875rem;" class="userspan">@'+data[1]+'</span></a><span class="badge" style="font-size: 0.875rem;background-color:#d9534f;">creator</span></h5><ul class="comment-actions"><li class="reply" title="Go to this discussion"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></li></ul><p class="comment-text" style="color:black;">'+data[2]+'</p><div class="bottom-comment"><div class="comment-date">'+data[3]+'</div><ul class="comment-actions"><li class="reply likes_comment" id="'+data[4]+'"><i class="fa fa-thumbs-up" aria-hidden="true"></i> </li><li class="reply dislikes_comment" id="'+data[4]+'"><i class="fa fa-thumbs-down" aria-hidden="true"></i> </li><li class="reply" id="reply-c"><i class="fa fa-reply" aria-hidden="true"></i> </li><li class="reply delete" id="'+data[4]+'"><i class="fa fa-trash"  aria-hidden="true"></i></li></ul></div></div></div><div class="comment-reply hidden"><div class="photo"><div class="ava-me"></div></div><div class="comment-block"><ul class="comment-actions"><li class="reply" id="dell_reply" title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></li></ul><form action=""> <textarea name="subject" id="subject" cols="30" rows="1" placeholder="Subject"></textarea><hr><textarea name="text_comment" id="text_comment" cols="30" rows="3" placeholder="Comment Text"></textarea></form><ul class="comment-actions"><li class="reply" title="Send" id="'+data[4]+'"><i class="fa fa-paper-plane" aria-hidden="true"></i></li></ul></div></div>');
+                            divcomment_re.after('<div class="comment-wrap"><div class="photo"><div class="ava-me"></div></div><div class="comment-block"><h5 style="color: #d9534f;">'+data[0]+'<a href=""><span style="font-size: 1.5rem;" class="userspan">@'+data[1]+'</span></a><span class="badge" style="font-size: 1.5rem;background-color:#d9534f;">creator</span></h5><ul class="comment-actions"><li class="reply" title="Go to this discussion"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></li></ul><p class="comment-text" style="color:black;">'+data[2]+'</p><div class="bottom-comment"><div class="comment-date">'+data[3]+'</div><ul class="comment-actions"><li class="reply likes_comment" id="'+data[4]+'"><i class="fa fa-thumbs-up" aria-hidden="true"></i> </li><li class="reply dislikes_comment" id="'+data[4]+'"><i class="fa fa-thumbs-down" aria-hidden="true"></i> </li><li class="reply" id="reply-c"><i class="fa fa-reply" aria-hidden="true"></i> </li><li class="reply delete" id="'+data[4]+'"><i class="fa fa-trash"  aria-hidden="true"></i></li></ul></div></div></div><div class="comment-reply hidden"><div class="photo"><div class="ava-me"></div></div><div class="comment-block"><ul class="comment-actions"><li class="reply" id="dell_reply" title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></li></ul><form action=""> <textarea name="subject" id="subject" cols="30" rows="1" placeholder="Subject"></textarea><hr><textarea name="text_comment" id="text_comment" cols="30" rows="3" placeholder="Comment Text"></textarea></form><ul class="comment-actions"><li class="reply" title="Send" id="'+data[4]+'"><i class="fa fa-paper-plane" aria-hidden="true"></i></li></ul></div></div>');
                           }
                            else { 
-                          divcomment_re.after('<div class="comment-wrap"><div class="photo"><div class="ava-me"></div></div><div class="comment-block"><h5 style="color: #d9534f;">'+data[0]+'<a href=""><span style="font-size: 0.875rem;" class="userspan">@'+data[1]+'</span></a></h5><ul class="comment-actions"><li class="reply" title="Go to this discussion"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></li></ul><p class="comment-text" style="color:black;">'+data[2]+'</p><div class="bottom-comment"><div class="comment-date">'+data[3]+'</div><ul class="comment-actions"><li class="reply likes_comment" id="'+data[4]+'"><i class="fa fa-thumbs-up" aria-hidden="true"></i> </li><li class="reply dislikes_comment" id="'+data[4]+'"><i class="fa fa-thumbs-down" aria-hidden="true"></i> </li><li class="reply" id="reply-c"><i class="fa fa-reply" aria-hidden="true"></i> </li><li class="reply delete" id="'+data[4]+'"><i class="fa fa-trash"  aria-hidden="true"></i></li></ul></div></div></div><div class="comment-reply hidden"><div class="photo"><div class="ava-me"></div></div><div class="comment-block"><ul class="comment-actions"><li class="reply" id="dell_reply" title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></li></ul><form action=""> <textarea name="subject" id="subject" cols="30" rows="1" placeholder="Subject"></textarea><hr><textarea name="text_comment" id="text_comment" cols="30" rows="3" placeholder="Comment Text"></textarea></form><ul class="comment-actions"><li class="reply" title="Send" id="'+data[4]+'"><i class="fa fa-paper-plane" aria-hidden="true"></i></li></ul></div></div>');
+                          divcomment_re.after('<div class="comment-wrap"><div class="photo"><div class="ava-me"></div></div><div class="comment-block"><h5 style="color: #d9534f;">'+data[0]+'<a href=""><span style="font-size: 1.5rem;" class="userspan">@'+data[1]+'</span></a></h5><ul class="comment-actions"><li class="reply" title="Go to this discussion"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></li></ul><p class="comment-text" style="color:black;">'+data[2]+'</p><div class="bottom-comment"><div class="comment-date">'+data[3]+'</div><ul class="comment-actions"><li class="reply likes_comment" id="'+data[4]+'"><i class="fa fa-thumbs-up" aria-hidden="true"></i> </li><li class="reply dislikes_comment" id="'+data[4]+'"><i class="fa fa-thumbs-down" aria-hidden="true"></i> </li><li class="reply" id="reply-c"><i class="fa fa-reply" aria-hidden="true"></i> </li><li class="reply delete" id="'+data[4]+'"><i class="fa fa-trash"  aria-hidden="true"></i></li></ul></div></div></div><div class="comment-reply hidden"><div class="photo"><div class="ava-me"></div></div><div class="comment-block"><ul class="comment-actions"><li class="reply" id="dell_reply" title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></li></ul><form action=""> <textarea name="subject" id="subject" cols="30" rows="1" placeholder="Subject"></textarea><hr><textarea name="text_comment" id="text_comment" cols="30" rows="3" placeholder="Comment Text"></textarea></form><ul class="comment-actions"><li class="reply" title="Send" id="'+data[4]+'"><i class="fa fa-paper-plane" aria-hidden="true"></i></li></ul></div></div>');
                            } 
              }
                       
@@ -1560,6 +1518,16 @@ a.subs_true{
 
                     }
                 });
+  }
+  else{
+    swal({
+                       title: "Warning",
+                       text: "Subject dan Comment tidak boleh kosong",
+                       timer: 1500,
+                       showConfirmButton: false,
+                       type: 'warning'
+      });
+  }
     });
 
       
@@ -1680,5 +1648,34 @@ a.subs_true{
   }
   
 </script>
+<script type="text/javascript">
+        function mini_notif() {
+                var mini_notif = 'mini_notif';
+          
+                  $.ajax({
+              url:"<?php echo base_url(); ?>home/mini_notif",
+              method:"POST",
+              data:{mini_notif:mini_notif},
+              // dataType:"json",
+              success:function(e){
+                var data = e.split("|");
+                // alert(data);
+                $('ul#mininotif').html(data[0]);
+                  if (data[1] == '0') {
+                     $('i#count_notif').attr('data-count','0');
+                     $('i#count_notif').removeClass('notification-icon');
+                     $('h3#h_notif').html('Notifications (0)');
+                   }
+                  else{
+                      $('i#count_notif').attr('data-count',data[1]);
+                      $('i#count_notif').addClass('notification-icon');
+                      $('h3#h_notif').html('Notifications ('+data[1]+')');
+                   }
+                
+              }
+            });
+              }
+          window.onload = mini_notif;
+      </script>
 </body>
 </html>

@@ -53,13 +53,14 @@
 <!-- Popular courses -->
 <div class="event" id="events">
 	<div class="container">
-		<h3 style="text-align: left;text-transform: uppercase;">Popular Q & A</h3>
+		<h3 style="text-align: left;text-transform: uppercase;">Discussion</h3>
+		<?php foreach ($list_discuss as $discuss) { ?>
 		<div class="col-md-4 eve-agile e1">
 			<div class="eve-sub1">
 				<!-- <a href="#" data-toggle="modal" data-target="#myModal5"><img src="images/e2.jpg" alt="image"></a> -->
-			<h4><a href="#" data-toggle="modal" data-target="#myModal5">Pertanyaan?</a></h4>
-				<h6>By an <a href="#">admin</a>, Oct-2016</h6>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+			<h4><a href="#" data-toggle="modal" data-target="#myModal5"><?php echo $discuss->subject ?></a></h4>
+				<h6>By an <a href="#"><?php echo $discuss->from_username ?></a>, Oct-2016</h6>
+				<p><?php echo $discuss->text_comment ?></p>
 			</div>
 			<div class="eve-sub2">
 				<div class="eve-w3lleft">
@@ -67,47 +68,13 @@
 					<h6><i class="fa fa-heart-o" aria-hidden="true"></i>78</h6>
 				</div>	
 				<div class="eve-w3lright e1">
-					<a href="<?php echo base_url(); ?>index.php/answer" data-toggle="" data-target=""><h5>More</h5></a>
+					<a href="<?php echo base_url().'discuss/'.$discuss->id_title ?>" data-toggle="" data-target=""><h5>More</h5></a>
 				</div>
 				<div class="clearfix"></div>	
 			</div>
 		</div>
-		<div class="col-md-4 eve-agile e2">
-			<div class="eve-sub1">
-				<!-- <a href="#" data-toggle="modal" data-target="#myModal6"><img src="images/e1.jpg" alt="image"></a> -->
-				<h4><a href="#" data-toggle="modal" data-target="#myModal6">Pertanyaan</a></h4>
-				<h6>By an <a href="#">admin</a>, Oct-2016</h6>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
-			</div>
-			<div class="eve-sub2">
-				<div class="eve-w3lleft">
-					<h6><i class="fa fa-comment-o" aria-hidden="true"></i>64</h6>
-					<h6><i class="fa fa-heart-o" aria-hidden="true"></i>86</h6>
-				</div>	
-				<div class="eve-w3lright">
-					<a href="<?php echo base_url(); ?>index.php/answer" data-toggle="" data-target=""><h5>More</h5></a>
-				</div>
-				<div class="clearfix"></div>	
-			</div>
-		</div>
-		<div class="col-md-4 eve-agile e3">
-			<div class="eve-sub1">
-				<!-- <a href="#" data-toggle="modal" data-target="#myModal7"><img src="images/e3.jpg" alt="image"></a> -->
-				<h4><a href="#" data-toggle="modal" data-target="#myModal7">Pertanyaan</a></h4>
-				<h6>By an <a href="#">admin</a>, Oct-2016</h6>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
-			</div>
-			<div class="eve-sub2">
-				<div class="eve-w3lleft">
-					<h6><i class="fa fa-comment-o" aria-hidden="true"></i>47</h6>
-					<h6><i class="fa fa-heart-o" aria-hidden="true"></i>58</h6>
-				</div>	
-				<div class="eve-w3lright">
-					<a href="<?php echo base_url(); ?>index.php/answer" data-toggle="" data-target=""><h5>More</h5></a>
-				</div>
-				<div class="clearfix"></div>	
-			</div>
-		</div>
+		<?php } ?>
+	
 	</div>
 </div>
 

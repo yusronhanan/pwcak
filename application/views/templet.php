@@ -275,6 +275,7 @@
         color:#d9534f;
       }
       </style>
+      <?php if ($this->session->userdata('logged_in') == TRUE) {  ?>
       <script type="text/javascript">
         function mini_notif() {
                 var mini_notif = 'mini_notif';
@@ -304,6 +305,7 @@
               }
           window.onload = mini_notif;
       </script>
+      <?php } ?>
 </head>
 <body style="margin-top: 0px;">
 

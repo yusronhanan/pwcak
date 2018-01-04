@@ -12,10 +12,11 @@ class Discussion extends CI_Controller {
 	public function index()
 	{
 		$user_id = $this->session->userdata('logged_id');
+		$list_discuss = $this->home_model->GetData(['type_action'=>'1'],'user_action')->result();
 		$username_id = $this->auth_model->GetUser(['id_user' => $user_id])->row('username');
 				$data = [
-				'main_view'  => 'qna_view',
-
+				'main_view'  => 'discussion_view',
+				'list_discuss' => $list_discuss,
 				'username_id'	=> $username_id,
 		 		];
 				$this->load->view('templet', $data);

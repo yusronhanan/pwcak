@@ -94,6 +94,7 @@ class Home extends CI_Controller {
 			if(!empty($result)){
 				foreach ($result as $notif) {
 					$notification = $this->home_model->GetData(['id_action'=>$notif->id_action],'user_action')->row();
+					if(!empty($notification)){
 					$random_code = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('random_code');
 					if ($notification->type_action == '0') {
 						// $link = base_url().'lesson/'.$random_code;
@@ -179,7 +180,7 @@ class Home extends CI_Controller {
                     </div>
                 </li>';	
 				}
-				
+				}
 			}
 			if(!empty($result2)){
 				//loop isi notif
@@ -269,7 +270,9 @@ class Home extends CI_Controller {
   // 0, 1 - reply_id = null ; 2, 3, 4, 5 reply id depend id_action of comment - reply_id not null;
 	
 				foreach ($result as $notif) {
+
 					$notification = $this->home_model->GetData(['id_action'=>$notif->id_action],'user_action')->row();
+					if(!empty($notification)){
 					$random_code = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('random_code');
 					if ($notification->type_action == '0') {
 						// $link = base_url().'lesson/'.$random_code;
@@ -412,6 +415,7 @@ class Home extends CI_Controller {
 
 					
 				}
+			}
 				
 			}
 			if(!empty($result2)){
@@ -441,6 +445,136 @@ class Home extends CI_Controller {
                                         </div>
                                     </div>';	
 
+				}
+				
+			}
+			
+		}
+			else{
+				$output .= '';;
+				}
+
+			// $count_action = count($this->home_model->unseen_notification()); #table user_action
+			// $count_subscribe = count($this->home_model->unseen_subscribe()); #table user_subscribe
+			// $count = $count_action+$count_subscribe;
+			// $data = array(
+			// 	'notification' => $output,
+			// 	'amountNotifikasi' => $count
+			// );.'|'.$count
+			echo $output;
+
+		}
+		
+
+}
+
+	public function big_activity(){
+		$big_activity = $this->input->post('big_activity');
+		date_default_timezone_set('Asia/Jakarta'); # add your city to set local time zone
+		$now = date('Y-m-d H:i:s');
+		if ($big_activity != '') {
+			$output = '';
+			$i=1;
+			$result=$this->home_model->GetData(['from_id'=>$big_activity],'user_action')->result(); #table user_action
+			$result2=$this->home_model->GetData(['from_id'=>$big_activity],'user_subscribe')->result(); #table user_subscribe
+			if (!empty($result) || !empty($result2)) {
+				
+			if(!empty($result)){
+				//loop isi notif
+// type action  like title course = 0 , comment title course = 1, like(thumb up) comment = 2, reply comment = 3, dislike thumb down comment 4, 5 enroll course
+  // 0, 1 - reply_id = null ; 2, 3, 4, 5 reply id depend id_action of comment - reply_id not null;
+		        
+				foreach ($result as $activity) {
+					$i++;
+					$random_code = $this->home_model->GetData(['id_title'=>$activity->id_title],'course_title')->row('random_code');
+					if ($activity->type_action == '0') {
+						// $link = base_url().'lesson/'.$random_code;
+						$thumbnail = $this->home_model->GetData(['id_title'=>$activity->id_title],'course_title')->row('thumbnail');
+						$course_title = $this->home_model->GetData(['id_title'=>$activity->id_title],'course_title')->row('title');
+						$word = 'like course';
+						$go_word = $course_title;
+						$go_link = base_url().'lesson/'.$random_code;
+					}
+
+					else if ($activity->type_action == '1') {
+						// $link = base_url().'lesson/'.$random_code; #+direct to comment 
+						$thumbnail = $this->home_model->GetData(['id_title'=>$activity->id_title],'course_title')->row('thumbnail');
+						$course_title = $this->home_model->GetData(['id_title'=>$activity->id_title],'course_title')->row('title');
+						$word = 'comment course';
+						$go_word = $course_title;
+						$go_link = base_url().'discuss/'.$random_code;
+					}
+					else if ($activity->type_action == '2') {
+						// $link = base_url().'discuss/'.$random_code; #liked to comment 
+						$thumbnail = $this->home_model->GetData(['id_title'=>$activity->id_title],'course_title')->row('thumbnail');
+						$course_title = $this->home_model->GetData(['id_title'=>$activity->id_title],'course_title')->row('title');
+						$word = 'like comment';
+						$go_word = $course_title;
+						$go_link = base_url().'discuss/'.$random_code;
+					}
+					else if ($activity->type_action == '3') {
+						// $link = base_url().'discuss/'.$random_code; #reply to comment
+						$thumbnail = $this->home_model->GetData(['id_title'=>$activity->id_title],'course_title')->row('thumbnail');
+						$course_title = $this->home_model->GetData(['id_title'=>$activity->id_title],'course_title')->row('title');
+						$word = 'reply comment';
+						$go_word = $course_title;
+						$go_link = base_url().'discuss/'.$random_code;
+					}
+					else if ($activity->type_action == '4') {
+						// $link = base_url().'discuss/'.$random_code; #disliked to comment 
+						$thumbnail = $this->home_model->GetData(['id_title'=>$activity->id_title],'course_title')->row('thumbnail');
+						$course_title = $this->home_model->GetData(['id_title'=>$activity->id_title],'course_title')->row('title');
+						$word = 'dislike comment';
+						$go_word = $course_title;
+						$go_link = base_url().'discuss/'.$random_code;
+					}
+					else if ($activity->type_action == '5') { #enroll course
+						// $link = base_url().'lesson/'.$random_code; 
+						$thumbnail = $this->home_model->GetData(['id_title'=>$activity->id_title],'course_title')->row('thumbnail');
+						$course_title = $this->home_model->GetData(['id_title'=>$activity->id_title],'course_title')->row('title');
+						$word = 'enroll course';
+						$go_word = $course_title;
+						$go_link = base_url().'lesson/'.$random_code;
+					}
+				$imguser  = $this->home_model->GetData(['id_user'=>$activity->for_id],'user')->row('photo'); 
+				$username = $this->home_model->GetData(['id_user'=>$activity->for_id],'user')->row('username'); 
+				
+
+				$timestamp = strtotime($activity->created_at);
+				$nowstr = strtotime($now);
+					
+				$time = timespan($timestamp, $now) . ' ago';
+				// <td>
+    //                                         <span class="label label-primary"><i class="fa fa-check"></i> Completed</span>
+    //                                     </td>
+					$output .= '<tr>
+								<td>'.$i.'</td> <td>'.$word.'</td> <td><a href="'.$go_link.'" class="go_link">'.$go_word.'</a></td> <td>'.$activity->created_at.'</td> <td></td>
+								</tr>';
+				
+
+					
+				}
+				
+			}
+			if(!empty($result2)){
+				
+				foreach ($result2 as $action_subscribe) {
+$i++;
+						$link = base_url().$action_subscribe->for_username; #+direct to user profile
+						// $thumbnail = $this->home_model->GetData(['id_title'=>$action_subscribe->id_title],'course_title')->row('thumbnail');
+						// $course_title = $this->home_model->GetData(['id_title'=>$action_subscribe->id_title],'course_title')->row('title');
+						$word = 'subscribed';
+					
+						$imguser  = $this->home_model->GetData(['id_user'=>$action_subscribe->for_id],'user')->row('photo'); 
+						
+						$timestamp = strtotime($action_subscribe->created_at);
+						$nowstr = strtotime($now);
+							
+						$time = timespan($timestamp, $now) . ' ago';
+						$output .= '<tr>
+								<td>'.$i.'</td> <td>'.$word.'</td> <td><a href="'.$link .'" class="go_link">'.$action_subscribe->for_username.'</a></td> <td>'.$action_subscribe->created_at.'</td> <td></td>
+								</tr>';
+						
 				}
 				
 			}

@@ -191,7 +191,6 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Activity</th>
-                                        <th>Description</th>
                                         <th>Datetime</th>
                                         <th>Action</th>
                                     </tr>

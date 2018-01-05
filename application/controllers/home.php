@@ -473,6 +473,12 @@ class Home extends CI_Controller {
 		date_default_timezone_set('Asia/Jakarta'); # add your city to set local time zone
 		$now = date('Y-m-d H:i:s');
 		if ($big_activity != '') {
+			if ($big_activity == $this->session->userdata('logged_id')) {
+				$user = "you";
+			}
+			else{
+				$user = $this->auth_model->GetUser(['id_user' => $big_activity])->row('username');
+			}
 			$output = '';
 			$i=1;
 			$result=$this->home_model->GetData(['from_id'=>$big_activity],'user_action')->result(); #table user_action
@@ -548,7 +554,7 @@ class Home extends CI_Controller {
     //                                         <span class="label label-primary"><i class="fa fa-check"></i> Completed</span>
     //                                     </td>
 					$output .= '<tr>
-								<td>'.$i.'</td> <td>'.$word.'</td> <td><a href="'.$go_link.'" class="go_link">'.$go_word.'</a></td> <td>'.$activity->created_at.'</td> <td></td>
+								<td>'.$i.'</td> <td>'.$user.' '.$word.' <a href="'.$go_link.'" class="go_link">'.$go_word.'</a></td> <td>'.$activity->created_at.'</td> <td></td>
 								</tr>';
 				
 
@@ -572,7 +578,7 @@ $i++;
 							
 						$time = timespan($timestamp, $now) . ' ago';
 						$output .= '<tr>
-								<td>'.$i.'</td> <td>'.$word.'</td> <td><a href="'.$link .'" class="go_link">'.$action_subscribe->for_username.'</a></td> <td>'.$action_subscribe->created_at.'</td> <td></td>
+								<td>'.$i.'</td> <td>'.$user.' '.$word.' <a href="'.$link .'" class="go_link">'.$action_subscribe->for_username.'</a></td> <td>'.$action_subscribe->created_at.'</td> <td></td>
 								</tr>';
 						
 				}

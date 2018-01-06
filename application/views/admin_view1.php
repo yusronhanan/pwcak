@@ -14,9 +14,17 @@
 
     <!-- Custom Fonts -->
     <link href="<?php echo base_url(); ?>vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+
+
 </head>
 <body>
 <div id="wrapper">
+
+
+        
+
 
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">

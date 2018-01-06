@@ -204,7 +204,7 @@
 	                    <a class="btn btn-info updateclass" href="#" id=""> Simpan&nbsp;</a>
 	                    <a class="btn btn-warning" data-dismiss="modal"> Batal</a>
 	                </div>
-                </form?
+                </form>
             </div>
         </div>
     </div>

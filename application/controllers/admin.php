@@ -14,8 +14,8 @@ class Admin extends CI_Controller {
 		// $data['user'] = $this->admin_model->get_data_user();
 		// // $data['course'] = $this->admin_model->get_data_course();
 
-		$data['main_view'] = 'dashboard1';
-		$this->load->view('tempadmin',$data);
+		$data['main_view'] = 'dashboard';
+		$this->load->view('admin_view1',$data);
 		}else{
 			redirect('home');
 		}
@@ -24,13 +24,13 @@ class Admin extends CI_Controller {
 	public function get_user(){
 		if($this->session->userdata('role') == 1){
 		// if($this->session->userdata('admin_login')==TRUE){
-			$data['main_view'] = 'datauser_view';
+			$data['main_view'] = 'user_data';
 
 			$this->load->library('pagination');
 
 		    $config['base_url'] = base_url().'index.php/admin/get_user';
 			$config['total_rows'] = $this->admin_model->total_user();
-			$config['per_page'] = 3;
+			$config['per_page'] = 5;
 			$config['uri_segment'] =3;
 			$config['full_tag_open'] = "<ul class='pagination'>";
 			$config['full_tag_close'] ="</ul>";
@@ -56,7 +56,7 @@ class Admin extends CI_Controller {
 			$data['user'] = $rows;
 			$data['pagination'] = $this->pagination->create_links();
 			$data['mulai'] = $mulai;
-			$this->load->view('tempadmin',$data);
+			$this->load->view('admin_view1',$data);
 		// }
 		}else{
 			redirect('home');
@@ -66,7 +66,7 @@ class Admin extends CI_Controller {
 	public function get_course(){
 		if($this->session->userdata('role') == 1){
 		// if($this->session->userdata('admin_login') == TRUE){
-			$data['main_view'] = 'datacourse_view';
+			$data['main_view'] = 'course_data';
 			$this->load->library('pagination');
 
 		    $config['base_url'] = base_url().'index.php/admin/get_course';
@@ -97,7 +97,7 @@ class Admin extends CI_Controller {
 			$data['course'] = $rows;
 			$data['pagination'] = $this->pagination->create_links();
 			$data['start'] = $start;
-			$this->load->view('tempadmin',$data);
+			$this->load->view('admin_view1',$data);
 
 		// }
 		}else{
@@ -132,29 +132,14 @@ class Admin extends CI_Controller {
  }
 
  	public function logout_admin(){
- 		// $data=array(
- 		// 	'email' => '',
- 		//     'role' => FALSE
- 		// );
  		$this->session->sess_destroy();
  		redirect('');
  	}
 
- 	// public function detail_user(){
- 	// 	if($this->session->userdata('role')==1){
- 	// 		$id_detail = $this->uri->segment(3);
- 	// 		$data['detail'] = $this->admin_model->get_detail_user($id_detail);
- 	// 		$this->load->view('admin_view1',$data);
- 	// 	}else{
- 	// 		redirect('home');
- 	// 	}
- 	// }
- 
-
  	public function detUser(){
  		if($this->session->userdata('role')==1){
  		    $data 	= $this->admin_model->get_detail_user();
-			echo $data->id_user."|".$data->email."|".$data->username."|".$data->city."|".$data->bio;
+			echo $data->id_user."|".$data->email."|".$data->username."|".$data->city."|".$data->bio."|".$data->name."|".$data->photo;
 		}
 		else{
 			redirect('home');
@@ -172,30 +157,6 @@ class Admin extends CI_Controller {
 		}
 	}
 
-	public function broadcast(){
-		$data['main_view'] = 'broadcast_view';
-		$this->load->view('tempadmin', $data);
-	}
-
-	// public function editUser(){
-	// 	if($this->session->userdata('role')==1){
-	// 		if($this->input->post('submit')==TRUE){
-
-	// 			$this->form_validation->set_rules('email','Email','required|trim');
-	// 			$this->form_validation->set_rules('username','Username','required|trim');
-	// 			$this->form_validation->set_rules('city','City','required|trim');
-	// 			$this->form_validation->set_rules('bio','Bio','required|trim');
-
-	// 			if($this->form_validation->run()==TRUE){
-	// 				if($this->admin_model->edit_user()==TRUE){
-
-
-	// 				}
-	// 			}
-	// 		}
-	// 	}
-	// }
-
 	public function updateUser(){
 		if($this->session->userdata('role')==1){
 
@@ -209,24 +170,21 @@ class Admin extends CI_Controller {
 		}else{
 			redirect('home');
 		}
+	}
 
-	// 	$id=$this->session->userdata('role');
-	// 	$us=$this->admin_model->GetData(array("id_user"=>$id),'user');
-	// 	$id=$this->uri->segment(3);
-        
-	// 	$data=[
-
-	// 		'email' => $us->email,
-	// 		'username' => $us->username,
-	// 		'city' => $us->city,
-	// 		'bio' => $us->bio,
-	// 	];
-        
-	// 	$this->load->view('admin_view1',$data);
-	// 	}else{
-	// 		redirect('home');
-	// 	}
-	// }
+	public function edit_pick(){
+		if($this->session->userdata('role')==1){
+			// $unedit = 
+			$result = $this->admin_model->editpick($this->uri->segment(3));
+			if($result == TRUE){
+				$this->session->set_flashdata('notif_success','Course telah terverifikasi!');
+				redirect ('admin/get_course');
+			}else{
+				$this->admin_model->uneditpick($this->uri->segment(3));
+				$this->session->set_flashdata('notif_failed','Course telah di unverifikasi!');
+				redirect ('admin');
+			}
+		}
 	}
 }
 

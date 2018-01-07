@@ -114,4 +114,35 @@ class Admin_model extends CI_Model {
 	public function GetData($where,$table){
 		return $this->db->where($where)->get($table)->row();
 	}
+
+	public function editpick($id_title){
+		$id_title = $this->uri->segment(3);
+		$data=array(
+			'verified' => 1 );
+
+		$this->db->where('id_title',$id_title)
+				 ->update('course_title',$data);
+
+				 if($this->db->affected_rows()>0){
+				 	return TRUE;
+				 }else{
+				 	return FALSE;
+				 }
+
+	}
+	public function uneditpick($id_title){
+		$id_title = $this->uri->segment(3);
+		$data=array(
+			'verified' => 0 );
+
+		$this->db->where('id_title',$id_title)
+				 ->update('course_title',$data);
+
+				 if($this->db->affected_rows()>0){
+				 	return TRUE;
+				 }else{
+				 	return FALSE;
+				 }
+
+	}
 }

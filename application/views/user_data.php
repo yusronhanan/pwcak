@@ -1,7 +1,9 @@
 <style type="text/css">
-	.modalmadul{
-		margin:5px;
-
+	.user_img{
+		display: block;
+		height: 200px;
+		width: 200px;
+		margin: auto;
 	}
 
 </style>
@@ -101,27 +103,39 @@
             </div>
             <form class="form-horizontal" action="#" method="post" enctype="multipart/form-data" role="form">
 	            <div class="modal-body">
+	            	<div class="row">
+                    <div class="col-md-12 product_img">
+                        <img src="http://img.bbystatic.com/BestBuy_US/images/products/5613/5613060_sd.jpg" class="user_img" id="image_id">
+                	</div>
+                	</div>
+                	<br>
+                	<div class="form-group">
+	                        <label class="col-lg-2 col-sm-2 control-label">Name :</label>
+	                        <div class="col-lg-10">
+	                        	<input type="text" class="form-control" id="name_id" name="alamat" placeholder="" disabled>
+	                        </div>
+	                    </div>
 	                    <div class="form-group">
-	                        <label class="col-lg-2 col-sm-2 control-label">Email</label>
+	                        <label class="col-lg-2 col-sm-2 control-label">Email :</label>
 	                        <div class="col-lg-10">
 	                        	<input type="hidden" id="id" name="id">
 	                            <input type="text" class="form-control" id="email_id" name="nama" placeholder="" disabled>
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
-	                        <label class="col-lg-2 col-sm-2 control-label">Username</label>
+	                        <label class="col-lg-2 col-sm-2 control-label">Username:</label>
 	                        <div class="col-lg-10">
 	                        	<input type="text" class="form-control" id="username_id" name="alamat" placeholder="" disabled>
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
-	                        <label class="col-lg-2 col-sm-2 control-label">City</label>
+	                        <label class="col-lg-2 col-sm-2 control-label">City :</label>
 	                        <div class="col-lg-10">
 	                            <input type="text" class="form-control" id="city_id" name="pekerjaan" placeholder="" disabled>
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
-	                        <label class="col-lg-2 col-sm-2 control-label">Bio</label>
+	                        <label class="col-lg-2 col-sm-2 control-label">Bio :</label>
 	                        <div class="col-lg-10">
 	                            <input type="text" class="form-control" id="bio_id" name="pekerjaan" placeholder="" disabled>
 	                        </div>
@@ -171,7 +185,7 @@
             <form class="form-horizontal" action="" method="post" enctype="multipart/form-data" role="form">
 	            <div class="modal-body">
 	                    <div class="form-group">
-	                        <label class="col-lg-2 col-sm-2 control-label">Email</label>
+	                        <label class="col-lg-2 col-sm-2 control-label">Email :</label>
 	                        <div class="col-lg-10">
 	                        	<input type="hidden" id="id" name="id">
 	                            <input type="text" class="form-control" id="email_idd" name="nama" placeholder="Tuliskan Nama">
@@ -179,21 +193,21 @@
 	                    </div>
 	                    <br>
 	                    <div class="form-group">
-	                        <label class="col-lg-2 col-sm-2 control-label">Username</label>
+	                        <label class="col-lg-2 col-sm-2 control-label">Username:</label>
 	                        <div class="col-lg-10">
 	                        	<input type="text" class="form-control" id="username_idd" name="alamat" placeholder="Tuliskan Alamat">
 	                        </div>
 	                    </div>
 	                    <br>
 	                    <div class="form-group">
-	                        <label class="col-lg-2 col-sm-2 control-label">City</label>
+	                        <label class="col-lg-2 col-sm-2 control-label">City :</label>
 	                        <div class="col-lg-10">
 	                            <input type="text" class="form-control" id="city_idd" name="pekerjaan" placeholder="Tuliskan Pekerjaan">
 	                        </div>
 	                    </div>
 	                    <br>
 	                    <div class="form-group">
-	                        <label class="col-lg-2 col-sm-2 control-label">Bio</label>
+	                        <label class="col-lg-2 col-sm-2 control-label">Bio :</label>
 	                        <div class="col-lg-10">
 	                            <input type="text" class="form-control" id="bio_idd" name="pekerjaan" placeholder="Tuliskan Pekerjaan">
 	                        </div>
@@ -204,7 +218,7 @@
 	                    <a class="btn btn-info updateclass" href="#" id=""> Simpan&nbsp;</a>
 	                    <a class="btn btn-warning" data-dismiss="modal"> Batal</a>
 	                </div>
-                </form>
+                </form?
             </div>
         </div>
     </div>
@@ -245,6 +259,8 @@
 					                $('input#username_id').attr('value',data[2]);
 					                $('input#city_id').attr('value',data[3]);
 					                $('input#bio_id').attr('value',data[4]);
+					                $('input#name_id').attr('value',data[5]);
+					                 $('img#image_id').attr('src','<?php echo base_url();?>assets/images/' +data[6]);
 					            }
 					        });
 					    } else {

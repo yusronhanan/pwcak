@@ -588,8 +588,8 @@
 <script type="text/javascript">
 
 
-  
-  $('h6.thumb_in').click(function(event) {
+  $('h6.thumb_in').on('click', thumb_in);
+  function thumb_in(){
     <?php if ($this->session->userdata('logged_in') == TRUE) {  ?>
     var random_code = $(this).attr('id');
     // alert(random_code);
@@ -626,7 +626,7 @@
       <?php
     } ?>
           
-  });
+  }
 
 
 </script>

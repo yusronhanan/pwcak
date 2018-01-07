@@ -92,6 +92,13 @@ class Course extends CI_Controller {
 			// echo "NOT_LOGIN";
 		// }
 	}
+	public function getlesson(){
+			$result=$this->course_model->GetJoin('course_title.*, user.name, user.username',['random_code'=>$this->input->post('random_code')])
+					->join('user', 'user.id_user = course_title.id_user', 'left')
+					->group_by('course_title.id_title')
+					->get('course_title')->row();
+			echo $result->title.'|'.$result->thumbnail.'|'.$result->description.'|'.$result->name.'|'.$result->username;
+	}
 	public function action_delete(){ //delete comment, dsb
 		if ($this->session->userdata('logged_in') == TRUE) {
 			// $reply_idd = $this->course_model->GetData(['id_action'=> $this->input->post('id_action')],'id_action')->row('reply_id');

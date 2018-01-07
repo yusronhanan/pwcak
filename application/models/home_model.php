@@ -263,7 +263,6 @@ class Home_model extends CI_Model {
         $userid = $this->session->userdata('logged_id');
         $this->db->where('for_id',$userid)
                  ->where('status','0')
-                 // ->update('user_action', array('status' => '1'));
                  ->update('notification', array('status' => '1'));
 
         if ($this->db->affected_rows() > 0) {

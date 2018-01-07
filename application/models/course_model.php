@@ -485,6 +485,10 @@ public function GetDetailCourse($id_course){
     {
       return $this->db->where($where)->get($table);
     }
+    public function GetJoin($select,$where)
+    {
+      return $this->db->select($select)->where($where);
+    }
 }
 
 /* End of file course_model.php */

@@ -92,46 +92,4 @@
 						
 							</div>
 				       </div>
-					   <!-- //Modal1 -->
-						<div class="modal fade" id="myModal6" tabindex="-1" role="dialog" >
-							<div class="modal-dialog">
-							<!-- Modal content-->
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4>Educational</h4>
-											<img src="images/e1.jpg" alt="blog-image" />
-											<span>Lorem ipsum dolor sit amet, Sed ut perspiciatis unde omnis iste natus error sit voluptatem , eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.accusantium doloremque laudantium.</span>
-									</div>
-								</div>
-						
-							</div>
-				       </div>
-
-					   <!-- //Modal1 -->
-						<div class="modal fade" id="myModal7" tabindex="-1" role="dialog" >
-							<div class="modal-dialog">
-							<!-- Modal content-->
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4>Educational</h4>
-											<img src="images/e3.jpg" alt="blog-image" />
-											<span>Lorem ipsum dolor sit amet, Sed ut perspiciatis unde omnis iste natus error sit voluptatem , eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.accusantium doloremque laudantium.</span>
-									</div>
-								</div>
-						
-							</div>
-				       </div>
-					   <!-- //Modal1 -->
-
-<!-- //popular courses -->
-
-<!-- Top User -->
-
-<!--//Top User-->
-
-<!-- courses -->
-
-
-<!-- //courses -->
+					   

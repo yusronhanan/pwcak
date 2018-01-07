@@ -169,8 +169,8 @@ class Infinitive extends CI_Controller {
 				$output .= '
 				 <div class="col-md-4 eve-agile e1">
 			<div class="eve-sub1">
-				<a href="'. base_url() .'lesson/'. $courses->random_code .'"><img src="'. base_url() .'assets/images/'. $courses->thumbnail .'" width="350px" height="250px" alt="image"></a>
-			<h4><a href="#" data-toggle="modal" data-target="#myModal5">'. $courses->title .'</a></h4>
+				<a href="#" data-toggle="modal" data-target="#lesson" class="lesson_view" id="'. $courses->random_code .'"><img src="'. base_url() .'assets/images/'. $courses->thumbnail .'" width="350px" height="250px" alt="image"></a>
+			<h4><a href="#" data-toggle="modal" data-target="#lesson" class="lesson_view" id="'. $courses->random_code .'">'. $courses->title .'</a></h4>
 
 				<h6>By  <a href="'. base_url() .''. $usrnm .'">
 					'. $usrnm .'
@@ -185,7 +185,7 @@ class Infinitive extends CI_Controller {
                     <h6 id="'. $courses->random_code .'" class="thumb_in '. $thumb .'"><i class="fa fa-thumbs-up" aria-hidden="true"></i>'. $likes .'</h6>
 				</div>	
 				<div class="eve-w3lright e1">
-					<a href="'. base_url() .'lesson/'. $courses->random_code .'"><h5>More</h5></a>
+					<a href="#" data-toggle="modal" data-target="#lesson" class="lesson_view" id="'. $courses->random_code .'"><h5>More</h5></a>
 				</div>
 				<div class="clearfix"></div>	
 			</div>
@@ -195,12 +195,7 @@ class Infinitive extends CI_Controller {
 				// $output .= '<button class="btn btn-danger" id="load_infinite">LOAD PLEASE</button>';
 			}
 			else{
-				$output .= ' <div id="about" class="about">
-					    <div class="container">
-					            <h1> <span>Sorry!</span></h1>
-					            <h2>Not Found. Try Again</h2>
-					    </div>
-					</div>';
+				$output .= '';
 				}
 			
 			// $data = array(

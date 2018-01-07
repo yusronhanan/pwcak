@@ -90,7 +90,10 @@ class Auth extends CI_Controller {
     }
 
 
+    public function login_admin() {
+    	$this->load->view('loginadm_view');
 
+    }
 
 }
 

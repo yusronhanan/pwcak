@@ -67,7 +67,7 @@
                           <form class="form-horizontal" action="#" method="post" enctype="multipart/form-data" role="form">
                             <div class="modal-body">
                                     <div class="form-group">
-                                        <label class="col-lg-2 col-sm-2 control-label">Email</label>
+                                        <label class="col-lg-2 col-sm-2 control-label">Email </label>
                                         <div class="col-lg-10">
                                           <input type="hidden" id="id" name="id">
                                             <input type="text" class="form-control" id="email_id" name="nama" placeholder="" disabled>

@@ -19,7 +19,7 @@
                             echo $this->db->count_all_results('course_title');
                             ?></div>
           <h3>All Courses</h3>
-          <a href="<?php echo base_url(); ?>admin/get_user"><p>View Details<i class="fa fa-arrow-circle-right"></i></p></a>
+          <a href="<?php echo base_url(); ?>admin/get_course"><p>View Details<i class="fa fa-arrow-circle-right"></i></p></a>
         </div>
       </div>
       

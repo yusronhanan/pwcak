@@ -1,3 +1,14 @@
+<style type="text/css">
+
+.images_c{
+  display: block;
+  max-width: 100%;
+  height:auto;
+  margin: auto;
+  width:200px;
+}
+
+</style>
 <div class="col-md-12 col-sm-6 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
@@ -58,98 +69,152 @@
                 </div>
 
                 <div aria-hidden="true" aria-labelledby="myModalView" role="dialog" tabindex="-1" id="myModalView" class="modal fade">
-                  <div class="modal-dialog">
-                      <div class="modal-content">
-                          <div class="modal-header">
-                              <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                              <h4 class="modal-title">Detail Data</h4>
-                          </div>
-                          <form class="form-horizontal" action="#" method="post" enctype="multipart/form-data" role="form">
-                            <div class="modal-body">
-                                    <div class="form-group">
-                                        <label class="col-lg-2 col-sm-2 control-label">Email </label>
-                                        <div class="col-lg-10">
-                                          <input type="hidden" id="id" name="id">
-                                            <input type="text" class="form-control" id="email_id" name="nama" placeholder="" disabled>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-2 col-sm-2 control-label">Username</label>
-                                        <div class="col-lg-10">
-                                          <input type="text" class="form-control" id="username_id" name="alamat" placeholder="" disabled>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-2 col-sm-2 control-label">City</label>
-                                        <div class="col-lg-10">
-                                            <input type="text" class="form-control" id="city_id" name="pekerjaan" placeholder="" disabled>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-2 col-sm-2 control-label">Bio</label>
-                                        <div class="col-lg-10">
-                                            <input type="text" class="form-control" id="bio_id" name="pekerjaan" placeholder="" disabled>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                              </form>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">Detail Data</h4>
+            </div>
+            <form class="form-horizontal" action="#" method="post" enctype="multipart/form-data" role="form">
+              <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 product_img">
+                        <img src="" class="images_c" id="image_id">
+                  </div>
+                  </div>
+                  <br>
+                  <div class="form-group">
+                          <label class="col-lg-2 col-sm-2 control-label">Name :</label>
+                          <div class="col-lg-10">
+                            <input type="text" class="form-control" id="name_id" name="alamat" placeholder="" disabled>
                           </div>
                       </div>
+                      <div class="form-group">
+                          <label class="col-lg-2 col-sm-2 control-label">Email :</label>
+                          <div class="col-lg-10">
+                            <input type="hidden" id="id" name="id">
+                              <input type="text" class="form-control" id="email_id" name="nama" placeholder="" disabled>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-lg-2 col-sm-2 control-label">Username:</label>
+                          <div class="col-lg-10">
+                            <input type="text" class="form-control" id="username_id" name="alamat" placeholder="" disabled>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-lg-2 col-sm-2 control-label">City :</label>
+                          <div class="col-lg-10">
+                              <input type="text" class="form-control" id="city_id" name="pekerjaan" placeholder="" disabled>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-lg-2 col-sm-2 control-label">Bio :</label>
+                          <div class="col-lg-10">
+                              <input type="text" class="form-control" id="bio_id" name="pekerjaan" placeholder="" disabled>
+                          </div>
+                      </div>
+                      
                   </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+              <div class="clearfix"></div>
+          <!-- Modal edit -->
 
-                  <div aria-hidden="true" aria-labelledby="myModalView" role="dialog" tabindex="-1" id="myModalEdit" class="modal fade">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                                <h4 class="modal-title">Ubah Data</h4>
-                            </div>
-                            <form class="form-horizontal" action="" method="post" enctype="multipart/form-data" role="form">
-                              <div class="modal-body">
-                                      <div class="form-group">
-                                          <label class="col-lg-2 col-sm-2 control-label">Email</label>
-                                          <div class="col-lg-10">
-                                            <input type="hidden" id="id" name="id">
-                                              <input type="text" class="form-control" id="email_idd" name="nama" placeholder="Tuliskan Nama">
-                                          </div>
-                                      </div>
-                                      <br>
-                                      <div class="form-group">
-                                          <label class="col-lg-2 col-sm-2 control-label">Username</label>
-                                          <div class="col-lg-10">
-                                            <input type="text" class="form-control" id="username_idd" name="alamat" placeholder="Tuliskan Alamat">
-                                          </div>
-                                      </div>
-                                      <br>
-                                      <div class="form-group">
-                                          <label class="col-lg-2 col-sm-2 control-label">City</label>
-                                          <div class="col-lg-10">
-                                              <input type="text" class="form-control" id="city_idd" name="pekerjaan" placeholder="Tuliskan Pekerjaan">
-                                          </div>
-                                      </div>
-                                      <br>
-                                      <div class="form-group">
-                                          <label class="col-lg-2 col-sm-2 control-label">Bio</label>
-                                          <div class="col-lg-10">
-                                              <input type="text" class="form-control" id="bio_idd" name="pekerjaan" placeholder="Tuliskan Pekerjaan">
-                                          </div>
-                                      </div>
-                                      <br>
-                                  </div>
-                                  <div class="modal-footer">
-                                      <a class="btn btn-info updateclass" href="#" id=""> Simpan&nbsp;</a>
-                                      <a class="btn btn-warning" data-dismiss="modal"> Batal</a>
-                                  </div>
-                                </form>
-                            </div>
-                        </div>
+
+          <!--Modal lihat-->
+            <!-- <div class="modal fade" id="myModalView" tabindex="-1" role="dialog" >
+              <div class="modal-dialog" role="document"> -->
+              <!-- Modal content-->
+                <!-- <div class="modal-content news-w3l">
+                    <div class="modal-header">
+                      <button type="button" class="close w3l" data-dismiss="modal">&times;</button>
+                      <h4>Detail User</h4> -->
+                      <!--newsletter-->
+                      <!-- <div class="login-main wthree">
+                        <form action="#" method="post">
+                          <h5> Email User </h5> <input type="text" disabled value="" name="email" id="email_id" class="form-control">
+                          <h5> Username </h5> <input type="text" disabled value="" name="Username" id="username_id" class="form-control">
+                          <h5> City </h5> <input type="text" disabled value="" name="city" id="city_id" class="form-control">
+                          <h5> Bio </h5> <input type="text" disabled value="" name="bio" id="bio_id" class="form-control"> -->
+
+                          <!-- <input type="submit" value="Save"> -->
+                        <!-- </form>
+                      </div>    
                     </div>
-
-
+                </div>
               </div>
+            </div> -->
+<!-- Modal Ubah -->
+<div aria-hidden="true" aria-labelledby="myModalView" role="dialog" tabindex="-1" id="myModalEdit" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">Ubah Data</h4>
+            </div>
+            <form class="form-horizontal" action="" method="post" enctype="multipart/form-data" role="form">
+              <div class="modal-body">
+                      <div class="form-group">
+                          <label class="col-lg-2 col-sm-2 control-label">Email :</label>
+                          <div class="col-lg-10">
+                            <input type="hidden" id="id" name="id">
+                              <input type="text" class="form-control" id="email_idd" name="nama" placeholder="Tuliskan Nama">
+                          </div>
+                      </div>
+                      <br>
+                      <div class="form-group">
+                          <label class="col-lg-2 col-sm-2 control-label">Username:</label>
+                          <div class="col-lg-10">
+                            <input type="text" class="form-control" id="username_idd" name="alamat" placeholder="Tuliskan Alamat">
+                          </div>
+                      </div>
+                      <br>
+                      <div class="form-group">
+                          <label class="col-lg-2 col-sm-2 control-label">City :</label>
+                          <div class="col-lg-10">
+                              <input type="text" class="form-control" id="city_idd" name="pekerjaan" placeholder="Tuliskan Pekerjaan">
+                          </div>
+                      </div>
+                      <br>
+                      <div class="form-group">
+                          <label class="col-lg-2 col-sm-2 control-label">Bio :</label>
+                          <div class="col-lg-10">
+                              <input type="text" class="form-control" id="bio_idd" name="pekerjaan" placeholder="Tuliskan Pekerjaan">
+                          </div>
+                      </div>
+                      <br>
+                  </div>
+                  <div class="modal-footer">
+                      <a class="btn btn-info updateclass" href="#" id=""> Simpan&nbsp;</a>
+                      <a class="btn btn-warning" data-dismiss="modal"> Batal</a>
+                  </div>
+                </form?
+            </div>
+        </div>
+    </div>
+</div>
+              <div class="clearfix"></div>
 
-              <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery-2.1.4.min.js"></script>
+            <!-- <script type="text/javascript">
+                $(document).ready(function() {
+                    $('#myModalView').on('show.bs.modal', function (event) {
+                        var div = $(event.relatedTarget) // Tombol dimana modal di tampilkan
+                        var modal          = $(this)
+           
+                        // Isi nilai pada field
+                        modal.find('#email_id').attr("value",div.data('email'));
+                        modal.find('#username_id').attr("value",div.data('username'));
+                        modal.find('#city_id').attr("value",div.data('city'));
+                        modal.find('#bio_id').attr("value",div.data('bio'));
+                    });
+                });
+              
+              </script> -->
+            <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery-2.1.4.min.js"></script>
             <script type="text/javascript">
             $("button.view").click(function(event) {
               var id_user = $(this).attr('id');
@@ -168,6 +233,8 @@
                           $('input#username_id').attr('value',data[2]);
                           $('input#city_id').attr('value',data[3]);
                           $('input#bio_id').attr('value',data[4]);
+                          $('input#name_id').attr('value',data[5]);
+                           $('img#image_id').attr('src','<?php echo base_url();?>assets/images/' +data[6]);
                       }
                   });
               } else {

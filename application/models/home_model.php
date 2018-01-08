@@ -30,10 +30,19 @@ class Home_model extends CI_Model {
 	public function GetListRCourses(){
 		// random course list
 		return $this->db
-			->limit(6,0) 
+			      ->limit(6,0) 
             ->get('course_title')
             ->result();
 	}
+
+  public function GetCourseVerified()
+  {
+    return $this->db
+                ->where('verified',1)
+                ->limit(9,0)
+                ->get('course_title')
+                ->result();
+  }
 	public function thumb_up(){  #like course
 		date_default_timezone_set('Asia/Jakarta'); # add your city to set local time zone
 		$now = date('Y-m-d H:i:s');

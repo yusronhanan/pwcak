@@ -14,8 +14,8 @@ class Admin extends CI_Controller {
 		// $data['user'] = $this->admin_model->get_data_user();
 		// // $data['course'] = $this->admin_model->get_data_course();
 
-		$data['main_view'] = 'dashboard';
-		$this->load->view('admin_view1',$data);
+		$data['main_view'] = 'dashboard1';
+		$this->load->view('tempadmin',$data);
 		}else{
 			redirect('home');
 		}
@@ -24,7 +24,7 @@ class Admin extends CI_Controller {
 	public function get_user(){
 		if($this->session->userdata('role') == 1){
 		// if($this->session->userdata('admin_login')==TRUE){
-			$data['main_view'] = 'user_data';
+			$data['main_view'] = 'datauser_view';
 
 			$this->load->library('pagination');
 
@@ -56,7 +56,7 @@ class Admin extends CI_Controller {
 			$data['user'] = $rows;
 			$data['pagination'] = $this->pagination->create_links();
 			$data['mulai'] = $mulai;
-			$this->load->view('admin_view1',$data);
+			$this->load->view('tempadmin',$data);
 		// }
 		}else{
 			redirect('home');
@@ -66,7 +66,7 @@ class Admin extends CI_Controller {
 	public function get_course(){
 		if($this->session->userdata('role') == 1){
 		// if($this->session->userdata('admin_login') == TRUE){
-			$data['main_view'] = 'course_data';
+			$data['main_view'] = 'datacourse_view';
 			$this->load->library('pagination');
 
 		    $config['base_url'] = base_url().'index.php/admin/get_course';
@@ -97,7 +97,7 @@ class Admin extends CI_Controller {
 			$data['course'] = $rows;
 			$data['pagination'] = $this->pagination->create_links();
 			$data['start'] = $start;
-			$this->load->view('admin_view1',$data);
+			$this->load->view('tempadmin',$data);
 
 		// }
 		}else{
@@ -185,6 +185,12 @@ class Admin extends CI_Controller {
 				redirect ('admin');
 			}
 		}
+	}
+
+	public function broadcast()
+	{
+		$data['main_view'] = 'broadcast_view';
+		$this->load->view('tempadmin',$data);
 	}
 }
 

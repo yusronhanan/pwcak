@@ -1,3 +1,12 @@
+<style type="text/css">
+.images_c{
+  display: block;
+  max-width: 100%;
+  height:auto;
+  margin: auto;
+  width:100%;
+}
+</style>
 <div class="col-md-12 col-sm-6 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
@@ -35,7 +44,7 @@
                                   <td>'.$data->subject.'</td>
                                   <td>'.$data->created_at.'</td>
                                   <td colspan="2"> 
-                                  <button class = "btn btn-info"><i class="glyphicon glyphicon-ok-sign"></i> Pick </button>
+                                 <a class = "btn btn-info" href="'.base_url().'admin/edit_pick/'.$data->id_title.'"><i class="glyphicon glyphicon-hand-up"></i> Pick </a>
                               <input type="hidden" id="id_course" value="" class="form-control"> 
                               <button type="button" href="#" id="'.$data->id_title.'" class = "btn btn-success view" data-toggle="modal" data-target="#viewCourse"><i class="glyphicon glyphicon-eye-open"></i> View </a>
                               <button type="button" href="'.base_url().'index.php/admin/course_delete/'.$data->id_title.'" class = "btn btn-danger" style="margin-left:5px;"><i class="fa fa-trash-o"></i> Delete </button>  
@@ -54,37 +63,102 @@
                 </div>
 
                 <div class="modal fade product_view" id="viewCourse">
-                  <div class="modal-dialog">
-                      <div class="modal-content">
-                          <div class="modal-header">
-                              <a href="#" data-dismiss="modal" class="class pull-right"><span class="glyphicon glyphicon-remove"></span></a>
-                              <h3 class="modal-title" id="id_title"></h3>
-                          </div>
-                          <div class="modal-body">
-                              <div class="row">
-                                  <div class="col-md-12 product_img">
-                                      <img src="http://img.bbystatic.com/BestBuy_US/images/products/5613/5613060_sd.jpg" class="img-responsive" id="image_id"
-                                  </div>
-                                  <div class="col-md-12 product_content">
-                                      <h4>Title ID : <span id="title_id"></span></h4>
-                                      
-                                      <h4>Description :</h4> <p id="description_id"></p>
-                                      <h4>Category   :</h4> <span><h5 id="subject_id"></h5></span>
-                                      <h4>Created at  :</h4> <span><h5 id="date_id"></h5></span>
-                                      <h4>Visitor     :</h4> <span><h5 id="visitor_id"></h5></span>
-                                     
-                                      <div class="space-ten"></div>
-                                      <div class="btn-ground">
-                                          <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-heart"></span></button>
-                                          <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-link"></span></button>
-                                      </div>
-                                  </div>
-                              </div>
-                           </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" data-dismiss="modal" class="class pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                <h3 class="modal-title" id="id_title"></h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 product_img">
+                        <img src="" class="images_c" id="image_id">
+                    </div>
+                    <div class="col-md-12 product_content">
+                    <br>
+                    
+                      <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                        <h4>Title ID : <span id="title_id"></span></h4>
+                    </div>
+                    </a>
+                        <!-- <div class="rating">
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            (10 reviews)
+                        </div> -->
+                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h4>Description :</h4> 
+                        <p id="description_id"></p>
+                    </div>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h4>Catergory   :</h4> <span><h5 id="subject_id"></h5></span>
+                    </div>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h4>Created at  :</h4> 
+                        <span><h5 id="date_id"></h5></span>
+                    </div>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h4>Visitor     :</h4> 
+                        <span><h5 id="visitor_id"></h5></span>
+                    </div>
+                </a>
+                       <!--  <div class="row">
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <select class="form-control" name="select">
+                                    <option value="" selected="">Color</option>
+                                    <option value="black">Black</option>
+                                    <option value="white">White</option>
+                                    <option value="gold">Gold</option>
+                                    <option value="rose gold">Rose Gold</option>
+                                    </select>
+                            </div> -->
+                            <!-- end col -->
+                            <!-- <div class="col-md-4 col-sm-6 col-xs-12">
+                                <select class="form-control" name="select">
+                                    <option value="">Capacity</option>
+                                    <option value="">16GB</option>
+                                    <option value="">32GB</option>
+                                    <option value="">64GB</option>
+                                    <option value="">128GB</option>
+                                </select>
+                            </div> -->
+                            <!-- end col -->
+                            <!-- <div class="col-md-4 col-sm-12">
+                                <select class="form-control" name="select">
+                                    <option value="" selected="">QTY</option>
+                                    <option value="">1</option>
+                                    <option value="">2</option>
+                                    <option value="">3</option>
+                                </select>
+                            </div> -->
+                            <!-- end col -->
+                        <!-- </div> -->
+                        <br>
+                        <div class="space-ten"></div>
+                        <div class="btn-ground">
+                            <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-heart"></span></button>
+                            <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-link"></span></button>
+                        </div>
+                    </div>
+                   </div>
+                </div>
+             </div>
+        </div>
+    </div>
+</div>
+
 
               
 

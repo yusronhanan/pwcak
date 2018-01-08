@@ -136,8 +136,8 @@
 <!-- courses -->
 <div class="event" id="events">
 	<div class="container">
-		<h3 style="text-align: left;">THUMB UP COURSES</h3>
-		<?php foreach ($list_rcourses as $rcourses) {
+		<h3 style="text-align: left;">EDITOR PICKS COURSES</h3>
+		<?php foreach ($list_vcourses as $rcourses) {
 			
 		 ?>
 		<div class="col-md-4 eve-agile e1">

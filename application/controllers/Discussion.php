@@ -12,7 +12,7 @@ class Discussion extends CI_Controller {
 	public function index()
 	{
 		$user_id = $this->session->userdata('logged_id');
-		$list_discuss = $this->home_model->GetData(['type_action'=>'1'],'user_action')->result();
+		$list_discuss = $this->home_model->GetData(['reply_id'=>'0'],'comment')->result();
 		$username_id = $this->auth_model->GetUser(['id_user' => $user_id])->row('username');
 				$data = [
 				'main_view'  => 'discussion_view',
@@ -26,7 +26,7 @@ class Discussion extends CI_Controller {
 		if ($this->session->userdata('logged_in') == TRUE) {
 		$id_user = $this->session->userdata('logged_id');
 		$username_id = $this->auth_model->GetUser(['id_user' => $id_user])->row('username');
-		
+		$user_login =  $this->auth_model->GetUser(['id_user' => $id_user])->row();
 		$random_code = $this->uri->segment(2);
 	
 		$id_title = $this->course_model->GetData(['random_code'=> $random_code],'course_title')->row('id_title');
@@ -37,14 +37,14 @@ class Discussion extends CI_Controller {
 		$list_content = '';
 		$getcontent = '';
 		
-		$list_comment= $this->home_model->GetAction('*',['id_title' => $id_title,'type_action' => '1'])->result(); #blm top
-		$list_reply_comment= $this->home_model->GetAction('*',['id_title' => $id_title,'type_action' => '3'])->result(); #blm top
+		$list_comment= $this->home_model->GetData(['id_title' => $id_title, 'reply_id' => '0'],'comment')->result();
+		$list_reply_comment= $this->home_model->GetData(['id_title' => $id_title, 'reply_id !=' => '0'],'comment')->result();
 
-		// $list_comment_3= $this->home_model->GetAction('*',['id_title' => $id_title,'type_action' => '3'])->result();
 		$getmaker = $this->auth_model->GetUser(['id_user' => $id_usermaker])->row();
 		
 		
 		$username = array(); #comment
+		$avaa = array(); 
 		$like_amount = array(); #comment type 2
 		$dislike_amount = array(); #comment  type 4
 		$reply_amount = array(); #comment (reply comment) type 3
@@ -55,35 +55,36 @@ class Discussion extends CI_Controller {
 		$subs_amount = array();
 		
 		foreach ($list_comment as $comment) {
-			$username[$comment->from_id] = $this->auth_model->GetUser(['id_user' => $comment->from_id])->row('username');
-			$like_amount[$comment->id_action] = $this->home_model->GetAction('COUNT(id_action) as like_amount',['reply_id' => $comment->id_action,'type_action' => '2'])->row('like_amount');
-			$dislike_amount[$comment->id_action] = $this->home_model->GetAction('COUNT(id_action) as dislike_amount',['reply_id' => $comment->id_action,'type_action' => '4'])->row('dislike_amount');
-			$reply_amount[$comment->id_action] = $this->home_model->GetAction('COUNT(id_action) as reply_amount',['reply_id' => $comment->id_action,'type_action' => '3'])->row('reply_amount');
+			$username[$comment->id_user] = $this->auth_model->GetUser(['id_user' => $comment->id_user])->row('username');
+			$avaa[$comment->id_user] = $this->auth_model->GetUser(['id_user' => $comment->id_user])->row('photo');
+			$like_amount[$comment->id_comment] = $this->home_model->GetSelectData('COUNT(id_likecomment) as like_amount',['id_comment' => $comment->id_comment,'type' => '2'],'like_comment')->row('like_amount');
+			$dislike_amount[$comment->id_comment] = $this->home_model->GetSelectData('COUNT(id_likecomment) as like_amount',['id_comment' => $comment->id_comment,'type' => '4'],'like_comment')->row('like_amount');
+			$reply_amount[$comment->id_comment] = $this->home_model->GetSelectData('COUNT(id_comment) as reply_amount',['reply_id' => $comment->id_comment],'comment')->row('reply_amount');
+
 			
 			if ($this->session->userdata('logged_in') == TRUE) {
-				$liked[] = $this->home_model->GetData(['reply_id' => $comment->id_action,'from_id'=>$id_user,'type_action'=>'2'],'user_action')->row('reply_id');
-				$disliked[] = $this->home_model->GetData(['reply_id' => $comment->id_action,'from_id'=>$id_user,'type_action'=>'4'],'user_action')->row('reply_id');
+				$liked[] = $this->home_model->GetData(['id_comment' => $comment->id_comment,'id_user'=>$id_user,'type'=>'2'],'like_comment')->row('id_comment');
+				$disliked[] = $this->home_model->GetData(['id_comment' => $comment->id_comment,'id_user'=>$id_user,'type'=>'4'],'like_comment')->row('id_comment');
 			}
 		}
-		foreach ($list_reply_comment as $comment) {
-			$username[$comment->from_id] = $this->auth_model->GetUser(['id_user' => $comment->from_id])->row('username');
-			$like_amount[$comment->id_action] = $this->home_model->GetAction('COUNT(id_action) as like_amount',['reply_id' => $comment->id_action,'type_action' => '2'])->row('like_amount');
-			$dislike_amount[$comment->id_action] = $this->home_model->GetAction('COUNT(id_action) as dislike_amount',['reply_id' => $comment->id_action,'type_action' => '4'])->row('dislike_amount');
-			// $reply_amount[$comment->id_action] = $this->home_model->GetAction('COUNT(id_action) as reply_amount',['reply_id' => $comment->id_action,'type_action' => '3'])->row('reply_amount');
+		foreach ($list_reply_comment as $reply_comment) {
+			$username[$reply_comment->id_user] = $this->auth_model->GetUser(['id_user' => $reply_comment->id_user])->row('username');
+			$avaa[$reply_comment->id_user] = $this->auth_model->GetUser(['id_user' => $reply_comment->id_user])->row('photo');
+			$like_amount[$reply_comment->id_comment] = $this->home_model->GetSelectData('COUNT(id_likecomment) as like_amount',['id_comment' => $reply_comment->id_comment,'type' => '2'],'like_comment')->row('like_amount');
+			$dislike_amount[$reply_comment->id_comment] = $this->home_model->GetSelectData('COUNT(id_likecomment) as like_amount',['id_comment' => $reply_comment->id_comment,'type' => '4'],'like_comment')->row('like_amount');
+			$reply_amount[$reply_comment->id_comment] = $this->home_model->GetSelectData('COUNT(id_comment) as reply_amount',['reply_id' => $reply_comment->id_comment],'comment')->row('reply_amount');
+
 			
 			if ($this->session->userdata('logged_in') == TRUE) {
-				$liked[] = $this->home_model->GetData(['reply_id' => $comment->id_action,'from_id'=>$id_user,'type_action'=>'2'],'user_action')->row('reply_id');
-				$disliked[] = $this->home_model->GetData(['reply_id' => $comment->id_action,'from_id'=>$id_user,'type_action'=>'4'],'user_action')->row('reply_id');
+				$liked[] = $this->home_model->GetData(['id_comment' => $reply_comment->id_comment,'id_user'=>$id_user,'type'=>'2'],'like_comment')->row('id_comment');
+				$disliked[] = $this->home_model->GetData(['id_comment' => $reply_comment->id_comment,'id_user'=>$id_user,'type'=>'4'],'like_comment')->row('id_comment');
 			}
 		}
 		
+		
 		if ($this->session->userdata('logged_in') == TRUE) {
-			// foreach ($list_user as $user) { tinggal ganti for id => $user->id_user
-			$subscribed[] = $this->home_model->GetData(['from_id'=>$id_user,'for_id'=>$id_usermaker],'user_subscribe')->row('for_id');
-			// $subs_amount[$user->id_user] = $this->home_model->GetSubscribe('COUNT(id_subscribe) as subs_amount',['for_id' => $user->id_user])->row('subs_amount');
+			$subscribed[] = $this->home_model->GetData(['id_user'=>$id_user,'for_id'=>$id_usermaker],'subscribe')->row('for_id');
 			$subs_amount[$id_usermaker] = $this->home_model->GetSubscribe('COUNT(id_subscribe) as subs_amount',['for_id' => $id_usermaker])->row('subs_amount');
-		// }
-				
 		}
 
 		
@@ -97,10 +98,10 @@ class Discussion extends CI_Controller {
 			'list_subject'			=> $this->course_model->GetSubject(),
 			
 			'username_id'			=> $username_id,
-			// 'user_info'				=> $this->auth_model->GetUser(['id_user' => $id_user])->row(),
-				
+			'user_login'			=> $user_login,
 			// array
 			'username' 				=> $username,
+			'avaa'					=> $avaa,
 			'like_amount' 			=> $like_amount,
 			'dislike_amount' 		=> $dislike_amount,
 			'reply_amount' 			=> $reply_amount, 

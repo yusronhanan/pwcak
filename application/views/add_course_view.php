@@ -164,75 +164,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		    <div class="drop-men" >
 		        <ul class=" nav_1">
 		           
-		    		<li class="dropdown at-drop">
-		              <a href="#" class="dropdown-toggle dropdown-at " data-toggle="dropdown"><i class="fa fa-globe"></i> <span class="number">5</span></a>
-		              <ul class="dropdown-menu menu1 " role="menu">
-		                <li><a href="#">
-		               
-		                	<div class="user-new">
-		                	<p>New user registered</p>
-		                	<span>40 seconds ago</span>
-		                	</div>
-		                	<div class="user-new-left">
-		                
-		                	<i class="fa fa-user-plus"></i>
-		                	</div>
-		                	<div class="clearfix"> </div>
-		                	</a></li>
-		                <li><a href="#">
-		                	<div class="user-new">
-		                	<p>Someone special liked this</p>
-		                	<span>3 minutes ago</span>
-		                	</div>
-		                	<div class="user-new-left">
-		                
-		                	<i class="fa fa-heart"></i>
-		                	</div>
-		                	<div class="clearfix"> </div>
-		                </a></li>
-		                <li><a href="#">
-		                	<div class="user-new">
-		                	<p>John cancelled the event</p>
-		                	<span>4 hours ago</span>
-		                	</div>
-		                	<div class="user-new-left">
-		                
-		                	<i class="fa fa-times"></i>
-		                	</div>
-		                	<div class="clearfix"> </div>
-		                </a></li>
-		                <li><a href="#">
-		                	<div class="user-new">
-		                	<p>The server is status is stable</p>
-		                	<span>yesterday at 08:30am</span>
-		                	</div>
-		                	<div class="user-new-left">
-		                
-		                	<i class="fa fa-info"></i>
-		                	</div>
-		                	<div class="clearfix"> </div>
-		                </a></li>
-		                <li><a href="#">
-		                	<div class="user-new">
-		                	<p>New comments waiting approval</p>
-		                	<span>Last Week</span>
-		                	</div>
-		                	<div class="user-new-left">
-		                
-		                	<i class="fa fa-rss"></i>
-		                	</div>
-		                	<div class="clearfix"> </div>
-		                </a></li>
-		                <li><a href="#" class="view">View all messages</a></li>
-		              </ul>
-		            </li>
-					<li class="dropdown">
-		              <a href="#" class="dropdown-toggle dropdown-at" data-toggle="dropdown"><span class=" name-caret">Rackham<i class="caret"></i></span><img src="<?php echo base_url(); ?>assets/lesson/images/wo.jpg"></a>
+		    		<li class="dropdown">
+		              <a href="#" class="dropdown-toggle dropdown-at" data-toggle="dropdown"><span class=" name-caret"><?php
+		              $names = explode(" ",$getuser_in->name);
+
+		               echo $names[0]; ?><i class="caret"></i></span><img src="<?php echo base_url() ?>assets/images/<?php echo $getuser_in->photo; ?>" style="border-radius: 50px;" width="50px" height="50px"></a>
 		              <ul class="dropdown-menu " role="menu">
-		                <li><a href="profile.html"><i class="fa fa-user"></i>Edit Profile</a></li>
-		                <li><a href="inbox.html"><i class="fa fa-envelope"></i>Inbox</a></li>
-		                <li><a href="calendar.html"><i class="fa fa-calendar"></i>Calender</a></li>
-		                <li><a href="inbox.html"><i class="fa fa-clipboard"></i>Tasks</a></li>
+		                <li><a href="<?php echo base_url(); ?>"><i class="fa fa-home"></i>Home</a></li>
+		                <li><a href="<?php echo base_url().$getuser_in->username; ?>"><i class="fa fa-user" target="_blank"></i>My Account</a></li>
+		                <li><a href="<?php echo base_url(); ?>auth/logout"><i class="fa fa-sign-out"></i>Logout</a></li>
 		              </ul>
 		            </li>
 		           
@@ -257,7 +197,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<!-- kurang if step_number == $step echo selected //membedakan -->
 					
 					<li>
-                        <a href="" id="go_step" class=" hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon "></i><span class="nav-label">Lesson <?php echo $i++; ?> : <?php echo  $list_c->step_title; ?></a>
+                        <a href="" id="go_step" class=" hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon "></i><span class="nav-label"><?php echo $i++; ?> : <?php echo  $list_c->step_title; ?></a>
                         <form action="<?php echo base_url(); ?>add_course/<?php echo $tit_info[3]; ?>" id="<?php echo  $list_c->step_number; ?>" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="step_number" value="<?php echo  $list_c->step_number; ?>">
                         <input type="submit" class="hidden" name="GO" id="goo">
@@ -274,7 +214,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				else{
 					?>
 					<li>
-                        <a href="" class=" hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon "></i><span class="nav-label">Lesson 1 : KOSONG/</span></a>
+                        <a href="" class=" hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon "></i><span class="nav-label">1 : KOSONG/</span></a>
                         
                     </li>
 					<?php
@@ -318,13 +258,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <option value="">All</option>
                                 <?php 
                                 foreach ($list_subject as $sbj) {
-                                 if ($sbj->value == $tit_info[5]) {
+                                 if ($sbj->text == $tit_info[5]) {
                                     
                                  ?>
-                                 <option value="<?php echo $sbj->value ?>" selected="selected"><?php echo $sbj->text ?></option>
+                                 <option value="<?php echo $sbj->text ?>" selected="selected"><?php echo $sbj->text ?></option>
                                  <?php }
                                  else { ?>
-                                    <option value="<?php echo $sbj->value ?>"><?php echo $sbj->text ?></option>
+                                    <option value="<?php echo $sbj->text ?>"><?php echo $sbj->text ?></option>
                                 <?php 
                             }
                             } ?>

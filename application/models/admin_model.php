@@ -7,28 +7,7 @@ class Admin_model extends CI_Model {
 		parent::__construct();
 	}
 
-	// public function cek(){
-
-	// 	$emailadmin = $this->input->post('email');
-	// 	$password = $this->input->post('password');
-
-	// 	$query=$this->db->where('email',$emaildmin)
-	// 	                ->where('password',$password)
-	// 	                ->get('user');
-	// 	if($query->num_rows()>0){
-	// 		$data=array(
-	// 			'username' => $useradmin,
-	// 		    'logged_in' => TRUE,
-	// 		    'role' => $query->row()->role = 1
-	// 		);
-	// 		$this->session->set_userdata('logged_in');
-	// 		return TRUE;
-	// 	}else{
-	// 		return FALSE;
-	// 	}
-
-
-	// }
+	
 
 	public function get_data_user($limit,$mulai){
 		return $this->db->limit($limit,$mulai)

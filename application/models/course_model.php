@@ -2,7 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Course_model extends CI_Model {
-// type action  like title course = 0 , comment title course = 1, like(thumb up) comment = 2, reply comment = 3,dislike thumb down comment 4, enroll course 5
 
 	public function __construct()
 	{
@@ -156,8 +155,8 @@ class Course_model extends CI_Model {
         $username = $this->session->userdata('username');
         $id_usermaker = $this->course_model->GetData(['id_title'=> $id_title],'course_title')->row('id_user');
     
-        $query = $this->db->where(['id_title'=> $id_title,'from_id'=>$user_id,'for_id'=>$id_usermaker,'type_action'=>'5'])
-                          ->get('user_action');
+        $query = $this->db->where(['id_title'=> $id_title,'id_user'=>$user_id])
+                          ->get('enroll_course');
         
         
         if($query->num_rows() > 0)
@@ -177,18 +176,18 @@ class Course_model extends CI_Model {
                 ->update('course_title', $data);
             $enroll=array(
               'id_title'           => $id_title,
-              'from_id'            => $user_id,
-              'from_username'      => $username,
-              'for_id'             => $id_usermaker,
-              'type_action'        => '5',
+              'id_user'            => $user_id,
               'created_at'         => $now,
         );
             
-             $this->db->insert('user_action', $enroll);
-             $id_action =  $this->home_model->GetAction('*',['id_title'=> $id_title,'from_id'=>$user_id,'for_id'=>$id_usermaker,'type_action'=>'5'])->row('id_action');
+             $this->db->insert('enroll_course', $enroll);
+             $id_enroll =  $this->home_model->GetData(['id_title'=> $id_title,'id_user'=>$user_id],'enroll_course')->row('id_enroll');
              $insert_notif = array(
-            'id_action' => $id_action,
-            'for_id'    => $id_usermaker,
+              'get_id'                 => $id_enroll,
+              'id_user'                => $id_usermaker,
+              'type'                   => 'enroll_course',
+              'created_at'             => $now,
+        
             );
         
          $this->db->insert('notification', $insert_notif);
@@ -197,16 +196,6 @@ class Course_model extends CI_Model {
       
             }
         }
-        // else
-        // {
-        //     return false;
-        // }
-        
-        // if ($this->db->affected_rows() > 0) {
-        //     return TRUE;
-        // } else {
-        //     return FALSE;
-        // }
     }
     
 	public function GetListCourses($keyword){
@@ -214,7 +203,6 @@ class Course_model extends CI_Model {
 		if (empty($keyword)) {
 		return $this->db
 			->limit(15,0)
-			// ->order_by() 
             ->get('course_title')
             ->result();
 		}
@@ -222,7 +210,6 @@ class Course_model extends CI_Model {
 		return $this->db
 			->where($keyword)
 			->limit(15,0) 
-			// ->order_by()
             ->get('course_title')
             ->result();
 		}
@@ -231,7 +218,6 @@ class Course_model extends CI_Model {
         if (empty($keyword)) {
         return $this->db
             ->limit(6,$start)
-            // ->order_by() 
             ->get('course_title')
             ->result();
         }
@@ -239,19 +225,16 @@ class Course_model extends CI_Model {
         return $this->db
             ->where($keyword)
             ->limit(6,$start) 
-            // ->order_by()
             ->get('course_title')
             ->result();
         }
     }
     public function GLCMyAccount($keyword){
-        // courses on my account /search course course list
         $id_user = $this->session->userdata('logged_id');
         if (empty($keyword)) {
         return $this->db
             ->where('id_user', $id_user)
             ->limit(15,0)
-            // ->order_by() 
             ->get('course_title')
             ->result();
         }
@@ -260,20 +243,15 @@ class Course_model extends CI_Model {
             ->where($keyword)
             ->where('id_user', $id_user)
             ->limit(15,0) 
-            // ->order_by()
             ->get('course_title')
             ->result();
         }
     }
     public function GLCUserAccount($keyword,$id_user){
-        // courses on my account /search course course list
-        // $id_user = $this->session->userdata('logged_id');
-      
         if (empty($keyword)) {
         return $this->db
             ->where('id_user', $id_user)
             ->limit(15,0)
-            // ->order_by() 
             ->get('course_title')
             ->result();
         }
@@ -282,7 +260,6 @@ class Course_model extends CI_Model {
             ->where($keyword)
             ->where('id_user', $id_user)
             ->limit(15,0) 
-            // ->order_by()
             ->get('course_title')
             ->result();
         }
@@ -329,7 +306,6 @@ public function GetDetailCourse($id_course){
          $id_course = $this->uri->segment(3);
          return $this->db->where('id_course',$id_course)
                          ->get('course_content')
-                         
                          ->row();
      }
       public function GetDetailTitle($id_title){
@@ -343,13 +319,8 @@ public function GetDetailCourse($id_course){
          $id_user = $this->uri->segment(3);
          return $this->db->where('id_user',$id_user)
                          ->get('user')
-                         
                          ->row();
      }
-     // public function GetIdCourse(){
-     //     return $this->db->get('course_content')
-     //                     ->result();
-     // }
      public function comment_in(){
     date_default_timezone_set('Asia/Jakarta'); # add your city to set local time zone
     $now = date('Y-m-d H:i:s');
@@ -358,66 +329,50 @@ public function GetDetailCourse($id_course){
     $id_title = $this->input->post('id_title');
     $id_usermaker = $this->course_model->GetData(['id_title'=> $id_title],'course_title')->row('id_user');
     
-    $type_comment = $this->input->post('type_comment');
     $text_comment = $this->input->post('text_comment');
     $subject = $this->input->post('subject');
-    $reply_comment = $this->input->post('reply_comment');
-    if (empty($reply_comment)) {
-        $reply_id = NULL;
-    }
-    else {
-        $reply_id = $reply_comment;
-    }
-    
-    // $query = $this->GetData(['id_title'=>$id_title,'from_id'=>$user_id,'type_action'=>'0'],'user_action');
-        
+    $reply_id = $this->input->post('reply_comment');
             $data=array(              
               'id_title'              => $id_title,
-              'from_id'               => $user_id,
-              'from_username'         => $username,
-              'for_id'                => $id_usermaker,
-              'type_action'           => $type_comment, #1/3
-              'reply_id'              => $reply_id, #buat comment
+              'id_user'               => $user_id,
               'subject'               => $subject,
-              'text_comment'          => $text_comment, #buat comment
-              // 'status'             => ,
+              'text_comment'          => $text_comment,
+              'reply_id'              => $reply_id,
               'created_at'            => $now,
         );
-        $this->db->insert('user_action', $data);
+        $this->db->insert('comment', $data);
         $timestamp = strtotime($now);
-        $nowstr = strtotime($now);
-             
         $time = timespan($timestamp, $now) . ' ago';
         // notif
         $for_id = array();
         $insert_notif = array();
-    if ($type_comment == '1') #comment on course 
+    if ($reply_id == '0') #comment on course 
     {
-        $getcomment = $this->home_model->GetAction('*',['id_title' => $id_title,'type_action' => '1'])->result();
+        $getcomment = $this->home_model->GetData(['id_title' => $id_title,'reply_id' => $reply_id],'comment')->result();
         if ($user_id != $id_usermaker) {
         $for_id[] = $id_usermaker;
     }
         foreach ($getcomment as $comment) {
-                if (!in_array($comment->from_id, $for_id)){
-                    if ($user_id != $comment->from_id) {
-                        $for_id[] = $comment->from_id;
+                if (!in_array($comment->id_user, $for_id)){
+                    if ($user_id != $comment->id_user) {
+                        $for_id[] = $comment->id_user;
                     }
             
         }
         }
 
     }
-    else if($type_comment == '3') #comment reply comment
+    else 
     {
-        $getcomment = $this->home_model->GetAction('*',['id_title' => $id_title,'type_action' => '3','reply_id'=>$reply_id])->result();
-        $id_replyid = $this->home_model->GetAction('*',['id_action' => $reply_id])->row('from_id');
+        $getcomment = $this->home_model->GetData(['id_title' => $id_title,'reply_id'=>$reply_id],'comment')->result();
+        $id_replyid = $this->home_model->GetData(['id_comment' => $reply_id],'comment')->row('id_user');
         if ($user_id != $id_replyid) {
         $for_id[] = $id_replyid;
         }
         foreach ($getcomment as $comment) {
-                if (!in_array($comment->from_id, $for_id)){
-                    if ($user_id != $comment->from_id) {
-                        $for_id[] = $comment->from_id;
+                if (!in_array($comment->id_user, $for_id)){
+                    if ($user_id != $comment->id_user) {
+                        $for_id[] = $comment->id_user;
                     }
             
         }
@@ -426,13 +381,15 @@ public function GetDetailCourse($id_course){
     }
         if (!empty($for_id)) {
 
-        $id_action =  $this->home_model->GetAction('*',['id_title'=> $id_title,'from_id'=> $user_id,'from_username'=> $username,'for_id'=> $id_usermaker,'type_action'=> $type_comment,'reply_id'=> $reply_id,'subject'=> $subject,'text_comment'=> $text_comment,'created_at'=> $now,])->row('id_action');
+        $id_comment =  $this->home_model->GetData(['id_title'=> $id_title,'id_user'=> $user_id,'reply_id'=> $reply_id,'subject'=> $subject,'text_comment'=> $text_comment,'created_at'=> $now,],'comment')->row('id_comment');
 
         for($i = 0; $i < count($for_id); $i++)
         {
             $insert_notif[] = array(
-            'id_action' => $id_action,
-            'for_id'    => $for_id[$i]
+              'get_id'                 => $id_comment,
+              'id_user'                => $for_id[$i],
+              'type'                   => 'comment',
+              'created_at'             => $now,
             );
         }
          $this->db->insert_batch('notification', $insert_notif);
@@ -440,25 +397,24 @@ public function GetDetailCourse($id_course){
     // notif end
         if ($this->db->affected_rows() > 0) {
 
-            if ($type_comment == '3') {
-            // 0 subject,1 username, 2 text_comment, 3 created at, 4 total reply comment,5 id action
-                $reply_amount = $this->home_model->GetAction('COUNT(id_action) as comment_amount',['id_title' => $id_title,'reply_id'=>$reply_id,'type_action' => '3'])->row('comment_amount');
-                $id_action = $this->course_model->GetData(['subject'=> $subject,'text_comment'=>$text_comment,'created_at'=>$now,'reply_id'=>$reply_id,'from_id'=>$user_id],'user_action')->row('id_action');
-                return $subject.'|'.$username.'|'.$text_comment.'|'.$time.'|'.$reply_amount.'|'.$id_action.'|'.$user_id;
+            if ($reply_id != '0') {
+            $reply_amount = $this->home_model->GetSelectData('COUNT(id_comment) as comment_amount',['id_title' => $id_title,'reply_id'=>$reply_id],'comment')->row('comment_amount');
+                $id_comment = $this->course_model->GetData(['subject'=> $subject,'text_comment'=>$text_comment,'created_at'=>$now,'reply_id'=>$reply_id,'id_user'=>$user_id],'comment')->row('id_comment');
+                return $subject.'|'.$username.'|'.$text_comment.'|'.$time.'|'.$reply_amount.'|'.$id_comment.'|'.$user_id;
             }
-            else if($type_comment == '1'){
-                $id_action = $this->course_model->GetData(['subject'=> $subject,'text_comment'=>$text_comment,'created_at'=>$now,'reply_id'=>$reply_id,'from_id'=>$user_id],'user_action')->row('id_action');
-                return $subject.'|'.$username.'|'.$text_comment.'|'.$time.'|'.$id_action.'|'.$user_id;
+            else {
+                $id_comment = $this->course_model->GetData(['subject'=> $subject,'text_comment'=>$text_comment,'created_at'=>$now,'reply_id'=>$reply_id,'id_user'=>$user_id],'comment')->row('id_comment');
+                return $subject.'|'.$username.'|'.$text_comment.'|'.$time.'|'.$id_comment.'|'.$user_id;
             }
         } else {
             return "false";
         }
 
   }
-  public function action_del(){ //delete comment, dsb
-                $id_action = $this->input->post('id_action');
-                $this->db->where(['id_action'=>$id_action])
-                ->delete('user_action');
+  public function comment_del(){ //delete comment, dsb
+                $id_comment = $this->input->post('id_comment');
+                $this->db->where(['id_comment'=>$id_comment])
+                ->delete('comment');
                 if ($this->db->affected_rows() > 0) {
                 return "true";
                 }

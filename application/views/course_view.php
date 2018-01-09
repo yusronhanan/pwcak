@@ -82,10 +82,10 @@
                                  if ($sbj->value == $subject) {
                                     
                                  ?>
-                                 <option value="<?php echo $sbj->value ?>" selected="selected"><?php echo $sbj->text ?></option>
+                                 <option value="<?php echo $sbj->text ?>" selected="selected"><?php echo $sbj->text ?></option>
                                  <?php }
                                  else { ?>
-                                    <option value="<?php echo $sbj->value ?>"><?php echo $sbj->text ?></option>
+                                    <option value="<?php echo $sbj->text ?>"><?php echo $sbj->text ?></option>
                                 <?php 
                             }
                             } ?>

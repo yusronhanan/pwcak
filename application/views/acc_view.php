@@ -23,6 +23,8 @@
                  ?>
 
                  <button class="btn btn-default btn-xs pull-right" style="margin-left: 25px;"><i class="fa fa-pencil"></i><a href="#" data-toggle="modal" data-target="#edituser"> Edit Account</a></button>
+                 <button class="btn btn-default btn-xs pull-right" style="margin-left: 25px;"><i class="fa fa-plus"></i><a href="#" data-toggle="modal" data-target="#modalpost"> Add Course</a></button>
+                 
 
                  <button class="btn btn-danger btn-xs pull-right"><a href="#" data-toggle="modal" data-target="" class="subs_false"><i class="fa fa-users"></i> Subscriber  <?php echo $subss_amount; ?></a></button>
                  <?php }
@@ -76,6 +78,46 @@
                         </div>
                        </div>
                       <div class="clearfix"></div>
+                      <div class="modal fade" id="modalpost" tabindex="-1" role="dialog" >
+    <div class="modal-dialog" role="document">
+      <!-- Modal content-->
+      <div class="modal-content news-w3l">
+        <div class="modal-header">
+              <button type="button" class="close w3l" data-dismiss="modal">&times;</button>
+              <h4>Add New Course</h4>
+              <!--newsletter-->
+              <div class="login-main wthree">
+               <form action="<?php echo base_url(); ?>myaccount/newcourse_title" method="post" enctype="multipart/form-data">
+                Course Name
+                <input class="form-control" name="coursename" type="text">
+                Subject
+                <select class="form-control" name="subject">
+                                <option value="">All</option>
+                                <?php 
+                                foreach ($list_subject as $sbj) {
+                                 ?>
+                                    <option value="<?php echo $sbj->text ?>"><?php echo $sbj->text ?></option>
+                                <?php                      
+                            } ?>
+                                </select>
+                                Description
+                                <textarea name="description" class="form-control"> </textarea>
+                                
+              <!-- <label for="file-upload" class="custom-file-upload ">
+                <span class="glyphicon glyphicon-upload"></span>  Upload Thumbnail
+              </label> -->
+                <br/>
+                Choose Thumbnail
+                <input id="file-upload" name="thumbnail" type="file" class="form-control"/>
+              
+                <input type="submit" name="submit" value="Create Now">
+              </form>
+              </div>
+            <!--//newsletter-->     
+        </div>
+      </div>
+    </div>
+  </div>
                   <!-- //Modal edit user -->
                  <?php }
                  ?>
@@ -123,7 +165,7 @@
                                         <?php if ($this->session->userdata('logged_id') == $user_info->id_user) { ?>
                                         <li class=""><a href="#tab-2" data-toggle="tab" aria-expanded="false">All Notifications</a></li>
                                         <?php }  ?>
-                                        <li class=""><a href="#tab-3" data-toggle="tab" aria-expanded="true">Last activity</a></li>
+                                        <li class=""><a href="#tab-3" data-toggle="tab" aria-expanded="true">Enroll Course</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -133,6 +175,7 @@
                             <div class="tab-content">
                             <div class="tab-pane active" id="tab-1">
                              <table class="table table-striped">
+                                    <?php if (!empty($list_courses)) { ?>
                                     <thead>
                                     <tr>
                                         <th>No</th>
@@ -151,6 +194,7 @@
                                         </td> -->
                                         <?php
                                         $i=1; 
+                                        
                                         foreach ($list_courses as $courses) {  ?>
                                     <tr>
                                         <td><?php echo $i++ ?></td>
@@ -172,7 +216,10 @@
                                         
 
                                     </tr>
-                                    <?php } ?>
+                                    <?php } }
+                                    else {
+                                      echo '<img src="'.base_url().'assets/images/404.png" alt="" width="200px" style="display: block;margin: 0 auto;"/>';
+                                    } ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -191,7 +238,7 @@
                                     <tr>
                                     </tr>
                                     </thead>
-                                    <tbody id="big_activity">
+                                    <tbody>
                                       
                                         
                                    
@@ -253,37 +300,15 @@
               url:"<?php echo base_url(); ?>home/big_notif",
               method:"POST",
               data:{big_notif:big_notif},
-              // dataType:"json",
               success:function(e){
-                // var data = e.split("|");
-                // alert(data);
                 $('div#big_notif').html(e);
               }
             });
               }
-       
           window.onload = big_notif;
-          
       </script>
 <?php }  ?>
-<script type="text/javascript">
-   function big_activity() {
-                var big_activity = <?php echo $user_info->id_user ?>;
-          
-                  $.ajax({
-              url:"<?php echo base_url(); ?>home/big_activity",
-              method:"POST",
-              data:{big_activity:big_activity},
-              // dataType:"json",
-              success:function(e){
-                // var data = e.split("|");
-                // alert(data);
-                $('tbody#big_activity').html(e);
-              }
-            });
-              }
-              window.onload = big_activity;
-</script>
+
 <script type="text/javascript">
 <?php if ($this->session->userdata('logged_id') == $user_info->id_user) { ?>
   document.getElementById("filefoto").onchange = function() {
@@ -335,7 +360,6 @@
           
   });
   setInterval(function(){ big_notif() }, 5000);
-  setInterval(function(){ big_activity() }, 5000);
 </script>
 <div class="modal fade" id="lesson" tabindex="-1" role="dialog" >
               <div class="modal-dialog">

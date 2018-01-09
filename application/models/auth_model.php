@@ -2,7 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Auth_model extends CI_Model {
-	// type action  like title course = 0 , comment title course = 1, like(thumb up) comment = 2, reply comment = 3,dislike thumb down comment 4, enroll course 5
 	public function authentication(){
         $email = $this->input->post('email');
         $password = $this->input->post('password');
@@ -11,7 +10,7 @@ class Auth_model extends CI_Model {
         $username = $this->GetUser(['email'=>$email])->row('username');
         
 
-        $query = $this->GetUser(['email'=>$email,'password'=>$password]);
+        $query = $this->GetUser(['email'=>$email,'password'=>md5($password)]);
         if ($query->num_rows() > 0) {
             $data = [
                 'logged_id'     => $id,
@@ -39,16 +38,14 @@ class Auth_model extends CI_Model {
             'name'               => $this->input->post('name'),
             'email'              => $this->input->post('email'),
             'username'           => $this->input->post('username'),
-            'password'           => $this->input->post('password'),
+            'password'           => md5($this->input->post('password')),
             'city'               => $this->input->post('city'),
             'bio'                => $this->input->post('bio'),
             'created_at'         => $now,
             'last_update'        => $now,
-            'hash_validation'    => $random_code,
         );
 
         $this->db->insert('user',$data);
-                     //Load email library
  
     
         if($this->db->affected_rows() > 0) {
@@ -66,8 +63,6 @@ class Auth_model extends CI_Model {
 
             'name' => $this->input->post('name'),
             'email' => $this->input->post('email'),
-            // 'username' => $this->input->post('username'),
-            // 'password' => $this->input->post('password'),
             'city' => $this->input->post('city'),
             'bio' => $this->input->post('bio'),
             'last_update'        => $now,
@@ -83,7 +78,7 @@ class Auth_model extends CI_Model {
         }
     }
     public function editphoto($photo){
-        date_default_timezone_set('Asia/Jakarta'); # add your city to set local time zone
+        date_default_timezone_set('Asia/Jakarta'); 
         $now = date('Y-m-d H:i:s');
         $id_user = $this->session->userdata('logged_id');
         $data=array(

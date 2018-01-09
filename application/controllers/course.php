@@ -46,17 +46,17 @@ class Course extends CI_Controller {
 
 		foreach ($list_courses as $courses) {
 			$username[$courses->id_user] = $this->auth_model->GetUser(['id_user' => $courses->id_user])->row('username');
-			$like_amount[$courses->id_title] = $this->home_model->GetAction('COUNT(id_action) as like_amount',['id_title' => $courses->id_title,'type_action' => '0'])->row('like_amount');
-			$comment_amount[$courses->id_title] = $this->home_model->GetAction('COUNT(id_action) as comment_amount',['id_title' => $courses->id_title,'type_action' => '1'])->row('comment_amount');
+			$like_amount[$courses->id_title] = $this->home_model->GetSelectData('COUNT(id_likecourse) as like_amount',['id_title' => $courses->id_title],'like_course')->row('like_amount');
+			$comment_amount[$courses->id_title] = $this->home_model->GetSelectData('COUNT(id_comment) as comment_amount',['id_title' => $courses->id_title],'comment')->row('comment_amount');
 			if ($this->session->userdata('logged_in') == TRUE) {
-				$liked[] = $this->home_model->GetData(['id_title'=>$courses->id_title,'from_id'=>$user_id,'type_action'=>'0'],'user_action')->row('id_title');
+				$liked[] = $this->home_model->GetData(['id_title'=>$courses->id_title,'id_user'=>$user_id,],'like_course')->row('id_title');
 			}
 		}
 		
 		
 		if (!empty($title) || !empty($subject)) {
 				$data = [
-				'list_subject'		=> $this->course_model->GetSubject(),
+				'list_subject'	=> $this->course_model->GetSubject(),
 				'username' 		=> $username,
 				'like_amount'	=> $like_amount,
 				'comment_amount'=> $comment_amount,
@@ -88,9 +88,6 @@ class Course extends CI_Controller {
 			$result=$this->course_model->comment_in();
 			echo $result;
 		}
-		// else{
-			// echo "NOT_LOGIN";
-		// }
 	}
 	public function getlesson(){
 			$result=$this->course_model->GetJoin('course_title.*, user.name, user.username',['random_code'=>$this->input->post('random_code')])
@@ -99,32 +96,14 @@ class Course extends CI_Controller {
 					->get('course_title')->row();
 			echo $result->title.'|'.$result->thumbnail.'|'.$result->description.'|'.$result->name.'|'.$result->username;
 	}
-	public function action_delete(){ //delete comment, dsb
+	public function comment_delete(){ 
 		if ($this->session->userdata('logged_in') == TRUE) {
-			// $reply_idd = $this->course_model->GetData(['id_action'=> $this->input->post('id_action')],'id_action')->row('reply_id');
-			$result=$this->course_model->action_del();
-			echo $result;
-			// if ($result == "true") {
-			// 	$reply_amount = $this->home_model->GetAction('COUNT(id_action) as comment_amount',['reply_id'=>$reply_idd])->row('comment_amount');
-			// 	echo $reply_amount;
-			// }
-			// else{
-			// 	echo $result;
-			// }
-			
+			$result=$this->course_model->comment_del();
+			echo $result;	
 		}
-		// else{
-			// echo "NOT_LOGIN";
-		// }
 	}
 	public function detail_course(){
 		if ($this->session->userdata('logged_in') == TRUE) {
-		// $id_title = $this->uri->segment(3);
-		// $id_course = $this->uri->segment(3);
-		// $id_usermaker = $this->uri->segment(3);
-		// $data['det'] = $this->course_model->GetDetailTitle($id_title);
-		// $data['detail'] = $this->course_model->GetDetailCourse($id_course);
-		// $data['name'] = $this->course_model->GetDetailUser($id_usermaker);
 
 		$step_number = $this->input->post('step_number');
 		$id_user = $this->session->userdata('logged_id');
@@ -140,9 +119,8 @@ class Course extends CI_Controller {
 		$getcontent = '';
 		$step = '';
 		
-		$list_comment_2top= $this->home_model->GetLimitAction('*',['id_title' => $id_title,'type_action' => '1'],2,0)->result(); #blm top
+		$list_comment_2top= $this->home_model->GetLimitData('*',['id_title' => $id_title,'reply_id' => '0'],2,0,'comment')->result(); #blm top
 
-		// $list_comment_3= $this->home_model->GetAction('*',['id_title' => $id_title,'type_action' => '3'])->result();
 		$getmaker = $this->auth_model->GetUser(['id_user' => $id_usermaker])->row();
 		$getuser_in = $this->auth_model->GetUser(['id_user' => $id_user])->row();
 		
@@ -160,14 +138,15 @@ class Course extends CI_Controller {
 		$disliked = array(); #comment type 4
 
 		foreach ($list_comment_2top as $comment) {
-			$username[$comment->from_id] = $this->auth_model->GetUser(['id_user' => $comment->from_id])->row('username');
-			$like_amount[$comment->id_action] = $this->home_model->GetAction('COUNT(id_action) as like_amount',['reply_id' => $comment->id_action,'type_action' => '2'])->row('like_amount');
-			$dislike_amount[$comment->id_action] = $this->home_model->GetAction('COUNT(id_action) as dislike_amount',['reply_id' => $comment->id_action,'type_action' => '4'])->row('dislike_amount');
-			$reply_amount[$comment->id_action] = $this->home_model->GetAction('COUNT(id_action) as reply_amount',['reply_id' => $comment->id_action,'type_action' => '3'])->row('reply_amount');
+			$username[$comment->id_user] = $this->auth_model->GetUser(['id_user' => $comment->id_user])->row('username');
+			$like_amount[$comment->id_comment] = $this->home_model->GetSelectData('COUNT(id_likecomment) as like_amount',['id_comment' => $comment->id_comment,'type' => '2'],'like_comment')->row('like_amount');
+			$dislike_amount[$comment->id_comment] = $this->home_model->GetSelectData('COUNT(id_likecomment) as like_amount',['id_comment' => $comment->id_comment,'type' => '4'],'like_comment')->row('like_amount');
+			$reply_amount[$comment->id_comment] = $this->home_model->GetSelectData('COUNT(id_comment) as reply_amount',['reply_id' => $comment->id_comment],'comment')->row('reply_amount');
+
 			
 			if ($this->session->userdata('logged_in') == TRUE) {
-				$liked[] = $this->home_model->GetData(['reply_id' => $comment->id_action,'from_id'=>$id_user,'type_action'=>'2'],'user_action')->row('reply_id');
-				$disliked[] = $this->home_model->GetData(['reply_id' => $comment->id_action,'from_id'=>$id_user,'type_action'=>'4'],'user_action')->row('reply_id');
+				$liked[] = $this->home_model->GetData(['id_comment' => $comment->id_comment,'id_user'=>$id_user,'type'=>'2'],'like_comment')->row('id_comment');
+				$disliked[] = $this->home_model->GetData(['id_comment' => $comment->id_comment,'id_user'=>$id_user,'type'=>'4'],'like_comment')->row('id_comment');
 			}
 		}
 
@@ -224,12 +203,6 @@ class Course extends CI_Controller {
 	}
 
 	}
-	// public function GetId(){
- //        if($this->session->userdata('logged_in')==TRUE){
- //            $data['course'] = $this->course_model->GetIdCourse();
- //            $this->load->view('lesson_view',$data);
- //        }
- //    }
 }
 
 /* End of file course.php */

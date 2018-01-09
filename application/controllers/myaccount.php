@@ -53,19 +53,14 @@ class Myaccount extends CI_Controller {
 
 		foreach ($list_courses as $courses) {
 			$username[$courses->id_user] = $this->auth_model->GetUser(['id_user' => $courses->id_user])->row('username');
-			$like_amount[$courses->id_title] = $this->home_model->GetAction('COUNT(id_action) as like_amount',['id_title' => $courses->id_title,'type_action' => '0'])->row('like_amount');
-			$comment_amount[$courses->id_title] = $this->home_model->GetAction('COUNT(id_action) as comment_amount',['id_title' => $courses->id_title,'type_action' => '1'])->row('comment_amount');
+			$like_amount[$courses->id_title] = $this->home_model->GetSelectData('COUNT(id_likecourse) as like_amount',['id_title' => $courses->id_title],'like_course')->row('like_amount');
+			$comment_amount[$courses->id_title] = $this->home_model->GetSelectData('COUNT(id_comment) as comment_amount',['id_title' => $courses->id_title],'comment')->row('comment_amount');
 			if ($this->session->userdata('logged_in') == TRUE) {
-				$liked[] = $this->home_model->GetData(['id_title'=>$courses->id_title,'from_id'=>$user_id,'type_action'=>'0'],'user_action')->row('id_title');
+				$liked[] = $this->home_model->GetData(['id_title'=>$courses->id_title,'id_user'=>$user_id,],'like_course')->row('id_title');
 			}
 		}
 		if ($this->session->userdata('logged_in') == TRUE) {
-			// foreach ($list_user as $user) { tinggal ganti for id => $user->id_user
-			// $subscribed[] = $this->home_model->GetData(['from_id'=>$userid_in,'for_id'=>$user_id],'user_subscribe')->row('for_id');
-			// $subs_amount[$user->id_user] = $this->home_model->GetSubscribe('COUNT(id_subscribe) as subs_amount',['for_id' => $user->id_user])->row('subs_amount');
 			$subs_amount[$user_id] = $this->home_model->GetSubscribe('COUNT(id_subscribe) as subs_amount',['for_id' => $user_id])->row('subs_amount');
-		// }
-				
 		}
 		
 		if (!empty($title) || !empty($subject)) {
@@ -129,7 +124,7 @@ class Myaccount extends CI_Controller {
 		$getcourse = $this->course_model->GetCourse(['id_title'=>$id_title]);
 
 		$id_usermaker = $getcourse->row('id_user');
-		
+		$getuser_in = $this->auth_model->GetUser(['id_user' => $id_user])->row();
 		$list_content = '';
 		$getcontent = '';
 		$step = '';
@@ -164,9 +159,8 @@ class Myaccount extends CI_Controller {
 			'step'					=> $step,
 			'list_content'			=> $list_content,		
 			'last'					=> $lastid,
+			'getuser_in'			=> $getuser_in,
 			'list_subject'			=> $this->course_model->GetSubject(),
-			
-			// 'list_subject'		=> $this->course_model->GetSubject(),
 
 		];
 
@@ -201,9 +195,6 @@ class Myaccount extends CI_Controller {
 						
 						$lastnumber = (int) $this->course_model->GetLastStep(['id_title'=>$this->input->post('id_title')]);
 						$newnumber = $lastnumber + 1; 
-						// $this->session->set_flashdata('notif_success','Anda sukses menambah step baru');
-						// $this->session->set_flashdata('new_step', $newnumber);
-						// redirect('add_course/'.$random_code);
 
 						
 						$id_title = $this->input->post('id_title');
@@ -212,6 +203,7 @@ class Myaccount extends CI_Controller {
 						$id_usermaker = $getcourse->row('id_user');
 						$lastid = (int) $this->course_model->GetLastStep(['id_title'=>$id_title]);
 						$list_content = $this->course_model->GetListContent(['id_title' => $id_title, 'id_user' => $id_usermaker]);
+						$getuser_in = $this->auth_model->GetUser(['id_user' => $this->session->userdata('logged_id')])->row();
 						$getcontent = '';
 						$getname = $this->auth_model->GetUser(['id_user' => $id_usermaker])->row('name');
 						
@@ -223,7 +215,8 @@ class Myaccount extends CI_Controller {
 						'step'					=> $newnumber,
 						'list_content'			=> $list_content,		
 						'last'					=> $lastid,
-						'list_subject'		=> $this->course_model->GetSubject(),
+						'getuser_in'			=> $getuser_in,
+						'list_subject'		    => $this->course_model->GetSubject(),
 						
 						// 'list_subject'		=> $this->course_model->GetSubject(),
 
@@ -236,12 +229,15 @@ class Myaccount extends CI_Controller {
 						$this->session->set_flashdata('notif_success','Anda sukses menyimpan data');
 						// redirect('add_course/'.$random_code);
 						$getcontent = $this->course_model->GetContent(['id_title' => $id_title, 'step_number' => $this->input->post('step_number')])->row();
+						$getuser_in = $this->auth_model->GetUser(['id_user' => $this->session->userdata('logged_id')])->row();
+
 						$data = [
 						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject').'|'.$getcourse->row('thumbnail'),
 						'getcontent'			=> $getcontent,
 						'step'					=> $this->input->post('step_number'),
 						'list_content'			=> $list_content,		
 						'last'					=> $lastid,
+						'getuser_in'			=> $getuser_in,
 						'list_subject'		=> $this->course_model->GetSubject(),
 						
 						// 'list_subject'		=> $this->course_model->GetSubject(),
@@ -389,8 +385,8 @@ class Myaccount extends CI_Controller {
 
 						$id_title = $this->input->post('id_title');
 						$random_code = $this->course_model->GetData(['id_title'=>$id_title],'course_title')->row('random_code');
+						
 						$getcourse = $this->course_model->GetCourse(['id_title'=>$id_title]);
-
 						$id_usermaker = $getcourse->row('id_user');
 						$lastid = (int) $this->course_model->GetLastStep(['id_title'=>$id_title]);
 						$list_content = $this->course_model->GetListContent(['id_title' => $id_title, 'id_user' => $id_usermaker]);
@@ -402,13 +398,16 @@ class Myaccount extends CI_Controller {
 						$result = $this->course_model->edit_course_title();
 					if($result == TRUE) {
 					$this->session->set_flashdata('notif_success','Anda sukses update data course');
+					$getcourse = $this->course_model->GetCourse(['id_title'=>$id_title]);
 					$getcontent = $this->course_model->GetContent(['id_title' => $id_title, 'step_number' => $this->input->post('step_number')])->row();
+					$getuser_in = $this->auth_model->GetUser(['id_user' => $this->session->userdata('logged_id')])->row();
 						$data = [
 						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject').'|'.$getcourse->row('thumbnail'),
 						'getcontent'			=> $getcontent,
 						'step'					=> $this->input->post('step_number'),
 						'list_content'			=> $list_content,		
 						'last'					=> $lastid,
+						'getuser_in'			=> $getuser_in,
 						'list_subject'			=> $this->course_model->GetSubject(),
 						
 						// 'list_subject'		=> $this->course_model->GetSubject(),
@@ -419,16 +418,17 @@ class Myaccount extends CI_Controller {
 				}
 				else {
 					$this->session->set_flashdata('notif_failed','Maaf, ada kesalahan saat update. Coba lagi');
+					$getcourse = $this->course_model->GetCourse(['id_title'=>$id_title]);
 					$getcontent = $this->course_model->GetContent(['id_title' => $id_title, 'step_number' => $this->input->post('step_number')])->row();
+					$getuser_in = $this->auth_model->GetUser(['id_user' => $this->session->userdata('logged_id')])->row();
 						$data = [
 						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject').'|'.$getcourse->row('thumbnail'),
 						'getcontent'			=> $getcontent,
 						'step'					=> $this->input->post('step_number'),
 						'list_content'			=> $list_content,		
 						'last'					=> $lastid,
+						'getuser_in'			=> $getuser_in,
 						'list_subject'			=> $this->course_model->GetSubject(),
-						
-						// 'list_subject'		=> $this->course_model->GetSubject(),
 
 					];
 						
@@ -438,16 +438,17 @@ class Myaccount extends CI_Controller {
 			
 		}else{
 					$this->session->set_flashdata('notif',validation_errors());
+					$getcourse = $this->course_model->GetCourse(['id_title'=>$id_title]);
 					$getcontent = $this->course_model->GetContent(['id_title' => $id_title, 'step_number' => $this->input->post('step_number')])->row();
+					$getuser_in = $this->auth_model->GetUser(['id_user' => $this->session->userdata('logged_id')])->row();
 						$data = [
 						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject').'|'.$getcourse->row('thumbnail'),
 						'getcontent'			=> $getcontent,
 						'step'					=> $this->input->post('step_number'),
-						'list_content'			=> $list_content,		
+						'list_content'			=> $list_content,	
+						'getuser_in'			=> $getuser_in,	
 						'last'					=> $lastid,
 						'list_subject'			=> $this->course_model->GetSubject(),
-						
-						// 'list_subject'		=> $this->course_model->GetSubject(),
 
 					];
 						
@@ -481,15 +482,16 @@ class Myaccount extends CI_Controller {
 					if($result == TRUE) {
 					$this->session->set_flashdata('notif_success','Anda sukses update thumbnail course');
 					$getcontent = $this->course_model->GetContent(['id_title' => $id_title, 'step_number' => $this->input->post('step_number')])->row();
+					$getcourse = $this->course_model->GetCourse(['id_title'=>$id_title]);
+					$getuser_in = $this->auth_model->GetUser(['id_user' => $this->session->userdata('logged_id')])->row();
 						$data = [
 						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject').'|'.$getcourse->row('thumbnail'),
 						'getcontent'			=> $getcontent,
 						'step'					=> $this->input->post('step_number'),
 						'list_content'			=> $list_content,		
 						'last'					=> $lastid,
+						'getuser_in'			=> $getuser_in,
 						'list_subject'			=> $this->course_model->GetSubject(),
-						
-						// 'list_subject'		=> $this->course_model->GetSubject(),
 
 					];
 						
@@ -498,12 +500,15 @@ class Myaccount extends CI_Controller {
 				else {
 					$this->session->set_flashdata('notif_failed','Maaf, ada kesalahan saat update thumbnail. Coba lagi');
 					$getcontent = $this->course_model->GetContent(['id_title' => $id_title, 'step_number' => $this->input->post('step_number')])->row();
+					$getcourse = $this->course_model->GetCourse(['id_title'=>$id_title]);
+					$getuser_in = $this->auth_model->GetUser(['id_user' => $this->session->userdata('logged_id')])->row();
 						$data = [
 						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject').'|'.$getcourse->row('thumbnail'),
 						'getcontent'			=> $getcontent,
 						'step'					=> $this->input->post('step_number'),
 						'list_content'			=> $list_content,		
 						'last'					=> $lastid,
+						'getuser_in'			=> $getuser_in,
 						'list_subject'			=> $this->course_model->GetSubject(),
 						
 						// 'list_subject'		=> $this->course_model->GetSubject(),
@@ -516,12 +521,15 @@ class Myaccount extends CI_Controller {
 			else{
 				$this->session->set_flashdata('notif', $this->upload->display_errors());
 				$getcontent = $this->course_model->GetContent(['id_title' => $id_title, 'step_number' => $this->input->post('step_number')])->row();
+				$getcourse = $this->course_model->GetCourse(['id_title'=>$id_title]);
+				$getuser_in = $this->auth_model->GetUser(['id_user' => $this->session->userdata('logged_id')])->row();
 						$data = [
 						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject').'|'.$getcourse->row('thumbnail'),
 						'getcontent'			=> $getcontent,
 						'step'					=> $this->input->post('step_number'),
 						'list_content'			=> $list_content,		
 						'last'					=> $lastid,
+						'getuser_in'			=> $getuser_in,
 						'list_subject'			=> $this->course_model->GetSubject(),
 						
 						// 'list_subject'		=> $this->course_model->GetSubject(),
@@ -588,20 +596,17 @@ class Myaccount extends CI_Controller {
 
 		foreach ($list_courses as $courses) {
 			$username[$courses->id_user] = $this->auth_model->GetUser(['id_user' => $courses->id_user])->row('username');
-			$like_amount[$courses->id_title] = $this->home_model->GetAction('COUNT(id_action) as like_amount',['id_title' => $courses->id_title,'type_action' => '0'])->row('like_amount');
-			$comment_amount[$courses->id_title] = $this->home_model->GetAction('COUNT(id_action) as comment_amount',['id_title' => $courses->id_title,'type_action' => '1'])->row('comment_amount');
+			$like_amount[$courses->id_title] = $this->home_model->GetSelectData('COUNT(id_likecourse) as like_amount',['id_title' => $courses->id_title],'like_course')->row('like_amount');
+			$comment_amount[$courses->id_title] = $this->home_model->GetSelectData('COUNT(id_comment) as comment_amount',['id_title' => $courses->id_title],'comment')->row('comment_amount');
 			if ($this->session->userdata('logged_in') == TRUE) {
-				$liked[] = $this->home_model->GetData(['id_title'=>$courses->id_title,'from_id'=>$userid_in,'type_action'=>'0'],'user_action')->row('id_title');
+				$liked[] = $this->home_model->GetData(['id_title'=>$courses->id_title,'id_user'=>$user_id,],'like_course')->row('id_title');
 			}
 		}
 
 		if ($this->session->userdata('logged_in') == TRUE) {
 			// foreach ($list_user as $user) { tinggal ganti for id => $user->id_user
-			$subscribed[] = $this->home_model->GetData(['from_id'=>$userid_in,'for_id'=>$user_id],'user_subscribe')->row('for_id');
-			// $subs_amount[$user->id_user] = $this->home_model->GetSubscribe('COUNT(id_subscribe) as subs_amount',['for_id' => $user->id_user])->row('subs_amount');
+			$subscribed[] = $this->home_model->GetData(['id_user'=>$userid_in,'for_id'=>$user_id],'subscribe')->row('for_id');
 			$subs_amount[$user_id] = $this->home_model->GetSubscribe('COUNT(id_subscribe) as subs_amount',['for_id' => $user_id])->row('subs_amount');
-		// }
-				
 		}
 		
 

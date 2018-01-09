@@ -446,6 +446,35 @@ a.subs_true{
   color:#d9534f;
 }
 </style>
+<script type="text/javascript">
+        function mini_notif() {
+                var mini_notif = 'mini_notif';
+          
+                  $.ajax({
+              url:"<?php echo base_url(); ?>home/mini_notif",
+              method:"POST",
+              data:{mini_notif:mini_notif},
+              // dataType:"json",
+              success:function(e){
+                var data = e.split("|");
+                // alert(data);
+                $('ul#mininotif').html(data[0]);
+                  if (data[1] == '0') {
+                     $('i#count_notif').attr('data-count','0');
+                     $('i#count_notif').removeClass('notification-icon');
+                     $('h3#h_notif').html('Notifications (0)');
+                   }
+                  else{
+                      $('i#count_notif').attr('data-count',data[1]);
+                      $('i#count_notif').addClass('notification-icon');
+                      $('h3#h_notif').html('Notifications ('+data[1]+')');
+                   }
+                
+              }
+            });
+              }
+          window.onload = mini_notif;
+      </script>
 </head>
 <body>
   <?php if ($this->session->flashdata('notif_success')): ?>
@@ -846,22 +875,29 @@ a.subs_true{
       ?>
       <div class="comment-wrap">
         <div class="photo">
-            <div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg')"></div>
+          <?php 
+          if(array_key_exists($comment->id_user, $avaa)) {
+          $img =  $avaa[$comment->id_user];
+          }
+          $avaaa = base_url().'assets/images/'.$img;
+          ?>
+
+            <div class="avatar" style="background-image: url('<?php echo $avaaa ?>');"></div>
 
         </div>
         <div class="comment-block">
           <?php 
-          if(array_key_exists($comment->from_id, $username)) {
-          $usrnm =  $username[$comment->from_id];
+          if(array_key_exists($comment->id_user, $username)) {
+          $usrnm =  $username[$comment->id_user];
           }?>
           <h5 style="color: #d9534f;"><?php  echo $comment->subject ?> <a href="<?php echo base_url().$usrnm; ?>"><span style="font-size: 1.5rem;" class="userspan">@<?php echo $usrnm; ?></span></a>
             <?php  
-              if ($this->session->userdata('logged_id') == $comment->from_id) {
+              if ($this->session->userdata('logged_id') == $comment->id_user) {
                  ?>
                 <span class="badge" style="font-size: 1.5rem;background-color:#d9534f;">you</span>
               <?php
               }
-              else if($comment->from_id == $maker_info->id_user){
+              else if($comment->id_user == $maker_info->id_user){
                 ?>
                 <span class="badge" style="font-size: 1.5rem;background-color:#d9534f;">creator</span>
               <?php
@@ -885,33 +921,33 @@ a.subs_true{
                    ?></div>
                 <ul class="comment-actions">
           <?php 
-                    if(array_key_exists($comment->id_action, $like_amount)) {
-                    $likes =  $like_amount[$comment->id_action];
+                    if(array_key_exists($comment->id_comment, $like_amount)) {
+                    $likes =  $like_amount[$comment->id_comment];
                     }
                     $thumb = '';
                     if (!empty($liked)) {
-                        if(in_array($comment->id_action, $liked)) {
+                        if(in_array($comment->id_comment, $liked)) {
                         $thumb = 'thumb_true';
                     }
                     }
-                    if(array_key_exists($comment->id_action, $dislike_amount)) {
-                      $dislikes =  $dislike_amount[$comment->id_action];
+                    if(array_key_exists($comment->id_comment, $dislike_amount)) {
+                      $dislikes =  $dislike_amount[$comment->id_comment];
                     }
                     $thumbb = '';
                     if (!empty($disliked)) {
-                        if(in_array($comment->id_action, $disliked)) {
+                        if(in_array($comment->id_comment, $disliked)) {
                         $thumbb = 'thumb_true';
                     }
                     }
-                     if(array_key_exists($comment->id_action, $reply_amount)) {
-                      $replies =  $reply_amount[$comment->id_action];
+                     if(array_key_exists($comment->id_comment, $reply_amount)) {
+                      $replies =  $reply_amount[$comment->id_comment];
                     }
                     ?>
-                    <li class="reply likes_comment <?php echo $thumb; ?>" id="<?php echo $comment->id_action ?>"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <?php echo $likes; ?></li>
-                    <li class="reply dislikes_comment <?php echo $thumbb; ?>" id="<?php echo $comment->id_action ?>"><i class="fa fa-thumbs-down" aria-hidden="true"></i> <?php echo $dislikes; ?></li>
+                    <li class="reply likes_comment <?php echo $thumb; ?>" id="<?php echo $comment->id_comment ?>"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <?php echo $likes; ?></li>
+                    <li class="reply dislikes_comment <?php echo $thumbb; ?>" id="<?php echo $comment->id_comment ?>"><i class="fa fa-thumbs-down" aria-hidden="true"></i> <?php echo $dislikes; ?></li>
                     <li class="reply" id="reply-c"><i class="fa fa-reply" aria-hidden="true"></i> <?php echo $replies; ?></li>
-                    <?php if($this->session->userdata('logged_id') == $comment->from_id) { ?>
-                    <li class="reply delete" id="<?php echo $comment->id_action ?>"><i class="fa fa-trash" aria-hidden="true"></i></li>
+                    <?php if($this->session->userdata('logged_id') == $comment->id_user) { ?>
+                    <li class="reply delete" id="<?php echo $comment->id_comment ?>"><i class="fa fa-trash" aria-hidden="true"></i></li>
                     <?php } ?>
                 </ul>
                   </div>
@@ -935,7 +971,7 @@ a.subs_true{
       <textarea name='text_comment' id='text_comment' cols='30' rows='3' placeholder='Comment Text'></textarea>
       </form>
       <ul class='comment-actions'>
-        <li class='reply' title='Send' id="<?php echo $comment->id_action ?>">
+        <li class='reply' title='Send' id="<?php echo $comment->id_comment ?>">
         <i class='fa fa-paper-plane' aria-hidden='true'>
       </i></li>
       </ul>
@@ -945,24 +981,32 @@ a.subs_true{
           // 0 subject,1 username, 2 text_comment, 3 created at, 4 total reply comment, 5 id action
 
     foreach ($list_reply_comment as $reply_comment) {
-       if ($comment->id_action == $reply_comment->reply_id) { 
+       if ($comment->id_comment == $reply_comment->reply_id) { 
        ?>
 <div class="comment-reply">
   <div class="photo">
-  <div class="ava-me"></div></div>
+ <?php 
+          if(array_key_exists($comment->id_user, $avaa)) {
+          $img =  $avaa[$comment->id_user];
+          }
+          $avaaa = base_url().'assets/images/'.$img;
+          ?>
+
+            <div class="avatar" style="background-image: url('<?php echo $avaaa ?>');"></div>
+</div>
 <div class="comment-block">
   <?php 
-          if(array_key_exists($reply_comment->from_id, $username)) {
-          $usrnm =  $username[$reply_comment->from_id];
+          if(array_key_exists($reply_comment->id_user, $username)) {
+          $usrnm =  $username[$reply_comment->id_user];
           }?>
           <h5 style="color: #d9534f;"><?php  echo $reply_comment->subject ?> <a href="<?php echo base_url().$usrnm; ?>"><span style="font-size: 1.5rem;" class="userspan">@<?php echo $usrnm; ?></span></a>
             <?php  
-              if ($this->session->userdata('logged_id') == $reply_comment->from_id) {
+              if ($this->session->userdata('logged_id') == $reply_comment->id_user) {
                  ?>
                 <span class="badge" style="font-size: 1.5rem;background-color:#d9534f;">you</span>
               <?php
               }
-              else if($reply_comment->from_id == $maker_info->id_user){
+              else if($reply_comment->id_user == $maker_info->id_user){
                 ?>
                 <span class="badge" style="font-size: 1.5rem;background-color:#d9534f;">creator</span>
               <?php
@@ -981,30 +1025,30 @@ a.subs_true{
                    ?></div>
                 <ul class="comment-actions">
           <?php 
-                    if(array_key_exists($reply_comment->id_action, $like_amount)) {
-                    $likes =  $like_amount[$reply_comment->id_action];
+                    if(array_key_exists($reply_comment->id_comment, $like_amount)) {
+                    $likes =  $like_amount[$reply_comment->id_comment];
                     }
                     $thumb = '';
                     if (!empty($liked)) {
-                        if(in_array($reply_comment->id_action, $liked)) {
+                        if(in_array($reply_comment->id_comment, $liked)) {
                         $thumb = 'thumb_true';
                     }
                     }
-                    if(array_key_exists($reply_comment->id_action, $dislike_amount)) {
-                      $dislikes =  $dislike_amount[$reply_comment->id_action];
+                    if(array_key_exists($reply_comment->id_comment, $dislike_amount)) {
+                      $dislikes =  $dislike_amount[$reply_comment->id_comment];
                     }
                     $thumbb = '';
                     if (!empty($disliked)) {
-                        if(in_array($reply_comment->id_action, $disliked)) {
+                        if(in_array($reply_comment->id_comment, $disliked)) {
                         $thumbb = 'thumb_true';
                     }
                     }
                      
                     ?>
-                    <li class="reply likes_comment <?php echo $thumb; ?>" id="<?php echo $reply_comment->id_action ?>"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <?php echo $likes; ?></li>
-                    <li class="reply dislikes_comment <?php echo $thumbb; ?>" id="<?php echo $reply_comment->id_action ?>"><i class="fa fa-thumbs-down" aria-hidden="true"></i> <?php echo $dislikes; ?></li>
-                    <?php if($this->session->userdata('logged_id') == $reply_comment->from_id) { ?>
-                    <li class="reply delete" id="<?php echo $reply_comment->id_action ?>"><i class="fa fa-trash" aria-hidden="true"></i></li>
+                    <li class="reply likes_comment <?php echo $thumb; ?>" id="<?php echo $reply_comment->id_comment ?>"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <?php echo $likes; ?></li>
+                    <li class="reply dislikes_comment <?php echo $thumbb; ?>" id="<?php echo $reply_comment->id_comment ?>"><i class="fa fa-thumbs-down" aria-hidden="true"></i> <?php echo $dislikes; ?></li>
+                    <?php if($this->session->userdata('logged_id') == $reply_comment->id_user) { ?>
+                    <li class="reply delete" id="<?php echo $reply_comment->id_comment ?>"><i class="fa fa-trash" aria-hidden="true"></i></li>
                     <?php } ?>
                 </ul>
                   </div>
@@ -1060,8 +1104,8 @@ a.subs_true{
                                         </td>
                                         <td>
                                            <?php  
-                                           if(array_key_exists($comment->id_action, $reply_amount)) {
-                                             $repliess =  $reply_amount[$comment->id_action];
+                                           if(array_key_exists($comment->id_comment, $reply_amount)) {
+                                             $repliess =  $reply_amount[$comment->id_comment];
                                             echo $repliess;
                                             } ?>
                                         </td>
@@ -1402,7 +1446,6 @@ a.subs_true{
 
     function reply_c(){
         var here = $(this).parent().parent().parent().parent();
-            // $(this).parent().parent().parent().parent()
             if (here.next().hasClass('hidden')) {
             here.next().removeClass('hidden');
           }
@@ -1424,13 +1467,12 @@ a.subs_true{
         var text_comment = $(this).parent().prev().find('textarea#text_comment').val();
         var reply_id = $(this).attr('id');
         var id_title = <?php echo $title_info->id_title; ?>;
-        // alert(subject+' '+text_comment+' '+reply_id);
         if ($.trim(subject).length > 0 && $.trim(text_comment).length > 0) {
           $.ajax({
                     url: '<?php echo base_url(); ?>course/comment_up',
                     type: 'post',
                     context: this,
-                    data: {subject : subject, text_comment :text_comment  , reply_comment:reply_id, type_comment:'3',id_title:id_title},
+                    data: {subject : subject, text_comment :text_comment  , reply_comment:reply_id,id_title:id_title},
                     success: function(e){
                        if (e == "false") {
 
@@ -1485,7 +1527,7 @@ else{
                     url: '<?php echo base_url(); ?>course/comment_up',
                     type: 'post',
                     context: this,
-                    data: {subject : subject, text_comment :text_comment, type_comment:'1',id_title:id_title},
+                    data: {subject : subject, text_comment :text_comment,id_title:id_title, reply_comment : '0'},
                     success: function(e){
                        if (e == "false") {
 
@@ -1533,14 +1575,13 @@ else{
       
       function delete_comment(){
         if (confirm('Are you sure you want to delete this?')) {
-        var id_action = $(this).attr('id');
+        var id_comment = $(this).attr('id');
         var here = $(this).parent().parent().parent().parent();
-        // alert(id_action);
           $.ajax({
-                    url: '<?php echo base_url(); ?>course/action_delete',
+                    url: '<?php echo base_url(); ?>course/comment_delete',
                     type: 'post',
                     context: this,
-                    data: {id_action : id_action,type:'delete_comment'},
+                    data: {id_comment : id_comment},
                     success: function(e){
                        if (e == "false") {
                         alert('gagal');
@@ -1561,14 +1602,13 @@ else{
   function likes_comment(){
       <?php if ($this->session->userdata('logged_in') == TRUE) {  ?>
 
-    var id_action = $(this).attr('id');
+    var id_comment = $(this).attr('id');
     var id_title = <?php echo $title_info->id_title; ?>;
-    // alert(id_action + id_title);
     $.ajax({
                     url: '<?php echo base_url(); ?>home/thumb_comment',
                     type: 'post',
                     context: this,
-                    data: {id_action : id_action, id_title : id_title, type_action : '2',type_delete :'4'},
+                    data: {id_comment : id_comment, id_title : id_title, type_action : '2',type_delete :'4'},
                     success: function(e){
                          if(e == "false") {alert('Maaf, thumb_up anda gagal');}
                          
@@ -1605,14 +1645,13 @@ else{
   function dislikes_comment(){
         <?php if ($this->session->userdata('logged_in') == TRUE) {  ?>
 
-    var id_action = $(this).attr('id');
+    var id_comment = $(this).attr('id');
     var id_title = <?php echo $title_info->id_title; ?>;
-    // alert(id_action + id_title);
     $.ajax({
                     url: '<?php echo base_url(); ?>home/thumb_comment',
                     type: 'post',
                     context: this,
-                    data: {id_action : id_action, id_title : id_title, type_action : '4',type_delete :'2'},
+                    data: {id_comment : id_comment, id_title : id_title, type_action : '4',type_delete :'2'},
                     success: function(e){
                          if(e == "false") {alert('Maaf, thumb_up anda gagal');}
                          
@@ -1648,34 +1687,6 @@ else{
   }
   
 </script>
-<script type="text/javascript">
-        function mini_notif() {
-                var mini_notif = 'mini_notif';
-          
-                  $.ajax({
-              url:"<?php echo base_url(); ?>home/mini_notif",
-              method:"POST",
-              data:{mini_notif:mini_notif},
-              // dataType:"json",
-              success:function(e){
-                var data = e.split("|");
-                // alert(data);
-                $('ul#mininotif').html(data[0]);
-                  if (data[1] == '0') {
-                     $('i#count_notif').attr('data-count','0');
-                     $('i#count_notif').removeClass('notification-icon');
-                     $('h3#h_notif').html('Notifications (0)');
-                   }
-                  else{
-                      $('i#count_notif').attr('data-count',data[1]);
-                      $('i#count_notif').addClass('notification-icon');
-                      $('h3#h_notif').html('Notifications ('+data[1]+')');
-                   }
-                
-              }
-            });
-              }
-          window.onload = mini_notif;
-      </script>
+
 </body>
 </html>

@@ -64,7 +64,7 @@
 				<h6>By  <a href="<?php echo base_url() ?><?php echo $usrnm ?>">
 					<?php echo $usrnm ?>
 				</a>, <?php echo $pcourses->created_at ?></h6>
-				<p><?php echo $pcourses->description ?></p>
+				<p><?php echo substr($pcourses->description, 0,105) ?>...</p>
 			</div>
 			<div class="eve-sub2">
 				<div class="eve-w3lleft">
@@ -151,7 +151,7 @@
 				<h6>By  <a href="<?php echo base_url() ?><?php echo $usrnm ?>">
 					<?php echo $usrnm ?>
 				</a>, <?php echo $rcourses->created_at ?></h6>
-				<p><?php echo $rcourses->description ?></p>
+				<p><?php echo substr($rcourses->description, 0,105) ?>...</p>
 			</div>
 
 			<div class="eve-sub2">
@@ -232,47 +232,3 @@
 			</div>
 	</div>
 	<div class="clearfix"></div>
-<!--//about-->
-				<div class="modal fade" id="lesson" tabindex="-1" role="dialog" >
-							<div class="modal-dialog">
-							<!-- Modal content-->
-								<div class="modal-content">
-									<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4 id="title_lesson"></h4>
-											<p>by :<a href="" id="username_lesson"><i id="name_lesson"></i></a></p>
-											<img src="images/e2.jpg" id="img_lesson" alt="lesson" width="350px" height="350px" />
-											<span id="desc_lesson"></span>
-											<br>
-											<div class="eve-w3lright e1">
-								<a href="" id="go_lesson"><button class="btn btn-danger pull-right">Enroll</button></a>
-										</div>
-									</div>
-
-								</div>
-						
-							</div>
-				       </div>
-<script type="text/javascript">
-			$("a.lesson_view").click(function(event) {
-					    var random_code = $(this).attr('id');
-					    if (random_code != "") {
-					        $.ajax({
-					            url: "<?php echo base_url()?>course/getlesson",
-					            type: 'post',
-					            data: {
-					                random_code: random_code
-					            },
-					            success: function(e) {
-					                var data = e.split("|");
-					                $('#title_lesson').html(data[0]);
-					                $('#img_lesson').attr('src','<?php echo base_url() ?>assets/images/'+data[1]);
-					                $('#desc_lesson').html(data[2]);
-					                $('#name_lesson').html(data[3]);
-					                $('#username_lesson').attr('href','<?php echo base_url() ?>'+data[4]);
-					                $('#go_lesson').attr('href','<?php echo base_url() ?>lesson/'+random_code);
-					            }
-					        });
-					    }
-					});
-</script>

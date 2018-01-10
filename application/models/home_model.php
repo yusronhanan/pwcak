@@ -26,7 +26,7 @@ class Home_model extends CI_Model {
   public function GetCourseVerified()
   {
     return $this->db
-                ->where('verified',1)
+                ->where('pick',1)
                 ->limit(9,0)
                 ->get('course_title')
                 ->result();

@@ -36,7 +36,12 @@
                                 <?php 
                                 $no = 1;
                                 foreach($course as $data){
-
+                                if ($data->pick == 0) {
+                                  $picks = '<i class="glyphicon glyphicon-pushpin"></i> Pick';
+                                }
+                                else{
+                                  $picks = '<i class="glyphicon glyphicon-check"></i> Unpick';
+                                }
                                 echo '
                                   <td>'.++$start.'</td>
                                   <td>'.$data->id_user.'</td>
@@ -44,7 +49,7 @@
                                   <td>'.$data->subject.'</td>
                                   <td>'.$data->created_at.'</td>
                                   <td colspan="2"> 
-                                 <a class = "btn btn-info" href="'.base_url().'admin/edit_pick/'.$data->id_title.'"><i class="glyphicon glyphicon-hand-up"></i> Pick </a>
+                                 <a class = "btn btn-success pickss" id="'.$data->id_title.'">'.$picks.'</a>
                               <input type="hidden" id="id_course" value="" class="form-control"> 
                               <button type="button" href="#" id="'.$data->id_title.'" class = "btn btn-success view" data-toggle="modal" data-target="#viewCourse"><i class="glyphicon glyphicon-eye-open"></i> View </a>
                               <button type="button" href="'.base_url().'index.php/admin/course_delete/'.$data->id_title.'" class = "btn btn-danger" style="margin-left:5px;"><i class="fa fa-trash-o"></i> Delete </button>  
@@ -114,42 +119,11 @@
                         <span><h5 id="visitor_id"></h5></span>
                     </div>
                 </a>
-                       <!--  <div class="row">
-                            <div class="col-md-4 col-sm-6 col-xs-12">
-                                <select class="form-control" name="select">
-                                    <option value="" selected="">Color</option>
-                                    <option value="black">Black</option>
-                                    <option value="white">White</option>
-                                    <option value="gold">Gold</option>
-                                    <option value="rose gold">Rose Gold</option>
-                                    </select>
-                            </div> -->
-                            <!-- end col -->
-                            <!-- <div class="col-md-4 col-sm-6 col-xs-12">
-                                <select class="form-control" name="select">
-                                    <option value="">Capacity</option>
-                                    <option value="">16GB</option>
-                                    <option value="">32GB</option>
-                                    <option value="">64GB</option>
-                                    <option value="">128GB</option>
-                                </select>
-                            </div> -->
-                            <!-- end col -->
-                            <!-- <div class="col-md-4 col-sm-12">
-                                <select class="form-control" name="select">
-                                    <option value="" selected="">QTY</option>
-                                    <option value="">1</option>
-                                    <option value="">2</option>
-                                    <option value="">3</option>
-                                </select>
-                            </div> -->
-                            <!-- end col -->
-                        <!-- </div> -->
                         <br>
                         <div class="space-ten"></div>
                         <div class="btn-ground">
-                            <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-heart"></span></button>
-                            <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-link"></span></button>
+                            <a href="" id="go_discuss" target="_blank"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-comment"></span></button></a>
+                            <a href="" id="go_lesson" target="_blank"><button type="button" class="btn btn-success"><span class="glyphicon glyphicon-education"></span></button></a>
                         </div>
                     </div>
                    </div>
@@ -168,14 +142,14 @@
               <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery-2.1.4.min.js"></script>
             <script type="text/javascript">
             $("button.view").click(function(event) {
-              var id_user = $(this).attr('id');
+              var id_title = $(this).attr('id');
               // alert(product_id);
-              if (id_user != "") {
+              if (id_title != "") {
                   $.ajax({
-                      url: "<?php echo base_url()?>admin/detcourse/"+ id_user,
+                      url: "<?php echo base_url()?>admin/detcourse/"+ id_title,
                       type: 'post',
                       data: {
-                          id: id_user
+                          id: id_title
                       },
                       success: function(e) {
                           var data = e.split("|");
@@ -187,10 +161,38 @@
                           $('img#image_id').attr('src','<?php echo base_url(); ?>assets/images/' + data[4]);
                           $('h5#date_id').html(data[3]);
                           $('h5#visitor_id').html(data[6]);
+                          $('a#go_lesson').attr('href','<?php echo base_url(); ?>lesson/' + data[7]);
+                          $('a#go_discuss').attr('href','<?php echo base_url(); ?>discuss/' + data[7]);
+                          
                       }
                   });
-              } else {
-                  $('#pro_name').html();
               }
           });
-          </script>
+          
+      $("a.pickss").click(function(event) {
+              var id_title = $(this).attr('id');
+              if (id_title != "") {
+                  $.ajax({
+                      url: "<?php echo base_url()?>admin/edit_pick",
+                      type: 'post',
+                      context: this,
+                      data: {
+                          id_title: id_title
+                      },
+                      success: function(e) {
+                        if (e == 'true') {
+                          if ($(this).children().hasClass('glyphicon-pushpin')) {
+                                 $(this).html('<i class="glyphicon glyphicon-check"></i> Unpick');
+                                }
+                                else{
+                                  $(this).html('<i class="glyphicon glyphicon-pushpin"></i> Pick');
+                                }
+                      }
+                      else{
+                        alert('Maaf, anda gagal. Coba lagi');
+                      }
+                      }
+                  });
+              }
+          });
+</script>

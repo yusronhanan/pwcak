@@ -706,6 +706,8 @@ a.subs_true{
                   <button class="btn <?php echo $subs; ?> subs_in pull-right" id="<?php echo $maker_info->id_user; ?>"><a href="#" data-toggle="modal" data-target="" class="<?php echo $a_subs; ?>"><i class="<?php echo $i_subs; ?>"></i> <?php echo $text; ?>  <?php echo $subss_amount; ?></a></button>
                   <!-- <button class="btn btn-default"><a href="#" data-toggle="modal" data-target=""><i class="fa fa-users"></i> Disubscribe  1000</a></button> -->
                 <?php } ?>
+                <a href="#" data-toggle="modal" data-target="#lesson" class="lesson_view" id="<?php echo $title_info->random_code ?>"><button class="btn btn-danger"><i class="fa fa-search"></i> Course Detail</button></a>
+                
                                     <!-- <a href="#" class="btn btn-white btn-xs pull-right">Edit project</a> -->
                                     <h2><?php  echo $title_info->title ?></h2>
                                 </div>
@@ -720,8 +722,8 @@ a.subs_true{
 
                                     <dt>Created by:</dt> <dd><?php echo $maker_info->name ?></dd>
                                     <dt>Username:</dt> <dd>  <a href="<?php echo base_url().$maker_info->username; ?>" target="_blank" class="text-navy">@<?php echo $maker_info->username ?></a></dd>
-                                    <dt>Description:</dt> <dd> <?php  echo $title_info->description ?></dd>
                                     <dt>Visitor:</dt> <dd>     <?php  echo $title_info->visitor ?> </dd>
+
                                 </dl>
                             </div>
                             <div class="col-lg-7" id="cluster_info">
@@ -1687,6 +1689,48 @@ else{
   }
   
 </script>
+<div class="modal fade" id="lesson" tabindex="-1" role="dialog" >
+              <div class="modal-dialog">
+              <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 id="title_lesson"></h4>
+                      <p>by :<a href="" id="username_lesson"><i id="name_lesson"></i></a></p>
+                      <img src="images/e2.jpg" id="img_lesson" alt="lesson" width="350px" height="350px" />
+                      <span id="desc_lesson"></span>
+                      <br>
+                      <div class="eve-w3lright e1">
+                <a href="" id="go_lesson"><button class="btn btn-danger pull-right">Enroll</button></a>
+                    </div>
+                  </div>
 
+                </div>
+            
+              </div>
+               </div>
+<script type="text/javascript">
+      $("a.lesson_view").click(function(event) {
+              var random_code = $(this).attr('id');
+              if (random_code != "") {
+                  $.ajax({
+                      url: "<?php echo base_url()?>course/getlesson",
+                      type: 'post',
+                      data: {
+                          random_code: random_code
+                      },
+                      success: function(e) {
+                          var data = e.split("|");
+                          $('#title_lesson').html(data[0]);
+                          $('#img_lesson').attr('src','<?php echo base_url() ?>assets/images/'+data[1]);
+                          $('#desc_lesson').html(data[2]);
+                          $('#name_lesson').html(data[3]);
+                          $('#username_lesson').attr('href','<?php echo base_url() ?>'+data[4]);
+                          $('#go_lesson').attr('href','<?php echo base_url() ?>lesson/'+random_code);
+                      }
+                  });
+              }
+          });
+</script>
 </body>
 </html>

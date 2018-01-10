@@ -149,7 +149,7 @@ class Admin extends CI_Controller {
 	public function detCourse(){
  		if($this->session->userdata('role')==1){
  		    $data = $this->admin_model->get_detail_course();
-			echo $data->id_title."|".$data->title."|".$data->subject."|".$data->created_at."|".$data->thumbnail."|".$data->description."|".$data->visitor;
+			echo $data->id_title."|".$data->title."|".$data->subject."|".$data->created_at."|".$data->thumbnail."|".$data->description."|".$data->visitor."|".$data->random_code;
 		}
 		else{
 			$this->session->set_flashdata('notif_failed','Anda telah logout sebelumnya');
@@ -177,12 +177,10 @@ class Admin extends CI_Controller {
 			// $unedit = 
 			$result = $this->admin_model->editpick($this->uri->segment(3));
 			if($result == TRUE){
-				$this->session->set_flashdata('notif_success','Course telah terverifikasi!');
-				redirect ('admin/get_course');
-			}else{
-				$this->admin_model->uneditpick($this->uri->segment(3));
-				$this->session->set_flashdata('notif_failed','Course telah di unverifikasi!');
-				redirect ('admin');
+				echo 'true';
+			}
+			else{
+				echo 'false';
 			}
 		}
 	}

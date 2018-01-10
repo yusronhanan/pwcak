@@ -445,6 +445,15 @@ public function GetDetailCourse($id_course){
     {
       return $this->db->select($select)->where($where);
     }
+    public function GetListDiscuss($where){
+      return $this->db->select('comment.*, user.username, course_title.random_code, course_title.title, comment.created_at as comment_created')
+            ->where($where)
+            ->join('user', 'comment.id_user = user.id_user')
+            ->join('course_title', 'comment.id_title = course_title.id_title')
+            ->group_by('id_comment')
+            ->get('comment')
+            ->result();
+    }
 }
 
 /* End of file course_model.php */

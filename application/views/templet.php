@@ -491,7 +491,7 @@
     </div>
   </nav>
 
-
+    
   <script src="<?php echo base_url(); ?>assets/js/jquery.chocolat.js"></script>
     <link rel="stylesheet" href="css/chocolat.css" type="text/css" media="screen">
     <!--light-box-files -->
@@ -659,6 +659,48 @@
     setInterval(function(){ mini_notif() }, 3000);
 
   </script>
+  <div class="modal fade" id="lesson" tabindex="-1" role="dialog" >
+              <div class="modal-dialog">
+              <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 id="title_lesson"></h4>
+                      <p>by :<a href="" id="username_lesson"><i id="name_lesson"></i></a></p>
+                      <img src="images/e2.jpg" id="img_lesson" alt="lesson" width="350px" height="350px" />
+                      <span id="desc_lesson"></span>
+                      <br>
+                      <div class="eve-w3lright e1">
+                <a href="" id="go_lesson"><button class="btn btn-danger pull-right">Enroll</button></a>
+                    </div>
+                  </div>
 
+                </div>
+            
+              </div>
+               </div>
+<script type="text/javascript">
+      $("a.lesson_view").click(function(event) {
+              var random_code = $(this).attr('id');
+              if (random_code != "") {
+                  $.ajax({
+                      url: "<?php echo base_url()?>course/getlesson",
+                      type: 'post',
+                      data: {
+                          random_code: random_code
+                      },
+                      success: function(e) {
+                          var data = e.split("|");
+                          $('#title_lesson').html(data[0]);
+                          $('#img_lesson').attr('src','<?php echo base_url() ?>assets/images/'+data[1]);
+                          $('#desc_lesson').html(data[2]);
+                          $('#name_lesson').html(data[3]);
+                          $('#username_lesson').attr('href','<?php echo base_url() ?>'+data[4]);
+                          $('#go_lesson').attr('href','<?php echo base_url() ?>lesson/'+random_code);
+                      }
+                  });
+              }
+          });
+</script>
 </body>
 </html>

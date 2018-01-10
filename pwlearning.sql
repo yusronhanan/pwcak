@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 10 Jan 2018 pada 06.14
+-- Generation Time: 10 Jan 2018 pada 15.29
 -- Versi Server: 10.1.13-MariaDB
 -- PHP Version: 7.0.8
 
@@ -138,7 +138,8 @@ CREATE TABLE `course_title` (
   `thumbnail` text NOT NULL,
   `created_at` datetime NOT NULL,
   `last_update` datetime NOT NULL,
-  `verified` int(1) NOT NULL DEFAULT '0',
+  `status` int(1) NOT NULL DEFAULT '0',
+  `pick` int(1) NOT NULL DEFAULT '0',
   `visitor` int(5) NOT NULL,
   `random_code` varchar(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -147,8 +148,8 @@ CREATE TABLE `course_title` (
 -- Dumping data untuk tabel `course_title`
 --
 
-INSERT INTO `course_title` (`id_title`, `id_user`, `title`, `subject`, `description`, `thumbnail`, `created_at`, `last_update`, `verified`, `visitor`, `random_code`) VALUES
-(1, 1, 'Integral Tak Tentu dan Tak Tentu', 'Matematika', 'Integral adalah sebuah konsep penjumlahan secara berkesinambungan dalam matematika, dan bersama dengan inversnya, diferensiasi, adalah satu dari dua operasi utama dalam kalkulus. Integral dikembangkan menyusul dikembangkannya masalah dalam diferensiasi di mana matematikawan harus berpikir bagaimana menyelesaikan masalah yang berkebalikan dengan solusi diferensiasi. ', 'hqdefault1.jpg', '2018-01-09 23:11:53', '2018-01-09 23:36:50', 0, 4, '5Z9cImUzMTi');
+INSERT INTO `course_title` (`id_title`, `id_user`, `title`, `subject`, `description`, `thumbnail`, `created_at`, `last_update`, `status`, `pick`, `visitor`, `random_code`) VALUES
+(1, 1, 'Integral Tak Tentu dan Tak Tentu', 'Matematika', 'Integral adalah sebuah konsep penjumlahan secara berkesinambungan dalam matematika, dan bersama dengan inversnya, diferensiasi, adalah satu dari dua operasi utama dalam kalkulus. Integral dikembangkan menyusul dikembangkannya masalah dalam diferensiasi di mana matematikawan harus berpikir bagaimana menyelesaikan masalah yang berkebalikan dengan solusi diferensiasi. ', 'hqdefault1.jpg', '2018-01-09 23:11:53', '2018-01-09 23:36:50', 0, 1, 4, '5Z9cImUzMTi');
 
 -- --------------------------------------------------------
 
@@ -190,9 +191,12 @@ CREATE TABLE `like_comment` (
 --
 
 INSERT INTO `like_comment` (`id_likecomment`, `id_title`, `id_comment`, `id_user`, `type`, `created_at`) VALUES
-(10, 1, 1, 1, 2, '2018-01-09 23:56:12'),
+(41, 1, 3, 1, 2, '2018-01-10 13:34:20'),
+(34, 1, 1, 1, 4, '2018-01-10 13:34:12'),
 (12, 1, 2, 1, 4, '2018-01-10 00:03:15'),
-(33, 1, 3, 2, 2, '2018-01-10 00:17:05');
+(33, 1, 3, 2, 2, '2018-01-10 00:17:05'),
+(38, 1, 4, 1, 4, '2018-01-10 13:34:16'),
+(40, 1, 5, 1, 4, '2018-01-10 13:34:17');
 
 -- --------------------------------------------------------
 
@@ -212,7 +216,7 @@ CREATE TABLE `like_course` (
 --
 
 INSERT INTO `like_course` (`id_likecourse`, `id_title`, `id_user`, `created_at`) VALUES
-(4, 1, 1, '2018-01-10 00:39:48'),
+(11, 1, 1, '2018-01-10 13:19:44'),
 (3, 1, 2, '2018-01-10 00:04:19');
 
 -- --------------------------------------------------------
@@ -238,12 +242,15 @@ INSERT INTO `notification` (`id_notif`, `id_user`, `get_id`, `type`, `status`, `
 (1, 1, 3, 'like_course', 1, '2018-01-10 00:04:19'),
 (2, 1, 1, 'enroll_course', 1, '2018-01-10 00:04:26'),
 (25, 2, 2, 'subscribe', 0, '2018-01-10 00:39:18'),
-(23, 1, 8, 'comment', 1, '2018-01-10 00:15:11'),
+(35, 2, 41, 'like_comment', 0, '2018-01-10 13:34:20'),
 (27, 2, 4, 'subscribe', 0, '2018-01-10 00:39:25'),
 (12, 1, 22, 'like_comment', 1, '2018-01-10 00:05:40'),
+(32, 2, 38, 'like_comment', 0, '2018-01-10 13:34:16'),
 (24, 2, 1, 'subscribe', 0, '2018-01-10 00:39:16'),
 (26, 2, 3, 'subscribe', 0, '2018-01-10 00:39:23'),
-(28, 2, 5, 'subscribe', 0, '2018-01-10 00:39:26');
+(36, 2, 6, 'subscribe', 0, '2018-01-10 13:53:55'),
+(28, 2, 5, 'subscribe', 0, '2018-01-10 00:39:26'),
+(34, 2, 40, 'like_comment', 0, '2018-01-10 13:34:17');
 
 -- --------------------------------------------------------
 
@@ -257,6 +264,13 @@ CREATE TABLE `subscribe` (
   `for_id` int(5) NOT NULL,
   `created_at` datetime NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `subscribe`
+--
+
+INSERT INTO `subscribe` (`id_subscribe`, `id_user`, `for_id`, `created_at`) VALUES
+(6, 1, 2, '2018-01-10 13:53:55');
 
 -- --------------------------------------------------------
 
@@ -284,7 +298,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `email`, `username`, `password`, `name`, `city`, `bio`, `photo`, `role`, `status`, `created_at`, `last_update`) VALUES
-(1, 'yusronzain@gmail.com', 'yusron', '52b851e6dffbc3b9cc8ccc36e34eceda', 'Yusron Hanan Zain Vidi Imtinan', 'situbondo-malang', 'web developer', 'Screenshot_(65).png', 0, 0, '2018-01-09 22:07:45', '2018-01-09 23:00:11'),
+(1, 'yusronzain@gmail.com', 'yusron', '52b851e6dffbc3b9cc8ccc36e34eceda', 'Yusron Hanan Zain Vidi Imtinan', 'situbondo-malang', 'web developer', 'Screenshot_(65).png', 1, 0, '2018-01-09 22:07:45', '2018-01-09 23:00:11'),
 (2, 'qori@gmail.com', 'qori', 'd0538dbd2f87e857f54860382a64c97d', 'Qoriatul Masfufah', 'Magetan', 'Magetan lover', 'profile.png', 0, 0, '2018-01-10 00:03:59', '2018-01-10 00:03:59');
 
 --
@@ -396,22 +410,22 @@ ALTER TABLE `enroll_course`
 -- AUTO_INCREMENT for table `like_comment`
 --
 ALTER TABLE `like_comment`
-  MODIFY `id_likecomment` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id_likecomment` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 --
 -- AUTO_INCREMENT for table `like_course`
 --
 ALTER TABLE `like_course`
-  MODIFY `id_likecourse` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_likecourse` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `id_notif` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id_notif` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 --
 -- AUTO_INCREMENT for table `subscribe`
 --
 ALTER TABLE `subscribe`
-  MODIFY `id_subscribe` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_subscribe` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `user`
 --

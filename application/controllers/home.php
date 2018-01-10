@@ -81,32 +81,32 @@ class Home extends CI_Controller {
 		$now = date('Y-m-d H:i:s');
 		if ($mini_notif == 'mini_notif') {
 			$output = '';
-			$i = 0;
+
 			$result=$this->home_model->notification();
 			if (!empty($result)) {
-			
 				foreach ($result as $notif) {
-					if ($notif->type == 'like_course') { $field_id = 'id_likecourse';}
-					else if ($notif->type == 'like_comment') { $field_id = 'id_likecomment';}
-					else if ($notif->type == 'comment') { $field_id = 'id_comment';}
-					else if ($notif->type == 'subscribe') { $field_id = 'id_subscribe';}
-					else if ($notif->type == 'enroll_course') { $field_id = 'id_enroll';}
-					else if ($notif->type == 'broadcast') { $field_id = 'id_broadcast';}
+					$tipe = $notif->type;
+					if ($tipe == 'like_course') { $field_id = 'id_likecourse';}
+					else if ($tipe == 'like_comment') { $field_id = 'id_likecomment';}
+					else if ($tipe == 'comment') { $field_id = 'id_comment';}
+					else if ($tipe == 'subscribe') { $field_id = 'id_subscribe';}
+					else if ($tipe == 'enroll_course') { $field_id = 'id_enroll';}
+					else if ($tipe == 'broadcast') { $field_id = 'id_broadcast';}
 
-					$notification = $this->home_model->GetData([$field_id=>$notif->get_id],$notif->type)->row();
-					if ($notif->type != 'subscribe' || $notif->type != 'broadcast') {
-						$course_title = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('title');
+					$notification = $this->home_model->GetData([$field_id=>$notif->get_id],$tipe);
+					if ($tipe != 'subscribe' || $tipe != 'broadcast') {
+						$course_title = $this->home_model->GetData(['id_title'=>$notification->row('id_title')],'course_title')->row('title');
 						$go_word = $course_title;
-						$random_code = $this->course_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('random_code');
+						$random_code = $this->course_model->GetData(['id_title'=>$notification->row('id_title')],'course_title')->row('random_code');
 					}
 
-					if ($notif->type == 'like_course') { 
+					if ($tipe == 'like_course') { 
 						$word = 'liked your course';
 						$go_link = base_url().'lesson/'.$random_code;
 						$desc_notif ='<i style="margin-left: 79px" class="fa fa-thumb-up subsss"></i>';
 					}
-					else if ($notif->type == 'like_comment') { 
-						if ($notification->type == '2') {
+					else if ($tipe == 'like_comment') { 
+						if ($notification->row('type') == '2') {
 							$word = 'liked your comment on discussion course';
 						}
 						else{
@@ -115,47 +115,44 @@ class Home extends CI_Controller {
 						$go_link = base_url().'discuss/'.$random_code;
 						$desc_notif ='<i style="margin-left: 79px" class="fa fa-thumb-up subsss"></i>';
 					}
-					else if ($notif->type == 'comment') { 
-						if ($notification->reply_id == '0') {
+					else if ($tipe == 'comment') { 
+						if ($notification->row('reply_id') == '0') {
 							$word = 'commented on your discussion course';
 						}
 						else{
 							$word = 'reply comment on discussion course';
 						}
 						$go_link = base_url().'discuss/'.$random_code;
-						$desc_notif = '<p class="notification-desc">'.$notification->text_comment.'</p>';
+						$desc_notif = '<p class="notification-desc">'.$notification->row('text_comment').'</p>';
 					}
-					else if ($notif->type == 'subscribe') { 
+					else if ($tipe == 'subscribe') { 
 						$go_link = '#';
 						$go_word = 'see your subscriber profile.';
 						$word = ' subscribed you';
 						$desc_notif = '<i style="margin-left: 79px" class="fa fa-user-plus subsss"></i>';
 					}
-					else if ($notif->type == 'enroll_course') { 
+					else if ($tipe == 'enroll_course') { 
 						$word = 'enroll your course';
 						$go_link = base_url().'lesson/'.$random_code;
 						$desc_notif ='<i style="margin-left: 79px" class="fa fa-graduation-cap subsss"></i>';
 					}
-					else if ($notif->type == 'broadcast') { 
+					else if ($tipe == 'broadcast') { 
 						$go_word = '';
-						$word = '<strong>'.$notification->subject.'<strong> '.$notification->text;
-						$go_link = $notification->link;
+						$word = '<strong>'.$notification->row('subject').'<strong> '.$notification->row('text');
+						$go_link = $notification->row('link');
 						$desc_notif ='<i style="margin-left: 79px" class="fa fa-bullhorn subsss"></i>';
 					}
-				if ($notif->type != 'broadcast') {
-				$img  = $this->home_model->GetData(['id_user'=>$notification->id_user],'user')->row('photo');	
-				$username = $this->home_model->GetData(['id_user'=>$notification->id_user],'user')->row('username'); 
+				if ($tipe != 'broadcast') {
+				$img  = $this->home_model->GetData(['id_user'=>$notification->row('id_user')],'user')->row('photo');
+				$username = $this->home_model->GetData(['id_user'=>$notification->row('id_user')],'user')->row('username'); 
 				$username_link = base_url().$username;
 				}
 				else {
-				$img  = $this->home_model->GetData(['id_broadcast'=>$notification->id_broadcast],'broadcast')->row('thumbnail');
+				$img  = $this->home_model->GetData(['id_broadcast'=>$notification->row('id_broadcast')],'broadcast')->row('thumbnail');
 				$username = 'admin';
 				$username_link = '#';
 				}
-				 
-				
-				
-				$timestamp = strtotime($notification->created_at);	
+				$timestamp = strtotime($notification->row('created_at'));	
 				$time = timespan($timestamp, $now) . ' ago';
 
 				if ($notif->status == '0') {
@@ -171,7 +168,7 @@ class Home extends CI_Controller {
                     <div class="media">
                       <div class="media-left">
                         <div class="media-object">
-                          <img src="'.base_url().'assets/images/'.$img.'" class="img-circle" alt="'.$notif->type.'" width="50px" height="50px">
+                          <img src="'.base_url().'assets/images/'.$img.'" class="img-circle" alt="'.$tipe.'" width="50px" height="50px">
                         </div>
                       </div>
                       <div class="media-body">

@@ -218,27 +218,28 @@ class Home extends CI_Controller {
 				
 			if(!empty($result)){
 				foreach ($result as $notif) {
-					if ($notif->type == 'like_course') { $field_id = 'id_likecourse';}
-					else if ($notif->type == 'like_comment') { $field_id = 'id_likecomment';}
-					else if ($notif->type == 'comment') { $field_id = 'id_comment';}
-					else if ($notif->type == 'subscribe') { $field_id = 'id_subscribe';}
-					else if ($notif->type == 'enroll_course') { $field_id = 'id_enroll';}
-					else if ($notif->type == 'broadcast') { $field_id = 'id_broadcast';}
+					$tipe = $notif->type;
+					if ($tipe == 'like_course') { $field_id = 'id_likecourse';}
+					else if ($tipe == 'like_comment') { $field_id = 'id_likecomment';}
+					else if ($tipe == 'comment') { $field_id = 'id_comment';}
+					else if ($tipe == 'subscribe') { $field_id = 'id_subscribe';}
+					else if ($tipe == 'enroll_course') { $field_id = 'id_enroll';}
+					else if ($tipe == 'broadcast') { $field_id = 'id_broadcast';}
 
-					$notification = $this->home_model->GetData([$field_id=>$notif->get_id],$notif->type)->row();
-					if ($notif->type != 'subscribe' || $notif->type != 'broadcast') {
-						$course_title = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('title');
+					$notification = $this->home_model->GetData([$field_id=>$notif->get_id],$tipe);
+					if ($tipe != 'subscribe' || $tipe != 'broadcast') {
+						$course_title = $this->home_model->GetData(['id_title'=>$notification->row('id_title')],'course_title')->row('title');
 						$go_word = $course_title;
-						$random_code = $this->home_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('random_code');
+						$random_code = $this->home_model->GetData(['id_title'=>$notification->row('id_title')],'course_title')->row('random_code');
 					}
 
-					if ($notif->type == 'like_course') { 
+					if ($tipe == 'like_course') { 
 						$word = 'liked your course';
 						$go_link = base_url().'lesson/'.$random_code;
 						
 					}
-					else if ($notif->type == 'like_comment') { 
-						if ($notification->type == '2') {
+					else if ($tipe == 'like_comment') { 
+						if ($notification->row('type') == '2') {
 							$word = 'liked your comment on discussion course';
 						}
 						else{
@@ -247,8 +248,8 @@ class Home extends CI_Controller {
 						$go_link = base_url().'discuss/'.$random_code;
 						
 					}
-					else if ($notif->type == 'comment') { 
-						if ($notification->reply_id == '0') {
+					else if ($tipe == 'comment') { 
+						if ($notification->row('reply_id') == '0') {
 							$word = 'commented on your discussion course';
 						}
 						else{
@@ -257,38 +258,38 @@ class Home extends CI_Controller {
 						$go_link = base_url().'discuss/'.$random_code;
 						
 					}
-					else if ($notif->type == 'subscribe') { 
+					else if ($tipe == 'subscribe') { 
 						$go_link = '#';
 						$go_word = 'see your subscriber profile.';
 						$word = ' subscribed';
 						
 					}
-					else if ($notif->type == 'enroll_course') { 
+					else if ($tipe == 'enroll_course') { 
 						$word = 'enroll your course';
 						$go_link = base_url().'lesson/'.$random_code;
 						
 					}
-					else if ($notif->type == 'broadcast') { 
+					else if ($tipe == 'broadcast') { 
 						$go_word = '';
-						$word = '<strong>'.$notification->subject.'<strong> '.$notification->text;
-						$go_link = $notification->link;
+						$word = '<strong>'.$notification->row('subject').'<strong> '.$notification->row('text');
+						$go_link = $notification->row('link');
 						
 					}
-				if ($notif->type != 'broadcast') {
-				$img  = $this->home_model->GetData(['id_user'=>$notification->id_user],'user')->row('photo');	
-				$username = $this->home_model->GetData(['id_user'=>$notification->id_user],'user')->row('username'); 
+				if ($tipe != 'broadcast') {
+				$img  = $this->home_model->GetData(['id_user'=>$notification->row('id_user')],'user')->row('photo');	
+				$username = $this->home_model->GetData(['id_user'=>$notification->row('id_user')],'user')->row('username'); 
 				$username_link = base_url().$username;
-				$random_code = $this->course_model->GetData(['id_title'=>$notification->id_title],'course_title')->row('random_code');
+				$random_code = $this->course_model->GetData(['id_title'=>$notification->row('id_title')],'course_title')->row('random_code');
 				}
 				else {
-				$img  = $this->home_model->GetData(['id_broadcast'=>$notification->id_broadcast],'broadcast')->row('thumbnail');
+				$img  = $this->home_model->GetData(['id_broadcast'=>$notification->row('id_broadcast')],'broadcast')->row('thumbnail');
 				$username = 'admin';
 				$username_link = '#';
 				}
-				$timestamp = strtotime($notification->created_at);	
+				$timestamp = strtotime($notification->row('created_at'));	
 				$time = timespan($timestamp, $now) . ' ago';
 
-					if ($notif->type == 'like_course') { 
+					if ($tipe == 'like_course') { 
 						$output .= '<div class="feed-element">
                                         <a href="#" class="pull-left">
                                             <img alt="image" class="img-circle" src="'.base_url().'assets/images/'.$img.'">
@@ -300,7 +301,7 @@ class Home extends CI_Controller {
                                         </div>
                                     </div>';
 					}
-					else if ($notif->type == 'like_comment') { 
+					else if ($tipe == 'like_comment') { 
 						$output .= '<div class="feed-element">
                                         <a href="#" class="pull-left">
                                             <img alt="image" class="img-circle" src="'.base_url().'assets/images/'.$img.'">
@@ -312,7 +313,7 @@ class Home extends CI_Controller {
                                         </div>
                                     </div>';
 					}
-					else if ($notif->type == 'comment') {
+					else if ($tipe == 'comment') {
 						$output .= ' <div class="feed-element">
                                         <a href="#" class="pull-left">
                                             <img alt="image" class="img-circle" src="'.base_url().'assets/images/'.$img.'">
@@ -322,13 +323,13 @@ class Home extends CI_Controller {
                                             <strong><a href="'.$username_link.'" class="go_link">'.$username.'</a> </strong> '.$word.' <strong><a href="'.$go_link.'" class="go_link">'.$go_word.'</a></strong> <br>
                                             <small class="text-muted">at '.$notif->created_at.'</small>
                                             <div class="well">
-                                            	<strong>'.$notification->subject.'</strong> <br>
-                                                '.$notification->text_comment.'
+                                            	<strong>'.$notification->row('subject').'</strong> <br>
+                                                '.$notification->row('text_comment').'
                                             </div>
                                         </div>
                                     </div>';
 					}
-					else if ($notif->type == 'subscribe') { 
+					else if ($tipe == 'subscribe') { 
 						$output .= '<div class="feed-element">
                                         <a href="#" class="pull-left">
                                             <img alt="image" class="img-circle" src="'.base_url().'assets/images/'.$img.'">
@@ -340,7 +341,7 @@ class Home extends CI_Controller {
                                         </div>
                                     </div>';
 					}
-					else if ($notif->type == 'enroll_course') { 
+					else if ($tipe == 'enroll_course') { 
 						$output .= '<div class="feed-element">
                                         <a href="#" class="pull-left">
                                             <img alt="image" class="img-circle" src="'.base_url().'assets/images/'.$img.'">
@@ -352,7 +353,7 @@ class Home extends CI_Controller {
                                         </div>
                                     </div>';
 					}
-					else if ($notif->type == 'broadcast') { 
+					else if ($tipe == 'broadcast') { 
 						$output .= '<div class="feed-element">
                                         <a href="#" class="pull-left">
                                             <img alt="image" class="img-circle" src="'.base_url().'assets/images/'.$img.'">

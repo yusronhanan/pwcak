@@ -24,7 +24,14 @@
 
                  <button class="btn btn-default btn-xs pull-right" style="margin-left: 25px;"><i class="fa fa-pencil"></i><a href="#" data-toggle="modal" data-target="#edituser"> Edit Account</a></button>
                  <button class="btn btn-default btn-xs pull-right" style="margin-left: 25px;"><i class="fa fa-plus"></i><a href="#" data-toggle="modal" data-target="#modalpost"> Add Course</a></button>
-                 
+                 <?php
+    /*$notif = $this->session->flashdata('notif');*/
+     if(!empty($notif)) {
+            echo '<div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                '.$notif.'
+            </div>';
+          } ?>
 
                  <button class="btn btn-danger btn-xs pull-right"><a href="#" data-toggle="modal" data-target="" class="subs_false"><i class="fa fa-users"></i> Subscriber  <?php echo $subss_amount; ?></a></button>
                  <?php }
@@ -130,7 +137,7 @@
                                 <?php 
                                   if ($this->session->userdata('logged_id') == $user_info->id_user) {
                                    ?>
-                                   <form id="formfoto" class="" action ="<?php echo base_url();?>myaccount/editphoto" method="post" enctype="multipart/form-data">
+                                   <form id="formfoto" action="<?php echo base_url();?>myaccount/editphoto" method="post" enctype="multipart/form-data">
                                       <div class="custom-input-file" id="previewavatar" style="background-image:url('<?php echo base_url() ?>assets/images/<?php echo $user_info->photo; ?>');border-radius: 50%; float: left; margin-left: 80px;">
                                           <label class="uploadPhoto">
                                               Edit

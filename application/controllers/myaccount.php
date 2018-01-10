@@ -333,8 +333,7 @@ class Myaccount extends CI_Controller {
 
 		if($this->input->post('submit')){
 			$id_user = $this->session->userdata('logged_id');
-			$username_id = $this->auth_model->GetUser(['id_user' => $id_user])->row('username');
-
+			$username_id = $this->session->userdata('username');
 			$this->form_validation->set_rules('coursename', 'Course Name', 'required');
 			$this->form_validation->set_rules('subject','Subject','trim|required');
 			$this->form_validation->set_rules('description','Description','required');

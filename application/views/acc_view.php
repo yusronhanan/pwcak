@@ -264,9 +264,7 @@
                                         <td><?php echo $courses->name ?></td>
                                         <td><?php echo $courses->title ?></td>
                                         <td>
-                                        <p class="small">
-                                            <?php echo $courses->subject ?>
-                                        </p>
+                                        <span class="label label-primary"><?php echo $courses->subject ?></span>
                                         </td>
                                         <td><?php echo $courses->created_at ?></td>
                                         <td><a href="#" data-toggle="modal" data-target="#lesson" id="<?php echo $courses->random_code ?>" class="btn btn-xs btn-success lesson_view" title="enroll course"><i class="fa fa-search"></i></a><br><a href="<?php echo base_url().'discuss/'.$courses->random_code ?>" class="btn btn-xs btn-info" title="discussion course"><i class="fa fa-comment"></i></a><br>

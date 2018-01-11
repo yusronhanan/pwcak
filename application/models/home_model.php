@@ -28,12 +28,14 @@ class Home_model extends CI_Model {
   public function GetOtherCourses($id_user){
     return $this->db->limit(6,0) 
             ->where(['status'=>'1','id_user !='=> $id_user])
+            ->where('id_user !=', $this->session->userdata('logged_id'))
             ->get('course_title')
             ->result();
   }
   public function GetOtherUser($id_user){
     return $this->db->limit(6,0) 
-            ->where(['status'=>'0','id_user !='=> $id_user])
+            ->where(['status'=>'0','id_user !='=> $id_user,])
+            ->where('id_user !=', $this->session->userdata('logged_id'))
             ->get('user')
             ->result();
   }

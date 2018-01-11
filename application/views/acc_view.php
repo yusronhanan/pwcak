@@ -24,7 +24,14 @@
 
                  <button class="btn btn-default btn-xs pull-right" style="margin-left: 25px;"><i class="fa fa-pencil"></i><a href="#" data-toggle="modal" data-target="#edituser"> Edit Account</a></button>
                  <button class="btn btn-default btn-xs pull-right" style="margin-left: 25px;"><i class="fa fa-plus"></i><a href="#" data-toggle="modal" data-target="#modalpost"> Add Course</a></button>
-                 
+                 <?php
+    /*$notif = $this->session->flashdata('notif');*/
+     if(!empty($notif)) {
+            echo '<div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                '.$notif.'
+            </div>';
+          } ?>
 
                  <button class="btn btn-danger btn-xs pull-right"><a href="#" data-toggle="modal" data-target="" class="subs_false"><i class="fa fa-users"></i> Subscriber  <?php echo $subss_amount; ?></a></button>
                  <?php }
@@ -130,7 +137,7 @@
                                 <?php 
                                   if ($this->session->userdata('logged_id') == $user_info->id_user) {
                                    ?>
-                                   <form id="formfoto" class="" action ="<?php echo base_url();?>myaccount/editphoto" method="post" enctype="multipart/form-data">
+                                   <form id="formfoto" action="<?php echo base_url();?>myaccount/editphoto" method="post" enctype="multipart/form-data">
                                       <div class="custom-input-file" id="previewavatar" style="background-image:url('<?php echo base_url() ?>assets/images/<?php echo $user_info->photo; ?>');border-radius: 50%; float: left; margin-left: 80px;">
                                           <label class="uploadPhoto">
                                               Edit
@@ -360,48 +367,4 @@
           
   });
   setInterval(function(){ big_notif() }, 5000);
-</script>
-<div class="modal fade" id="lesson" tabindex="-1" role="dialog" >
-              <div class="modal-dialog">
-              <!-- Modal content-->
-                <div class="modal-content">
-                  <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 id="title_lesson"></h4>
-                      <p>by :<a href="" id="username_lesson"><i id="name_lesson"></i></a></p>
-                      <img src="images/e2.jpg" id="img_lesson" alt="lesson" width="350px" height="350px" />
-                      <span id="desc_lesson"></span>
-                      <br>
-                      <div class="eve-w3lright e1">
-                <a href="" id="go_lesson"><button class="btn btn-danger pull-right">Enroll</button></a>
-                    </div>
-                  </div>
-
-                </div>
-            
-              </div>
-               </div>
-<script type="text/javascript">
-    $("a.lesson_view").on('click', lesson_modal);
-            function lesson_modal(){
-                        var random_code = $(this).attr('id');
-                        if (random_code != "") {
-                            $.ajax({
-                                url: "<?php echo base_url()?>course/getlesson",
-                                type: 'post',
-                                data: {
-                                    random_code: random_code
-                                },
-                                success: function(e) {
-                                    var data = e.split("|");
-                                    $('#title_lesson').html(data[0]);
-                                    $('#img_lesson').attr('src','<?php echo base_url() ?>assets/images/'+data[1]);
-                                    $('#desc_lesson').html(data[2]);
-                                    $('#name_lesson').html(data[3]);
-                                    $('#username_lesson').attr('href','<?php echo base_url() ?>'+data[4]);
-                                    $('#go_lesson').attr('href','<?php echo base_url() ?>lesson/'+random_code);
-                                }
-                            });
-                        }
-                   }
 </script>

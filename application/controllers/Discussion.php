@@ -12,12 +12,21 @@ class Discussion extends CI_Controller {
 	public function index()
 	{
 		$user_id = $this->session->userdata('logged_id');
-		$list_discuss = $this->home_model->GetData(['reply_id'=>'0'],'comment')->result();
+		$list_discuss = $this->course_model->GetListDiscuss(['reply_id'=>'0']);
 		$username_id = $this->auth_model->GetUser(['id_user' => $user_id])->row('username');
+
+		$comment_amount = array();
+
+		foreach ($list_discuss as $discuss) {
+			$like_amount[$discuss->id_comment] = $this->home_model->GetSelectData('COUNT(id_likecomment) as like_amount',['id_comment' => $discuss->id_comment],'like_comment')->row('like_amount');
+			$comment_amount[$discuss->id_comment] = $this->home_model->GetSelectData('COUNT(id_comment) as comment_amount',['reply_id' => $discuss->id_comment],'comment')->row('comment_amount');
+		}
 				$data = [
 				'main_view'  => 'discussion_view',
 				'list_discuss' => $list_discuss,
 				'username_id'	=> $username_id,
+
+				'comment_amount' => $comment_amount,
 		 		];
 				$this->load->view('templet', $data);
 	}

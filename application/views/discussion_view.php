@@ -59,16 +59,23 @@
 			<div class="eve-sub1">
 				<!-- <a href="#" data-toggle="modal" data-target="#myModal5"><img src="images/e2.jpg" alt="image"></a> -->
 			<h4><a href="#" data-toggle="modal" data-target="#myModal5"><?php echo $discuss->subject ?></a></h4>
-				<h6>By an <a href="#"><?php echo $discuss->from_username ?></a>, Oct-2016</h6>
+				<h6>By an <a href="#"><?php echo $discuss->username ?></a>, <?php echo $discuss->comment_created ?>
+				<br>in <a href="#" data-toggle="modal" data-target="#lesson" class="lesson_view" id="<?php echo $discuss->random_code ?>" style="color:#d9534f;"><?php echo $discuss->title ?></a></h6>
 				<p><?php echo $discuss->text_comment ?></p>
 			</div>
 			<div class="eve-sub2">
 				<div class="eve-w3lleft">
-					<h6><i class="fa fa-comment-o" aria-hidden="true"></i>17</h6>
-					<h6><i class="fa fa-heart-o" aria-hidden="true"></i>78</h6>
+
+					<?php 
+					if(array_key_exists($discuss->id_comment, $comment_amount)) {
+					$comments =  $comment_amount[$discuss->id_comment];
+					}
+					 ?>
+					<h6><i class="fa fa-comment-o" aria-hidden="true"></i><?php echo $comments; ?></h6>
+					
 				</div>	
 				<div class="eve-w3lright e1">
-					<a href="<?php echo base_url().'discuss/'.$discuss->id_title ?>" data-toggle="" data-target=""><h5>More</h5></a>
+					<a href="<?php echo base_url().'discuss/'.$discuss->random_code ?>" data-toggle="" data-target=""><h5>More</h5></a>
 				</div>
 				<div class="clearfix"></div>	
 			</div>

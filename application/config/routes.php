@@ -54,6 +54,7 @@ $route['course'] = "course";
 $route['home'] = "home";
 $route['discussion'] = "discussion";
 
+$route['admin_login'] = "admin/admin_login";
 $route['myaccount'] = "myaccount";
 $route['notif'] = "notif";
 $route['infinitive'] = "infinitive";

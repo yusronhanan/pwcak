@@ -111,6 +111,14 @@ class Course extends CI_Controller {
 		$random_code = $this->uri->segment(2);
 	
 		$id_title = $this->course_model->GetData(['random_code'=> $random_code],'course_title')->row('id_title');
+		if (!empty($id_title)) {
+			
+		
+		$getcheckcontent = $this->course_model->GetData(['id_title'=> $id_title],'course_content')->num_rows();
+		$getcheckstatus = $this->course_model->GetData(['random_code'=> $random_code],'course_title')->row('status');
+		if ($getcheckcontent > 0 && $getcheckstatus == 1) {
+			
+		
 		$getcourse = $this->course_model->GetCourse(['id_title'=>$id_title]);
 
 		$id_usermaker = $getcourse->row('id_user');
@@ -197,11 +205,50 @@ class Course extends CI_Controller {
 			'disliked'				=> $disliked,
 		];
 		$this->load->view('lesson_view', $data);
+		}
+		else if($getcheckstatus == 0){
+		$this->session->set_flashdata('notif_failed','Maaf, course ini masih dalam pengembangan');
+		redirect('');
+		}
+		else{
+			$this->session->set_flashdata('notif_failed','Maaf, course yang anda maksud tidak tersedia');
+		redirect('');
+		}
+		}
+		else{
+			$this->session->set_flashdata('notif_failed','Maaf, course yang anda maksud tidak tersedia');
+		redirect('');
+		}
 	}else{
 		$this->session->set_flashdata('notif_failed','Maaf, anda harus login terlebih dahulu untuk menikmati pembelajaran');
 		redirect('');
 	}
 
+	}
+	public function edit_publish(){
+		$random_code = $this->input->post('random_code');
+		$id_title = $this->home_model->GetData(['random_code'=>$random_code],'course_title')->row('id_title');
+		$status = $this->input->post('status');
+		if ($status == 'Publish Now') {
+			$sts = '1';
+		}
+		else{
+			$sts = '0';	
+		}
+		$getcontent = $this->home_model->GetData(['id_title'=>$id_title],'course_content');
+		if ($getcontent->num_rows() > 0) {
+			$result = $this->home_model->Update(['id_title'=>$id_title],['status'=>$sts],'course_title');
+		}
+		else{
+			$result = FALSE;
+		}
+		if($result == TRUE){
+				echo 'true';
+			}
+			else{
+				echo 'false';
+			}
+			
 	}
 }
 

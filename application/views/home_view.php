@@ -149,7 +149,7 @@
 				<h6>By  <a href="<?php echo base_url() ?><?php echo $usrnm ?>">
 					<?php echo $usrnm ?>
 				</a>, <?php echo $pcourses->created_at ?></h6>
-				<p><?php echo $pcourses->description ?></p>
+				<p><?php echo substr($pcourses->description, 0,105) ?>...</p>
 			</div>
 			<div class="eve-sub2">
 				<div class="eve-w3lleft">
@@ -310,7 +310,7 @@
 				<h6>By  <a href="<?php echo base_url() ?><?php echo $usrnm ?>">
 					<?php echo $usrnm ?>
 				</a>, <?php echo $rcourses->created_at ?></h6>
-				<p><?php echo $rcourses->description ?></p>
+				<p><?php echo substr($rcourses->description, 0,105) ?>...</p>
 			</div>
 
 			<div class="eve-sub2">
@@ -507,6 +507,7 @@
 	       
 	    </div>
 	</div>
+<<<<<<< HEAD
 	<div class="portfolio-modal modal fade slideanim" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
 	    <div class="modal-content">
 	        <div class="close-modal" data-dismiss="modal">
@@ -673,3 +674,6 @@
 });
 </script>
 
+=======
+	<div class="clearfix"></div>
+>>>>>>> 8ccd7a19d6c549982b8d80faf1aa9761b14a1707

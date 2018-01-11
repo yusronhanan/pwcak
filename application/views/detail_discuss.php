@@ -643,7 +643,7 @@ a.subs_true{
             </ul>
 
               <div class="dropdown-footer text-center">
-                <a href="#">View All</a>
+                <a href="<?php echo base_url().$this->session->userdata('username'); ?>">View All</a>
               </div><!-- /dropdown-footer -->
 
             </div><!-- /dropdown-container -->
@@ -651,9 +651,7 @@ a.subs_true{
           <?php } ?>
 
 
-          <?php if ($this->session->userdata('role') == '1') { ?>
-          <li><a href="<?php echo base_url() ?>admin" class="active">Admin</a></li>
-                <?php } ?>
+          
           <li><a href="<?php echo base_url(); ?>discussion" class="active">Discussion</a></li>
           <li><a href="<?php echo base_url(); ?>course" class="active">Course</a></li>
           <li><a href="<?php echo base_url(); ?>" class="active">Home</a></li>         
@@ -1137,22 +1135,21 @@ a.subs_true{
         </div>
         <div class="col-md-3">
             <div class="wrapper wrapper-content project-manager">
-                <h4>Project description</h4>
+                <!-- <h4>Project description</h4>
                 <p class="small">
                     There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look
                     even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing
                 </p>
                 <p class="small font-bold">
                     <span><i class="fa fa-circle text-warning"></i> High priority</span>
-                </p>
-                <h5>Project tag</h5>
+                </p> -->
+                <h5>Other Discussion</h5>
                 <ul class="tag-list" style="padding: 0">
-                    <li><a href="#"><i class="fa fa-tag"></i> biword</a></li>
-                    <li><a href="#"><i class="fa fa-tag"></i> Lorem ipsum</a></li>
-                    <li><a href="#"><i class="fa fa-tag"></i> Passages</a></li>
-                    <li><a href="#"><i class="fa fa-tag"></i> Variations</a></li>
+                  <?php foreach ($other_discuss as $od) { ?>
+                    <li><a href="<?php echo base_url().'discuss/'.$od->random_code; ?>"><i class="fa fa-comments-o"></i> <?php echo $od->subject ?></a></li>
+                 <?php } ?>
                 </ul>
-                <h5>Project files</h5>
+                <!-- <h5>Project files</h5>
                 <ul class="list-unstyled project-files">
                     <li><a href="#"><i class="fa fa-file"></i> Project_document.docx</a></li>
                     <li><a href="#"><i class="fa fa-file-picture-o"></i> Logo_zender_company.jpg</a></li>
@@ -1163,7 +1160,7 @@ a.subs_true{
                     <a href="#" class="btn btn-xs btn-primary">Add files</a>
                     <a href="#" class="btn btn-xs btn-primary">Report contact</a>
 
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

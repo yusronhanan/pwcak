@@ -35,11 +35,16 @@
                         </tr>
                       </thead>
                       <tbody>
-                          <tr>
                             <?php
                             $no = 1;
                             foreach($user as $data){
-
+                              if ($data->status == 0) {
+                                  $status = '<i class="fa fa-times"></i> ';
+                                }
+                                else{
+                                  $status = '<i class="fa fa-check"></i> ';
+                                }
+                              
                               echo '
                               <td>'.++$mulai.'</td>
                               <td>'.$data->id_user.'</td>
@@ -51,17 +56,18 @@
                               <input type="hidden" name="id_user" placeholder="ID User" class="form-control" value="">
                               <button type="button
                               " href="#" class="btn btn-info view"
-                              id="'.$data->id_user.'" data-toggle="modal" data-target="#myModalView" style="color: white"><i class="glyphicon glyphicon-eye-open"></i> Detail </a></button>
+                              id="'.$data->id_user.'" data-toggle="modal" data-target="#myModalView" style="color: white"><i class="glyphicon glyphicon-eye-open"></i></a></button>
                               <input type="hidden" name="id_user" placeholder="ID User" class="form-control" value=""> 
-                          <button type="button" href="#" id="'.$data->id_user.'" class="btn btn-success update" data-toggle="modal" data-target="#myModalEdit" style="color: white"><i class="fa fa-edit"></i> Edit </a></button>
-                          <a href="'.base_url().'index.php/admin/user_delete/'.$data->id_user.'" class = "btn btn-danger"><i class="fa fa-trash-o"></i> Delete </button>
+                          <button type="button" href="#" id="'.$data->id_user.'" class="btn btn-success update" data-toggle="modal" data-target="#myModalEdit" style="color: white"><i class="fa fa-edit"></i></a></button>
+                          <button id="'.$data->id_user.'" class="btn btn-warning banned" style="color: white">'.$status.'</a></button>
+                          <button id="'.$data->id_user.'" class="btn btn-danger delete" style="color: white"><i class="fa fa-trash-o"></i></a></button>
+                          
                               </td>
                               
                           </tr>';
                           $no++;
                             }
                             ?>
-                        </tr>
                     </tbody>
                     </table>
                       <?php echo $pagination; ?>
@@ -105,13 +111,19 @@
                       <div class="form-group">
                           <label class="col-lg-2 col-sm-2 control-label">City :</label>
                           <div class="col-lg-10">
-                              <input type="text" class="form-control" id="city_id" name="pekerjaan" placeholder="" disabled>
+                              <input type="text" class="form-control" id="city_id"  placeholder="" disabled>
                           </div>
                       </div>
                       <div class="form-group">
                           <label class="col-lg-2 col-sm-2 control-label">Bio :</label>
                           <div class="col-lg-10">
-                              <input type="text" class="form-control" id="bio_id" name="pekerjaan" placeholder="" disabled>
+                              <input type="text" class="form-control" id="bio_id"  placeholder="" disabled>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-lg-2 col-sm-2 control-label">Role :</label>
+                          <div class="col-lg-10">
+                              <input type="number" class="form-control" id="role_id"  placeholder="" disabled>
                           </div>
                       </div>
                       
@@ -159,6 +171,13 @@
             <form class="form-horizontal" action="" method="post" enctype="multipart/form-data" role="form">
               <div class="modal-body">
                       <div class="form-group">
+                          <label class="col-lg-2 col-sm-2 control-label">Name :</label>
+                          <div class="col-lg-10">
+                            <input type="hidden" id="id" name="id">
+                              <input type="text" class="form-control" id="name_idd" name="nama" placeholder="Tuliskan Nama">
+                          </div>
+                      </div>
+                      <div class="form-group">
                           <label class="col-lg-2 col-sm-2 control-label">Email :</label>
                           <div class="col-lg-10">
                             <input type="hidden" id="id" name="id">
@@ -176,14 +195,21 @@
                       <div class="form-group">
                           <label class="col-lg-2 col-sm-2 control-label">City :</label>
                           <div class="col-lg-10">
-                              <input type="text" class="form-control" id="city_idd" name="pekerjaan" placeholder="Tuliskan Pekerjaan">
+                              <input type="text" class="form-control" id="city_idd"  >
                           </div>
                       </div>
                       <br>
                       <div class="form-group">
                           <label class="col-lg-2 col-sm-2 control-label">Bio :</label>
                           <div class="col-lg-10">
-                              <input type="text" class="form-control" id="bio_idd" name="pekerjaan" placeholder="Tuliskan Pekerjaan">
+                              <input type="text" class="form-control" id="bio_idd"  >
+                          </div>
+                      </div>
+                      <br>
+                      <div class="form-group">
+                          <label class="col-lg-2 col-sm-2 control-label">Role :</label>
+                          <div class="col-lg-10">
+                              <input type="number" max="1" min="0" class="form-control" id="role_idd">
                           </div>
                       </div>
                       <br>
@@ -234,6 +260,7 @@
                           $('input#city_id').attr('value',data[3]);
                           $('input#bio_id').attr('value',data[4]);
                           $('input#name_id').attr('value',data[5]);
+                          $('input#role_id').attr('value',data[7]);
                            $('img#image_id').attr('src','<?php echo base_url();?>assets/images/' +data[6]);
                       }
                   });
@@ -259,19 +286,21 @@
                           $('input#username_idd').attr('value',data[2]);
                           $('input#city_idd').attr('value',data[3]);
                           $('input#bio_idd').attr('value',data[4]);
+                          $('input#name_idd').attr('value',data[5]);
+                          $('input#role_idd').attr('value',data[7]);
                       }
                   });
-              } else {
-                  $('#pro_name').html();
               }
           });
 
             $("a.updateclass").click(function(event) {
               var id_user =  $(this).attr('id');
               var email =    $('input#email_idd').val();
+              var name =    $('input#name_idd').val();
               var username = $('input#username_idd').val();
               var city =     $('input#city_idd').val();
               var bio =      $('input#bio_idd').val();
+              var role =      $('input#role_idd').val();
               var bd =       $('button.view#'+id_user).parent();
               // alert(id_user+email+username+city+bio);
               // alert(product_id);
@@ -281,10 +310,12 @@
                       type: 'post',
                       data: {
                           id: id_user,
+                          name: name,
                           email : email,
                           username:username,
                           city:city,
                           bio:bio,
+                          role:role,
                       },
                       success: function(e) {
                           var data = e.split("|");
@@ -294,6 +325,8 @@
                           $('input#username_idd').attr('value',data[2]);
                           $('input#city_idd').attr('value',data[3]);
                           $('input#bio_idd').attr('value',data[4]);
+                          $('input#name_idd').attr('value',data[5]);
+                          $('input#role_idd').attr('value',data[7]);
                           $('div#myModalEdit').modal('hide');
 
 
@@ -301,13 +334,67 @@
                           bd.prev().prev().prev().html(data[2]);
                           bd.prev().prev().html(data[3]);
                           bd.prev().html(data[4]);
-
+                          
                       }
                   });
-              } else {
-                  $('#pro_name').html();
+              } 
+          });
+              $("button.delete").click(function(event) {
+                if (confirm('Apa anda ingin menghapus user ini?')) {
+              var id_user = $(this).attr('id');
+              // alert(id_user);
+              if (id_user != "") {
+                  $.ajax({
+                      url: "<?php echo base_url()?>admin/delete_user/",
+                      type: 'post',
+                      context: this,
+                      data: {
+                          id_user: id_user,
+                      },
+                      success: function(e) {
+                        if (e == 'true') {
+                          $(this).parent().parent().remove();
+                          // alert('aa');
+                        }
+                        else{
+                          alert('Maaf, coba lagi');
+                        }
+                    }
+                  });
               }
+            }
+          });
+               $("button.banned").click(function(event) {
+                if (confirm('Apa anda ingin banned user ini?')) {
+              var id_user = $(this).attr('id');
+              var status = $(this).children().attr('class');
+                              
+              if (id_user != "") {
+                  $.ajax({
+                      url: "<?php echo base_url()?>admin/banned_user/",
+                      type: 'post',
+                      context: this,
+                      data: {
+                          id_user: id_user,
+                          status : status
+                      },
+                      success: function(e) {
+                        if (e == 'true') {
+                          if ($(this).children().hasClass('fa fa-times')) {
+                                 $(this).html('<i class="fa fa-check"></i> ');
+                                }
+                                else{
+                                  $(this).html('<i class="fa fa-times"></i> ');
+                                }
+                      }
+                      else{
+                        alert('Maaf, anda gagal. Coba lagi');
+                      }
+                    }
+                  });
+              }
+            }
           });
 
- 
+  
              </script>

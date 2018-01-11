@@ -75,9 +75,11 @@ class Admin_model extends CI_Model {
 		$data=array(
 			
 			'email' => $this->input->post('email'),
+			'name' => $this->input->post('name'),
 			'username' => $this->input->post('username'),
 			'city' => $this->input->post('city'),
-			'bio' => $this->input->post('bio')
+			'bio' => $this->input->post('bio'),
+			'role' => $this->input->post('role')
 		);
 		$this->db->where('id_user',$id_user)
 				 ->update('user',$data);
@@ -94,28 +96,33 @@ class Admin_model extends CI_Model {
 		return $this->db->where($where)->get($table)->row();
 	}
 
+
 	public function GetDataa($where,$table){
 		return $this->db->where($where)->get($table)->result();
 	}
 
-	public function editpick($id_title){
+	public function editpick(){
+		$id_title = $this->input->post('id_title');
 		$query = $this->db->where(['id_title'=>$id_title])->get('course_title');		
-		$pick= 0;
-		if ($query->row('pick') == 0) {
-			$pick = 1;
+		$pick= '';
+		if ($query->row('pick') == '0') {
+			$pick = '1';
 		}
 		else{
-			$pick = 0;
+			$pick = '0';
 		}
 		$data=array(
-			'pick' => $pick 
+			'pick' => $pick
 		);
 		$this->db->where('id_title',$id_title)
 				 ->update('course_title',$data);
-				 return TRUE;
+		if($this->db->affected_rows()>0){
+			return true;
+		}else{
+			return false;
+		}
 
 	}
-
 	public function broadcast($foto){
 		date_default_timezone_set('Asia/Jakarta'); 
 		$sub = $this->input->post('subject');
@@ -146,5 +153,20 @@ class Admin_model extends CI_Model {
 	}
 
 	}
-	
+	public function Delete($where,$table){
+		$this->db->where($where)->delete($table);
+		if($this->db->affected_rows()>0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	public function Update($where,$data,$table){
+		$this->db->where($where)->update($table,$data);
+		if($this->db->affected_rows()>0){
+			return true;
+		}else{
+			return false;
+		}
+	}
 }

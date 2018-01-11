@@ -203,12 +203,14 @@ class Course_model extends CI_Model {
 		if (empty($keyword)) {
 		return $this->db
 			->limit(15,0)
+            ->where('status', '1')
             ->get('course_title')
             ->result();
 		}
 		else{
 		return $this->db
 			->where($keyword)
+            ->where('status', '1')
 			->limit(15,0) 
             ->get('course_title')
             ->result();
@@ -217,6 +219,7 @@ class Course_model extends CI_Model {
     public function GetListCoursesInfinite($keyword,$start){
         if (empty($keyword)) {
         return $this->db
+        ->where('status', '1')
             ->limit(6,$start)
             ->get('course_title')
             ->result();
@@ -224,6 +227,7 @@ class Course_model extends CI_Model {
         else{
         return $this->db
             ->where($keyword)
+            ->where('status', '1')
             ->limit(6,$start) 
             ->get('course_title')
             ->result();
@@ -248,9 +252,12 @@ class Course_model extends CI_Model {
         }
     }
     public function GLCUserAccount($keyword,$id_user){
+        $user_in = $this->session->userdata('logged_id');
+        if ($id_user == $user_in) {
         if (empty($keyword)) {
         return $this->db
             ->where('id_user', $id_user)
+            ->where('status !=', '2')
             ->limit(15,0)
             ->get('course_title')
             ->result();
@@ -259,10 +266,32 @@ class Course_model extends CI_Model {
         return $this->db
             ->where($keyword)
             ->where('id_user', $id_user)
+            ->where('status !=', '2')
             ->limit(15,0) 
             ->get('course_title')
             ->result();
         }
+        }
+        else{
+        if (empty($keyword)) {
+        return $this->db
+            ->where('id_user', $id_user)
+            ->where('status', '1')
+            ->limit(15,0)
+            ->get('course_title')
+            ->result();
+        }
+        else{
+        return $this->db
+            ->where($keyword)
+            ->where('id_user', $id_user)
+            ->where('status', '1')
+            ->limit(15,0) 
+            ->get('course_title')
+            ->result();
+        }
+        }
+        
     }
     public function GetListContent($where){
         return $this->db
@@ -288,7 +317,7 @@ class Course_model extends CI_Model {
 
 
 	public function GetSubject(){
-		return $this->db->where('type', 'subject')->get('config')->result();
+		return $this->db->where('type', 'subject')->order_by('code','ASC')->get('config')->result();
 	}	
 
 	public function GetCourse($where)
@@ -411,6 +440,45 @@ public function GetDetailCourse($id_course){
         }
 
   }
+  public function enroll_announce($id_title){
+    date_default_timezone_set('Asia/Jakarta'); # add your city to set local time zone
+    $now = date('Y-m-d H:i:s');    
+    $user_id = $this->session->userdata('logged_id');
+    $user_maker = $this->GetData(['id_title'=>$id_title],'course_title')->row('id_user');
+    $getenrolled = $this->GetData(['id_title'=>$id_title],'enroll_course')->result();
+    $getsubscribed = $this->GetData(['for_id'=>$user_maker],'subscribe')->result();
+    $for_id = array();
+    $insert_notif = array();
+    foreach ($getenrolled as $enroll) {
+                if (!in_array($enroll->id_user, $for_id)){
+                    if ($user_id != $enroll->id_user) {
+                        $for_id[] = $enroll->id_user;
+                    }
+            
+        }
+    }
+    foreach ($getsubscribed as $subs) {
+                if (!in_array($subs->id_user, $for_id)){
+                    if ($user_id != $subs->id_user) {
+                        $for_id[] = $subs->id_user;
+                    }
+            
+        }
+    }
+    if (!empty($for_id)) {
+    for($i = 0; $i < count($for_id); $i++)
+        {
+            $insert_notif[] = array(
+              'get_id'                 => $id_title,
+              'id_user'                => $for_id[$i],
+              'type'                   => 'course_title',
+              'created_at'             => $now,
+            );
+        }
+         $this->db->insert_batch('notification', $insert_notif);
+     }
+  }
+
   public function comment_del(){ //delete comment, dsb
                 $id_comment = $this->input->post('id_comment');
                 $this->db->where(['id_comment'=>$id_comment])

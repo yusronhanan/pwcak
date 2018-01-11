@@ -1,4 +1,8 @@
-
+<style type="text/css">
+  body{
+    background: #eee;
+  }
+</style>
 <div class="container">
 <div class="row">
         <div class="col-md-9">
@@ -53,7 +57,7 @@
               
                   ?>
 
-                  <button class="btn <?php echo $subs; ?> subs_in pull-right" id="<?php echo $user_info->id_user; ?>"><a href="#" data-toggle="modal" data-target="" class="<?php echo $a_subs; ?>"><i class="<?php echo $i_subs; ?>"></i> <?php echo $text; ?>  <?php echo $subss_amount; ?></a></button>
+                  <button class="btn <?php echo $subs; ?> subs_in pull-right" id="<?php echo $user_info->id_user; ?>"><a href="#" class="<?php echo $a_subs; ?>"><i class="<?php echo $i_subs; ?>"></i> <?php echo $text; ?>  <?php echo $subss_amount; ?></a></button>
                   <!-- <button class="btn btn-default"><a href="#" data-toggle="modal" data-target=""><i class="fa fa-users"></i> Disubscribe  1000</a></button> -->
                 <?php } ?>
 
@@ -99,7 +103,7 @@
                 <input class="form-control" name="coursename" type="text">
                 Subject
                 <select class="form-control" name="subject">
-                                <option value="">All</option>
+                                <option>--Pilih--</option>
                                 <?php 
                                 foreach ($list_subject as $sbj) {
                                  ?>
@@ -196,9 +200,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                      <!-- <td>
-                                            <span class="label label-primary"><i class="fa fa-check"></i> Completed</span>
-                                        </td> -->
+                                      
                                         <?php
                                         $i=1; 
                                         
@@ -209,7 +211,7 @@
                                         <td><?php echo $courses->subject ?></td>
                                         <td>
                                         <p class="small">
-                                            <?php echo $courses->description ?>
+                                            <?php echo substr($courses->description, 0,105) ?>...
                                         </p>
                                         </td>
                                         <td><?php echo $courses->visitor ?></td>
@@ -225,7 +227,7 @@
                                     </tr>
                                     <?php } }
                                     else {
-                                      echo '<img src="'.base_url().'assets/images/404.png" alt="" width="200px" style="display: block;margin: 0 auto;"/>';
+                                      echo '<img src="'.base_url().'assets/images/Asset 44.png" alt="" width="200px" style="display: block;margin: 0 auto;"/>';
                                     } ?>
                                     </tbody>
                                 </table>
@@ -241,14 +243,41 @@
                             <div class="tab-pane" id="tab-3">
 
                                 <table class="table table-striped">
+                                  <?php if (!empty($enroll)) { ?>
                                     <thead>
                                     <tr>
+                                      <th>No</th>
+                                      <th>Course Maker</th>
+                                      <th>Course</th>
+                                      <th>Subject</th>
+                                      <th>Date Time</th>
+                                      <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                      
+                                      <?php
+                                        $i=1; 
                                         
-                                   
+                                        foreach ($enroll as $courses) {  ?>
+                                        <tr>
+                                        <td><?php echo $i++ ?></td>
+                                        <td><?php echo $courses->name ?></td>
+                                        <td><?php echo $courses->title ?></td>
+                                        <td>
+                                        <p class="small">
+                                            <?php echo $courses->subject ?>
+                                        </p>
+                                        </td>
+                                        <td><?php echo $courses->created_at ?></td>
+                                        <td><a href="#" data-toggle="modal" data-target="#lesson" id="<?php echo $courses->random_code ?>" class="btn btn-xs btn-success lesson_view" title="enroll course"><i class="fa fa-search"></i></a><br><a href="<?php echo base_url().'discuss/'.$courses->random_code ?>" class="btn btn-xs btn-info" title="discussion course"><i class="fa fa-comment"></i></a><br>
+                                        </td>
+                                        
+
+                                    </tr>
+                                    <?php } }
+                                    else {
+                                      echo '<img src="'.base_url().'assets/images/Asset 44.png" alt="" width="200px" style="display: block;margin: 0 auto;"/>';
+                                    } ?>
                                     </tbody>
                                 </table>
 
@@ -266,33 +295,39 @@
         </div>
         <div class="col-md-3">
             <div class="wrapper wrapper-content project-manager">
-                <h4>Project description</h4>
-                <p class="small">
+                <!-- <h4>Project description</h4> -->
+                <!-- <p class="small">
                     There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look
                     even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing
-                </p>
-                <p class="small font-bold">
-                    <span><i class="fa fa-circle text-warning"></i> High priority</span>
-                </p>
-                <h5>Project tag</h5>
+                </p> -->
+                <!-- <p class="small font-bold">
+                    <span><i class="fa fa-circle text-warning"></i> Other Courses</span>
+                </p> -->
+                <h5>Other Courses</h5>
                 <ul class="tag-list" style="padding: 0">
-                    <li><a href="#"><i class="fa fa-tag"></i> biword</a></li>
-                    <li><a href="#"><i class="fa fa-tag"></i> Lorem ipsum</a></li>
-                    <li><a href="#"><i class="fa fa-tag"></i> Passages</a></li>
-                    <li><a href="#"><i class="fa fa-tag"></i> Variations</a></li>
+                    <?php foreach ($other_courses as $oc) { ?>
+                    <li><a href="<?php echo base_url().'lesson/'.$oc->random_code; ?>"><i class="fa graduation-cap"></i> <?php echo $oc->title ?></a></li>
+                 <?php } ?>
                 </ul>
-                <h5>Project files</h5>
-                <ul class="list-unstyled project-files">
+                <br>
+                <h5>Other User</h5>
+                <ul class="tag-list" style="padding: 0">
+                    <?php foreach ($other_user as $ou) { ?>
+                    <li><a href="<?php echo base_url().$ou->username; ?>"><i class="fa fa-user"></i> <?php echo $ou->name ?></a></li>
+                 <?php } ?>
+                </ul>
+                <!-- <h5>Project files</h5> -->
+                <!-- <ul class="list-unstyled project-files">
                     <li><a href="#"><i class="fa fa-file"></i> Project_document.docx</a></li>
                     <li><a href="#"><i class="fa fa-file-picture-o"></i> Logo_zender_company.jpg</a></li>
                     <li><a href="#"><i class="fa fa-stack-exchange"></i> Email_from_Alex.mln</a></li>
                     <li><a href="#"><i class="fa fa-file"></i> Contract_20_11_2014.docx</a></li>
-                </ul>
-                <div class="text-center m-t-md">
+                </ul> -->
+                <!-- <div class="text-center m-t-md">
                     <a href="#" class="btn btn-xs btn-primary">Add files</a>
                     <a href="#" class="btn btn-xs btn-primary">Report contact</a>
 
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -341,13 +376,13 @@
                           $(this).removeClass('btn-default');
                           $(this).addClass('btn-danger');
                           
-                          $(this).html('<a href="#" data-toggle="modal" data-target="" class="subs_false"><i class="fa fa-plus"></i> Subscribe  '+e+'</a>');
+                          $(this).html('<a href="#" class="subs_false"><i class="fa fa-plus"></i> Subscribe  '+e+'</a>');
                           }
                           else{
                           $(this).removeClass('btn-danger');
                           $(this).addClass('btn-default');
                           
-                          $(this).html('<a href="#" data-toggle="modal" data-target="" class="subs_true"><i class="fa fa-users"></i> Disubscribe  '+e+'</a>');
+                          $(this).html('<a href="#" class="subs_true"><i class="fa fa-users"></i> Disubscribe  '+e+'</a>');
                           }
                     }
         }

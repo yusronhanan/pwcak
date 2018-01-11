@@ -26,7 +26,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 html, body{
   	font-family:'arial';
     font-size: 100%;
-  	background:#F3F3F4;
+  	/*background:#F3F3F4;*/
   	overflow-x: hidden;
 }
 	/*--404--*/
@@ -106,7 +106,7 @@ html, body{
 
 <body>
 	<div class="four">
-		<img src="<?php echo base_url(); ?>assets/images/404.png" alt="" />
+		<img src="<?php echo base_url(); ?>assets/images/Asset 11.png" alt="Not Found" width="50%"/>
 		<p>For Some Reason The Page You Requested Could Not Be Found On Our Server</p>
 		<a href="#" class="hvr-shutter-in-horizontal">Go To Home</a>
 	</div>

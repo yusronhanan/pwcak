@@ -11,6 +11,7 @@ class Discussion extends CI_Controller {
 	}
 	public function index()
 	{
+		$slider = $this->home_model->GetData(['type'=>'slide'],'config')->result();
 		$user_id = $this->session->userdata('logged_id');
 		$list_discuss = $this->course_model->GetListDiscuss(['reply_id'=>'0']);
 		$username_id = $this->auth_model->GetUser(['id_user' => $user_id])->row('username');
@@ -25,7 +26,7 @@ class Discussion extends CI_Controller {
 				'main_view'  => 'discussion_view',
 				'list_discuss' => $list_discuss,
 				'username_id'	=> $username_id,
-
+				'slider'		=> $slider,
 				'comment_amount' => $comment_amount,
 		 		];
 				$this->load->view('templet', $data);
@@ -37,10 +38,13 @@ class Discussion extends CI_Controller {
 		$username_id = $this->auth_model->GetUser(['id_user' => $id_user])->row('username');
 		$user_login =  $this->auth_model->GetUser(['id_user' => $id_user])->row();
 		$random_code = $this->uri->segment(2);
-	
+		
 		$id_title = $this->course_model->GetData(['random_code'=> $random_code],'course_title')->row('id_title');
+		if (!empty($id_title)) {
+			
+		
 		$getcourse = $this->course_model->GetCourse(['id_title'=>$id_title]);
-
+		$other_discuss= $this->home_model->GetOtherDiscuss($id_title);
 		$id_usermaker = $getcourse->row('id_user');
 		
 		$list_content = '';
@@ -103,6 +107,7 @@ class Discussion extends CI_Controller {
 			'maker_info'			=> $getmaker,
 			'list_comment'			=> $list_comment,
 			'list_reply_comment'	=> $list_reply_comment,
+			'other_discuss'			=> $other_discuss,
 			
 			'list_subject'			=> $this->course_model->GetSubject(),
 			
@@ -122,6 +127,10 @@ class Discussion extends CI_Controller {
 		];
 				
 				$this->load->view('detail_discuss', $data);
+	}
+	else{
+		redirect('eror404');
+	}
 	}
 	else{
 		$this->session->set_flashdata('notif_failed', 'Maaf, anda harus login terlebih dahulu');

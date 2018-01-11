@@ -32,16 +32,29 @@
                       </tr>
                       </thead>
                       <tbody>
-                              <tr>
+                              
                                 <?php 
                                 $no = 1;
                                 foreach($course as $data){
                                 if ($data->pick == 0) {
-                                  $picks = '<i class="glyphicon glyphicon-pushpin"></i> Pick';
+                                  $picks = '<i class="glyphicon glyphicon-pushpin"></i> ';
                                 }
                                 else{
-                                  $picks = '<i class="glyphicon glyphicon-check"></i> Unpick';
+                                  $picks = '<i class="glyphicon glyphicon-check"></i> ';
                                 }
+                                if ($data->status == 1) {
+                                  $status = '<i class="fa fa-times"></i> ';
+                                  $publish = 'published';
+                                }
+                                else if($data->status == 2){
+                                  $status = '<i class="fa fa-check"></i> ';
+                                  $publish = 'published';
+                                }
+                                else{
+                                  $status = '<i class="fa fa-times"></i> ';
+                                  $publish = '';
+                                }
+                                
                                 echo '
                                   <td>'.++$start.'</td>
                                   <td>'.$data->id_user.'</td>
@@ -51,8 +64,9 @@
                                   <td colspan="2"> 
                                  <a class = "btn btn-success pickss" id="'.$data->id_title.'">'.$picks.'</a>
                               <input type="hidden" id="id_course" value="" class="form-control"> 
-                              <button type="button" href="#" id="'.$data->id_title.'" class = "btn btn-success view" data-toggle="modal" data-target="#viewCourse"><i class="glyphicon glyphicon-eye-open"></i> View </a>
-                              <button type="button" href="'.base_url().'index.php/admin/course_delete/'.$data->id_title.'" class = "btn btn-danger" style="margin-left:5px;"><i class="fa fa-trash-o"></i> Delete </button>  
+                              <button type="button" href="#" id="'.$data->id_title.'" class = "btn btn-info view" data-toggle="modal" data-target="#viewCourse"><i class="glyphicon glyphicon-eye-open"></i></a>
+                              <button id="'.$data->id_title.'"  class="btn btn-warning banned '.$publish.'" style="color: white">'.$status.'</a></button>
+                              <button id="'.$data->id_title.'"  class="btn btn-danger delete" style="color: white"><i class="fa fa-trash-o"></i></a></button>
                                   </td>
                                   
                               </tr> '
@@ -60,7 +74,6 @@
                              $no++;
                              }
                              ?>
-                        </tr>
                     </tbody>
                     </table>
                       <?php echo $pagination; ?>
@@ -170,6 +183,7 @@
           });
           
       $("a.pickss").click(function(event) {
+        if (confirm('Anda akan mengubah status pick pada course ini, anda yakin?')) {
               var id_title = $(this).attr('id');
               if (id_title != "") {
                   $.ajax({
@@ -182,10 +196,10 @@
                       success: function(e) {
                         if (e == 'true') {
                           if ($(this).children().hasClass('glyphicon-pushpin')) {
-                                 $(this).html('<i class="glyphicon glyphicon-check"></i> Unpick');
+                                 $(this).html('<i class="glyphicon glyphicon-check"></i> ');
                                 }
                                 else{
-                                  $(this).html('<i class="glyphicon glyphicon-pushpin"></i> Pick');
+                                  $(this).html('<i class="glyphicon glyphicon-pushpin"></i> ');
                                 }
                       }
                       else{
@@ -194,5 +208,66 @@
                       }
                   });
               }
+              }
+          });
+      $("button.delete").click(function(event) {
+                if (confirm('Apa anda ingin menghapus course ini?')) {
+              var id_title = $(this).attr('id');
+              // alert(id_user);
+              if (id_title != "") {
+                  $.ajax({
+                      url: "<?php echo base_url()?>admin/delete_course/",
+                      type: 'post',
+                      context: this,
+                      data: {
+                          id_title: id_title,
+                      },
+                      success: function(e) {
+                        if (e == 'true') {
+                          $(this).parent().parent().remove();
+                          // alert('aa');
+                        }
+                        else{
+                          alert('Maaf, coba lagi');
+                        }
+                    }
+                  });
+              }
+            }
+          });
+       $("button.banned").click(function(event) {
+        if ($(this).hasClass('published')) {
+                if (confirm('Apa anda ingin banned course ini?')) {
+              var id_title = $(this).attr('id');
+              var status = $(this).children().attr('class');
+                              
+              if (id_title != "") {
+                  $.ajax({
+                      url: "<?php echo base_url()?>admin/banned_course/",
+                      type: 'post',
+                      context: this,
+                      data: {
+                          id_title: id_title,
+                          status : status
+                      },
+                      success: function(e) {
+                        if (e == 'true') {
+                          if ($(this).children().hasClass('fa fa-times')) {
+                                 $(this).html('<i class="fa fa-check"></i> ');
+                                }
+                                else{
+                                  $(this).html('<i class="fa fa-times"></i> ');
+                                }
+                      }
+                      else{
+                        alert('Maaf, anda gagal. Coba lagi');
+                      }
+                    }
+                  });
+              }
+            }
+          }else{
+            alert('Maaf, course ini dalam status pengembangan');
+          }
           });
 </script>

@@ -274,6 +274,7 @@
       .subsss{
         color:#d9534f;
       }
+
       </style>
       <?php if ($this->session->userdata('logged_in') == TRUE) {  ?>
       <script type="text/javascript">
@@ -471,7 +472,7 @@
             </ul>
 
               <div class="dropdown-footer text-center">
-                <a href="#">View All</a>
+                <a href="<?php echo base_url().$this->session->userdata('username'); ?>">View All</a>
               </div><!-- /dropdown-footer -->
 
             </div><!-- /dropdown-container -->
@@ -479,9 +480,9 @@
           <?php } ?>
 
 
-          <?php if ($this->session->userdata('role') == '1') { ?>
+          <!-- <?php if ($this->session->userdata('role') == '1') { ?>
           <li><a href="<?php echo base_url() ?>admin" class="active">Admin</a></li>
-                <?php } ?>
+                <?php } ?> -->
           <li><a href="<?php echo base_url(); ?>discussion" class="active">Discussion</a></li>
           <li><a href="<?php echo base_url(); ?>course" class="active">Course</a></li>
           <li><a href="<?php echo base_url(); ?>" class="active">Home</a></li>         

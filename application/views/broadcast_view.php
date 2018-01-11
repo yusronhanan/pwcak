@@ -13,9 +13,13 @@
 
       <br/>
 
+
       <label for="message">Text : </label>
       <textarea id="message" required="required" class="form-control" name="text" data-parsley-trigger="keyup" data-parsley-maxlength="200" 
         data-parsley-validation-threshold="10"></textarea>
+      <label for="message">Text comment :</label>
+      <textarea id="message" required="required" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-maxlength="200" 
+        data-parsley-validation-threshold="10" rows="2"></textarea>
 
       <br/>
       <label for="thubmnail">Thumbnail : </label>

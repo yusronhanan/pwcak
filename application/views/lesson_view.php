@@ -264,7 +264,7 @@ i.del_reply:hover{
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-               <h1> <a class="navbar-brand" href="index.html"><?php echo substr($title_info->title ,0,5); ?>..</a></h1>         
+               <h1> <a class="navbar-brand" href=""><?php echo substr($title_info->title ,0,5); ?>..</a></h1>         
 			   </div>
 			 <div class=" border-bottom">
         	<div class="full-left">

@@ -30,21 +30,27 @@
 
 </style>
 <div class="header">
-				<div class="callbacks_container">
-					<ul class="rslides" id="">
-						<li>
-						
-							<div class="slider-info">
-								<p>find your passion</p>
-								<h3><a href="index.html"><span>Edu</span> cational</a></h3>
-								<h6>place where you get lesson</h6>
-							</div>
-						</li>
-							
-					</ul>
-				</div>
-				<div class="clearfix"></div>
-	</div>
+        <!-- Slider -->
+            <div class="slider">
+                <div class="callbacks_container">
+                    <ul class="rslides" id="slider">
+                        <?php foreach ($slider as $sld) { 
+                            $texts = explode("|",$sld->text);
+                        ?>
+                        <li>
+                            <div class="slider-info">
+                                <p><?php echo $texts[0] ?></p>
+                                <h3><a href="#"><span><?php echo $texts[1] ?></span><?php echo $texts[2] ?></a></h3>
+                                <h6><?php echo $texts[3] ?></h6>
+                            </div>
+                        </li>
+                        <?php } ?>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        <!-- //Slider -->
+    </div>
 </div>
 <!--main-content-->
 
@@ -76,10 +82,10 @@
                             <span class="caret"></span>
                         </button> -->
                         <select class="form-control" name="subject">
-                                <option value="">All</option>
+                            <option value="">All</option>
                                 <?php 
                                 foreach ($list_subject as $sbj) {
-                                 if ($sbj->value == $subject) {
+                                 if ($sbj->text == $subject) {
                                     
                                  ?>
                                  <option value="<?php echo $sbj->text ?>" selected="selected"><?php echo $sbj->text ?></option>

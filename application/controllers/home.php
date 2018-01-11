@@ -13,13 +13,14 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
-	
+		$slider = $this->home_model->GetData(['type'=>'slide'],'config')->result();
+
 		$list_pcourses = $this->home_model->GetListPCourses();
 		// $list_rcourses = $this->home_model->GetListRCourses();
 		$list_vcourses=$this->home_model->GetCourseVerified();
 		$user_id = $this->session->userdata('logged_id');
 		$username_id = $this->auth_model->GetUser(['id_user' => $user_id])->row('username');
-						
+		
 		$username = array();
 		$like_amount = array();
 		$comment_amount = array();
@@ -51,6 +52,8 @@ class Home extends CI_Controller {
  		'list_pcourses' => $list_pcourses,
 		'main_view'     => 'home_view',
 		'username_id'	=> $username_id,
+
+		'slider'		=> $slider,
  		];
 		$this->load->view('templet', $data);
 	
@@ -81,10 +84,10 @@ class Home extends CI_Controller {
 		$now = date('Y-m-d H:i:s');
 		if ($mini_notif == 'mini_notif') {
 			$output = '';
-
+			$i= 0;
 			$result=$this->home_model->notification();
 			if (!empty($result)) {
-				$i= 0;
+				
 				foreach ($result as $notif) {
 					$tipe = $notif->type;
 					if ($tipe == 'like_course') { $field_id = 'id_likecourse';}
@@ -93,6 +96,8 @@ class Home extends CI_Controller {
 					else if ($tipe == 'subscribe') { $field_id = 'id_subscribe';}
 					else if ($tipe == 'enroll_course') { $field_id = 'id_enroll';}
 					else if ($tipe == 'broadcast') { $field_id = 'id_broadcast';}
+
+					else if ($tipe == 'course_title') { $field_id = 'id_title';}
 
 					$notification = $this->home_model->GetData([$field_id=>$notif->get_id],$tipe);
 					
@@ -105,6 +110,10 @@ class Home extends CI_Controller {
 						$course_title = $this->home_model->GetData(['id_title'=>$notification->row('id_title')],'course_title')->row('title');
 						$go_word = $course_title;
 						$random_code = $this->course_model->GetData(['id_title'=>$notification->row('id_title')],'course_title')->row('random_code');
+					}
+					else if($tipe == 'course_title'){
+						$go_word = $notification->title;
+						$random_code = $notification->random_code;
 					}
 
 					if ($tipe == 'like_course') { 
@@ -130,11 +139,11 @@ class Home extends CI_Controller {
 							$word = 'reply comment on discussion course';
 						}
 						$go_link = base_url().'discuss/'.$random_code;
-						$desc_notif = '<p class="notification-desc">'.$notification->row('text_comment').'</p>';
+						$desc_notif = '<p class="notification-desc">'.substr($notification->row('text_comment'),0,80).'...</p>';
 					}
 					else if ($tipe == 'subscribe') { 
 						$go_link = '#';
-						$go_word = 'see your subscriber profile.';
+						$go_word = '';
 						$word = ' subscribed you';
 						$desc_notif = '<i style="margin-left: 79px" class="fa fa-user-plus subsss"></i>';
 					}
@@ -143,14 +152,23 @@ class Home extends CI_Controller {
 						$go_link = base_url().'lesson/'.$random_code;
 						$desc_notif ='<i style="margin-left: 79px" class="fa fa-graduation-cap subsss"></i>';
 					}
+					else if ($tipe == 'course_title') { 
+						$word = 'publish new course';
+						$go_link = base_url().'lesson/'.$random_code;
+						$desc_notif ='<i style="margin-left: 79px" class="fa fa-graduation-cap subsss"></i>';
+					}
 					else if ($tipe == 'broadcast') { 
-						$go_word = '';
-						$word = '<strong>'.$notification->row('subject').'<strong> '.$notification->row('text');
+						$word = '<strong><i style="margin-left: 79px" class="fa fa-bullhorn subsss"></i>';
 						$go_link = $notification->row('link');
-						$desc_notif ='<i style="margin-left: 79px" class="fa fa-bullhorn subsss"></i>';
+						$desc_notif = '<p class="notification-desc">'.$notification->row('text').'</p>';
 					}
 				if ($tipe != 'broadcast') {
 				$img  = $this->home_model->GetData(['id_user'=>$notification->row('id_user')],'user')->row('photo');
+				$username = $this->home_model->GetData(['id_user'=>$notification->row('id_user')],'user')->row('username'); 
+				$username_link = base_url().$username;
+				}
+				else if ($tipe == 'course_title') {
+				$img  = $notification->thumbnail;
 				$username = $this->home_model->GetData(['id_user'=>$notification->row('id_user')],'user')->row('username'); 
 				$username_link = base_url().$username;
 				}
@@ -200,7 +218,8 @@ class Home extends CI_Controller {
 				// <li><a href="'.base_url().'notif" class="view" style="margin-left: 40px">View all notification</a></li>
 				}
 			// $count = count($this->home_model->unseen_notification());
-			$count = $i; 
+						$count = $i; 	
+			
 			echo $output.'|'.$count;
 		}
 		else if($mini_notif == 'notification_null'){
@@ -235,12 +254,17 @@ class Home extends CI_Controller {
 					else if ($tipe == 'enroll_course') { $field_id = 'id_enroll';}
 					else if ($tipe == 'broadcast') { $field_id = 'id_broadcast';}
 
+					else if ($tipe == 'course_title') { $field_id = 'id_title';}
 					$notification = $this->home_model->GetData([$field_id=>$notif->get_id],$tipe);
 					if (!empty($notification)) {
 					if ($tipe != 'subscribe' || $tipe != 'broadcast') {
 						$course_title = $this->home_model->GetData(['id_title'=>$notification->row('id_title')],'course_title')->row('title');
 						$go_word = $course_title;
 						$random_code = $this->home_model->GetData(['id_title'=>$notification->row('id_title')],'course_title')->row('random_code');
+					}
+					else if($tipe == 'course_title'){
+						$go_word = $notification->title;
+						$random_code = $notification->random_code;
 					}
 
 					if ($tipe == 'like_course') { 
@@ -279,6 +303,11 @@ class Home extends CI_Controller {
 						$go_link = base_url().'lesson/'.$random_code;
 						
 					}
+					else if ($tipe == 'course_title') { 
+						$word = 'publish new course';
+						$go_link = base_url().'lesson/'.$random_code;
+						
+					}
 					else if ($tipe == 'broadcast') { 
 						$go_word = '';
 						$word = '<strong>'.$notification->row('subject').'<strong> '.$notification->row('text');
@@ -289,7 +318,14 @@ class Home extends CI_Controller {
 				$img  = $this->home_model->GetData(['id_user'=>$notification->row('id_user')],'user')->row('photo');	
 				$username = $this->home_model->GetData(['id_user'=>$notification->row('id_user')],'user')->row('username'); 
 				$username_link = base_url().$username;
+				
+
 				$random_code = $this->course_model->GetData(['id_title'=>$notification->row('id_title')],'course_title')->row('random_code');
+				}
+				else if ($tipe == 'course_title') {
+				$img  = $notification->thumbnail;
+				$username = $this->home_model->GetData(['id_user'=>$notification->row('id_user')],'user')->row('username'); 
+				$username_link = base_url().$username;
 				}
 				else {
 				$img  = $this->home_model->GetData(['id_broadcast'=>$notification->row('id_broadcast')],'broadcast')->row('thumbnail');
@@ -351,7 +387,7 @@ class Home extends CI_Controller {
                                         </div>
                                     </div>';
 					}
-					else if ($tipe == 'enroll_course') { 
+					else if ($tipe == 'enroll_course' || $tipe == 'course_title') { 
 						$output .= '<div class="feed-element">
                                         <a href="#" class="pull-left">
                                             <img alt="image" class="img-circle" src="'.base_url().'assets/images/'.$img.'">
@@ -377,6 +413,7 @@ class Home extends CI_Controller {
 					}
 
 				}
+
 			}
 			}else{
 				$output .= '<img src="'.base_url().'assets/images/Asset 33.png" alt="" width="200px" style="display: block;margin: 0 auto;"/>';

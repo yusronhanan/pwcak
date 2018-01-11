@@ -186,7 +186,7 @@ class Admin extends CI_Controller {
 	public function edit_pick(){
 		if($this->session->userdata('role')==1){
 			// $unedit = 
-			$result = $this->admin_model->editpick($this->uri->segment(3));
+			$result = $this->admin_model->editpick();
 			if($result == TRUE){
 				echo 'true';
 			}

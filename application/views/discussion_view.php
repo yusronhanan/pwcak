@@ -4,40 +4,17 @@
 			<div class="slider">
 				<div class="callbacks_container">
 					<ul class="rslides" id="slider">
+						<?php foreach ($slider as $sld) { 
+							$texts = explode("|",$sld->text);
+						?>
 						<li>
-						
 							<div class="slider-info">
-								<p>Question and Answer</p>
-								<p>for  discuss and boost our knowledge</p>
-								<!-- <h3><a href="index.html"><span>Edu</span> cational</a></h3> -->
-								<!-- <h6>wisdom begins with wonder.</h6> -->
-								
+								<p><?php echo $texts[0] ?></p>
+								<h3><a href="#"><span><?php echo $texts[1] ?></span><?php echo $texts[2] ?></a></h3>
+								<h6><?php echo $texts[3] ?></h6>
 							</div>
-
-							<div class="container">
-							    <div class="row">
-							        <div class="col-sm-6 col-sm-offset-3">
-							            <div id="imaginary_container">
-							            	<form method="" action="">
-							                <div class="input-group stylish-input-group input-append">
-							                    <input type="text" class="form-control"  placeholder="Search" >
-							                    <div class="input-group-btn">
-                                                <input type="submit"  class="btn btn-search btn-danger btn-secondary" value="Go!" id="#">
-                                            </div>
-							                    <!-- <span class="input-group-addon">
-							                        <button type="submit">
-							                            <span class="glyphicon glyphicon-search"></span>
-							                        </button>  
-							                    </span> -->
-							                </div>
-							            </form>
-							            </div>
-							        </div>
-								</div>
-							</div>
-
 						</li>
-							
+						<?php } ?>
 					</ul>
 				</div>
 				<div class="clearfix"></div>

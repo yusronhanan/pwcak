@@ -472,7 +472,7 @@
             </ul>
 
               <div class="dropdown-footer text-center">
-                <a href="#">View All</a>
+                <a href="<?php echo base_url().$this->session->userdata('username'); ?>">View All</a>
               </div><!-- /dropdown-footer -->
 
             </div><!-- /dropdown-container -->

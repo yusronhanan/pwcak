@@ -16,6 +16,28 @@ class Home_model extends CI_Model {
             ->get('course_title')
             ->result();
 	}
+  public function GetOtherDiscuss($id_title){
+    return $this->db->select('course_title.title,course_title.random_code, comment.*')
+            ->limit(10,0) 
+            ->where(['reply_id' => '0', 'status'=>'1','comment.id_title !='=>$id_title])
+            ->join('course_title','course_title.id_title = comment.id_title')
+            ->group_by('id_comment')
+            ->get('comment')
+            ->result();
+  }
+  public function GetOtherCourses($id_user){
+    return $this->db->limit(6,0) 
+            ->where(['status'=>'1','id_user !='=> $id_user])
+            ->get('course_title')
+            ->result();
+  }
+  public function GetOtherUser($id_user){
+    return $this->db->limit(6,0) 
+            ->where(['status'=>'0','id_user !='=> $id_user])
+            ->get('user')
+            ->result();
+  }
+
 	
 	public function GetListRCourses(){
 		return $this->db
@@ -30,7 +52,7 @@ class Home_model extends CI_Model {
     return $this->db
                 ->where(['status'=>'1'])
                 ->where('pick',1)
-                ->limit(9,0)
+                ->limit(7,0)
                 ->get('course_title')
                 ->result();
   }
@@ -189,12 +211,14 @@ class Home_model extends CI_Model {
       if (!empty($mini_notif)) {
        if (count($this->unseen_notification()) > 15) {
           return $this->db->where('id_user',$user_id)
+              ->or_where('id_user','0')
               ->order_by('created_at','DESC')
               ->get('notification')
               ->result();
       }
       else{
         return $this->db->where('id_user',$user_id)
+        ->or_where('id_user','0')
                  ->limit(15,0)
               ->order_by('created_at','DESC')
               ->get('notification')
@@ -203,6 +227,7 @@ class Home_model extends CI_Model {
       }
       else{
         return $this->db->where('id_user',$user_id)
+        ->or_where('id_user','0')
               ->order_by('created_at','DESC')
               ->get('notification')
               ->result();
@@ -213,6 +238,7 @@ class Home_model extends CI_Model {
   public function unseen_notification(){
       $user_id = $this->session->userdata('logged_id');
       return $this->db->where('id_user',$user_id)
+      ->or_where('id_user','0')
               ->where('status','0')
               ->get('notification')
               ->result();

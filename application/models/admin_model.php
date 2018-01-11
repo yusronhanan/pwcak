@@ -96,21 +96,26 @@ class Admin_model extends CI_Model {
 		return $this->db->where($where)->get($table)->row();
 	}
 
-	public function editpick($id_title){
+	public function editpick(){
+		$id_title = $this->input->post('id_title');
 		$query = $this->db->where(['id_title'=>$id_title])->get('course_title');		
-		$pick= 0;
-		if ($query->row('pick') == 0) {
-			$pick = 1;
+		$pick= '';
+		if ($query->row('pick') == '0') {
+			$pick = '1';
 		}
 		else{
-			$pick = 0;
+			$pick = '0';
 		}
 		$data=array(
-			'pick' => $pick 
+			'pick' => $pick
 		);
 		$this->db->where('id_title',$id_title)
 				 ->update('course_title',$data);
-				 return TRUE;
+		if($this->db->affected_rows()>0){
+			return true;
+		}else{
+			return false;
+		}
 
 	}
 	public function Delete($where,$table){

@@ -13,6 +13,7 @@ class Course extends CI_Controller {
 	}
 	public function index()
 	{
+		$slider = $this->home_model->GetData(['type'=>'slide'],'config')->result();
 		$list_courses = '';
 		$user_id = $this->session->userdata('logged_id');
 		$username_id = $this->auth_model->GetUser(['id_user' => $user_id])->row('username');
@@ -66,6 +67,7 @@ class Course extends CI_Controller {
 				'subject'		=> $subject, //search
 				'main_view'  	=> 'course_view',
 				'username_id'	=> $username_id,
+				'slider'		=> $slider,
 					];
 		}
 		else{
@@ -78,6 +80,7 @@ class Course extends CI_Controller {
 				'list_courses' 	=> $list_courses,
 				'main_view' 	=> 'course_view',
 				'username_id'	=> $username_id,
+				'slider'		=> $slider,
 					];
 		}
 		
@@ -211,13 +214,11 @@ class Course extends CI_Controller {
 		redirect('');
 		}
 		else{
-			$this->session->set_flashdata('notif_failed','Maaf, course yang anda maksud tidak tersedia');
-		redirect('');
+			redirect('eror404');
 		}
 		}
 		else{
-			$this->session->set_flashdata('notif_failed','Maaf, course yang anda maksud tidak tersedia');
-		redirect('');
+			redirect('eror404');
 		}
 	}else{
 		$this->session->set_flashdata('notif_failed','Maaf, anda harus login terlebih dahulu untuk menikmati pembelajaran');
@@ -231,10 +232,13 @@ class Course extends CI_Controller {
 		$status = $this->input->post('status');
 		if ($status == 'Publish Now') {
 			$sts = '1';
+			$this->course_model->enroll_announce($id_title);
 		}
 		else{
 			$sts = '0';	
+			$this->home_model->Delete(['get_id'=>$id_title,'type'=>'course_title'],'notification');
 		}
+
 		$getcontent = $this->home_model->GetData(['id_title'=>$id_title],'course_content');
 		if ($getcontent->num_rows() > 0) {
 			$result = $this->home_model->Update(['id_title'=>$id_title],['status'=>$sts],'course_title');

@@ -88,39 +88,17 @@
 			<div class="slider">
 				<div class="callbacks_container">
 					<ul class="rslides" id="slider">
+						<?php foreach ($slider as $sld) { 
+							$texts = explode("|",$sld->text);
+						?>
 						<li>
-						
 							<div class="slider-info">
-								<p>wisdom begins with wonder.</p>
-								<h3><a href="index.html"><span>Edu</span> cational</a></h3>
-								<h6>wisdom begins with wonder.</h6>
+								<p><?php echo $texts[0] ?></p>
+								<h3><a href="#"><span><?php echo $texts[1] ?></span><?php echo $texts[2] ?></a></h3>
+								<h6><?php echo $texts[3] ?></h6>
 							</div>
 						</li>
-						<li>
-						
-							<div class="slider-info">
-								<p>Education is a vaccine for violence.</p>
-								<h3><a href="index.html"><span>Edu</span> cational</a></h3>
-								<h6>wisdom begins with wonder.</h6>
-							</div>
-						</li>
-						<li>
-						
-							<div class="slider-info">
-								<p>wisdom begins with wonder.</p>
-								<h3><a href="index.html"><span>Edu</span> cational</a></h3>
-								<h6>wisdom begins with wonder.</h6>
-							</div>
-						</li>
-						<li>
-						
-							<div class="slider-info">
-								<p>Learning never exhausts the mind.</p>
-								<h3><a href="index.html"><span>Edu</span> cational</a></h3>
-								<h6>wisdom begins with wonder.</h6>
-							</div>
-						</li>
-							
+						<?php } ?>
 					</ul>
 				</div>
 				<div class="clearfix"></div>
@@ -195,7 +173,7 @@
 				<div class="col-md-4 service-box" style="visibility: visible; -webkit-animation-delay: 0.4s;">
 					<figure class="icon">
 						<span class="glyphicon glyphicon-education a1" aria-hidden="true"></span>
-					</figure>
+					</figure>thumbnail
 					<h5>Enroll</h5> <p>Sed ut perspiciis iste natus error sit voluptatem accusantium doloremque laudantium elerisque ipsum vehicula pharetra.</p>
 				</div>
 				<div class="col-md-4 service-box wow bounceIn animated" data-wow-delay="0.4s" style="visibility: visible; -webkit-animation-delay: 0.4s;">
@@ -291,92 +269,49 @@
 <!-- testii end -->
 
 
-
-<!-- editor picks -->
-<div class="event" id="events">
-	<div class="container">
-		<h3>EDITOR PICKS COURSES</h3>
-		<?php foreach ($list_vcourses as $rcourses) {
-			
-		 ?>
-		<div class="col-md-4 eve-agile e1">
-			<div class="eve-sub1">
-				<a href="#" data-toggle="modal" data-target="#lesson" class="lesson_view" id="<?php echo $rcourses->random_code ?>"><img src="<?php echo base_url() ?>assets/images/<?php echo $rcourses->thumbnail ?>" width="350px" height="250px" alt="image"></a>
-			<h4><a href="#" data-toggle="modal" data-target="#lesson" class="lesson_view" id="<?php echo $rcourses->random_code ?>"><?php echo $rcourses->title ?></a></h4>
-				<?php 
-					if(array_key_exists($rcourses->id_user, $username)) {
-					$usrnm =  $username[$rcourses->id_user];
-				}?>
-				<h6>By  <a href="<?php echo base_url() ?><?php echo $usrnm ?>">
-					<?php echo $usrnm ?>
-				</a>, <?php echo $rcourses->created_at ?></h6>
-				<p><?php echo substr($rcourses->description, 0,105) ?>...</p>
-			</div>
-
-			<div class="eve-sub2">
-				<div class="eve-w3lleft">
-					<?php 
-					if(array_key_exists($rcourses->id_title, $comment_amount)) {
-					$comments =  $comment_amount[$rcourses->id_title];
-					}
-					 ?>
-					<h6><i class="fa fa-comment-o" aria-hidden="true"></i><?php echo $comments; ?></h6>
-					 <?php 
-					if(array_key_exists($rcourses->id_title, $like_amount)) {
-					$likes =  $like_amount[$rcourses->id_title];
-					}
-					$thumb = '';
-					if (!empty($liked)) {
-						if(in_array($rcourses->id_title, $liked)) {
-						$thumb = 'thumb_true';
-					}
-					}
-					?>
-					<h6 id="<?php echo $rcourses->random_code ?>" class="thumb_in <?php echo $thumb ?>"><i class="fa fa-thumbs-up" aria-hidden="true"></i><?php echo $likes; ?></h6>
-				</div>	
-				<div class="eve-w3lright e1">
-					<a href="#" data-toggle="modal" data-target="#lesson" class="lesson_view" id="<?php echo $rcourses->random_code ?>"><h5>More</h5></a>
-				</div>
-				<div class="clearfix"></div>	
-			</div>
-		</div>
-		<?php } ?>
-		</div>
-	</div>
-<!-- editor picks-->
-
-
 <!-- gallery -->
 	<div class="portfolio" id="gallery" style="margin-top: 0px;">
 		<h3> Editor Picks Courses</h3>
 			
 			<div class="portfolio-top wow fadeInDown animated" data-wow-delay=".5s">
-			 
+			
+				<?php 
+				$i = 0;
+				foreach ($list_vcourses as $rcourses) {  
+					$i++; ?>
+				
 				<div class="col-md-4 grid slideanim">
 					<figure class="effect-jazz">
-					<a href="#portfolioModal1"  data-toggle="modal">
+					<a href="#portfolioModal1" class="pick_view" data-toggle="modal" id="<?php echo $rcourses->random_code ?>">
 
-						<img src="<?php echo base_url(); ?>assets/images/g1.jpg" alt="img25" class="img-responsive"/>
+						<img src="<?php echo base_url(); ?>assets/images/<?php echo $rcourses->thumbnail ?>" alt="<?php echo $rcourses->title ?>"  width ="550px" height="366px"/>
 							<figcaption>
-								<h4>Educational</h4>
-								<p> Education is not a problem. Education is an opportunity.</p>
-							</figcaption>
-						</a>						
-					</figure>
-				</div>
-				<div class="col-md-4 grid slideanim">
-					<figure class="effect-jazz">
-					<a href="#portfolioModal2"  data-toggle="modal">
-
-						<img src="<?php echo base_url(); ?>assets/images/g2.jpg" alt="img25" class="img-responsive"/>
-							<figcaption>
-								<h4>Educational</h4>
-								<p> Education is not a problem. Education is an opportunity.</p>							
+								<h4><?php echo $rcourses->title ?></h4>
+								<p> <?php echo substr($rcourses->description, 0,75) ?>...</p>				
+								<?php 
+					if(array_key_exists($rcourses->id_user, $username)) {
+					$usrnm =  $username[$rcourses->id_user];
+				}?>
+					<p>by <?php echo $usrnm ?></p>
+					<?php 
+					if(array_key_exists($rcourses->id_title, $comment_amount)) {
+					$comments =  $comment_amount[$rcourses->id_title];
+					}
+					if(array_key_exists($rcourses->id_title, $like_amount)) {
+					$likes =  $like_amount[$rcourses->id_title];
+					}
+						?>		
+						<p><i class="fa fa-comment-o"><?php echo $comments ?></i> | <i class="fa fa-thumbs-up"><?php echo $likes ?></i></p>
 							</figcaption>	
 							</a>						
 					</figure>
 				</div>
-				<div class="col-md-4 grid slideanim">
+				<?php if ($i == 3) {
+					echo '<div class="clearfix"></div>';
+					$i = 0;
+				} ?>
+				<?php } ?>
+				<!-- <div class="col-md-4 grid slideanim">
 					<figure class="effect-jazz">
 					<a href="#portfolioModal3"  data-toggle="modal">
 
@@ -387,61 +322,14 @@
 							</figcaption>
 						</a>						
 					</figure>
-				</div>
+				</div> -->
+				
+				<!-- <div class="clearfix"></div> -->
+			 <!-- </div> -->
+			<!-- <div class="portfolio-top wow fadeInUp animated" data-wow-delay=".5s"> -->
 				
 				<div class="clearfix"></div>
-			 </div>
-			<div class="portfolio-top wow fadeInUp animated" data-wow-delay=".5s">
-				<div class="col-md-3 grid grid-wi slideanim">
-					<figure class="effect-jazz">
-					<a href="#portfolioModal4"  data-toggle="modal">
-
-						<img src="<?php echo base_url(); ?>assets/images/g4.jpg" alt="img25" class="img-responsive"/>
-							<figcaption>
-								<h4 class="effcet-text"> Educational</h4>
-								<p> Learning is never done without errors and defeat.</p>							
-							</figcaption>	
-						</a>						
-					</figure>
-				</div>
-				<div class="col-md-3 grid grid-wi slideanim">
-					<figure class="effect-jazz">
-					<a href="#portfolioModal5"  data-toggle="modal">
-
-						<img src="<?php echo base_url(); ?>assets/images/g5.jpg" alt="img25" class="img-responsive"/>
-							<figcaption>
-								<h4 class="effcet-text"> Educational</h4>
-								<p>Learning is never done without errors and defeat.</p>							
-							</figcaption>
-							</a>						
-					</figure>
-				</div>
-				<div class="col-md-3 grid grid-wi slideanim">
-					<figure class="effect-jazz">
-					<a href="#portfolioModal6"  data-toggle="modal">
-
-						<img src="<?php echo base_url(); ?>assets/images/g6.jpg" alt="img25" class="img-responsive"/>
-							<figcaption>
-								<h4 class="effcet-text">Educational</h4>
-								<p>Learning is never done without errors and defeat.</p>							
-							</figcaption>
-						</a>						
-					</figure>
-				</div>
-				<div class="col-md-3 grid grid-wi slideanim">
-					<figure class="effect-jazz">
-					<a href="#portfolioModal7"  data-toggle="modal">
-
-						<img src="<?php echo base_url(); ?>assets/images/g7.jpg" alt="img25" class="img-responsive"/>
-							<figcaption>
-								<h4 class="effcet-text"> Educational</h4>
-								<p> Learning is never done without errors and defeat.</p>							
-							</figcaption>
-						</a>						
-					</figure>
-				</div>
-				<div class="clearfix"></div>
-			 </div>
+			 <!-- </div> -->
 		</div>
 	<!-- Portfolio Modals -->
 	<div class="portfolio-modal modal fade slideanim" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
@@ -455,146 +343,47 @@
 			
 	                <div class="col-lg-8 col-lg-offset-2">
 	                    <div class="modal-body">
-	                        <h3>Educational</h3>
+	                        <h3 id="titlee_lesson">Educatiaonal</h3>
 							
-	                        <img src="<?php echo base_url(); ?>assets/images/g1.jpg" class="img-responsive" alt="">
-	                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-	                    </div>
-	                </div>
-	           
-	        </div>
-	    </div>
-	</div>
-	<div class="portfolio-modal modal fade slideanim" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
-	    <div class="modal-content">
-	        <div class="close-modal" data-dismiss="modal">
-	            <div class="lr">
-	                <div class="rl"></div>
-	            </div>
-	        </div>
-	        <div class="container">
-	         
-	                <div class="col-lg-8 col-lg-offset-2">
-	                    <div class="modal-body">
-	                        <h3>Educational</h3>
-	                      
-	                        <img src="<?php echo base_url(); ?>assets/images/g2.jpg" class="img-responsive" alt="">
-	                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-	                    </div>
-	                </div>
-	           
-	        </div>
-	    </div>
-	    </div>
-	<div class="portfolio-modal modal fade slideanim" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
-	    <div class="modal-content">
-	        <div class="close-modal" data-dismiss="modal">
-	            <div class="lr">
-	                <div class="rl"></div>
-	            </div>
-	        </div>
-	        <div class="container">
-	           
-	                <div class="col-lg-8 col-lg-offset-2">
-	                    <div class="modal-body">
-	                        <h3>Educational</h3>
-	                     
-	                        <img src="<?php echo base_url(); ?>assets/images/g3.jpg" class="img-responsive" alt="">
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-	                    </div>
-	                </div>
-	            </div>
-	       
-	    </div>
-	</div>
-<<<<<<< HEAD
-	<div class="portfolio-modal modal fade slideanim" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
-	    <div class="modal-content">
-	        <div class="close-modal" data-dismiss="modal">
-	            <div class="lr">
-	                <div class="rl"></div>
-	            </div>
-	        </div>
-	        <div class="container">
-				
-	                <div class="col-lg-8 col-lg-offset-2">
-	                    <div class="modal-body">
-	                        <h3>Educational</h3>
-	                       
-	                        <img src="<?php echo base_url(); ?>assets/images/g4.jpg" class="img-responsive" alt="">
-	                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-	                    </div>
-	                </div>
-	            
-	        </div>
-	    </div>
-	</div>
-	<div class="portfolio-modal modal fade slideanim" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-content">
-	        <div class="close-modal" data-dismiss="modal">
-	            <div class="lr">
-	                <div class="rl"></div>
-	            </div>
-	        </div>
-	        <div class="container">
+	                        <img id="imgg_lesson" src="" class="img-responsive" alt="">
+	                        <p id="descc_lesson"></p>
 
-	                <div class="col-lg-8 col-lg-offset-2">
-	                    <div class="modal-body">
-	                        <h3>Educational</h3>
-	                       
-	                        <img src="<?php echo base_url(); ?>assets/images/g5.jpg" class="img-responsive" alt="">
-	                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+	                        <p id="namee_lesson"></p>
+	                        
+	                        <a id="goo_lesson" href="">Enroll</a>
 	                    </div>
 	                </div>
 	           
 	        </div>
 	    </div>
 	</div>
-	<div class="portfolio-modal modal fade slideanim" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
-	    <div class="modal-content">
-	        <div class="close-modal" data-dismiss="modal">
-	            <div class="lr">
-	                <div class="rl"></div>
-	            </div>
-	        </div>
-	        <div class="container">
-	           
-	                <div class="col-lg-8 col-lg-offset-2">
-	                    <div class="modal-body">
-	                        <h3>Educational</h3>
-	                       
-	                        <img src="<?php echo base_url(); ?>assets/images/g6.jpg" class="img-responsive" alt="">
-	                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-	                    </div>
-	                </div>
-	            </div>
-	        
-	    </div>
-	</div>
-	<div class="portfolio-modal modal fade slideanim" id="portfolioModal7" tabindex="-1" role="dialog" aria-hidden="true">
-	    <div class="modal-content">
-	        <div class="close-modal" data-dismiss="modal">
-	            <div class="lr">
-	                <div class="rl"></div>
-	            </div>
-	        </div>
-	        <div class="container">
-	            
-	                <div class="col-lg-8 col-lg-offset-2">
-	                    <div class="modal-body">
-	                        <h3>Educational</h3>
-	                     
-	                        <img src="<?php echo base_url(); ?>assets/images/g7.jpg" class="img-responsive" alt="">
-	                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-	                    </div>
-	                </div>
-	         
-	        </div>
-	    </div>
-	</div>
+	
 	<!-- /Portfolio Modals -->
 	<!-- //gallery -->
-
+				
+<script type="text/javascript">
+			$("a.pick_view").click(function(event) {
+					    var random_code = $(this).attr('id');
+					    if (random_code != "") {
+					        $.ajax({
+					            url: "<?php echo base_url()?>course/getlesson",
+					            type: 'post',
+					            data: {
+					                random_code: random_code
+					            },
+					            success: function(e) {
+					                var data = e.split("|");
+					                $('#titlee_lesson').html(data[0]);
+					                $('#imgg_lesson').attr('src','<?php echo base_url() ?>assets/images/'+data[1]);
+					                $('#descc_lesson').html(data[2]);
+					                $('#namee_lesson').html('by <a href="<?php echo base_url() ?>'+data[4]+'">'+data[3]+'</a>');
+					                // $('#usernamee_lesson').attr('href','<?php echo base_url() ?>'+data[4]);
+					                $('#goo_lesson').attr('href','<?php echo base_url() ?>lesson/'+random_code);
+					            }
+					        });
+					    }
+					});
+</script>
 	
 </div>
 
@@ -612,49 +401,7 @@
 <!-- //footer -->
 
 
-				<div class="modal fade" id="lesson" tabindex="-1" role="dialog" >
-							<div class="modal-dialog">
-							<!-- Modal content-->
-								<div class="modal-content">
-									<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4 id="title_lesson"></h4>
-											<p>by :<a href="" id="username_lesson"><i id="name_lesson"></i></a></p>
-											<img src="images/e2.jpg" id="img_lesson" alt="lesson" width="350px" height="350px" />
-											<span id="desc_lesson"></span>
-											<br>
-											<div class="eve-w3lright e1">
-								<a href="" id="go_lesson"><button class="btn btn-danger pull-right">Enroll</button></a>
-										</div>
-									</div>
 
-								</div>
-						
-							</div>
-				       </div>
-<script type="text/javascript">
-			$("a.lesson_view").click(function(event) {
-					    var random_code = $(this).attr('id');
-					    if (random_code != "") {
-					        $.ajax({
-					            url: "<?php echo base_url()?>course/getlesson",
-					            type: 'post',
-					            data: {
-					                random_code: random_code
-					            },
-					            success: function(e) {
-					                var data = e.split("|");
-					                $('#title_lesson').html(data[0]);
-					                $('#img_lesson').attr('src','<?php echo base_url() ?>assets/images/'+data[1]);
-					                $('#desc_lesson').html(data[2]);
-					                $('#name_lesson').html(data[3]);
-					                $('#username_lesson').attr('href','<?php echo base_url() ?>'+data[4]);
-					                $('#go_lesson').attr('href','<?php echo base_url() ?>lesson/'+random_code);
-					            }
-					        });
-					    }
-					});
-</script>
 
 <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script> -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js"></script>
@@ -674,6 +421,4 @@
 });
 </script>
 
-=======
 	<div class="clearfix"></div>
->>>>>>> 8ccd7a19d6c549982b8d80faf1aa9761b14a1707

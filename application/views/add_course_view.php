@@ -214,7 +214,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				else{
 					?>
 					<li>
-                        <a href="" class=" hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon "></i><span class="nav-label">1 : KOSONG/</span></a>
+                        <a href="" class=" hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon "></i><span class="nav-label">1 : KOSONG</span></a>
                         
                     </li>
 					<?php
@@ -255,7 +255,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<input type="text" name="coursename" class="form-control" value="<?php echo $tit_info[0]; ?>">
 								Subject 
 								 <select class="form-control" name="subject">
-                                <option value="">All</option>
                                 <?php 
                                 foreach ($list_subject as $sbj) {
                                  if ($sbj->text == $tit_info[5]) {
@@ -362,7 +361,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		 		<div class="grid-hor">
 		 			<form action="<?php echo base_url(); ?>add_course/<?php echo $tit_info[3]; ?>" method="post" enctype="multipart/form-data">
 		 			<h3 id="grid-example-basic">
-		 			<input type="text" name="step_title" placeholder="Your Title" value="<?php if(!empty($getcontent)){ echo $getcontent->step_title;} ?>" style="padding: 8px;text-align: center;"></h3>
+		 			<input type="text" name="step_title" placeholder="Your Title" value="<?php if(!empty($getcontent)){ echo $getcontent->step_title;} ?>" style="padding: 8px;text-align: center;"> </h3>
+
 		 			<br>
 		 			<input type="hidden" name="id_title" value="<?php echo $tit_info[2]; ?>">
 		 			
@@ -385,11 +385,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<input type="submit" name="done" class="btn btn-danger" value="SAVE AND BACK TO MY ACCOUNT">
 					</form>	
 				</div>
-
+				<?php if(!empty($getcontent)){ ?>
 				 <div class="btn-group">
-                                <a class="btn btn-default"><i class="fa fa-angle-left"></i></a>
-                                <a class="btn btn-default"><i class="fa fa-angle-right"></i></a>
-                            </div>
+				 	
+                                <a class="btn btn-default" href="<?php echo base_url() ?>myaccount/delete_content/<?php echo $getcontent->id_course; ?>"><i class="fa fa-trash"></i></a>
+                            
+                           
+                 </div>
+                 <?php } ?>
 				<!----> 		
 			</div>
 		</div>

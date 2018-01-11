@@ -1,4 +1,8 @@
-
+<style type="text/css">
+  body{
+    background: #eee;
+  }
+</style>
 <div class="container">
 <div class="row">
         <div class="col-md-9">
@@ -99,7 +103,7 @@
                 <input class="form-control" name="coursename" type="text">
                 Subject
                 <select class="form-control" name="subject">
-                                <option value="">All</option>
+                                <option>--Pilih--</option>
                                 <?php 
                                 foreach ($list_subject as $sbj) {
                                  ?>
@@ -207,7 +211,7 @@
                                         <td><?php echo $courses->subject ?></td>
                                         <td>
                                         <p class="small">
-                                            <?php echo $courses->description ?>
+                                            <?php echo substr($courses->description, 0,105) ?>...
                                         </p>
                                         </td>
                                         <td><?php echo $courses->visitor ?></td>
@@ -291,33 +295,39 @@
         </div>
         <div class="col-md-3">
             <div class="wrapper wrapper-content project-manager">
-                <h4>Project description</h4>
-                <p class="small">
+                <!-- <h4>Project description</h4> -->
+                <!-- <p class="small">
                     There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look
                     even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing
-                </p>
-                <p class="small font-bold">
-                    <span><i class="fa fa-circle text-warning"></i> High priority</span>
-                </p>
-                <h5>Project tag</h5>
+                </p> -->
+                <!-- <p class="small font-bold">
+                    <span><i class="fa fa-circle text-warning"></i> Other Courses</span>
+                </p> -->
+                <h5>Other Courses</h5>
                 <ul class="tag-list" style="padding: 0">
-                    <li><a href="#"><i class="fa fa-tag"></i> biword</a></li>
-                    <li><a href="#"><i class="fa fa-tag"></i> Lorem ipsum</a></li>
-                    <li><a href="#"><i class="fa fa-tag"></i> Passages</a></li>
-                    <li><a href="#"><i class="fa fa-tag"></i> Variations</a></li>
+                    <?php foreach ($other_courses as $oc) { ?>
+                    <li><a href="<?php echo base_url().'lesson/'.$oc->random_code; ?>"><i class="fa graduation-cap"></i> <?php echo $oc->title ?></a></li>
+                 <?php } ?>
                 </ul>
-                <h5>Project files</h5>
-                <ul class="list-unstyled project-files">
+                <br>
+                <h5>Other User</h5>
+                <ul class="tag-list" style="padding: 0">
+                    <?php foreach ($other_user as $ou) { ?>
+                    <li><a href="<?php echo base_url().$ou->username; ?>"><i class="fa fa-user"></i> <?php echo $ou->name ?></a></li>
+                 <?php } ?>
+                </ul>
+                <!-- <h5>Project files</h5> -->
+                <!-- <ul class="list-unstyled project-files">
                     <li><a href="#"><i class="fa fa-file"></i> Project_document.docx</a></li>
                     <li><a href="#"><i class="fa fa-file-picture-o"></i> Logo_zender_company.jpg</a></li>
                     <li><a href="#"><i class="fa fa-stack-exchange"></i> Email_from_Alex.mln</a></li>
                     <li><a href="#"><i class="fa fa-file"></i> Contract_20_11_2014.docx</a></li>
-                </ul>
-                <div class="text-center m-t-md">
+                </ul> -->
+                <!-- <div class="text-center m-t-md">
                     <a href="#" class="btn btn-xs btn-primary">Add files</a>
                     <a href="#" class="btn btn-xs btn-primary">Report contact</a>
 
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

@@ -218,9 +218,6 @@ class Myaccount extends CI_Controller {
 						'last'					=> $lastid,
 						'getuser_in'			=> $getuser_in,
 						'list_subject'		    => $this->course_model->GetSubject(),
-						
-						// 'list_subject'		=> $this->course_model->GetSubject(),
-
 					];
 						
 						$this->load->view('add_course_view',$data);
@@ -228,7 +225,6 @@ class Myaccount extends CI_Controller {
 					}
 					else if (!empty($this->input->post('save'))) {
 						$this->session->set_flashdata('notif_success','Anda sukses menyimpan data');
-						// redirect('add_course/'.$random_code);
 						$getcontent = $this->course_model->GetContent(['id_title' => $id_title, 'step_number' => $this->input->post('step_number')])->row();
 						$getuser_in = $this->auth_model->GetUser(['id_user' => $this->session->userdata('logged_id')])->row();
 
@@ -270,7 +266,29 @@ class Myaccount extends CI_Controller {
 					redirect('add_course/'.$this->input->post('id_title'));
 			}
 	}
+	public function delete_content(){
+		if ($this->session->userdata('logged_in') == TRUE) {
+			$id_user = $this->session->userdata('logged_id');
+		
+			$id_content = $this->uri->segment(3);
+			
+			$check = $this->home_model->GetData(['id_course'=>$id_content],'course_content')->row('id_user');
 
+			if ($id_user == $check) {
+				$id_title = $this->home_model->GetData(['id_course'=>$id_content],'course_content')->row('id_title');
+					$random_code = $this->home_model->GetData(['id_title'=>$id_title],'course_title')->row('random_code');
+				$result = $this->home_model->Delete(['id_course'=>$id_content],'course_content');
+				if ($result == true) {
+					$this->session->set_flashdata('notif_success','Anda berhasil menghapus content');
+					redirect('add_course/'.$random_code,'refresh');
+				}
+				else{
+					$this->session->set_flashdata('notif_failed','Maaf, Anda gagal menghapus content');
+				redirect('add_course/'.$random_code,'refresh');
+				}
+			 }		 
+		}
+	}
 	public function edit_user(){
 		if($this->input->post('submit')) {
 			$id_user = $this->session->userdata('logged_id');
@@ -547,9 +565,7 @@ class Myaccount extends CI_Controller {
 		$userid_in = $this->session->userdata('logged_id');
 		$enrolled = $this->home_model->GetEnrolled($user_id);
 		if (empty($user_id)) {
-			// redirect('404'); ke not found
-			$this->session->set_flashdata('notif_failed','Maaf, pengguna yang anda cari tidak ditemukan');
-			redirect('');
+			redirect('eror404');
 		}
 		else{
 
@@ -558,7 +574,8 @@ class Myaccount extends CI_Controller {
 		// }
 		// else{
 
-
+		$other_user = $this->home_model->GetOtherUser($user_id);
+		$other_courses = $this->home_model->GetOtherCourses($user_id);
 		$list_courses = '';
 		$list_user = '';
 
@@ -627,6 +644,10 @@ class Myaccount extends CI_Controller {
 				'subs_amount'	=> $subs_amount,
 				'username_id'	=> $usrnm,
 				'enroll'		=> $enrolled,
+				'other_courses' => $other_courses,
+				'other_user'    => $other_user,
+				'main_view'		=> 'acc_view',
+				
 					];
 		}
 		else{
@@ -641,8 +662,12 @@ class Myaccount extends CI_Controller {
 				'subscribed'	=> $subscribed,
 				'subs_amount'	=> $subs_amount,
 				'username_id'	=> $usrnm,
-				'main_view'		=> 'acc_view',
+				
 				'enroll'		=> $enrolled,
+				'other_courses' => $other_courses,
+				'other_user'    => $other_user,
+				'main_view'		=> 'acc_view',
+				
 					];
 		}
 		

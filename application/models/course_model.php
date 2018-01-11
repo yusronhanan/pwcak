@@ -317,7 +317,7 @@ class Course_model extends CI_Model {
 
 
 	public function GetSubject(){
-		return $this->db->where('type', 'subject')->get('config')->result();
+		return $this->db->where('type', 'subject')->order_by('code','ASC')->get('config')->result();
 	}	
 
 	public function GetCourse($where)
@@ -440,6 +440,45 @@ public function GetDetailCourse($id_course){
         }
 
   }
+  public function enroll_announce($id_title){
+    date_default_timezone_set('Asia/Jakarta'); # add your city to set local time zone
+    $now = date('Y-m-d H:i:s');    
+    $user_id = $this->session->userdata('logged_id');
+    $user_maker = $this->GetData(['id_title'=>$id_title],'course_title')->row('id_user');
+    $getenrolled = $this->GetData(['id_title'=>$id_title],'enroll_course')->result();
+    $getsubscribed = $this->GetData(['for_id'=>$user_maker],'subscribe')->result();
+    $for_id = array();
+    $insert_notif = array();
+    foreach ($getenrolled as $enroll) {
+                if (!in_array($enroll->id_user, $for_id)){
+                    if ($user_id != $enroll->id_user) {
+                        $for_id[] = $enroll->id_user;
+                    }
+            
+        }
+    }
+    foreach ($getsubscribed as $subs) {
+                if (!in_array($subs->id_user, $for_id)){
+                    if ($user_id != $subs->id_user) {
+                        $for_id[] = $subs->id_user;
+                    }
+            
+        }
+    }
+    if (!empty($for_id)) {
+    for($i = 0; $i < count($for_id); $i++)
+        {
+            $insert_notif[] = array(
+              'get_id'                 => $id_title,
+              'id_user'                => $for_id[$i],
+              'type'                   => 'course_title',
+              'created_at'             => $now,
+            );
+        }
+         $this->db->insert_batch('notification', $insert_notif);
+     }
+  }
+
   public function comment_del(){ //delete comment, dsb
                 $id_comment = $this->input->post('id_comment');
                 $this->db->where(['id_comment'=>$id_comment])

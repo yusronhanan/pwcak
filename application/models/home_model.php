@@ -34,6 +34,16 @@ class Home_model extends CI_Model {
                 ->get('course_title')
                 ->result();
   }
+  public function GetEnrolled($user_id){
+    return $this->db->select('enroll_course.*, user.username,user.name, course_title.random_code, course_title.subject, course_title.title, enroll_course.created_at as enroll_created')
+            ->where(['course_title.status'=>'1','enroll_course.id_user'=>$user_id])
+            ->join('user', 'course_title.id_user = user.id_user')
+            ->join('enroll_course', 'enroll_course.id_title = course_title.id_title')
+            ->group_by('id_enroll')
+            ->get('course_title')
+            ->result();
+    
+  }
 	public function thumb_up(){  #like course
 		date_default_timezone_set('Asia/Jakarta'); # add your city to set local time zone
 		$now = date('Y-m-d H:i:s');
@@ -46,7 +56,7 @@ class Home_model extends CI_Model {
 		$query = $this->GetData(['id_title'=>$id_title,'id_user'=>$user_id],'like_course');
         if ($query->num_rows() > 0) {
     
-          $this->db->where(['get_id'=>$query->row('id_likecourse'), 'id_user'=>$user_id])
+          $this->db->where(['get_id'=>$query->row('id_likecourse'),'type'=>'like_course'])
                 ->delete('notification');
            $this->db->where(['id_title'=>$id_title,'id_user'=>$user_id])
            			->delete('like_course');
@@ -72,7 +82,7 @@ class Home_model extends CI_Model {
         }
 		
         if ($this->db->affected_rows() > 0) {
-        	$like_amount = $this->home_model->GetSelectData('COUNT(id_likecourse) as like_amount',['id_title' => $id_title], 'like_course')->row('like_amount');
+        	$like_amount = $this->GetSelectData('COUNT(id_likecourse) as like_amount',['id_title' => $id_title], 'like_course')->row('like_amount');
             return $like_amount;
         } else {
             return "false";
@@ -94,7 +104,7 @@ class Home_model extends CI_Model {
 
     $query = $this->GetData(['id_title'=>$id_title,'id_user'=>$user_id,'type'=>$type_action,'id_comment' => $reply_id],'like_comment');
         if ($query->num_rows() > 0) {
-           $this->db->where(['get_id'=>$query->row('id_likecomment'),'id_user'=>$user_id])
+           $this->db->where(['get_id'=>$query->row('id_likecomment'),'type'=>'like_comment'])
                 ->delete('notification');
            $this->db->where(['id_title'=>$id_title,'id_user'=>$user_id,'type'=>$type_action,'id_comment' => $reply_id])
                 ->delete('like_comment');
@@ -123,12 +133,12 @@ class Home_model extends CI_Model {
     
         if ($this->db->affected_rows() > 0) {
           $id_likecomment_delete = $this->GetData(['id_title'=>$id_title,'id_user'=>$user_id,'type'=>$type_delete,'id_comment' => $reply_id],'like_comment')->row('id_likecomment');
-          $this->db->where(['get_id'=>$id_likecomment_delete])
+          $this->db->where(['get_id'=>$id_likecomment_delete,'type'=>'like_comment'])
                 ->delete('notification');
           $this->db->where(['id_title'=>$id_title,'id_user'=>$user_id,'type'=>$type_delete,'id_comment' => $reply_id])
                 ->delete('like_comment');
-          $like_amount = $this->home_model->GetSelectData('COUNT(id_likecomment) as like_amount',['id_title'=>$id_title,'type'=>'2','id_comment' => $reply_id],'like_comment')->row('like_amount'); 
-          $dislike_amount = $this->home_model->GetSelectData('COUNT(id_likecomment) as like_amount',['id_title'=>$id_title,'type'=>'4','id_comment' => $reply_id],'like_comment')->row('like_amount');
+          $like_amount = $this->GetSelectData('COUNT(id_likecomment) as like_amount',['id_title'=>$id_title,'type'=>'2','id_comment' => $reply_id],'like_comment')->row('like_amount'); 
+          $dislike_amount = $this->GetSelectData('COUNT(id_likecomment) as like_amount',['id_title'=>$id_title,'type'=>'4','id_comment' => $reply_id],'like_comment')->row('like_amount');
             return $like_amount.'|'.$dislike_amount;
         } else {
             return "false";
@@ -149,6 +159,8 @@ class Home_model extends CI_Model {
         if ($query->num_rows() > 0) {
            $this->db->where(['id_user'=>$user_id,'for_id'=>$for_id])
                 ->delete('subscribe');
+            $this->db->where(['get_id' => $query->row('id_subscribe'),'type'=>'subscribe'])
+                ->delete('notification');
         } 
          else {
             $data=array(              
@@ -165,16 +177,11 @@ class Home_model extends CI_Model {
               'created_at'              => $now,
         );
          $this->db->insert('notification', $notif);
-         
-        }
-    
-        if ($this->db->affected_rows() > 0) {
-          $subs_amount = $this->home_model->GetSelectData('COUNT(id_subscribe) as subs_amount',['id_user' => $for_id],'subscribe')->row('subs_amount');
-            return $subs_amount;
-        } else {
-            return "false";
-        }
 
+        }
+          
+        $subs_amount = $this->GetSubscribe('COUNT(id_subscribe) as subs_amount',['for_id' => $for_id])->row('subs_amount');
+         return $subs_amount;
   }
     public function notification(){
       $user_id = $this->session->userdata('logged_id');

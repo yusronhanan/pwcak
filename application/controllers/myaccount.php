@@ -545,7 +545,7 @@ class Myaccount extends CI_Controller {
 		$username = $usrnm;
 		$user_id = $this->auth_model->GetUser(['username' => $username])->row('id_user');
 		$userid_in = $this->session->userdata('logged_id');
-		$enrolled = $this->home_model->GetData(['id_user'=>$user_id],'enroll_course');
+		$enrolled = $this->home_model->GetEnrolled($user_id);
 		if (empty($user_id)) {
 			// redirect('404'); ke not found
 			$this->session->set_flashdata('notif_failed','Maaf, pengguna yang anda cari tidak ditemukan');

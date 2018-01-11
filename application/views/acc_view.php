@@ -53,7 +53,7 @@
               
                   ?>
 
-                  <button class="btn <?php echo $subs; ?> subs_in pull-right" id="<?php echo $user_info->id_user; ?>"><a href="#" data-toggle="modal" data-target="" class="<?php echo $a_subs; ?>"><i class="<?php echo $i_subs; ?>"></i> <?php echo $text; ?>  <?php echo $subss_amount; ?></a></button>
+                  <button class="btn <?php echo $subs; ?> subs_in pull-right" id="<?php echo $user_info->id_user; ?>"><a href="#" class="<?php echo $a_subs; ?>"><i class="<?php echo $i_subs; ?>"></i> <?php echo $text; ?>  <?php echo $subss_amount; ?></a></button>
                   <!-- <button class="btn btn-default"><a href="#" data-toggle="modal" data-target=""><i class="fa fa-users"></i> Disubscribe  1000</a></button> -->
                 <?php } ?>
 
@@ -196,9 +196,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                      <!-- <td>
-                                            <span class="label label-primary"><i class="fa fa-check"></i> Completed</span>
-                                        </td> -->
+                                      
                                         <?php
                                         $i=1; 
                                         
@@ -225,7 +223,7 @@
                                     </tr>
                                     <?php } }
                                     else {
-                                      echo '<img src="'.base_url().'assets/images/404.png" alt="" width="200px" style="display: block;margin: 0 auto;"/>';
+                                      echo '<img src="'.base_url().'assets/images/Asset 44.png" alt="" width="200px" style="display: block;margin: 0 auto;"/>';
                                     } ?>
                                     </tbody>
                                 </table>
@@ -241,14 +239,41 @@
                             <div class="tab-pane" id="tab-3">
 
                                 <table class="table table-striped">
+                                  <?php if (!empty($enroll)) { ?>
                                     <thead>
                                     <tr>
+                                      <th>No</th>
+                                      <th>Course Maker</th>
+                                      <th>Course</th>
+                                      <th>Subject</th>
+                                      <th>Date Time</th>
+                                      <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                      
+                                      <?php
+                                        $i=1; 
                                         
-                                   
+                                        foreach ($enroll as $courses) {  ?>
+                                        <tr>
+                                        <td><?php echo $i++ ?></td>
+                                        <td><?php echo $courses->name ?></td>
+                                        <td><?php echo $courses->title ?></td>
+                                        <td>
+                                        <p class="small">
+                                            <?php echo $courses->subject ?>
+                                        </p>
+                                        </td>
+                                        <td><?php echo $courses->created_at ?></td>
+                                        <td><a href="#" data-toggle="modal" data-target="#lesson" id="<?php echo $courses->random_code ?>" class="btn btn-xs btn-success lesson_view" title="enroll course"><i class="fa fa-search"></i></a><br><a href="<?php echo base_url().'discuss/'.$courses->random_code ?>" class="btn btn-xs btn-info" title="discussion course"><i class="fa fa-comment"></i></a><br>
+                                        </td>
+                                        
+
+                                    </tr>
+                                    <?php } }
+                                    else {
+                                      echo '<img src="'.base_url().'assets/images/Asset 44.png" alt="" width="200px" style="display: block;margin: 0 auto;"/>';
+                                    } ?>
                                     </tbody>
                                 </table>
 
@@ -341,13 +366,13 @@
                           $(this).removeClass('btn-default');
                           $(this).addClass('btn-danger');
                           
-                          $(this).html('<a href="#" data-toggle="modal" data-target="" class="subs_false"><i class="fa fa-plus"></i> Subscribe  '+e+'</a>');
+                          $(this).html('<a href="#" class="subs_false"><i class="fa fa-plus"></i> Subscribe  '+e+'</a>');
                           }
                           else{
                           $(this).removeClass('btn-danger');
                           $(this).addClass('btn-default');
                           
-                          $(this).html('<a href="#" data-toggle="modal" data-target="" class="subs_true"><i class="fa fa-users"></i> Disubscribe  '+e+'</a>');
+                          $(this).html('<a href="#" class="subs_true"><i class="fa fa-users"></i> Disubscribe  '+e+'</a>');
                           }
                     }
         }

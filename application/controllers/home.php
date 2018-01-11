@@ -84,6 +84,7 @@ class Home extends CI_Controller {
 
 			$result=$this->home_model->notification();
 			if (!empty($result)) {
+				$i= 0;
 				foreach ($result as $notif) {
 					$tipe = $notif->type;
 					if ($tipe == 'like_course') { $field_id = 'id_likecourse';}
@@ -94,6 +95,12 @@ class Home extends CI_Controller {
 					else if ($tipe == 'broadcast') { $field_id = 'id_broadcast';}
 
 					$notification = $this->home_model->GetData([$field_id=>$notif->get_id],$tipe);
+					
+						
+					if (!empty($notification)) {
+						if ($notif->status == '0') {
+							$i++;
+						}
 					if ($tipe != 'subscribe' || $tipe != 'broadcast') {
 						$course_title = $this->home_model->GetData(['id_title'=>$notification->row('id_title')],'course_title')->row('title');
 						$go_word = $course_title;
@@ -182,16 +189,18 @@ class Home extends CI_Controller {
                       </div>
                     </div>
                 </li>';	
-            
+            	
+            	}
 				}
 				
 				}
 			else{
-				$output .= '<img src="'.base_url().'assets/images/404.png" alt="" width="100px" style="display: block;margin: 0 auto;" />';;
+				$output .= '<img src="'.base_url().'assets/images/Asset 33.png" alt="" width="100px" style="display: block;margin: 0 auto;" />';;
 				// <li>Tidak ada notifikasi</li>
 				// <li><a href="'.base_url().'notif" class="view" style="margin-left: 40px">View all notification</a></li>
 				}
-			$count = count($this->home_model->unseen_notification()); 
+			// $count = count($this->home_model->unseen_notification());
+			$count = $i; 
 			echo $output.'|'.$count;
 		}
 		else if($mini_notif == 'notification_null'){
@@ -227,6 +236,7 @@ class Home extends CI_Controller {
 					else if ($tipe == 'broadcast') { $field_id = 'id_broadcast';}
 
 					$notification = $this->home_model->GetData([$field_id=>$notif->get_id],$tipe);
+					if (!empty($notification)) {
 					if ($tipe != 'subscribe' || $tipe != 'broadcast') {
 						$course_title = $this->home_model->GetData(['id_title'=>$notification->row('id_title')],'course_title')->row('title');
 						$go_word = $course_title;
@@ -367,8 +377,9 @@ class Home extends CI_Controller {
 					}
 
 				}
+			}
 			}else{
-				$output .= '<img src="'.base_url().'assets/images/404.png" alt="" width="200px" style="display: block;margin: 0 auto;"/>';
+				$output .= '<img src="'.base_url().'assets/images/Asset 33.png" alt="" width="200px" style="display: block;margin: 0 auto;"/>';
 				}
 			echo $output;
 			}

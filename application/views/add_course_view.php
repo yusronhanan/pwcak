@@ -146,7 +146,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-               <h1> <a class="navbar-brand" href="index.html"><?php echo substr($tit_info[0],0,7); ?>..</a></h1>         
+               <h1> <a class="navbar-brand" href="#"><?php echo substr($tit_info[0],0,7); ?>..</a></h1>         
 			   </div>
 			 <div class=" border-bottom">
         	<div class="full-left">
@@ -333,11 +333,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		   	
 				<h2>
 				
-				<a href="index.html"><?php echo $tit_info[0]; ?></a>
+				<a href="#"><?php echo $tit_info[0]; ?></a>
 				<i class="fa fa-angle-right"></i>
 				<span>by: <?php echo $tit_info[1]; ?></span>
+				<?php 
+				if ($tit_info[7] == '0') {
+				 	$publishh = 'Publish Now';
+				 }
+				 else{
+				 	$publishh = 'Unpublish Now';
+				 } ?>
+				<button class="btn btn-danger pull-right publishh" id="<?php echo $tit_info[3]; ?>"><?php echo $publishh ?></button>
+		    
 				</h2>
-		    </div>
+			</div>
 		    <?php
 		$notif = $this->session->flashdata('notif');
 		 if(!empty($notif)) {
@@ -432,6 +441,35 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 }); 
 });
 
+    	$("button.publishh").click(function(event) {
+        if (confirm('Anda akan mengubah status publish course ini, anda yakin?')) {
+              var random_code = $(this).attr('id');
+              var status = $(this).html();
+              if (random_code != "") {
+                  $.ajax({
+                      url: "<?php echo base_url()?>course/edit_publish",
+                      type: 'post',
+                      context: this,
+                      data: {
+                          random_code: random_code, status : status
+                      },
+                      success: function(e) {
+                        if (e == 'true') {
+                          if (status == 'Publish Now') {
+                                 $(this).html('Unpublish Now');
+                                }
+                                else{
+                                  $(this).html('Publish Now');
+                                }
+                      }
+                      else{
+                        alert('Maaf, anda gagal. Coba lagi');
+                      }
+                      }
+                  });
+              }
+              }
+          });
 	  
 	
 // 	window.onbeforeunload = function (event) {

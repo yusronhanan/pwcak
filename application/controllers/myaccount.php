@@ -154,7 +154,7 @@ class Myaccount extends CI_Controller {
 		}
 
 		$data = [
-			'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject').'|'.$getcourse->row('thumbnail'),
+			'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject').'|'.$getcourse->row('thumbnail').'|'.$getcourse->row('status'),
 			'getcontent'			=> $getcontent,
 			'step'					=> $step,
 			'list_content'			=> $list_content,		
@@ -210,7 +210,7 @@ class Myaccount extends CI_Controller {
 					if (!empty($this->input->post('newstep'))) {
 						
 						$data = [
-						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject').'|'.$getcourse->row('thumbnail'),
+						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject').'|'.$getcourse->row('thumbnail').'|'.$getcourse->row('status'),
 						'getcontent'			=> $getcontent,
 						'step'					=> $newnumber,
 						'list_content'			=> $list_content,		
@@ -232,7 +232,7 @@ class Myaccount extends CI_Controller {
 						$getuser_in = $this->auth_model->GetUser(['id_user' => $this->session->userdata('logged_id')])->row();
 
 						$data = [
-						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject').'|'.$getcourse->row('thumbnail'),
+						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject').'|'.$getcourse->row('thumbnail').'|'.$getcourse->row('status'),
 						'getcontent'			=> $getcontent,
 						'step'					=> $this->input->post('step_number'),
 						'list_content'			=> $list_content,		
@@ -401,7 +401,7 @@ class Myaccount extends CI_Controller {
 					$getcontent = $this->course_model->GetContent(['id_title' => $id_title, 'step_number' => $this->input->post('step_number')])->row();
 					$getuser_in = $this->auth_model->GetUser(['id_user' => $this->session->userdata('logged_id')])->row();
 						$data = [
-						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject').'|'.$getcourse->row('thumbnail'),
+						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject').'|'.$getcourse->row('thumbnail').'|'.$getcourse->row('status'),
 						'getcontent'			=> $getcontent,
 						'step'					=> $this->input->post('step_number'),
 						'list_content'			=> $list_content,		
@@ -421,7 +421,7 @@ class Myaccount extends CI_Controller {
 					$getcontent = $this->course_model->GetContent(['id_title' => $id_title, 'step_number' => $this->input->post('step_number')])->row();
 					$getuser_in = $this->auth_model->GetUser(['id_user' => $this->session->userdata('logged_id')])->row();
 						$data = [
-						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject').'|'.$getcourse->row('thumbnail'),
+						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject').'|'.$getcourse->row('thumbnail').'|'.$getcourse->row('status'),
 						'getcontent'			=> $getcontent,
 						'step'					=> $this->input->post('step_number'),
 						'list_content'			=> $list_content,		
@@ -441,7 +441,7 @@ class Myaccount extends CI_Controller {
 					$getcontent = $this->course_model->GetContent(['id_title' => $id_title, 'step_number' => $this->input->post('step_number')])->row();
 					$getuser_in = $this->auth_model->GetUser(['id_user' => $this->session->userdata('logged_id')])->row();
 						$data = [
-						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject').'|'.$getcourse->row('thumbnail'),
+						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject').'|'.$getcourse->row('thumbnail').'|'.$getcourse->row('status'),
 						'getcontent'			=> $getcontent,
 						'step'					=> $this->input->post('step_number'),
 						'list_content'			=> $list_content,	
@@ -484,7 +484,7 @@ class Myaccount extends CI_Controller {
 					$getcourse = $this->course_model->GetCourse(['id_title'=>$id_title]);
 					$getuser_in = $this->auth_model->GetUser(['id_user' => $this->session->userdata('logged_id')])->row();
 						$data = [
-						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject').'|'.$getcourse->row('thumbnail'),
+						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject').'|'.$getcourse->row('thumbnail').'|'.$getcourse->row('status'),
 						'getcontent'			=> $getcontent,
 						'step'					=> $this->input->post('step_number'),
 						'list_content'			=> $list_content,		
@@ -502,7 +502,7 @@ class Myaccount extends CI_Controller {
 					$getcourse = $this->course_model->GetCourse(['id_title'=>$id_title]);
 					$getuser_in = $this->auth_model->GetUser(['id_user' => $this->session->userdata('logged_id')])->row();
 						$data = [
-						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject').'|'.$getcourse->row('thumbnail'),
+						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject').'|'.$getcourse->row('thumbnail').'|'.$getcourse->row('status'),
 						'getcontent'			=> $getcontent,
 						'step'					=> $this->input->post('step_number'),
 						'list_content'			=> $list_content,		
@@ -523,7 +523,7 @@ class Myaccount extends CI_Controller {
 				$getcourse = $this->course_model->GetCourse(['id_title'=>$id_title]);
 				$getuser_in = $this->auth_model->GetUser(['id_user' => $this->session->userdata('logged_id')])->row();
 						$data = [
-						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject').'|'.$getcourse->row('thumbnail'),
+						'title_info' 			=> $getcourse->row('title').'|'.$getname.'|'.$id_title.'|'.$random_code.'|'.$getcourse->row('description').'|'.$getcourse->row('subject').'|'.$getcourse->row('thumbnail').'|'.$getcourse->row('status'),
 						'getcontent'			=> $getcontent,
 						'step'					=> $this->input->post('step_number'),
 						'list_content'			=> $list_content,		

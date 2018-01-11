@@ -273,6 +273,22 @@ class Home_model extends CI_Model {
     //   $query = 'SELECT *, COUNT(reply_id) as total from user_action WHERE type_action = 3 AND WHERE id_title = '.$id_title.' GROUP BY id_title
     // ORDER BY id_action DESC LIMIT '.$limit;
     // }
+    public function Delete($where,$table){
+    $this->db->where($where)->delete($table);
+    if($this->db->affected_rows()>0){
+      return true;
+    }else{
+      return false;
+    }
+  }
+  public function Update($where,$data,$table){
+    $this->db->where($where)->update($table,$data);
+    if($this->db->affected_rows()>0){
+      return true;
+    }else{
+      return false;
+    }
+  }
 	 public function GetData($where,$table)
     {
       return $this->db->where($where)->get($table);

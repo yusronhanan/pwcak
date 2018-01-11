@@ -15,7 +15,7 @@
 
       <label for="message">Text comment :</label>
       <textarea id="message" required="required" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-maxlength="200" 
-        data-parsley-validation-threshold="10"></textarea>
+        data-parsley-validation-threshold="10" rows="2"></textarea>
 
       <br/>
       <span class="btn btn-primary">Send</span>

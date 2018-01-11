@@ -14,7 +14,30 @@ class Auth_model extends CI_Model {
         if ($query->num_rows() > 0) {
             $data = [
                 'logged_id'     => $id,
-                'role'          => $role,
+                'role'          => '0',
+                'username'      => $username,
+                'logged_in'     => TRUE,
+            ];
+            $this->session->set_userdata( $data );
+            return TRUE;
+        } 
+         else {
+            return FALSE;
+        }
+    }
+    public function authentication_admin(){
+        $email = $this->input->post('email');
+        $password = $this->input->post('password');
+        $role = $this->GetUser(['email'=>$email])->row('role');
+        $id = $this->GetUser(['email'=>$email])->row('id_user');
+        $username = $this->GetUser(['email'=>$email])->row('username');
+        
+
+        $query = $this->GetUser(['email'=>$email,'password'=>md5($password),'role'=>'1']);
+        if ($query->num_rows() > 0) {
+            $data = [
+                'logged_id'     => $id,
+                'role'          => '1',
                 'username'      => $username,
                 'logged_in'     => TRUE,
             ];

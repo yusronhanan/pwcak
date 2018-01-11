@@ -100,7 +100,10 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="<?php echo base_url(); ?>assets/images/t4.jpg" alt="">Qori
+                    <img src="<?php echo base_url(); ?>assets/images/<?php echo $user_login->photo ?>" alt=""><?php
+                  $names = explode(" ",$user_login->name);
+
+                   echo $names[0]; ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">

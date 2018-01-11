@@ -651,9 +651,7 @@ a.subs_true{
           <?php } ?>
 
 
-          <?php if ($this->session->userdata('role') == '1') { ?>
-          <li><a href="<?php echo base_url() ?>admin" class="active">Admin</a></li>
-                <?php } ?>
+          
           <li><a href="<?php echo base_url(); ?>discussion" class="active">Discussion</a></li>
           <li><a href="<?php echo base_url(); ?>course" class="active">Course</a></li>
           <li><a href="<?php echo base_url(); ?>" class="active">Home</a></li>         

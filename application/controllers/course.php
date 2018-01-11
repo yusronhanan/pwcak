@@ -203,6 +203,24 @@ class Course extends CI_Controller {
 	}
 
 	}
+	public function edit_publish(){
+		$random_code = $this->input->post('random_code');
+		$id_title = $this->home_model->GetData(['random_code'=>$random_code],'course_title')->row('id_title');
+		$status = $this->input->post('status');
+		if ($status == 'Publish Now') {
+			$sts = '1';
+		}
+		else{
+			$sts = '0';	
+		}
+		$result = $this->home_model->Update(['id_title'=>$id_title],['status'=>$sts],'course_title');
+			if($result == TRUE){
+				echo 'true';
+			}
+			else{
+				echo 'false';
+			}
+	}
 }
 
 /* End of file course.php */

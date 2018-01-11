@@ -75,9 +75,11 @@ class Admin_model extends CI_Model {
 		$data=array(
 			
 			'email' => $this->input->post('email'),
+			'name' => $this->input->post('name'),
 			'username' => $this->input->post('username'),
 			'city' => $this->input->post('city'),
-			'bio' => $this->input->post('bio')
+			'bio' => $this->input->post('bio'),
+			'role' => $this->input->post('role')
 		);
 		$this->db->where('id_user',$id_user)
 				 ->update('user',$data);
@@ -111,5 +113,23 @@ class Admin_model extends CI_Model {
 				 return TRUE;
 
 	}
+	public function Delete($where,$table){
+		$this->db->where($where)->delete($table);
+		if($this->db->affected_rows()>0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	public function Update($where,$data,$table){
+		$this->db->where($where)->update($table,$data);
+		if($this->db->affected_rows()>0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+
 	
 }

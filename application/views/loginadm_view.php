@@ -30,7 +30,7 @@
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
-            <form>
+             <form action="<?php echo base_url(); ?>auth/admin_auth" method="post" enctype="multipart/form-data">
               <h1>Login Admin</h1>
               <div>
                 <input type="text" class="form-control" id="email" name="email" placeholder="Email" required="" />
@@ -39,9 +39,9 @@
                 <input type="password" class="form-control" id="password" name="password" placeholder="Password" required="" />
               </div>
               <div>
-                <a class="btn btn-default submit" href="index.html">Log in</a>
-                <!-- <input class="btn btn-default submit center" type="submit" name="submit" value="Login"> -->
+                 <input type="submit" name="submit" value="Login" class="btn btn-default submit center">
                 
+                                
               </div>
 
               <div class="clearfix"></div>

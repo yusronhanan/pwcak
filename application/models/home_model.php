@@ -12,6 +12,7 @@ class Home_model extends CI_Model {
 	public function GetListPCourses(){
 		// popular course list
 		return $this->db->limit(3,0) 
+            ->where(['status'=>'1'])
             ->get('course_title')
             ->result();
 	}
@@ -19,6 +20,7 @@ class Home_model extends CI_Model {
 	public function GetListRCourses(){
 		return $this->db
 			      ->limit(6,0) 
+            ->where(['status'=>'1'])
             ->get('course_title')
             ->result();
 	}
@@ -26,6 +28,7 @@ class Home_model extends CI_Model {
   public function GetCourseVerified()
   {
     return $this->db
+                ->where(['status'=>'1'])
                 ->where('pick',1)
                 ->limit(9,0)
                 ->get('course_title')
@@ -173,34 +176,7 @@ class Home_model extends CI_Model {
         }
 
   }
-  // public function subscribe(){
-  //     $user_id = $this->session->userdata('logged_id');
-  //     $mini_notif = $this->input->post('mini_notif');
-  //     if (!empty($mini_notif)) {
-  //      if (count($this->unseen_subscribe()) > 15) {
-  //         return $this->db->where('for_id',$user_id)
-  //             ->order_by('created_at','DESC')
-  //             // ->limit(15,0)
-  //             ->get('subscribe')
-  //             ->result();
-  //     }
-  //     else{
-  //       return $this->db->where('for_id',$user_id)
-  //             ->order_by('created_at','DESC')
-  //             ->limit(15,0)
-  //             ->get('subscribe')
-  //             ->result();
-  //     }
-  //     }
-  //     else{
-  //       return $this->db->where('for_id',$user_id)
-  //             ->order_by('created_at','DESC')
-  //             // ->limit(15,0)
-  //             ->get('subscribe')
-  //             ->result();
-  //           }
-  //     }
-  public function notification(){
+    public function notification(){
       $user_id = $this->session->userdata('logged_id');
       $mini_notif = $this->input->post('mini_notif');
       if (!empty($mini_notif)) {
@@ -256,23 +232,7 @@ class Home_model extends CI_Model {
             return FALSE;
         }
     }
-    // public function nullNotifSubscribe(){
-    //   $userid = $this->session->userdata('logged_id');
-    //     $this->db->where('for_id',$userid)
-    //              ->where('status','0')
-    //              ->update('subscribe', array('status' => '1'));
-
-    //     if ($this->db->affected_rows() > 0) {
-    //         return TRUE;
-    //     } else {
-    //         return FALSE;
-    //     }
-    // }
-
-    // public function GetDiscussTerbanyak($id_title,$limit){
-    //   $query = 'SELECT *, COUNT(reply_id) as total from user_action WHERE type_action = 3 AND WHERE id_title = '.$id_title.' GROUP BY id_title
-    // ORDER BY id_action DESC LIMIT '.$limit;
-    // }
+   
     public function Delete($where,$table){
     $this->db->where($where)->delete($table);
     if($this->db->affected_rows()>0){

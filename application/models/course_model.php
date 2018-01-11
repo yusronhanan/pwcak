@@ -203,12 +203,14 @@ class Course_model extends CI_Model {
 		if (empty($keyword)) {
 		return $this->db
 			->limit(15,0)
+            ->where('status', '1')
             ->get('course_title')
             ->result();
 		}
 		else{
 		return $this->db
 			->where($keyword)
+            ->where('status', '1')
 			->limit(15,0) 
             ->get('course_title')
             ->result();
@@ -217,6 +219,7 @@ class Course_model extends CI_Model {
     public function GetListCoursesInfinite($keyword,$start){
         if (empty($keyword)) {
         return $this->db
+        ->where('status', '1')
             ->limit(6,$start)
             ->get('course_title')
             ->result();
@@ -224,6 +227,7 @@ class Course_model extends CI_Model {
         else{
         return $this->db
             ->where($keyword)
+            ->where('status', '1')
             ->limit(6,$start) 
             ->get('course_title')
             ->result();
@@ -248,9 +252,12 @@ class Course_model extends CI_Model {
         }
     }
     public function GLCUserAccount($keyword,$id_user){
+        $user_in = $this->session->userdata('logged_id');
+        if ($id_user == $user_in) {
         if (empty($keyword)) {
         return $this->db
             ->where('id_user', $id_user)
+            ->where('status !=', '2')
             ->limit(15,0)
             ->get('course_title')
             ->result();
@@ -259,10 +266,32 @@ class Course_model extends CI_Model {
         return $this->db
             ->where($keyword)
             ->where('id_user', $id_user)
+            ->where('status !=', '2')
             ->limit(15,0) 
             ->get('course_title')
             ->result();
         }
+        }
+        else{
+        if (empty($keyword)) {
+        return $this->db
+            ->where('id_user', $id_user)
+            ->where('status', '1')
+            ->limit(15,0)
+            ->get('course_title')
+            ->result();
+        }
+        else{
+        return $this->db
+            ->where($keyword)
+            ->where('id_user', $id_user)
+            ->where('status', '1')
+            ->limit(15,0) 
+            ->get('course_title')
+            ->result();
+        }
+        }
+        
     }
     public function GetListContent($where){
         return $this->db

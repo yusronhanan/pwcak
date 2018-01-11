@@ -12,95 +12,96 @@ class Myaccount extends CI_Controller {
 	}
 
 
-	public function index()
-	{
-		if ($this->session->userdata('logged_in') == TRUE) {
-		$user_id = $this->session->userdata('logged_id');
-		$username_id = $this->auth_model->GetUser(['id_user' => $user_id])->row('username');
-		
-		$list_courses = '';
+	// public function index()
+	// {
+	// 	if ($this->session->userdata('logged_in') == TRUE) {
+	// 	$user_id = $this->session->userdata('logged_id');
+	// 	$username_id = $this->auth_model->GetUser(['id_user' => $user_id])->row('username');
+	// 	$enrolled = $this->home_model->GetData(['id_user'=>$user_id],'enroll_course');
+	// 	$list_courses = '';
 
-		$title = $this->input->get('title');
-		$subject = $this->input->get('subject');
+	// 	$title = $this->input->get('title');
+	// 	$subject = $this->input->get('subject');
 
-		if (empty($title) && empty($subject)) {
-		$list_courses = $this->course_model->GLCMyAccount('');
-		}
-		else if (empty($title)) {
-			if ($subject == "") {
-				$list_courses = $this->course_model->GLCMyAccount("");
-			}
-			else{
-				$list_courses = $this->course_model->GLCMyAccount(["subject "=>$subject]);
-			}
-		}
-		else{
-			if ($subject == "") {
-				$list_courses = $this->course_model->GLCMyAccount(["title LIKE"=>"%".$title."%"]);
-			}
-			else{
-				$list_courses = $this->course_model->GLCMyAccount(["title LIKE"=>"%".$title."%", "subject" => $subject]);
-			}
+	// 	if (empty($title) && empty($subject)) {
+	// 	$list_courses = $this->course_model->GLCMyAccount('');
+	// 	}
+	// 	else if (empty($title)) {
+	// 		if ($subject == "") {
+	// 			$list_courses = $this->course_model->GLCMyAccount("");
+	// 		}
+	// 		else{
+	// 			$list_courses = $this->course_model->GLCMyAccount(["subject "=>$subject]);
+	// 		}
+	// 	}
+	// 	else{
+	// 		if ($subject == "") {
+	// 			$list_courses = $this->course_model->GLCMyAccount(["title LIKE"=>"%".$title."%"]);
+	// 		}
+	// 		else{
+	// 			$list_courses = $this->course_model->GLCMyAccount(["title LIKE"=>"%".$title."%", "subject" => $subject]);
+	// 		}
 			
-		}
-		$username = array();
-		$like_amount = array();
-		$comment_amount = array();
-		$liked = array();
+	// 	}
+	// 	$username = array();
+	// 	$like_amount = array();
+	// 	$comment_amount = array();
+	// 	$liked = array();
 
-		$subscribed = array();
-		$subs_amount = array();
+	// 	$subscribed = array();
+	// 	$subs_amount = array();
 
-		foreach ($list_courses as $courses) {
-			$username[$courses->id_user] = $this->auth_model->GetUser(['id_user' => $courses->id_user])->row('username');
-			$like_amount[$courses->id_title] = $this->home_model->GetSelectData('COUNT(id_likecourse) as like_amount',['id_title' => $courses->id_title],'like_course')->row('like_amount');
-			$comment_amount[$courses->id_title] = $this->home_model->GetSelectData('COUNT(id_comment) as comment_amount',['id_title' => $courses->id_title],'comment')->row('comment_amount');
-			if ($this->session->userdata('logged_in') == TRUE) {
-				$liked[] = $this->home_model->GetData(['id_title'=>$courses->id_title,'id_user'=>$user_id,],'like_course')->row('id_title');
-			}
-		}
-		if ($this->session->userdata('logged_in') == TRUE) {
-			$subs_amount[$user_id] = $this->home_model->GetSubscribe('COUNT(id_subscribe) as subs_amount',['for_id' => $user_id])->row('subs_amount');
-		}
+	// 	foreach ($list_courses as $courses) {
+	// 		$username[$courses->id_user] = $this->auth_model->GetUser(['id_user' => $courses->id_user])->row('username');
+	// 		$like_amount[$courses->id_title] = $this->home_model->GetSelectData('COUNT(id_likecourse) as like_amount',['id_title' => $courses->id_title],'like_course')->row('like_amount');
+	// 		$comment_amount[$courses->id_title] = $this->home_model->GetSelectData('COUNT(id_comment) as comment_amount',['id_title' => $courses->id_title],'comment')->row('comment_amount');
+	// 		if ($this->session->userdata('logged_in') == TRUE) {
+	// 			$liked[] = $this->home_model->GetData(['id_title'=>$courses->id_title,'id_user'=>$user_id,],'like_course')->row('id_title');
+	// 		}
+	// 	}
+	// 	if ($this->session->userdata('logged_in') == TRUE) {
+	// 		$subs_amount[$user_id] = $this->home_model->GetSubscribe('COUNT(id_subscribe) as subs_amount',['for_id' => $user_id])->row('subs_amount');
+	// 	}
 		
-		if (!empty($title) || !empty($subject)) {
-				$data = [
-				'list_subject'	=> $this->course_model->GetSubject(),
-				'like_amount'	=> $like_amount,
-				'comment_amount'=> $comment_amount,
-				'liked'			=> $liked,
-				'username' 		=> $username,
-				'list_courses' 	=> $list_courses,
-				'title'		 	=> $title,	//search
-				'subject'		=> $subject, //search
-				'user_info'		=> $this->auth_model->GetUser(['id_user' => $user_id])->row(),
-				// 'subscribed'	=> $subscribed,
-				'subs_amount'	=> $subs_amount,
-				'username_id'	=> $username_id,
-					];
-		}
-		else{
-				$data = [
-				'list_subject'	=> $this->course_model->GetSubject(),
-				'like_amount'	=> $like_amount,
-				'comment_amount'=> $comment_amount,
-				'liked'			=> $liked,
-				'username' 		=> $username,
-				'list_courses' 	=> $list_courses,
-				'user_info'		=> $this->auth_model->GetUser(['id_user' => $user_id])->row(),
-				// 'subscribed'	=> $subscribed,
-				'subs_amount'	=> $subs_amount,
-				'username_id'	=> $username_id,
-				'main_view'		=> 'acc_view',
-					];
-		}
-		$this->load->view('templet', $data);
-		}
-		else{
-			$this->session->set_flashdata('notif_failed','Maaf, anda harus login terlebih dahulu');
-			redirect('');
-		}	
-	}
+	// 	if (!empty($title) || !empty($subject)) {
+	// 			$data = [
+	// 			'list_subject'	=> $this->course_model->GetSubject(),
+	// 			'like_amount'	=> $like_amount,
+	// 			'comment_amount'=> $comment_amount,
+	// 			'liked'			=> $liked,
+	// 			'username' 		=> $username,
+	// 			'list_courses' 	=> $list_courses,
+	// 			'enroll'		=> $enrolled,
+	// 			'title'		 	=> $title,	//search
+	// 			'subject'		=> $subject, //search
+	// 			'user_info'		=> $this->auth_model->GetUser(['id_user' => $user_id])->row(),
+	// 			// 'subscribed'	=> $subscribed,
+	// 			'subs_amount'	=> $subs_amount,
+	// 			'username_id'	=> $username_id,
+	// 				];
+	// 	}
+	// 	else{
+	// 			$data = [
+	// 			'list_subject'	=> $this->course_model->GetSubject(),
+	// 			'like_amount'	=> $like_amount,
+	// 			'comment_amount'=> $comment_amount,
+	// 			'liked'			=> $liked,
+	// 			'username' 		=> $username,
+	// 			'list_courses' 	=> $list_courses,
+	// 			'user_info'		=> $this->auth_model->GetUser(['id_user' => $user_id])->row(),
+	// 			// 'subscribed'	=> $subscribed,
+	// 			'subs_amount'	=> $subs_amount,
+	// 			'username_id'	=> $username_id,
+	// 			'main_view'		=> 'acc_view',
+	// 				];
+	// 	}
+	// 	$this->load->view('templet', $data);
+	// 	}
+	// 	else{
+	// 		$this->session->set_flashdata('notif_failed','Maaf, anda harus login terlebih dahulu');
+	// 		redirect('');
+	// 	}	
+	// }
 	
 	
 	public function add_course(){
@@ -541,10 +542,10 @@ class Myaccount extends CI_Controller {
 
 		}
 		public function user_profile($usrnm){
-		// $usrnm = $username;
 		$username = $usrnm;
 		$user_id = $this->auth_model->GetUser(['username' => $username])->row('id_user');
 		$userid_in = $this->session->userdata('logged_id');
+		$enrolled = $this->home_model->GetData(['id_user'=>$user_id],'enroll_course');
 		if (empty($user_id)) {
 			// redirect('404'); ke not found
 			$this->session->set_flashdata('notif_failed','Maaf, pengguna yang anda cari tidak ditemukan');
@@ -552,10 +553,10 @@ class Myaccount extends CI_Controller {
 		}
 		else{
 
-		if ($user_id == $userid_in) {
-			$this->index();
-		}
-		else{
+		// if ($user_id == $userid_in) {
+		// 	$this->index();
+		// }
+		// else{
 
 
 		$list_courses = '';
@@ -625,6 +626,7 @@ class Myaccount extends CI_Controller {
 				'subscribed'	=> $subscribed,
 				'subs_amount'	=> $subs_amount,
 				'username_id'	=> $usrnm,
+				'enroll'		=> $enrolled,
 					];
 		}
 		else{
@@ -640,11 +642,12 @@ class Myaccount extends CI_Controller {
 				'subs_amount'	=> $subs_amount,
 				'username_id'	=> $usrnm,
 				'main_view'		=> 'acc_view',
+				'enroll'		=> $enrolled,
 					];
 		}
 		
 		$this->load->view('templet', $data);
-		}
+		// }
 	}
 }
 	}

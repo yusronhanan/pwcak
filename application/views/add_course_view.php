@@ -463,7 +463,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 }
                       }
                       else{
-                        alert('Maaf, anda gagal. Coba lagi');
+                        alert('Maaf, anda belum menambahkan content course');
                       }
                       }
                   });

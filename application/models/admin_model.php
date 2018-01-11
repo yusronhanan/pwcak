@@ -94,6 +94,10 @@ class Admin_model extends CI_Model {
 		return $this->db->where($where)->get($table)->row();
 	}
 
+	public function GetDataa($where,$table){
+		return $this->db->where($where)->get($table)->result();
+	}
+
 	public function editpick($id_title){
 		$query = $this->db->where(['id_title'=>$id_title])->get('course_title');		
 		$pick= 0;
@@ -109,6 +113,37 @@ class Admin_model extends CI_Model {
 		$this->db->where('id_title',$id_title)
 				 ->update('course_title',$data);
 				 return TRUE;
+
+	}
+
+	public function broadcast($foto){
+		date_default_timezone_set('Asia/Jakarta'); 
+		$sub = $this->input->post('subject');
+        $now = date('Y-m-d H:i:s');
+		$data = array(
+			'id_broadcast' => NULL,
+			'id_user' => NULL,
+			'subject' =>  $this->input->post('subject'),
+			'text' => $this->input->post('text'),
+			'link' => NULL,
+			'thumbnail' => $foto['file_name'],
+			'created_at' => $now,
+	);
+	$this->db->insert('broadcast',$data);
+
+	$id_broadcast = $this->admin_model->GetData(['subject' => $sub],'broadcast')->row('id_broadcast');
+	$notif = array(
+		'get_id' => $id_broadcast,
+		'id_user' => 0,
+		'type' => 'broadcast',
+		'created_at' => $now
+	);
+	$this->db->insert('notification',$notif);
+	if($this->db->affected_rows()>0){
+		return true;
+	}else{
+		return false;
+	}
 
 	}
 	

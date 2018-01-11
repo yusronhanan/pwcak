@@ -190,6 +190,49 @@ class Admin extends CI_Controller {
 		$data['main_view'] = 'broadcast_view';
 		$this->load->view('tempadmin',$data);
 	}
+
+	public function submit_B()
+	{
+		if($this->session->userdata('role') == 1){
+			if($this->input->post('submit') == TRUE){
+
+				$this->form_validation->set_rules('subject','Subject','required|trim');
+				$this->form_validation->set_rules('text','Text','required|trim');
+
+				if($this->form_validation->run() == TRUE){
+
+				$config['upload_path'] = './assets/images';
+				$config['allowed_types'] = 'jpg|png|gif|JPG|PNG';
+				$config['max_size'] = '2000';
+
+				$this->load->library('upload',$config);
+				$this->upload->initialize($config);
+
+				if($this->upload->do_upload('foto')){
+
+				$data = $this->admin_model->broadcast($this->upload->data());
+				if($data == false){
+					$this->session->set_flashdata('notif_failed','Maaf, ada kesalahan. Coba lagi');
+					redirect('admin/broadcast');
+				}
+				else {
+					$this->session->set_flashdata('notif_success','Anda sukses mengedit foto profile');
+					redirect('admin/broadcast');
+				}
+				
+				}else{
+				    $this->session->set_flashdata('notif_failed', $this->upload->display_errors());
+				    redirect('admin/broadcast');
+				}
+
+			}else{
+				$this->session->set_flashdata('notif_failed',validation_errors());
+				redirect('admin/broadcast');
+			}
+		
+		}
+	}
+}
 }
 
 

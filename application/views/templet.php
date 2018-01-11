@@ -274,6 +274,7 @@
       .subsss{
         color:#d9534f;
       }
+
       </style>
       <?php if ($this->session->userdata('logged_in') == TRUE) {  ?>
       <script type="text/javascript">

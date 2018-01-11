@@ -648,6 +648,9 @@ class Myaccount extends CI_Controller {
 		}
 	}
 }
+	public function about_us(){
+		$this->load->view('aboutus_view');
+	}
 	}
 	
 

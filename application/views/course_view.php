@@ -221,10 +221,10 @@
 </div>
         <?php } ?>
         <div class="load_beforethis" id="15"></div>
-        <button class="btn btn-danger" id="load_infinite">LOAD PLEASE</button>
+        <!-- <button class="btn btn-danger" id="load_infinite">LOAD PLEASE</button> -->
 	</div>
 </div>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
         $(document).ready(function(){
             $("button#load_infinite").on('click', load_infinite);
     });
@@ -236,5 +236,6 @@
         load_infinite();
     }
 });
-    </script>
+        
+    </script> -->
    

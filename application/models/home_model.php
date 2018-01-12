@@ -27,8 +27,11 @@ class Home_model extends CI_Model {
   }
   public function GetOtherCourses($id_user){
     return $this->db->limit(6,0) 
-            ->where(['status'=>'1','id_user !='=> $id_user])
-            ->where('id_user !=', $this->session->userdata('logged_id'))
+            ->where(['course_title.status'=>'1','course_title.id_user !='=> $id_user])
+            ->where('course_title.id_user !=', $this->session->userdata('logged_id'))
+            ->where('enroll_course.id_user !=', $id_user)
+            ->join('enroll_course', 'enroll_course.id_title = course_title.id_title')
+            ->group_by('course_title.id_title')
             ->get('course_title')
             ->result();
   }
@@ -63,6 +66,7 @@ class Home_model extends CI_Model {
             ->where(['course_title.status'=>'1','enroll_course.id_user'=>$user_id])
             ->join('user', 'course_title.id_user = user.id_user')
             ->join('enroll_course', 'enroll_course.id_title = course_title.id_title')
+            ->order_by('enroll_course.created_at','DESC')
             ->group_by('id_enroll')
             ->get('course_title')
             ->result();

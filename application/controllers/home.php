@@ -319,7 +319,7 @@ class Home extends CI_Controller {
 					}
 					else if ($tipe == 'broadcast') { 
 						$go_word = '';
-						$word = '<strong>'.$notification->row('subject').'</strong> '.$notification->row('text');
+						$word = $notification->row('subject').' '.$notification->row('text');
 						$go_link = $notification->row('link');
 						
 					}
@@ -410,16 +410,30 @@ class Home extends CI_Controller {
                                     </div>';
 					}
 					else if ($tipe == 'broadcast') { 
-						$output .= '<div class="feed-element">
+						if ($notification->row('link') != NULL) {
+							$output .= '<div class="feed-element">
                                         <a href="#" class="pull-left">
                                             <img alt="image" class="img-circle" src="'.base_url().'assets/images/'.$img.'">
                                         </a>
                                         <div class="media-body ">
                                             <small class="pull-right">'.$time.'</small>
-                                            <strong><a href="'.$go_link.'" class="go_link">'.$notif->id_user.' </a></strong> '.$word.' <strong>you</strong><br>
+                                            <strong>'.$username.' </strong> '.$word.' <strong><a href="'.$go_link.'" class="go_link">Go Here</a></strong><br>
                                             <small class="text-muted">at '.$notif->created_at.'</small>
                                         </div>
                                     </div>';
+						}else{
+							$output .= '<div class="feed-element">
+                                        <a href="#" class="pull-left">
+                                            <img alt="image" class="img-circle" src="'.base_url().'assets/images/'.$img.'">
+                                        </a>
+                                        <div class="media-body ">
+                                            <small class="pull-right">'.$time.'</small>
+                                            <strong>'.$username.' </strong> '.$word.' <br>
+                                            <small class="text-muted">at '.$notif->created_at.'</small>
+                                        </div>
+                                    </div>';
+                                }
+
 					}
 
 				}

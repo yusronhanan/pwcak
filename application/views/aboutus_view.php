@@ -1,27 +1,4 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<title>Educational An Education Category Bootstrap Responsive Website Template | Home :: w3layouts</title>
-<!-- Meta tag Keywords -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Educational Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
-Smartphone Compatible web template, free web designs for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!--// Meta tag Keywords -->
-<!-- css files -->
-<link href="<?php echo base_url(); ?>assets/css/style.css" rel="stylesheet" type="text/css" media="all">
-<link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all">
-<link href="<?php echo base_url(); ?>assets/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
-<!-- //css files -->
-<!-- online-fonts -->
-<link href="//fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i&subset=latin-ext" rel="stylesheet">
-<link href="//fonts.googleapis.com/css?family=Covered+By+Your+Grace" rel="stylesheet">
-<!-- //online-fonts -->
-
-</head>
 
 <style type="text/css">
     	body {
@@ -248,21 +225,21 @@ figure.effect-zoe:hover p.icon-links a:first-child {
 			                </div>
 			                <div class="team-attrs">
 			                    <div class="team-name font-accident-two-bold-italic">Arya Bayu Ageng P.</div>
-			                    <div class="team-position">CEO</div>
+			                    <div class="team-position">Back-End</div>
 			                </div>
 			                <div class="team-content small">
-			                    Truong is also the recipient of The George C. Lin Emerging Filmmaker Award from the San Diego
+			                    Saya harap, T-Learning ini bisa membawa manfaat bagi banyak orang !
 			                </div>
 			                <figcaption>
 
 			                    <p class="icon-links">
-			                        <a href="#!"><i class="fa fa-google"></i></a>
-			                        <a href="#!"><i class="fa fa-instagram"></i></a>
-			                        <a href="#!"><i class="fa fa-facebook"></i></a>
+			                        <a href="mailto:aryabayu23@gmail.com"><i class="fa fa-envelope"></i></a>
+			                        <a href="https://www.instagram.com/_aryabayu" target="_blank"><i class="fa fa-instagram"></i></a>
+			                        <!-- <a href="#!"><i class="fa fa-facebook"></i></a> -->
 			                    </p>
 
 			                    <p class="phone-number">
-			                        <a href="#!">tel: 1 234 567-89-10</a>
+			                        <a href="tel:+6285814264287">tel: +62 858 1426 4287</a>
 			                    </p>
 			                </figcaption>
 			            </figure>
@@ -278,20 +255,19 @@ figure.effect-zoe:hover p.icon-links a:first-child {
 			                </div>
 			                <div class="team-attrs">
 			                    <div class="team-name font-accident-two-bold-italic">Karina Widhia N.</div>
-			                    <div class="team-position">Art-Director</div>
+			                    <div class="team-position">Front-End</div>
 			                </div>
 			                <div class="team-content small">
-			                    Truong is also the recipient of The George C. Lin Emerging Filmmaker Award from the San Diego
+			                    Saya senang menjadi bagian dari T-Learning, ini merupakan masa-masa produktif paling berharga menurut saya !
 			                </div>
 			                <figcaption>
 			                    <p class="icon-links">
-			                        <a href="#!"><i class="fa fa-google"></i></a>
-			                        <a href="#!"><i class="fa fa-instagram"></i></a>
-			                        <a href="#!"><i class="fa fa-facebook"></i></a>
+			                        <a href="mailto:karinwidhia@gmail.com"><i class="fa fa-envelope"></i></a>
+			                        <a href="https://www.instagram.com/karinwidhia" target="_blank"><i class="fa fa-instagram"></i></a>
 			                    </p>
 
 			                    <p class="phone-number">
-			                        <a href="#!">tel: 1 234 567-89-10</a>
+			                        <a href="tel:+6282139307407">tel: +62 821 3930 7407</a>
 			                    </p>
 			                </figcaption>
 			            </figure>
@@ -307,20 +283,19 @@ figure.effect-zoe:hover p.icon-links a:first-child {
 			                </div>
 			                <div class="team-attrs">
 			                    <div class="team-name font-accident-two-bold-italic">Qoriatul Masfufah</div>
-			                    <div class="team-position">Designer</div>
+			                    <div class="team-position">Front-End</div>
 			                </div>
 			                <div class="team-content small">
-			                    Truong is also the recipient of The George C. Lin Emerging Filmmaker Award from the San Diego
+			                    Semoga T-Learning bermanfaat dan dapat jadi acuan untuk sharing ilmu !
 			                </div>
 			                <figcaption>
 			                    <p class="icon-links">
-			                        <a href="#!"><i class="fa fa-google"></i></a>
-			                        <a href="#!"><i class="fa fa-instagram"></i></a>
-			                        <a href="#!"><i class="fa fa-facebook"></i></a>
+			                        <a href="mailto:qoriatulmasfufah@gmail.com"><i class="fa fa-envelope"></i></a>
+			                        <a href="https://www.instagram.com/qoriatulmasfufah" target="_blank"><i class="fa fa-instagram"></i></a>
 			                    </p>
 
 			                    <p class="phone-number">
-			                        <a href="#!">tel: 1 234 567-89-10</a>
+			                        <a href="tel:+6281357316790">tel: +62 813 5731 6790</a>
 			                    </p>
 			                </figcaption>
 			            </figure>
@@ -336,20 +311,19 @@ figure.effect-zoe:hover p.icon-links a:first-child {
 			                </div>
 			                <div class="team-attrs">
 			                    <div class="team-name font-accident-two-bold-italic">Yusron Hanan Zain V.I.</div>
-			                    <div class="team-position">Manager</div>
+			                    <div class="team-position">Back-End</div>
 			                </div>
 			                <div class="team-content small">
-			                    Truong is also the recipient of The George C. Lin Emerging Filmmaker Award from the San Diego
+			                    T-Learning merupakan bagian <i>Teen Signature</i> yang indah untuk dikenang nantinya, terimakasih dan sukses !
 			                </div>
 			                <figcaption>
 			                    <p class="icon-links">
-			                        <a href="#!"><i class="fa fa-google"></i></a>
-			                        <a href="#!"><i class="fa fa-instagram"></i></a>
-			                        <a href="#!"><i class="fa fa-facebook"></i></a>
+			                        <a href="mailto:yusronzain@gmail.com"><i class="fa fa-envelope"></i></a>
+			                        <a href="https://www.instagram.com/yusron_hzvi" target="_blank"><i class="fa fa-instagram"></i></a>
 			                    </p>
 
 			                    <p class="phone-number">
-			                        <a href="#!">tel: 1 234 567-89-10</a>
+			                        <a href="tel:+6282251461910">tel: +62 822 5146 1910</a>
 			                    </p>
 			                </figcaption>
 			            </figure>
@@ -457,39 +431,3 @@ figure.effect-zoe:hover p.icon-links a:first-child {
 				});
 			</script>
 			
-
-<!-- start-smoth-scrolling -->
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/move-top.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/easing.js"></script>
-<script type="text/javascript">
-	jQuery(document).ready(function($) {
-		$(".scroll").click(function(event){		
-			event.preventDefault();
-			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-		});
-	});
-</script>
-<!-- start-smoth-scrolling -->
-
-	<!-- bottom-top -->
-	<!-- smooth scrolling -->
-		<script type="text/javascript">
-			$(document).ready(function() {
-			/*
-				var defaults = {
-				containerID: 'toTop', // fading element id
-				containerHoverID: 'toTopHover', // fading element hover id
-				scrollSpeed: 1200,
-				easingType: 'linear' 
-				};
-			*/								
-			$().UItoTop({ easingType: 'easeOutQuart' });
-			});
-		</script>
-		<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
-	<!-- //smooth scrolling -->
-	<!--// bottom-top -->
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap-3.1.1.min.js"></script>
-
-</body>
-</html>

@@ -676,7 +676,11 @@ class Myaccount extends CI_Controller {
 	}
 }
 	public function about_us(){
-		$this->load->view('aboutus_view');
+		$data = [
+		'main_view'		=> 'aboutus_view',
+				
+					];
+		$this->load->view('templet', $data);
 	}
 	}
 	

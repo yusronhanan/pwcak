@@ -261,7 +261,7 @@
                                         foreach ($enroll as $courses) {  ?>
                                         <tr>
                                         <td><?php echo $i++ ?></td>
-                                        <td><?php echo $courses->name ?></td>
+                                        <td><a href="<?php echo $courses->username ?>"><?php echo $courses->name ?></a></td>
                                         <td><?php echo $courses->title ?></td>
                                         <td>
                                         <span class="label label-primary"><?php echo $courses->subject ?></span>
@@ -304,7 +304,7 @@
                 <h5>Other Courses</h5>
                 <ul class="tag-list" style="padding: 0">
                     <?php foreach ($other_courses as $oc) { ?>
-                    <li><a href="<?php echo base_url().'lesson/'.$oc->random_code; ?>"><i class="fa graduation-cap"></i> <?php echo $oc->title ?></a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#lesson" id="<?php echo $oc->random_code ?>" class="lesson_view" title="enroll course"><i class="fa fa-graduation-cap"></i> <?php echo $oc->title ?></a></li>
                  <?php } ?>
                 </ul>
                 <br>
@@ -346,7 +346,7 @@
             });
               }
           window.onload = big_notif;
-       // setInterval(function(){ big_notif() }, 5000);
+       setInterval(function(){ big_notif() }, 5000);
       </script>
 <?php }  ?>
 

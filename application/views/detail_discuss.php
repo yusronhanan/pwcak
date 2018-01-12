@@ -1724,6 +1724,7 @@ else{
                           $('#name_lesson').html(data[3]);
                           $('#username_lesson').attr('href','<?php echo base_url() ?>'+data[4]);
                           $('#go_lesson').attr('href','<?php echo base_url() ?>lesson/'+random_code);
+                          $('#go_lesson').children().html(data[5]);
                       }
                   });
               }

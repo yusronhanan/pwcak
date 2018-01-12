@@ -5,6 +5,7 @@ class Admin_model extends CI_Model {
 
 	public function __construct(){
 		parent::__construct();
+		 $this->load->helper('date');
 	}
 
 	
@@ -75,11 +76,9 @@ class Admin_model extends CI_Model {
 		$data=array(
 			
 			'email' => $this->input->post('email'),
-			'name' => $this->input->post('name'),
 			'username' => $this->input->post('username'),
 			'city' => $this->input->post('city'),
-			'bio' => $this->input->post('bio'),
-			'role' => $this->input->post('role')
+			'bio' => $this->input->post('bio')
 		);
 		$this->db->where('id_user',$id_user)
 				 ->update('user',$data);
@@ -96,56 +95,79 @@ class Admin_model extends CI_Model {
 		return $this->db->where($where)->get($table)->row();
 	}
 
-
 	public function GetDataa($where,$table){
 		return $this->db->where($where)->get($table)->result();
 	}
 
-	public function editpick(){
-		$id_title = $this->input->post('id_title');
+	public function editpick($id_title){
 		$query = $this->db->where(['id_title'=>$id_title])->get('course_title');		
-		$pick= '';
-		if ($query->row('pick') == '0') {
-			$pick = '1';
+		$pick= 0;
+		if ($query->row('pick') == 0) {
+			$pick = 1;
 		}
 		else{
-			$pick = '0';
+			$pick = 0;
 		}
 		$data=array(
-			'pick' => $pick
+			'pick' => $pick 
 		);
 		$this->db->where('id_title',$id_title)
 				 ->update('course_title',$data);
-		if($this->db->affected_rows()>0){
-			return true;
-		}else{
-			return false;
-		}
+				 return TRUE;
 
 	}
-	public function broadcast($foto){
+
+	public function broadcast($thumbnail){
 		date_default_timezone_set('Asia/Jakarta'); 
 		$sub = $this->input->post('subject');
+		$text = $this->input->post('text');
+		$id_user = $this->input->post('id_user');
+		$thumbnail = $thumbnail['file_name'];
+		$id = $this->input->post('id_broadcast');
+
+		
+
         $now = date('Y-m-d H:i:s');
 		$data = array(
-			'id_broadcast' => NULL,
-			'id_user' => NULL,
-			'subject' =>  $this->input->post('subject'),
-			'text' => $this->input->post('text'),
+			// 'id_broadcast' => NULL,
+			'id_user' => 0,
+			'subject' =>  $sub,
+			'text' => $text,
 			'link' => NULL,
-			'thumbnail' => $foto['file_name'],
+			'thumbnail' => $thumbnail,
 			'created_at' => $now,
 	);
 	$this->db->insert('broadcast',$data);
+	$result= $this->db->where(['subject'=>$sub,'text'=>$text,'thumbnail'=>$thumbnail,'created_at' => $now,])
+					  ->get('broadcast')
+					  ->row('id_broadcast');
 
-	$id_broadcast = $this->admin_model->GetData(['subject' => $sub],'broadcast')->row('id_broadcast');
-	$notif = array(
-		'get_id' => $id_broadcast,
-		'id_user' => 0,
+	$getuser = $this->db->get('user')
+						->result();
+		$for_id = array();
+		$insert_notif = array();
+    foreach ($getuser as $user) {
+    	if(!in_array($user->id_user,$for_id)){
+    		$for_id[] = $user->id_user;
+    	}
+    	
+    }
+    
+    if(!empty($for_id)){
+	
+
+	for($i = 0; $i < count($for_id); $i++)
+    {
+	$insert_notif[] = array(
+
+		'get_id' => $result,
+		'id_user' => $for_id[$i],
 		'type' => 'broadcast',
 		'created_at' => $now
 	);
-	$this->db->insert('notification',$notif);
+}
+	$this->db->insert_batch('notification',$insert_notif);
+}
 	if($this->db->affected_rows()>0){
 		return true;
 	}else{
@@ -153,20 +175,5 @@ class Admin_model extends CI_Model {
 	}
 
 	}
-	public function Delete($where,$table){
-		$this->db->where($where)->delete($table);
-		if($this->db->affected_rows()>0){
-			return true;
-		}else{
-			return false;
-		}
-	}
-	public function Update($where,$data,$table){
-		$this->db->where($where)->update($table,$data);
-		if($this->db->affected_rows()>0){
-			return true;
-		}else{
-			return false;
-		}
-	}
+	
 }

@@ -18,9 +18,33 @@
 
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url(); ?>assets/builds/css/custom.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.1/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.1/sweetalert2.min.css">
   </head>
 
   <body class="nav-md">
+    <?php if ($this->session->flashdata('notif_success')): ?>
+                            <script>
+                                swal({
+                                    title: "Success",
+                                    text: "<?php echo $this->session->flashdata('notif_success'); ?>",
+                                    timer: 1500,
+                                    showConfirmButton: false,
+                                    type: 'success'
+                                });
+                            </script>
+                    <?php endif; ?>
+                    <?php if ($this->session->flashdata('notif_failed')): ?>
+                            <script>
+                                swal({
+                                    title: "Failed",
+                                    text: "<?php echo $this->session->flashdata('notif_failed'); ?>",
+                                    timer: 1500,
+                                    showConfirmButton: false,
+                                    type: 'error'
+                                });
+                            </script>
+                    <?php endif; ?>
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
@@ -100,10 +124,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="<?php echo base_url(); ?>assets/images/<?php echo $user_login->photo ?>" alt=""><?php
-                  $names = explode(" ",$user_login->name);
-
-                   echo $names[0]; ?>
+                    <img src="<?php echo base_url(); ?>assets/images/t4.jpg" alt=""><?php echo $this->session->userdata('username');?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">

@@ -317,7 +317,7 @@ class Course_model extends CI_Model {
 
 
 	public function GetSubject(){
-		return $this->db->where('type', 'subject')->order_by('code','ASC')->get('config')->result();
+		return $this->db->where('type', 'subject')->order_by('text','ASC')->get('config')->result();
 	}	
 
 	public function GetCourse($where)
@@ -481,8 +481,18 @@ public function GetDetailCourse($id_course){
 
   public function comment_del(){ //delete comment, dsb
                 $id_comment = $this->input->post('id_comment');
+                if ($this->GetData(['id_comment'=>$id_comment],'comment')->row('reply_id') == '0') {
+                $this->db->where(['reply_id'=>$id_comment])
+                ->or_where(['id_comment'=>$id_comment])
+                ->delete('comment'); 
+                // $this->db->where(['id_comment'=>$id_comment])
+                // ->delete('comment');   
+                }
+                else{
                 $this->db->where(['id_comment'=>$id_comment])
                 ->delete('comment');
+                }
+                
                 if ($this->db->affected_rows() > 0) {
                 return "true";
                 }

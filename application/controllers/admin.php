@@ -26,8 +26,9 @@ class Admin extends CI_Controller {
 	}
 	public function admin_login()
 	{
+		// if($this->session->userdata('role') == 1 && $this->session->userdata('logged_in') == TRUE){
 		$this->load->view('loginadm_view');
-		
+		// }
 	}
 
 	public function get_user(){
@@ -325,6 +326,7 @@ class Admin extends CI_Controller {
 		if($this->session->userdata('role')==1){
 		$id_user = $this->session->userdata('logged_id');
 		$data['user_login'] = $this->home_model->GetData(['id_user'=> $id_user],'user')->row();
+		$data['list_subject'] = $this->home_model->GetData(['type'=> 'subject'],'config')->result();
 
 		$data['main_view'] = 'subject_view.php';
 		$this->load->view('tempadmin', $data);

@@ -94,6 +94,8 @@
                     <ul class="nav child_menu">
                       <li><a href="<?php echo base_url(); ?>admin/get_user">Data User</a></li>
                       <li><a href="<?php echo base_url(); ?>admin/get_course">Data Course</a></li>
+                       <li><a href="<?php echo base_url(); ?>admin/get_discuss">Data Discussion</a></li>
+                       <li><a href="<?php echo base_url(); ?>admin/get_comment">Data Comment</a></li>
                     </ul>
                   </li>
                   

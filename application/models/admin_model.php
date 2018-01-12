@@ -157,7 +157,7 @@ class Admin_model extends CI_Model {
 			'id_user' => 0,
 			'subject' =>  $sub,
 			'text' => $text,
-			'link' => $link,
+			'link' => 'http://'.$link,
 			'thumbnail' => $thumbnail,
 			'created_at' => $now,
 	);
@@ -199,6 +199,13 @@ class Admin_model extends CI_Model {
 	}
 
 	}
+	// public function list_subject_update(){
+		// $list_sbj = $this->input->post('list_subject');
+		// $sbj = explode(',', $list_sbj);
+		// for($i = 0; $i < count($sbj); $i++) {
+		// $check = $this->db->where(['type'=>'subject','text'])->get('config');
+		// }
+	// }
 	public function Delete($where,$table){
 		$this->db->where($where)->delete($table);
 		if($this->db->affected_rows()>0){

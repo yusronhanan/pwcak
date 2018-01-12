@@ -16,6 +16,19 @@
     <!-- NProgress -->
     <link href="<?php echo base_url(); ?>assets/vendorss/nprogress/nprogress.css" rel="stylesheet">
 
+    <!-- iCheck -->
+    <link href="<?php echo base_url(); ?>assets/vendorss/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- bootstrap-wysiwyg -->
+    <link href="<?php echo base_url(); ?>assets/vendorss/google-code-prettify/bin/prettify.min.css" rel="stylesheet">
+    <!-- Select2 -->
+    <link href="<?php echo base_url(); ?>assets/vendorss/select2/dist/css/select2.min.css" rel="stylesheet">
+    <!-- Switchery -->
+    <link href="<?php echo base_url(); ?>assets/vendorss/switchery/dist/switchery.min.css" rel="stylesheet">
+    <!-- starrr -->
+    <link href="<?php echo base_url(); ?>assets/vendorss/starrr/dist/starrr.css" rel="stylesheet">
+    <!-- bootstrap-daterangepicker -->
+    <link href="<?php echo base_url(); ?>assets/vendorss/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url(); ?>assets/builds/css/custom.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.1/sweetalert2.min.js"></script>
@@ -85,7 +98,14 @@
                   </li>
                   
                   <li><a href="<?php echo base_url(); ?>admin/broadcast"><i class="fa fa-desktop"></i> Broadcast</a>
-                    
+                  <li><a><i class="fa fa-cogs"></i> Settings <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="<?php echo base_url(); ?>admin/subject">Subject</a></li>
+                      <li><a href="<?php echo base_url(); ?>admin/slider">Slider</a></li>
+                      <li><a href="<?php echo base_url(); ?>admin/testi">Testimonial</a></li>
+                    </ul>
+                  </li>
+
                   </li>
                 </ul>
               </div>
@@ -178,6 +198,32 @@
 
     <!-- Custom Theme Scripts -->
     <script src="<?php echo base_url(); ?>assets/builds/js/custom.min.js"></script>
+
+    <!-- bootstrap-progressbar -->
+    <script src="<?php echo base_url(); ?>assets/vendorss/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="<?php echo base_url(); ?>assets/vendorss/iCheck/icheck.min.js"></script>
+    
+    <!-- bootstrap-wysiwyg -->
+    <script src="<?php echo base_url(); ?>assets/vendorss/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/vendorss/jquery.hotkeys/jquery.hotkeys.js"></script>
+    <script src="<?php echo base_url(); ?>assets/vendorss/google-code-prettify/src/prettify.js"></script>
+    <!-- jQuery Tags Input -->
+    <script src="<?php echo base_url(); ?>assets/vendorss/jquery.tagsinput/src/jquery.tagsinput.js"></script>
+    <!-- Switchery -->
+    <script src="<?php echo base_url(); ?>assets/vendorss/switchery/dist/switchery.min.js"></script>
+    <!-- Select2 -->
+    <script src="<?php echo base_url(); ?>assets/vendorss/select2/dist/js/select2.full.min.js"></script>
+    <!-- Parsley -->
+    <script src="<?php echo base_url(); ?>assets/vendorss/parsleyjs/dist/parsley.min.js"></script>
+    <!-- Autosize -->
+    <script src="<?php echo base_url(); ?>assets/vendorss/autosize/dist/autosize.min.js"></script>
+    <!-- jQuery autocomplete -->
+    <script src="<?php echo base_url(); ?>assets/vendorss/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
+    <!-- starrr -->
+    <script src="<?php echo base_url(); ?>assets/vendorss/starrr/dist/starrr.js"></script>
+
+  
 	
   </body>
 </html>

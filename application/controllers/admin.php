@@ -209,6 +209,37 @@ class Admin extends CI_Controller {
 		$this->load->view('tempadmin',$data);
 		}
 	}
+
+	public function slider() {
+		if($this->session->userdata('role')==1){
+		$id_user = $this->session->userdata('logged_id');
+		$data['user_login'] = $this->home_model->GetData(['id_user'=> $id_user],'user')->row();
+
+		$data['main_view'] = 'slider_adm.php';
+		$this->load->view('tempadmin', $data);
+		}
+	}
+
+	public function testi() {
+		if($this->session->userdata('role')==1){
+		$id_user = $this->session->userdata('logged_id');
+		$data['user_login'] = $this->home_model->GetData(['id_user'=> $id_user],'user')->row();
+
+		$data['main_view'] = 'testimonial_adm.php';
+		$this->load->view('tempadmin', $data);
+		}
+	}
+
+	public function subject() {
+		if($this->session->userdata('role')==1){
+		$id_user = $this->session->userdata('logged_id');
+		$data['user_login'] = $this->home_model->GetData(['id_user'=> $id_user],'user')->row();
+
+		$data['main_view'] = 'subject_view.php';
+		$this->load->view('tempadmin', $data);
+		}
+	}
+
 	public function delete_user(){
 		if($this->session->userdata('role')==1){
 			$id_user = $this->input->post('id_user');
@@ -329,6 +360,8 @@ class Admin extends CI_Controller {
 		}
 	}
 }
+
+
 }
 
 

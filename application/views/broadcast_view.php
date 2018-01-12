@@ -8,7 +8,8 @@
 <div class="x_panel">
 <div class="x_content">
 <form id="demo-form" data-parsley-validate method="post" action="<?php echo base_url();?>admin/submit_B" enctype="multipart/form-data">
-      <label for="fullname">Subject :</label>
+
+      <label for="subject">Subject :</label>
       <input type="text" id="subject" class="form-control" name="subject" required />
 
       <br/>
@@ -20,7 +21,10 @@
       <br/>
 
 
-      <label for="fullname">Link :</label>
+      <label for="link">Link :</label>
+      <span class="form-control-feedback left">
+          <input type="text" disabled value="http://"/>
+      </span>
       <input type="text" id="link" class="form-control" name="link" placeholder="(Optional)" />
 
       <br/>

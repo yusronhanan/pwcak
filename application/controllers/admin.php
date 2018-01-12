@@ -6,11 +6,15 @@ class Admin extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('admin_model');
+		$this->load->model('course_model');
+		$this->load->model('home_model');
 	}
 
 	public function index()
 	{
 		if($this->session->userdata('role') == 1){
+		$id_user = $this->session->userdata('logged_id');
+		$data['user_login'] = $this->home_model->GetData(['id_user'=> $id_user],'user')->row();
 		// $data['user'] = $this->admin_model->get_data_user();
 		// // $data['course'] = $this->admin_model->get_data_course();
 
@@ -20,10 +24,18 @@ class Admin extends CI_Controller {
 			redirect('home');
 		}
 	}
+	public function admin_login()
+	{
+		$this->load->view('loginadm_view');
+		
+	}
 
 	public function get_user(){
 		if($this->session->userdata('role') == 1){
 		// if($this->session->userdata('admin_login')==TRUE){
+			$id_user = $this->session->userdata('logged_id');
+		$data['user_login'] = $this->home_model->GetData(['id_user'=> $id_user],'user')->row();
+		
 			$data['main_view'] = 'datauser_view';
 
 			$this->load->library('pagination');
@@ -66,6 +78,8 @@ class Admin extends CI_Controller {
 	public function get_course(){
 		if($this->session->userdata('role') == 1){
 		// if($this->session->userdata('admin_login') == TRUE){
+			$id_user = $this->session->userdata('logged_id');
+		$data['user_login'] = $this->home_model->GetData(['id_user'=> $id_user],'user')->row();
 			$data['main_view'] = 'datacourse_view';
 			$this->load->library('pagination');
 
@@ -133,16 +147,16 @@ class Admin extends CI_Controller {
 
  	public function logout_admin(){
  		$this->session->sess_destroy();
- 		redirect('');
+ 		redirect('admin_login');
  	}
 
  	public function detUser(){
  		if($this->session->userdata('role')==1){
  		    $data 	= $this->admin_model->get_detail_user();
-			echo $data->id_user."|".$data->email."|".$data->username."|".$data->city."|".$data->bio."|".$data->name."|".$data->photo;
+			echo $data->id_user."|".$data->email."|".$data->username."|".$data->city."|".$data->bio."|".$data->name."|".$data->photo."|".$data->role;
 		}
 		else{
-			redirect('home');
+			redirect('admin_login');
 		}
 	}
 
@@ -163,7 +177,7 @@ class Admin extends CI_Controller {
 			$result = $this->admin_model->update_user();
 			if($result == 'TRUE'){
 			$data = $this->admin_model->GetData(array("id_user"=>$this->input->post('id')),'user');
-			echo $data->id_user."|".$data->email."|".$data->username."|".$data->city."|".$data->bio;
+			echo $data->id_user."|".$data->email."|".$data->username."|".$data->city."|".$data->bio."|".$data->role;
 		    }else{
 		    	echo 'FALSE';
 		    }
@@ -175,7 +189,7 @@ class Admin extends CI_Controller {
 	public function edit_pick(){
 		if($this->session->userdata('role')==1){
 			// $unedit = 
-			$result = $this->admin_model->editpick($this->uri->segment(3));
+			$result = $this->admin_model->editpick();
 			if($result == TRUE){
 				echo 'true';
 			}
@@ -187,10 +201,92 @@ class Admin extends CI_Controller {
 
 	public function broadcast()
 	{
+		if($this->session->userdata('role')==1){
+		$id_user = $this->session->userdata('logged_id');
+		$data['user_login'] = $this->home_model->GetData(['id_user'=> $id_user],'user')->row();
+
 		$data['main_view'] = 'broadcast_view';
 		$this->load->view('tempadmin',$data);
+		}
 	}
+	public function delete_user(){
+		if($this->session->userdata('role')==1){
+			$id_user = $this->input->post('id_user');
+			$comment = $this->admin_model->Delete(['id_user'=>$id_user],'comment');
+			$notif = $this->admin_model->Delete(['id_user'=>$id_user],'notification');
+			$subscribe = $this->admin_model->Delete(['id_user'=>$id_user],'subscribe');
+			$like_course = $this->admin_model->Delete(['id_user'=>$id_user],'like_course');
+			$like_comment = $this->admin_model->Delete(['id_user'=>$id_user],'like_comment');
+			$enroll = $this->admin_model->Delete(['id_user'=>$id_user],'enroll_course');
+			$course_title = $this->admin_model->Delete(['id_user'=>$id_user],'course_title');
+			$content = $this->admin_model->Delete(['id_user'=>$id_user],'course_content');
+			$broadcast = $this->admin_model->Delete(['id_user'=>$id_user],'broadcast');
+			$result = $this->admin_model->Delete(['id_user'=>$id_user],'user');
 
+			if($result == TRUE){
+				echo 'true';
+			}
+			else{
+				echo 'false';
+			}
+		}
+	}
+	public function delete_course(){
+		if($this->session->userdata('role')==1){
+			$id_title = $this->input->post('id_title');
+			$comment = $this->admin_model->Delete(['id_title'=>$id_title],'comment');
+			$like_course = $this->admin_model->Delete(['id_title'=>$id_title],'like_course');
+			$like_comment = $this->admin_model->Delete(['id_title'=>$id_title],'like_comment');
+			$enroll = $this->admin_model->Delete(['id_title'=>$id_title],'enroll_course');
+			$content = $this->admin_model->Delete(['id_title'=>$id_title],'course_content');
+			$result = $this->admin_model->Delete(['id_title'=>$id_title],'course_title');
+			if($result == TRUE){
+				echo 'true';
+			}
+			else{
+				echo 'false';
+			}
+		}
+	}
+	
+	public function banned_user(){
+		if($this->session->userdata('role')==1){
+			$id_user = $this->input->post('id_user');
+			$status = $this->input->post('status');
+			if ($status == 'fa fa-times') {
+				$banned = '1';
+			}
+			else{
+				$banned = '0';	
+			}
+			$result = $this->admin_model->Update(['id_user'=>$id_user],['status'=>$banned],'user');
+			if($result == TRUE){
+				echo 'true';
+			}
+			else{
+				echo 'false';
+			}
+		}
+	}
+	public function banned_course(){
+		if($this->session->userdata('role')==1){
+			$id_title = $this->input->post('id_title');
+			$status = $this->input->post('status');
+			if ($status == 'fa fa-times') {
+				$banned = '2';
+			}
+			else{
+				$banned = '1';	
+			}
+			$result = $this->admin_model->Update(['id_title'=>$id_title],['status'=>$banned],'course_title');
+			if($result == TRUE){
+				echo 'true';
+			}
+			else{
+				echo 'false';
+			}
+		}
+	}
 	public function submit_B()
 	{
 		if($this->session->userdata('role') == 1){

@@ -99,21 +99,26 @@ class Admin_model extends CI_Model {
 		return $this->db->where($where)->get($table)->result();
 	}
 
-	public function editpick($id_title){
-		$query = $this->db->where(['id_title'=>$id_title])->get('course_title');		
-		$pick= 0;
-		if ($query->row('pick') == 0) {
-			$pick = 1;
+	public function editpick(){
+		$id_title = $this->input->post('id_title');	
+		$pick= '';
+		$query = $this->db->where(['id_title'=>$id_title])->get('course_title');
+		if ($query->row('pick') == '0') {
+			$pick = '1';
 		}
 		else{
-			$pick = 0;
+			$pick = '0';
 		}
 		$data=array(
 			'pick' => $pick 
 		);
 		$this->db->where('id_title',$id_title)
 				 ->update('course_title',$data);
-				 return TRUE;
+		if($this->db->affected_rows()>0){
+			return true;
+		}else{
+			return false;
+		}
 
 	}
 
@@ -122,18 +127,21 @@ class Admin_model extends CI_Model {
 		$sub = $this->input->post('subject');
 		$text = $this->input->post('text');
 		$id_user = $this->input->post('id_user');
+		$link = $this->input->post('link');
 		$thumbnail = $thumbnail['file_name'];
 		$id = $this->input->post('id_broadcast');
 
+		if ($link == '') {
+			$link = NULL;
+		}
 		
 
         $now = date('Y-m-d H:i:s');
 		$data = array(
-			// 'id_broadcast' => NULL,
 			'id_user' => 0,
 			'subject' =>  $sub,
 			'text' => $text,
-			'link' => NULL,
+			'link' => $link,
 			'thumbnail' => $thumbnail,
 			'created_at' => $now,
 	);
@@ -174,6 +182,22 @@ class Admin_model extends CI_Model {
 		return false;
 	}
 
+	}
+	public function Delete($where,$table){
+		$this->db->where($where)->delete($table);
+		if($this->db->affected_rows()>0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	public function Update($where,$data,$table){
+		$this->db->where($where)->update($table,$data);
+		if($this->db->affected_rows()>0){
+			return true;
+		}else{
+			return false;
+		}
 	}
 	
 }

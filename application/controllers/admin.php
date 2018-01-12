@@ -119,6 +119,97 @@ class Admin extends CI_Controller {
 		}
 	}
 
+	public function get_discuss(){
+		if($this->session->userdata('role') == 1){
+		// if($this->session->userdata('admin_login')==TRUE){
+			$id_user = $this->session->userdata('logged_id');
+			$data['user_login'] = $this->home_model->GetData(['id_user'=> $id_user],'user')->row();
+		
+			$data['main_view'] = 'datadiscuss_view';
+
+			$this->load->library('pagination');
+
+		    $config['base_url'] = base_url().'index.php/admin/get_discuss';
+			$config['total_rows'] = $this->admin_model->total_user();
+			$config['per_page'] = 5;
+			$config['uri_segment'] =3;
+			$config['full_tag_open'] = "<ul class='pagination'>";
+			$config['full_tag_close'] ="</ul>";
+			$config['num_tag_open'] = '<li>';
+			$config['num_tag_close'] = '</li>';
+			$config['cur_tag_open'] = "<li class='active'><a href='#'>";
+			$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+			$config['next_tag_open']="<li>";
+			$config['next_tagl_close']="</li>";
+			$config['prev_tag_open'] = "<li>";
+			$config['prev_tagl_close'] = "</li>";
+			$config['first_tag_open'] ="<li>";
+			$config['first_tagl_close'] ="</li>";
+			$config['last_tag_open'] = "<li>";
+			$config['last_tagl_close'] = "</li>";
+
+			$this->pagination->initialize($config);
+
+			$start = $this->uri->segment(3,0);
+
+			$rows = $this->admin_model->get_data_discuss($config['per_page'],$start);
+
+			$data['discuss'] = $rows;
+			$data['pagination'] = $this->pagination->create_links();
+			$data['start'] = $start;
+			$this->load->view('tempadmin',$data);
+		// }
+		}else{
+			redirect('home');
+		}
+	}
+
+	public function get_comment(){
+		if($this->session->userdata('role') == 1){
+		// if($this->session->userdata('admin_login')==TRUE){
+			$id_user = $this->session->userdata('logged_id');
+			$data['user_login'] = $this->home_model->GetData(['id_user'=> $id_user],'user')->row();
+		
+			$data['main_view'] = 'datacomment_view';
+
+			$this->load->library('pagination');
+
+		    $config['base_url'] = base_url().'index.php/admin/get_comment';
+			$config['total_rows'] = $this->admin_model->total_user();
+			$config['per_page'] = 5;
+			$config['uri_segment'] =3;
+			$config['full_tag_open'] = "<ul class='pagination'>";
+			$config['full_tag_close'] ="</ul>";
+			$config['num_tag_open'] = '<li>';
+			$config['num_tag_close'] = '</li>';
+			$config['cur_tag_open'] = "<li class='active'><a href='#'>";
+			$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+			$config['next_tag_open']="<li>";
+			$config['next_tagl_close']="</li>";
+			$config['prev_tag_open'] = "<li>";
+			$config['prev_tagl_close'] = "</li>";
+			$config['first_tag_open'] ="<li>";
+			$config['first_tagl_close'] ="</li>";
+			$config['last_tag_open'] = "<li>";
+			$config['last_tagl_close'] = "</li>";
+
+			$this->pagination->initialize($config);
+
+			$start = $this->uri->segment(3,0);
+
+			$rows = $this->admin_model->get_data_comment($config['per_page'],$start);
+
+			$data['comment'] = $rows;
+			$data['pagination'] = $this->pagination->create_links();
+			$data['start'] = $start;
+			$this->load->view('tempadmin',$data);
+		// }
+		}else{
+			redirect('home');
+		}
+	}
+
+
 	public function user_delete(){
 		if($this->session->userdata('role') == 1){
 		$id_user=$this->uri->segment(3);
@@ -262,6 +353,29 @@ class Admin extends CI_Controller {
 			}
 		}
 	}
+	public function delete_discuss(){
+		if($this->session->userdata('role')==1){
+		$id_comment = $this->input->post('id_comment');	
+		$check = $this->admin_model->GetData(['id_comment'=>$id_comment],'comment');
+// >num_rows()
+		if($check->reply_id == '0'){
+		$comment = $this->admin_model->Delete(['reply_id'=>$id_comment],'comment');
+		$like_comment = $this->admin_model->Delete(['id_comment'=>$id_comment],'like_comment');
+		$comment = $this->admin_model->Delete(['id_comment'=>$id_comment],'comment');
+		}
+		else{
+		$comment = $this->admin_model->Delete(['id_comment'=>$id_comment],'comment');
+		}
+
+		if($comment == TRUE){
+			echo 'true';
+		}else{
+			echo 'false';
+		}
+
+	}
+}
+
 	public function delete_course(){
 		if($this->session->userdata('role')==1){
 			$id_title = $this->input->post('id_title');

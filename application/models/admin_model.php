@@ -24,6 +24,22 @@ class Admin_model extends CI_Model {
 		                ->result();
 	}
 
+	public function get_data_discuss($limit,$start)
+	{
+		return $this->db->where('reply_id',0)
+		                ->limit($limit,$start)         
+		                ->get('comment')
+		                ->result();
+	}
+
+	public function get_data_comment($limit,$start)
+	{
+		return $this->db->where('reply_id !=', 0)
+						->limit($limit,$start)
+						->get('comment')
+						->result();
+	}
+
 	public function total(){
 		return $this->db->from('course_title')
 		                ->count_all_results();

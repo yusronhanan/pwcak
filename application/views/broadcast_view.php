@@ -9,23 +9,28 @@
 <div class="x_content">
 <form id="demo-form" data-parsley-validate method="post" action="<?php echo base_url();?>admin/submit_B" enctype="multipart/form-data">
 
-      <label for="subject">Subject :</label>
-      <input type="text" id="subject" class="form-control" name="subject" required />
+      <div class="form-group">
+        <label for="subject">Subject :</label>
+        <input type="text" id="subject" class="form-control" name="subject" required />
+      </div>
 
       <br/>
 
-      <label for="message">Text : </label>
-      <textarea id="message" required="required" class="form-control" name="text" data-parsley-trigger="keyup" data-parsley-maxlength="200" 
-        data-parsley-validation-threshold="10"></textarea>
+      <div class="form-group">
+        <label for="message">Text : </label>
+        <textarea id="message" required="required" class="form-control" name="text" data-parsley-trigger="keyup" data-parsley-maxlength="200" 
+          data-parsley-validation-threshold="10"></textarea>
+      </div>
 
       <br/>
 
-
-      <label for="link">Link :</label>
-      <span class="form-control-feedback left">
-          <input type="text" disabled value="http://"/>
-      </span>
-      <input type="text" id="link" class="form-control" name="link" placeholder="(Optional)" />
+      <div class="form-group">
+        <label for="link">Link :</label>
+        <div class="input-group">
+          <span class="input-group-addon">http://</span>
+          <input id="link" type="text" class="form-control" name="link" placeholder="(Optional)">
+        </div>
+      </div>
 
       <br/>
 

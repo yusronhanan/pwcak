@@ -165,7 +165,15 @@
 		<div class="col-md-4 eve-agile e1">
 			<div class="eve-sub1">
 				<a href="#" data-toggle="modal" data-target="#lesson" class="lesson_view" id="<?php echo $courses->random_code ?>"><img src="<?php echo base_url() ?>assets/images/<?php echo $courses->thumbnail ?>" width="350px" height="250px" alt="image"></a>
-			<h4><a href="#" data-toggle="modal" data-target="#lesson" class="lesson_view" id="<?php echo $courses->random_code ?>"><?php echo $courses->title ?></a></h4>
+			<h4><a href="#" data-toggle="modal" data-target="#lesson" class="lesson_view" id="<?php echo $courses->random_code ?>" title="<?php echo $courses->title ?>">
+                    <?php 
+                        if (strlen($courses->title) < 25) {
+                          echo $courses->title;
+                        }
+                        else{
+                        echo  substr($courses->title, 0,24).'..';
+                        } ?>         
+            </a></h4>
 				<?php 
 					if(array_key_exists($courses->id_user, $username)) {
 					$usrnm =  $username[$courses->id_user];

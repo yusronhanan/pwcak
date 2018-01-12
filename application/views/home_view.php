@@ -119,7 +119,15 @@
 		<div class="col-md-4 eve-agile e1">
 			<div class="eve-sub1">
 				<a href="#" data-toggle="modal" data-target="#lesson" class="lesson_view" id="<?php echo $pcourses->random_code ?>"><img src="<?php echo base_url() ?>assets/images/<?php echo $pcourses->thumbnail ?>" width="350px" height="250px" alt="image"></a>
-			<h4><a href="#" data-toggle="modal" data-target="#lesson" class="lesson_view" id="<?php echo $pcourses->random_code ?>"><?php echo $pcourses->title ?></a></h4>
+			<h4><a href="#" data-toggle="modal" data-target="#lesson" class="lesson_view" id="<?php echo $pcourses->random_code ?>" title="<?php echo $pcourses->title ?>">
+				<?php 
+                        if (strlen($pcourses->title) < 25) {
+                          echo $pcourses->title;
+                        }
+                        else{
+                        echo  substr($pcourses->title, 0,24).'..';
+                        } ?>
+			</a></h4>
 				<?php 
 					if(array_key_exists($pcourses->id_user, $username)) {
 					$usrnm =  $username[$pcourses->id_user];
@@ -173,22 +181,22 @@
 				<div class="col-md-4 service-box" style="visibility: visible; -webkit-animation-delay: 0.4s;">
 					<figure class="icon">
 						<span class="glyphicon glyphicon-education a1" aria-hidden="true"></span>
-					</figure>thumbnail
-					<h5>Enroll</h5> <p>Sed ut perspiciis iste natus error sit voluptatem accusantium doloremque laudantium elerisque ipsum vehicula pharetra.</p>
-				</div>
-				<div class="col-md-4 service-box wow bounceIn animated" data-wow-delay="0.4s" style="visibility: visible; -webkit-animation-delay: 0.4s;">
-					<figure class="icon">
-						<span class="glyphicon glyphicon-home a2" aria-hidden="true"></span>
 					</figure>
-					<h5>Subscribe</h5>
-					<p>Sed ut perspiciis iste natus error sit voluptatem accusantium doloremque laudantium elerisque ipsum vehicula pharetra.</p>
+					<h5>Learning</h5> <p>Dimana saja dan kapan saja. Banyak konten pelajaran yang akan membuat kalian bisa belajar apa saja. Belajar pun lebih menarik karena ada fitur gambar dan video!</p>
 				</div>
 				<div class="col-md-4 service-box wow bounceIn animated" data-wow-delay="0.4s" style="visibility: visible; -webkit-animation-delay: 0.4s;">
 					<figure class="icon">
-						 <span class="glyphicon glyphicon-leaf a3" aria-hidden="true"></span>						
+						<span class="glyphicon glyphicon-share-alt a2" aria-hidden="true"></span>
+					</figure>
+					<h5>Sharing</h5>
+					<p>Anda punya konten pelajaran untuk di share? Disinilah satu tempat yang tepat untuk learning and sharing.</p>
+				</div>
+				<div class="col-md-4 service-box wow bounceIn animated" data-wow-delay="0.4s" style="visibility: visible; -webkit-animation-delay: 0.4s;">
+					<figure class="icon">
+						 <span class="glyphicon glyphicon-comment a3" aria-hidden="true"></span>						
 					</figure>
 					<h5>Disscussion</h5>
-					<p>Sed ut perspiciis iste natus error sit voluptatem accusantium doloremque laudantium elerisque ipsum vehicula pharetra.</p>
+					<p>Jika ada yang kurang dipahami atau ingin bertanya seputar course yang anda ikuti, buat aja diskusi baru atau baca beberapa diskusi yang sudah ada.</p>
 				</div>
 				<div class="clearfix"> </div>
 			</div>
@@ -205,61 +213,29 @@
     		<h3 class="title">Testimonials</h3>
     	<p></p>
         <div class="row">
+            
             <div class="col-md-12">
                 <div id="testimonial-slider" class="owl-carousel">
+                	<?php foreach ($testimonial as $testi) { 
+            	$testii = explode('|', $testi->text);
+             ?>
                     <div class="testimonial">
                         <div class="testimonial-content">
                             <div class="testimonial-icon">
                                 <i class="fa fa-quote-left"></i>
                             </div>
-                            <p class="description">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum dolor sit amet eros imperdiet, sit amet hendrerit nisi vehicula.
-                            </p>
-                        </div>
-                        <h3 class="title">williamson</h3>
-                        <span class="post">Web Developer</span>
-                    </div>
- 
-                    <div class="testimonial">
-                        <div class="testimonial-content">
-                            <div class="testimonial-icon">
-                                <i class="fa fa-quote-left"></i>
-                            </div>
-                            <p class="description">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum dolor sit amet eros imperdiet, sit amet hendrerit nisi vehicula.
-                            </p>
-                        </div>
-                        <h3 class="title">Kristina</h3>
-                        <span class="post">Web Designer</span>
-                    </div>
- 
-                    <div class="testimonial">
-                        <div class="testimonial-content">
-                            <div class="testimonial-icon">
-                                <i class="fa fa-quote-left"></i>
-                            </div>
-                            <p class="description">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum dolor sit amet eros imperdiet, sit amet hendrerit nisi vehicula.
-                            </p>
-                        </div>
-                        <h3 class="title">williamson</h3>
-                        <span class="post">Web Developer</span>
-                    </div>
 
-                    <div class="testimonial">
-                        <div class="testimonial-content">
-                            <div class="testimonial-icon">
-                                <i class="fa fa-quote-left"></i>
-                            </div>
                             <p class="description">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent bibendum dolor sit amet eros imperdiet, sit amet hendrerit nisi vehicula.
+                                <?php echo $testii[0] ?>
                             </p>
                         </div>
-                        <h3 class="title">williamson</h3>
-                        <span class="post">Web Developer</span>
+                        <h3 class="title"><?php echo $testii[1] ?></h3>
+                        <span class="post"><?php echo $testii[2] ?></span>
                     </div>
+                      <?php } ?>
                 </div>
             </div>
+          
         </div>
     </div>
 <!-- </div> -->

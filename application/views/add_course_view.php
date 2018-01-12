@@ -197,7 +197,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<!-- kurang if step_number == $step echo selected //membedakan -->
 					
 					<li>
-                        <a href="" id="go_step" class=" hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon "></i><span class="nav-label"><?php echo $i++; ?> : <?php echo  $list_c->step_title; ?></a>
+                        <a href="" id="go_step" class=" hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon "></i><span class="nav-label"><?php echo $i++; ?> : <?php 
+                        if (strlen($list_c->step_title) < 15) {
+                          echo $list_c->step_title;
+                        }
+                        else{
+                        echo  substr($list_c->step_title, 0,14).'..';
+                        } ?></a>
                         <form action="<?php echo base_url(); ?>add_course/<?php echo $tit_info[3]; ?>" id="<?php echo  $list_c->step_number; ?>" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="step_number" value="<?php echo  $list_c->step_number; ?>">
                         <input type="submit" class="hidden" name="GO" id="goo">

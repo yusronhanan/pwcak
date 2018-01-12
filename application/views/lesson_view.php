@@ -306,7 +306,7 @@ i.del_reply:hover{
                 <ul class="nav" id="side-menu">
 				
                     <!-- <li>
-                        <a href="index.html" class=" hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon " ></i><span class="nav-label"><?php echo $getcontent->step_title; ?></a>
+                        <a href="" class=" hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon " ></i><span class="nav-label"><?php echo $getcontent->step_title; ?></a>
                     </li> -->
                    
                    <?php
@@ -317,7 +317,13 @@ i.del_reply:hover{
 				
 
 					<li>
-                        <a href="" id="go_step" class=" hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon "></i><span class="nav-label">Lesson <?php echo $i++; ?> : <?php echo  $list_c->step_title; ?></a>
+                        <a href="" id="go_step" class=" hvr-bounce-to-right" title="<?php echo  $list_c->step_title; ?>"><i class="fa fa-file-text-o nav_icon "></i><span class="nav-label"><?php echo $i++; ?> : <?php 
+                        if (strlen($list_c->step_title) < 15) {
+                          echo $list_c->step_title;
+                        }
+                        else{
+                        echo  substr($list_c->step_title, 0,14).'..';
+                        } ?></a>
                         <form action="<?php echo base_url(); ?>lesson/<?php echo $title_info->random_code; ?>" id="<?php echo  $list_c->step_number; ?>" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="step_number" value="<?php echo  $list_c->step_number; ?>">
                         <input type="submit" class="hidden" name="GO" id="goo">
@@ -340,33 +346,6 @@ i.del_reply:hover{
 					<?php
 				}
 				 ?>
-					 <!-- <li>
-                        <a href="inbox.html" class=" hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon"></i> <span class="nav-label">Lesson 2: Install JDK</span> </a>
-                    </li>
-                    
-                    <li>
-                        <a href="gallery.html" class=" hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon"></i> <span class="nav-label">Lesson 3: Install MEMU</span> </a>
-                    </li>
-                     
-                    <li>
-                        <a href="layout.html" class=" hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon"></i> <span class="nav-label">Lesson 4: Buat apk</span> </a>
-                    </li> -->
-                   
-                    <li>
-                        <a href="#" class=" hvr-bounce-to-right"><i class="fa fa-list nav_icon"></i> <span class="nav-label">Forms</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li><a href="forms.html" class=" hvr-bounce-to-right"><i class="fa fa-align-left nav_icon"></i>Basic forms</a></li>
-                            <li><a href="validation.html" class=" hvr-bounce-to-right"><i class="fa fa-check-square-o nav_icon"></i>Validation</a></li>
-                        </ul>
-                    </li>
-                   
-                    <li>
-                        <a href="#" class=" hvr-bounce-to-right"><i class="fa fa-cog nav_icon"></i> <span class="nav-label">Settings</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li><a href="signin.html" class=" hvr-bounce-to-right"><i class="fa fa-sign-in nav_icon"></i>Signin</a></li>
-                            <li><a href="signup.html" class=" hvr-bounce-to-right"><i class="fa fa-sign-in nav_icon"></i>Singup</a></li>
-                        </ul>
-                    </li>
                 </ul>
             </div>
 			</div>
@@ -379,7 +358,7 @@ i.del_reply:hover{
 		    <div class="banner">
 		   
 				<h2>
-				<a href="index.html"><?php echo $title_info->title; ?></a>
+				<a href=""><?php echo $title_info->title; ?></a>
 				<i class="fa fa-angle-right"></i>
 				<span>by: <?php echo $maker_info->name; ?></span>
 				</h2>
@@ -388,9 +367,11 @@ i.del_reply:hover{
 		<!--content-->
 		<div class="grid-system">
 			<div class="horz-grid">
-		 		<div class="grid-hor">
+		 		<div class="grid"> <!-- -hor -->
 		 			<h3 id="grid-example-basic" ><?php echo $getcontent->step_title;?></h3>
-		 			<p class="" ><?php echo $getcontent->content; ?></p>
+		 			<!-- <p class="" > -->
+            <?php echo $getcontent->content; ?>
+          <!-- </p> -->
 				</div>
 				<div style="text-align: right; padding-right: 35px">
 					<?php if ($next != 0) {

@@ -75,11 +75,11 @@
                               <!--newsletter-->
                               <div class="login-main wthree">
                                  <form action="<?php echo base_url(); ?>myaccount/edit_user" method="post" enctype="multipart/form-data">
-                                <input type="text" placeholder="Name" value="<?php echo $user_info->name ?>" name="name" class="form-control">
-                                <input type="email" placeholder="Email" required="" name="email" value="<?php echo $user_info->email ?>" class="form-control">
-                                <input type="text" name="username" placeholder="Username" value="<?php echo $user_info->username ?>" disabled class="form-control">
-                                <input type="text" placeholder="City" name="city" value="<?php echo $user_info->city ?>" class="form-control">
-                                <input type="text" name="bio" placeholder="Bio" value="<?php echo $user_info->bio ?>" class="form-control">
+                                <input type="text" placeholder="Name" value="<?php echo $user_info->name ?>" name="name" class="form-control" required>
+                                <input type="email" placeholder="Email" required="" name="email" value="<?php echo $user_info->email ?>" class="form-control" required>
+                                <input type="text" name="username" placeholder="Username" value="<?php echo $user_info->username ?>" disabled class="form-control" required>
+                                <input type="text" placeholder="City" name="city" value="<?php echo $user_info->city ?>" class="form-control" required>
+                                <input type="text" name="bio" placeholder="Bio" value="<?php echo $user_info->bio ?>" class="form-control" required>
                                 <input type="submit" value="Save" name="submit">
                                 
                               </form>
@@ -100,10 +100,10 @@
               <div class="login-main wthree">
                <form action="<?php echo base_url(); ?>myaccount/newcourse_title" method="post" enctype="multipart/form-data">
                 Course Name
-                <input class="form-control" name="coursename" type="text">
+                <input class="form-control" name="coursename" type="text" minlength="5" required>
                 Subject
-                <select class="form-control" name="subject">
-                                <option>--Pilih--</option>
+                <select class="form-control" name="subject" required>
+                                <option value="">--Pilih--</option>
                                 <?php 
                                 foreach ($list_subject as $sbj) {
                                  ?>
@@ -112,14 +112,14 @@
                             } ?>
                                 </select>
                                 Description
-                                <textarea name="description" class="form-control"> </textarea>
+                                <textarea name="description" minlength="105" class="form-control" required></textarea>
                                 
               <!-- <label for="file-upload" class="custom-file-upload ">
                 <span class="glyphicon glyphicon-upload"></span>  Upload Thumbnail
               </label> -->
                 <br/>
                 Choose Thumbnail
-                <input id="file-upload" name="thumbnail" type="file" class="form-control"/>
+                <input id="file-upload" name="thumbnail" type="file" class="form-control" required/>
               
                 <input type="submit" name="submit" value="Create Now">
               </form>
@@ -346,6 +346,7 @@
             });
               }
           window.onload = big_notif;
+       // setInterval(function(){ big_notif() }, 5000);
       </script>
 <?php }  ?>
 
@@ -399,5 +400,5 @@
     } ?>
           
   });
-  setInterval(function(){ big_notif() }, 5000);
+ 
 </script>

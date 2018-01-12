@@ -14,7 +14,7 @@ class Home extends CI_Controller {
 	public function index()
 	{
 		$slider = $this->home_model->GetData(['type'=>'slide'],'config')->result();
-
+		$testimonial =$this->home_model->GetData(['type'=>'testimoni'],'config')->result();
 		$list_pcourses = $this->home_model->GetListPCourses();
 		// $list_rcourses = $this->home_model->GetListRCourses();
 		$list_vcourses=$this->home_model->GetCourseVerified();
@@ -54,6 +54,7 @@ class Home extends CI_Controller {
 		'username_id'	=> $username_id,
 
 		'slider'		=> $slider,
+		'testimonial'		=> $testimonial
  		];
 		$this->load->view('templet', $data);
 	
@@ -102,7 +103,7 @@ class Home extends CI_Controller {
 					$notification = $this->home_model->GetData([$field_id=>$notif->get_id],$tipe);
 					
 						
-					if (!empty($notification)) {
+					if ($notification->num_rows() >0) {
 						if ($notif->status == '0') {
 							$i++;
 						}
@@ -158,7 +159,14 @@ class Home extends CI_Controller {
 						$desc_notif ='<i style="margin-left: 79px" class="fa fa-graduation-cap subsss"></i>';
 					}
 					else if ($tipe == 'broadcast') { 
-						$word = '<strong><i style="margin-left: 79px" class="fa fa-bullhorn subsss"></i>';
+						$word = '<strong><i style="margin-left: 79px" class="fa fa-bullhorn subsss"></i></strong>';
+						if ($notification->row('link') != NULL) {
+							$go_word = 'GO HERE';
+						}
+						else{
+							$go_word ='';
+						}
+						
 						$go_link = $notification->row('link');
 						$desc_notif = '<p class="notification-desc">'.$notification->row('text').'</p>';
 					}
@@ -173,11 +181,12 @@ class Home extends CI_Controller {
 				$username_link = base_url().$username;
 				}
 				else {
-				$img  = $this->home_model->GetData(['id_broadcast'=>$notification->row('id_broadcast')],'broadcast')->row('thumbnail');
-				$username = 'admin';
-				$username_link = '#';
+				$img  = $notification->row('thumbnail');
+				$username = 'T-Learning';
+				$username_link = base_url();
 				}
-				$timestamp = strtotime($notification->row('created_at'));	
+				// $timestamp = strtotime($notification->row('created_at'));
+				$timestamp = strtotime($notif->created_at);		
 				$time = timespan($timestamp, $now) . ' ago';
 
 				if ($notif->status == '0') {
@@ -256,7 +265,7 @@ class Home extends CI_Controller {
 
 					else if ($tipe == 'course_title') { $field_id = 'id_title';}
 					$notification = $this->home_model->GetData([$field_id=>$notif->get_id],$tipe);
-					if (!empty($notification)) {
+					if ($notification->num_rows() >0) {
 					if ($tipe != 'subscribe' || $tipe != 'broadcast') {
 						$course_title = $this->home_model->GetData(['id_title'=>$notification->row('id_title')],'course_title')->row('title');
 						$go_word = $course_title;
@@ -310,7 +319,7 @@ class Home extends CI_Controller {
 					}
 					else if ($tipe == 'broadcast') { 
 						$go_word = '';
-						$word = '<strong>'.$notification->row('subject').'<strong> '.$notification->row('text');
+						$word = '<strong>'.$notification->row('subject').'</strong> '.$notification->row('text');
 						$go_link = $notification->row('link');
 						
 					}
@@ -318,7 +327,7 @@ class Home extends CI_Controller {
 				$img  = $this->home_model->GetData(['id_user'=>$notification->row('id_user')],'user')->row('photo');	
 				$username = $this->home_model->GetData(['id_user'=>$notification->row('id_user')],'user')->row('username'); 
 				$username_link = base_url().$username;
-				
+
 
 				$random_code = $this->course_model->GetData(['id_title'=>$notification->row('id_title')],'course_title')->row('random_code');
 				}
@@ -328,11 +337,12 @@ class Home extends CI_Controller {
 				$username_link = base_url().$username;
 				}
 				else {
-				$img  = $this->home_model->GetData(['id_broadcast'=>$notification->row('id_broadcast')],'broadcast')->row('thumbnail');
-				$username = 'admin';
-				$username_link = '#';
+				$img  = $notification->row('thumbnail');
+				$username = 'T-Learning';
+				$username_link = base_url();
 				}
-				$timestamp = strtotime($notification->row('created_at'));	
+				// $timestamp = strtotime($notification->row('created_at'));
+				$timestamp = strtotime($notif->created_at);	
 				$time = timespan($timestamp, $now) . ' ago';
 
 					if ($tipe == 'like_course') { 
@@ -382,7 +392,7 @@ class Home extends CI_Controller {
                                         </a>
                                         <div class="media-body ">
                                             <small class="pull-right">'.$time.'</small>
-                                            <strong><a href="'.$go_link.'" class="go_link">'.$notif->id_user.' </a></strong> '.$word.' <strong>you</strong><br>
+                                            <strong><a href="'.$username_link.'" class="go_link">'.$username.' </a></strong> '.$word.' <strong>you</strong><br>
                                             <small class="text-muted">at '.$notif->created_at.'</small>
                                         </div>
                                     </div>';

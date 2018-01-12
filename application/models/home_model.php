@@ -213,14 +213,14 @@ class Home_model extends CI_Model {
       if (!empty($mini_notif)) {
        if (count($this->unseen_notification()) > 15) {
           return $this->db->where('id_user',$user_id)
-              ->or_where('id_user','0')
+              // ->or_where('id_user','0')
               ->order_by('created_at','DESC')
               ->get('notification')
               ->result();
       }
       else{
         return $this->db->where('id_user',$user_id)
-        ->or_where('id_user','0')
+        // ->or_where('id_user','0')
                  ->limit(15,0)
               ->order_by('created_at','DESC')
               ->get('notification')
@@ -229,7 +229,7 @@ class Home_model extends CI_Model {
       }
       else{
         return $this->db->where('id_user',$user_id)
-        ->or_where('id_user','0')
+        // ->or_where('id_user','0')
               ->order_by('created_at','DESC')
               ->get('notification')
               ->result();
@@ -240,7 +240,7 @@ class Home_model extends CI_Model {
   public function unseen_notification(){
       $user_id = $this->session->userdata('logged_id');
       return $this->db->where('id_user',$user_id)
-      ->or_where('id_user','0')
+      // ->or_where('id_user','0')
               ->where('status','0')
               ->get('notification')
               ->result();

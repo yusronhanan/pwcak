@@ -59,6 +59,28 @@ class Admin_model extends CI_Model {
 		return false;
 	}
 	}
+	public function newtesti(){
+		date_default_timezone_set('Asia/Jakarta'); 
+		$now = date('Y-m-d H:i:s');
+		$name = $this->input->post('nama');
+		$profesi = $this->input->post('profesi');
+		$testimoni = $this->input->post('testimoni');
+		
+		$tes = $testimoni.'|'.$name.'|'.$profesi;
+		$data = array(
+			'id_user' =>  $this->session->userdata('logged_id'),
+			'type' => 'testimoni',
+			'text'	=> $tes,
+			'created_at' => $now,
+			'last_update' => $now,
+	);
+	$this->db->insert('config',$data);
+	if($this->db->affected_rows()>0){
+		return true;
+	}else{
+		return false;
+	}
+	}
 
 	public function get_data_course($limit,$start){
 		return $this->db->limit($limit,$start)

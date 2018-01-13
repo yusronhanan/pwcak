@@ -373,6 +373,31 @@ class Admin extends CI_Controller {
 			redirect('admin/testi');	
 		}
 	}
+	public function newtesti(){
+
+		$result = $this->admin_model->newtesti();
+
+			if($result == TRUE){
+			$this->session->set_flashdata('notif_success','Anda sukses menambah testimoni');
+			redirect('admin/testi');
+		}
+		else{
+			$this->session->set_flashdata('notif_failed','Maaf, ada kesalahan. Coba lagi');
+			redirect('admin/testi');	
+		}
+	}
+	public function deletetesti(){
+
+		
+			$result = $this->admin_model->Delete(['id_config'=>$this->input->post('id_testi')],'config');
+
+			if($result == TRUE){
+				echo 'true';
+			}
+			else{
+				echo 'false';
+			}
+	}
 	public function getslider(){
 		if($this->session->userdata('role')==1){
  		    $data 	= $this->home_model->GetData(['id_config'=>$this->input->post('id_quote')],'config');

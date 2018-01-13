@@ -26,7 +26,7 @@
                          foreach ($list_testi as $testi) {
                           $tes = explode('|', $testi->text);
                           ?>
-                        <tr>
+                        <tr id="<?php echo $testi->id_config ?>">
                           <td><?php echo $i++ ?></td>
                           <td><?php echo $tes[1] ?></td>
                           <td><?php echo $tes[2] ?></td>
@@ -38,7 +38,32 @@
                       </tbody>
                     </table>
         <br />
-       
+        <form method="post" action="<?php echo base_url();?>admin/newtesti" enctype="multipart/form-data" class="form-horizontal" role="form">
+
+          <div class="form-group">
+            <label for="">Nama :</label>
+            <input type="text" id="" class="form-control" name="nama" required />
+          </div>
+          <div class="form-group">
+            <label for="">Profesi :</label>
+            <input type="text" id="" class="form-control" name="profesi" required />
+          </div>
+
+          <br/>
+
+          <div class="form-group">
+            <label for="text">Text : </label>
+            <textarea id="text" required="required" class="form-control" name="testimoni" data-parsley-trigger="keyup" data-parsley-maxlength="200" 
+            data-parsley-validation-threshold="10"></textarea>
+          </div>
+ 
+          <div class="form-group">
+            <div>
+              <button class="btn btn-primary" type="submit">Save</button>
+            </div>
+          </div>
+
+        </form>
       </div>
     </div>
   </div>
@@ -109,5 +134,29 @@
                            
                       }
                   });
+});
+    $("button.deletetesti").click(function(event) {
+      if (confirm('Apa anda yakin ingin menghapus testimoni ini?')) {
+              var id_testi = $(this).attr('id');
+              $.ajax({
+                      url: "<?php echo base_url()?>admin/deletetesti/",
+                      type: 'post',
+                      context : this,
+                      data: {
+                          id_testi: id_testi
+                      },
+                      success: function(e) {
+                          if (e == 'false') {
+                            alert('Maaf gagal, coba lagi');
+                          }
+                          else{
+                          $('tr#'+id_testi).remove(); 
+                          $('#testi_see').modal('hide'); 
+                          }
+                          
+                           
+                      }
+                  });
+            }
 });
 </script>

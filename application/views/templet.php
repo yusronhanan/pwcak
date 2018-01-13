@@ -392,7 +392,7 @@
   <!-- //Modal4-->
 
           <div class="">
-            <a class="navbar-brand" href="#">T-Learning</a>
+            <a class="navbar-brand" href="<?php echo base_url();?>home"><img class="icon_cuy" src="<?php echo base_url();?>assets/images/icon logo.png" alt="icon" name="icon" style="width: 45px;height: auto;"></a>
           </div>
 
 

@@ -1,5 +1,5 @@
 	
-	<div class="header">
+	<div class="header" style="background: url(<?php echo base_url().'assets/images/'.$sld_img; ?>) no-repeat center;">
 		<!-- Slider -->
 			<div class="slider">
 				<div class="callbacks_container">
@@ -10,8 +10,8 @@
 						<li>
 							<div class="slider-info">
 								<p><?php echo $texts[0] ?></p>
-								<h3><a href="#"><span><?php echo $texts[1] ?></span><?php echo $texts[2] ?></a></h3>
-								<h6><?php echo $texts[3] ?></h6>
+								<h3><a href="#"><span>EDU</span>CATIONAL</a></h3>
+								<h6><?php echo $texts[1] ?></h6>
 							</div>
 						</li>
 						<?php } ?>

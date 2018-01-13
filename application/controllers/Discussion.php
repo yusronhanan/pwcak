@@ -11,6 +11,7 @@ class Discussion extends CI_Controller {
 	}
 	public function index()
 	{
+		$sld_img = $this->home_model->GetData(['type'=> 'slide image'],'config')->row('img');
 		$slider = $this->home_model->GetData(['type'=>'slide'],'config')->result();
 		$user_id = $this->session->userdata('logged_id');
 		$list_discuss = $this->course_model->GetListDiscuss(['reply_id'=>'0']);
@@ -28,6 +29,7 @@ class Discussion extends CI_Controller {
 				'username_id'	=> $username_id,
 				'slider'		=> $slider,
 				'comment_amount' => $comment_amount,
+				'sld_img'		=> $sld_img,
 		 		];
 				$this->load->view('templet', $data);
 	}

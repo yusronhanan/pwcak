@@ -13,6 +13,7 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
+		$sld_img = $this->home_model->GetData(['type'=> 'slide image'],'config')->row('img');
 		$slider = $this->home_model->GetData(['type'=>'slide'],'config')->result();
 		$testimonial =$this->home_model->GetData(['type'=>'testimoni'],'config')->result();
 		$list_pcourses = $this->home_model->GetListPCourses();
@@ -54,6 +55,7 @@ class Home extends CI_Controller {
 		'username_id'	=> $username_id,
 
 		'slider'		=> $slider,
+		'sld_img'		=> $sld_img,
 		'testimonial'		=> $testimonial
  		];
 		$this->load->view('templet', $data);

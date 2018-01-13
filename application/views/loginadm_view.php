@@ -20,6 +20,8 @@
 
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url(); ?>assets/builds/css/custom.min.css" rel="stylesheet">
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.1/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.1/sweetalert2.min.css">
   </head>
 
   <body class="login">
@@ -90,6 +92,28 @@
             </form>
           </section>
         </div> -->
+        <?php if ($this->session->flashdata('notif_success')): ?>
+                            <script>
+                                swal({
+                                    title: "Success",
+                                    text: "<?php echo $this->session->flashdata('notif_success'); ?>",
+                                    timer: 1500,
+                                    showConfirmButton: false,
+                                    type: 'success'
+                                });
+                            </script>
+                    <?php endif; ?>
+                    <?php if ($this->session->flashdata('notif_failed')): ?>
+                            <script>
+                                swal({
+                                    title: "Failed",
+                                    text: "<?php echo $this->session->flashdata('notif_failed'); ?>",
+                                    timer: 1500,
+                                    showConfirmButton: false,
+                                    type: 'error'
+                                });
+                            </script>
+                    <?php endif; ?>
       </div>
     </div>
   </body>

@@ -8,6 +8,7 @@ class Admin extends CI_Controller {
 		$this->load->model('admin_model');
 		$this->load->model('course_model');
 		$this->load->model('home_model');
+		$this->load->helper('date');
 	}
 
 	public function index()
@@ -26,9 +27,12 @@ class Admin extends CI_Controller {
 	}
 	public function admin_login()
 	{
-		// if($this->session->userdata('role') == 1 && $this->session->userdata('logged_in') == TRUE){
+		if($this->session->userdata('role') != 1 && $this->session->userdata('logged_in') != TRUE){
 		$this->load->view('loginadm_view');
-		// }
+		}
+		else{
+			redirect('admin');
+		}
 	}
 
 	public function get_user(){
@@ -306,16 +310,21 @@ class Admin extends CI_Controller {
 		if($this->session->userdata('role')==1){
 		$id_user = $this->session->userdata('logged_id');
 		$data['user_login'] = $this->home_model->GetData(['id_user'=> $id_user],'user')->row();
+		$data['slider_image'] = $this->home_model->GetData(['type'=> 'slide image'],'config')->row();
+		$data['list_quote'] = $this->home_model->GetData(['type'=> 'slide'],'config')->result();
 
 		$data['main_view'] = 'slider_adm.php';
 		$this->load->view('tempadmin', $data);
 		}
 	}
 
+
 	public function testi() {
 		if($this->session->userdata('role')==1){
 		$id_user = $this->session->userdata('logged_id');
 		$data['user_login'] = $this->home_model->GetData(['id_user'=> $id_user],'user')->row();
+		
+		$data['list_testi'] = $this->home_model->GetData(['type'=> 'testimoni'],'config')->result();
 
 		$data['main_view'] = 'testimonial_adm.php';
 		$this->load->view('tempadmin', $data);
@@ -331,6 +340,134 @@ class Admin extends CI_Controller {
 		$data['main_view'] = 'subject_view.php';
 		$this->load->view('tempadmin', $data);
 		}
+	}
+	public function getsubject(){
+		if($this->session->userdata('role')==1){
+ 		    $data 	= $this->home_model->GetData(['id_config'=>$this->input->post('id_sbj')],'config');
+			echo $data->row('id_config')."|".$data->row('text');
+		}
+	}
+	public function gettesti(){
+		if($this->session->userdata('role')==1){
+ 		    $data 	= $this->home_model->GetData(['id_config'=>$this->input->post('id_testi')],'config');
+			$tes = explode('|', $data->row('text'));
+			echo $data->row('id_config')."|".$tes[1]."|".$tes[2]."|".$tes[0];
+		}
+	}
+	public function edittesti(){
+		date_default_timezone_set('Asia/Jakarta'); 
+		$now = date('Y-m-d H:i:s');
+		$name = $this->input->post('name');
+		$profesi = $this->input->post('profesi');
+		$testimoni = $this->input->post('testimoni');
+		
+		$tes = $testimoni.'|'.$name.'|'.$profesi;
+		$result = $this->admin_model->Update(['id_config'=>$this->input->post('id_testi')],['text'=>$tes,'last_update'=>$now],'config');
+
+			if($result == TRUE){
+			$this->session->set_flashdata('notif_success','Anda sukses update testimoni');
+			redirect('admin/testi');
+		}
+		else{
+			$this->session->set_flashdata('notif_failed','Maaf, ada kesalahan. Coba lagi');
+			redirect('admin/testi');	
+		}
+	}
+	public function getslider(){
+		if($this->session->userdata('role')==1){
+ 		    $data 	= $this->home_model->GetData(['id_config'=>$this->input->post('id_quote')],'config');
+ 		    $qt = explode('|', $data->row('text'));
+			echo $qt[0]."|".$qt[1];
+		}
+	}
+	public function updateslider(){
+		date_default_timezone_set('Asia/Jakarta'); 
+		$now = date('Y-m-d H:i:s');
+		$text_1 = $this->input->post('text_1');
+		$text_2 = $this->input->post('text_2');
+		$qts = $text_1.'|'.$text_2;
+		$result = $this->admin_model->Update(['id_config'=>$this->input->post('id_quote')],['text'=>$qts,'last_update'=>$now],'config');
+
+			if($result == TRUE){
+			$this->session->set_flashdata('notif_success','Anda sukses update slider');
+			redirect('admin/slider');
+		}
+		else{
+			$this->session->set_flashdata('notif_failed','Maaf, ada kesalahan. Coba lagi');
+			redirect('admin/slider');	
+		}
+	}
+	public function updateslider_img(){
+				$config['upload_path'] = './assets/images';
+				$config['allowed_types'] = 'jpg|png';
+				$config['max_size'] = '5000';
+
+				$this->load->library('upload',$config);
+				$this->upload->initialize($config);
+
+				if($this->upload->do_upload('slider_image')){
+
+				$data = $this->admin_model->updateslider_img($this->upload->data());
+				if($data == false){
+					$this->session->set_flashdata('notif_failed','Maaf, ada kesalahan. Coba lagi');
+					redirect('admin/slider');
+				}
+				else {
+					$this->session->set_flashdata('notif_success','Anda sukses mengedit slider image');
+					redirect('admin/slider');
+				}
+				
+				}else{
+				    $this->session->set_flashdata('notif', $this->upload->display_errors());
+				    redirect('admin/slider');
+				}
+	}
+	public function updatesubject(){
+		date_default_timezone_set('Asia/Jakarta'); 
+		$now = date('Y-m-d H:i:s');
+		$sbjjs = $this->home_model->GetData(['id_config'=>$this->input->post('id_sbj')],'config')->row('text');
+		$update_course = $this->admin_model->Update(['subject'=>$sbjjs],['subject'=>$this->input->post('text_sbj')],'course_title');
+
+		$result = $this->admin_model->Update(['id_config'=>$this->input->post('id_sbj')],['text'=>$this->input->post('text_sbj'),'last_update'=>$now],'config');
+
+			if($result == TRUE){
+				$data 	= $this->home_model->GetData(['id_config'=>$this->input->post('id_sbj')],'config');
+				echo $data->row('text');
+			}
+			else{
+				echo 'false';
+			}
+	}
+	public function deletesubject(){
+		$sbjjs = $this->home_model->GetData(['id_config'=>$this->input->post('id_sbj')],'config')->row('text');
+		$check = $this->home_model->GetData(['subject'=>$sbjjs],'course_title');
+
+		if ($check->num_rows() > 0 || $sbjjs == 'Other') {
+			echo 'false';
+		}
+		else{
+			$result = $this->admin_model->Delete(['id_config'=>$this->input->post('id_sbj')],'config');
+
+			if($result == TRUE){
+				echo 'true';
+			}
+			else{
+				echo 'false';
+			}
+		}
+	}
+	public function submit_sbj(){
+		$result = $this->admin_model->new_subject();
+		if ($result == true) {
+		$this->session->set_flashdata('notif_success','Anda sukses menambah subject baru');
+			redirect('admin/subject');
+		}
+		else{
+			$this->session->set_flashdata('notif_failed','Maaf, ada kesalahan. Coba lagi');
+			redirect('admin/subject');	
+		}
+
+		
 	}
 
 	public function delete_user(){

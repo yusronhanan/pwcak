@@ -16,6 +16,49 @@ class Admin_model extends CI_Model {
 				        ->get('user')
 				        ->result();
 	}
+	public function new_subject(){
+		date_default_timezone_set('Asia/Jakarta'); 
+		$now = date('Y-m-d H:i:s');
+		$id_user = $this->session->userdata('logged_id');
+		$subject = $this->input->post('subject');
+		$sbj = explode(',', $subject);
+		$data=array();
+		for($i = 0; $i < count($sbj); $i++)
+        {
+            $data[]=array(
+			
+			'id_user' => $id_user,
+			'type' => 'subject',
+			'text' => $sbj[$i],
+			'created_at' => $now,
+			'last_update' => $now,
+			);
+        }
+         $this->db->insert_batch('config',$data);
+		if($this->db->affected_rows()>0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	public function updateslider_img($img){
+		date_default_timezone_set('Asia/Jakarta');
+		$id_config = $this->input->post('id_slide'); 
+
+		$now = date('Y-m-d H:i:s');
+		$data = array(
+			'img' =>  $img['file_name'],
+			'last_update' => $now,
+	);
+	$this->db->where('id_config',$id_config)
+			->update('config',$data);
+
+	if($this->db->affected_rows()>0){
+		return true;
+	}else{
+		return false;
+	}
+	}
 
 	public function get_data_course($limit,$start){
 		return $this->db->limit($limit,$start)

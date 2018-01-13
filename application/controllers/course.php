@@ -13,6 +13,7 @@ class Course extends CI_Controller {
 	}
 	public function index()
 	{
+		$sld_img = $this->home_model->GetData(['type'=> 'slide image'],'config')->row('img');
 		$slider = $this->home_model->GetData(['type'=>'slide'],'config')->result();
 		$list_courses = '';
 		$user_id = $this->session->userdata('logged_id');
@@ -68,6 +69,7 @@ class Course extends CI_Controller {
 				'main_view'  	=> 'course_view',
 				'username_id'	=> $username_id,
 				'slider'		=> $slider,
+				'sld_img'		=> $sld_img,
 					];
 		}
 		else{
@@ -81,6 +83,7 @@ class Course extends CI_Controller {
 				'main_view' 	=> 'course_view',
 				'username_id'	=> $username_id,
 				'slider'		=> $slider,
+				'sld_img'		=> $sld_img,
 					];
 		}
 		

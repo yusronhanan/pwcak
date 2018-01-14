@@ -14,8 +14,31 @@ class Discussion extends CI_Controller {
 		$sld_img = $this->home_model->GetData(['type'=> 'slide image'],'config')->row('img');
 		$slider = $this->home_model->GetData(['type'=>'slide'],'config')->result();
 		$user_id = $this->session->userdata('logged_id');
-		$list_discuss = $this->course_model->GetListDiscuss(['reply_id'=>'0']);
+		
 		$username_id = $this->auth_model->GetUser(['id_user' => $user_id])->row('username');
+
+		$title = $this->input->get('title');
+		$subject = $this->input->get('subject');
+		if (empty($title) && empty($subject)) {
+		$list_discuss = $this->course_model->GetListDiscuss(['reply_id'=>'0'],'','');
+		}
+		else if (empty($title)) {
+			if ($subject == "") {
+				$list_discuss = $this->course_model->GetListDiscuss(['reply_id'=>'0'],'','');
+			}
+			else{
+				$list_discuss = $this->course_model->GetListDiscuss(['reply_id'=>'0'],["course_title.subject "=>$subject],'');
+			}
+		}
+		else{
+			if ($subject == "") {
+				$list_discuss = $this->course_model->GetListDiscuss(['reply_id'=>'0'],["comment.subject LIKE"=>"%".$title."%"],["comment.text_comment LIKE"=>"%".$title]);
+			}
+			else{
+				$list_discuss = $this->course_model->GetListDiscuss(['reply_id'=>'0'],["comment.subject LIKE"=>"%".$title."%", "course_title.subject" => $subject],["comment.text_comment LIKE"=>"%".$title]);
+			}
+			
+		}
 
 		$comment_amount = array();
 
@@ -23,7 +46,22 @@ class Discussion extends CI_Controller {
 			$like_amount[$discuss->id_comment] = $this->home_model->GetSelectData('COUNT(id_likecomment) as like_amount',['id_comment' => $discuss->id_comment],'like_comment')->row('like_amount');
 			$comment_amount[$discuss->id_comment] = $this->home_model->GetSelectData('COUNT(id_comment) as comment_amount',['reply_id' => $discuss->id_comment],'comment')->row('comment_amount');
 		}
+		if (!empty($title) || !empty($subject)) {
+			$data = [
+				'list_subject'	=> $this->course_model->GetSubject(),
+				'main_view'  => 'discussion_view',
+				'list_discuss' => $list_discuss,
+				'username_id'	=> $username_id,
+				'slider'		=> $slider,
+				'title'		 	=> $title,	//search
+				'subject'		=> $subject, //search
+				'comment_amount' => $comment_amount,
+				'sld_img'		=> $sld_img,
+		 		];
+		}
+		else{
 				$data = [
+				'list_subject'	=> $this->course_model->GetSubject(),
 				'main_view'  => 'discussion_view',
 				'list_discuss' => $list_discuss,
 				'username_id'	=> $username_id,
@@ -31,6 +69,8 @@ class Discussion extends CI_Controller {
 				'comment_amount' => $comment_amount,
 				'sld_img'		=> $sld_img,
 		 		];
+
+		}
 				$this->load->view('templet', $data);
 	}
 	public function detail_discuss()

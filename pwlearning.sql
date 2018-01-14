@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 13 Jan 2018 pada 10.45
+-- Generation Time: 14 Jan 2018 pada 07.14
 -- Versi Server: 10.1.13-MariaDB
 -- PHP Version: 7.0.8
 
@@ -68,6 +68,7 @@ CREATE TABLE `comment` (
 --
 
 INSERT INTO `comment` (`id_comment`, `id_title`, `id_user`, `subject`, `text_comment`, `reply_id`, `created_at`) VALUES
+(27, 7, 3, 'Proparte dan prototo', 'Ada yang bisa menjelaskan lebih tentang prototo dan proparte', 0, '2018-01-14 13:04:05'),
 (26, 4, 3, 'hola hola2', 'holaaa', 25, '2018-01-13 01:06:12'),
 (23, 4, 3, 'Coba', 'coba', 0, '2018-01-13 01:05:49'),
 (24, 4, 3, 'hola', 'hola', 23, '2018-01-13 01:05:55'),
@@ -101,14 +102,13 @@ INSERT INTO `config` (`id_config`, `id_user`, `type`, `text`, `img`, `created_at
 (5, 0, 'slide', 'Go to future with sharing education|Course for sharing', NULL, '2018-01-09 00:00:00', '2018-01-13 15:59:04'),
 (6, 0, 'slide', 'Reach success with sharing education|Easy Sharing, Easy Learning', NULL, '2018-01-09 00:00:00', '2018-01-09 00:00:00'),
 (7, 0, 'slide', 'Learning, learning, and learning.|Start Learning now!', NULL, '2018-01-09 00:00:00', '2018-01-09 00:00:00'),
-(9, 0, 'slide image', NULL, 'bg6662.jpg', '2018-01-09 00:00:00', '2018-01-13 16:21:23'),
+(9, 0, 'slide image', NULL, 'Asset_511331.png', '2018-01-09 00:00:00', '2018-01-14 12:22:58'),
 (13, 0, 'subject', 'Penjaskes', NULL, '2018-01-09 00:00:00', '2018-01-09 00:00:00'),
 (14, 0, 'testimoni', 'Ini merupakan terobosan yang menarik menurut saya. Satu tempat untuk sharing dan learning, keren !|Steven Albert|CEO Telkomsel', NULL, '2018-01-13 00:00:00', '2018-01-13 00:00:00'),
 (15, 0, 'testimoni', 'Belajar secara gratis, sharing pun mudah. Bagus sekali !|Abi Rahman|Manager Quipper', NULL, '2018-01-13 00:00:00', '2018-01-13 16:43:07'),
 (16, 0, 'testimoni', 'Learning dimana saja, sharing pun dimana saja. Gratis juga, tidak sangka !|Chili Gates|CEO Microsoft Indonesia', NULL, '2018-01-13 00:00:00', '2018-01-13 00:00:00'),
 (17, 0, 'testimoni', 'Semoga dengan platform ini, siswa-siswi dimana saja dapat belajar lebih baik|Kak Seto|Ketua KOMNAS Anak', NULL, '2018-01-13 00:00:00', '2018-01-13 00:00:00'),
 (18, 0, 'testimoni', 'Saya rasa penting untuk sharing ilmu, dilain sisi menambah ilmu dibidang mengajar !|Prof. Mahmud|Guru Besar UII', NULL, '2018-01-13 00:00:00', '2018-01-13 00:00:00'),
-(19, 0, 'testimoni', 'Ini platform yang cocok untuk Indonesia !|Harry Tanoe|Presidential MNC Group', NULL, '2018-01-13 00:00:00', '2018-01-13 00:00:00'),
 (25, 3, 'subject', 'Other', NULL, '2018-01-13 14:52:21', '2018-01-13 14:52:21'),
 (27, 3, 'subject', 'Simulasi Digital', NULL, '2018-01-13 14:54:39', '2018-01-13 14:54:39'),
 (28, 3, 'subject', 'PKN', NULL, '2018-01-13 14:54:39', '2018-01-13 14:54:39'),
@@ -209,13 +209,13 @@ INSERT INTO `course_title` (`id_title`, `id_user`, `title`, `subject`, `descript
 (3, 3, 'Belajar Bahasa Inggris', 'BHS Inggris', 'Bahasa Inggris merupakan salah satu bahasa resmi yang dipakai lebih dari 1/3 penduduk bumi dan dikuasai oleh banyak orang hampir di seluruh dunia. Ada beberapa hal yang harus diketahui agar bisa belajar Bahasa Inggris secara lebih efektif.', 'Capture.JPG', '2018-01-11 11:09:26', '2018-01-12 21:08:53', 1, 1, 4, '02CIkQAnTSM'),
 (5, 3, 'Sejarah Lengkap Kerajaan Majapahit', 'Sejarah', ' Dalam perkembangan sejarah Indonesia, Kerajaan Majapahit dikatakan berperan penting dalam penyatuan Nusantara. Majapahit merupakan kerajaan besar yang disegani banyak negara asing dan membawa keharuman nama Indonesia sampai jauh di luar wilayah Indonesia. Namun demikian, pada hakikatnya sejarah Majapahit menerima unsur-unsur politik, ekonomi, sosial, budaya dari Singasari. Bahkan Kerajaan Majapahit dapat disebut sebagai kelanjutan dari Kerajaan Singasari.', 'sejarah_kerajaan_majapahit.jpg', '2018-01-11 21:01:57', '2018-01-11 21:01:57', 1, 0, 0, 'bXdtiFLSVM6'),
 (6, 8, 'Kebugaran Jasmani', 'Penjaskes', ' Kebugaran jasmani merupakan suatu kebutuhan yang harus dipenuhi agar kita dapat menjalankan aktifitas kehidupan sehari-hari dengan baik, seefektif dan seefisien mungkin. Hingga pada akhirnya akan mampu menciptakan kehidupan yang berkualitas sebagai seorang manusia.\r\nPada artikel kali ini, kita akan membahas berbagai hal tentang kebugaran jasmani, yakni : Apakah yang dimaksud dengan kebugaran jasmani? Faktor apa saja yang mempengaruhi kebugaran jasmani? Apa saja unsur-unsur dari kebugaran jasmani? Apa saja jenis atau bentuk latihan yang dilakukan dalam menjaga kebugaran jasmani? Serta apa manfaat langsung yang dapat dirasakan dengan melakukan latihan-latihan kebugaran jasmani tersebut?', 'kecepatan-3-300x213.jpg', '2018-01-11 21:08:21', '2018-01-11 21:08:21', 1, 0, 0, 'Yqp07h4VacE'),
-(7, 8, 'Majas Mudah', 'BHS Indonesia', ' Majas atau gaya bahasa yaitu pemanfaatan kekayaan bahasa, pemakaian ragam tertentu untuk memperoleh efek-efek tertentu yang membuat sebuah karya sastra semakin hidup, keseluruhan ciri bahasa sekelompok penulis sastra dan cara khas dalam menyampaikan pikiran dan perasaan, baik secara lisan maupun tertulis.', 'macam20macam20majas20jempolkaki_com_.jpg', '2018-01-11 21:32:33', '2018-01-11 21:32:33', 1, 0, 1, 'd6Fqc9eQN8m'),
+(7, 8, 'Majas Mudah', 'BHS Indonesia', ' Majas atau gaya bahasa yaitu pemanfaatan kekayaan bahasa, pemakaian ragam tertentu untuk memperoleh efek-efek tertentu yang membuat sebuah karya sastra semakin hidup, keseluruhan ciri bahasa sekelompok penulis sastra dan cara khas dalam menyampaikan pikiran dan perasaan, baik secara lisan maupun tertulis.', 'macam20macam20majas20jempolkaki_com_.jpg', '2018-01-11 21:32:33', '2018-01-11 21:32:33', 1, 0, 3, 'd6Fqc9eQN8m'),
 (8, 8, 'Fungsi Kuadrat', 'Matematika', 'Suatu logaritma merupakan hasil penjumlahan dari dua logaritma lain yang nilai kedua numerus-nya merupakan faktor dari nilai numerus awal. Berikut modelnya:\r\nalog p.q = alog p + alog q\r\ndengan syarat a > 0, a \\ne 1, p > 0, q > 0.', 'sifat-logaritma.jpg', '2018-01-11 21:42:19', '2018-01-11 21:42:19', 1, 1, 2, 'WAG6Zdpeluf'),
 (9, 9, 'Belajar Gerund', 'BHS Inggris', ' Gerund adalah kata benda (noun) yang terbentuk dari kata kerja  (verb) yang diakhiri dengan sufiks -ing. Sangat mudah mendeteksi gerund karena yang perlu kita lakukan adalah memperhatikan verb+ing yang berfungsi sebagai kata benda. Namun, ada beberapa penggunaan gerund sebagai kata benda yang perlu kita perhatikan.', 'gerund9.jpg', '2018-01-11 21:45:52', '2018-01-11 21:45:52', 1, 1, 0, 'Yhi6de4lQfP'),
 (10, 9, 'Belajar Tenses Mudah', 'BHS Inggris', ' Tenses adalah bentuk kata kerja dalam bahasa Inggris untuk menunjukkan waktu (sekarang, masa depan, atau masa lalu) terjadinya suatu perbuatan atau peristiwa.', 'English-tenses.png', '2018-01-11 21:48:09', '2018-01-11 21:48:09', 1, 1, 0, 'wJbXvYH63id'),
 (11, 9, 'Conditional Sentence (IF, will)', 'BHS Inggris', ' Dalam pelajaran hari ini, kita akan membahas tentang kalimat kondisional. Beberapa dari Anda mungkin menemukan kalimat kondisional sebagai sesuatu yang membingungkan, tapi jangan menyerah! Sebenarnya belajar itu tidak sulit, selama Anda bisa mengetahui bagaimana struktur kalimat bekerja, maka Anda akan bisa mengerti lebih banyak. Tentu saja, semua penjelasan bisa ditemukan melalui artikel ini, jadi tetap belajar di sini, ya!', 'bentuk-conditional-sentences.jpg', '2018-01-11 21:51:51', '2018-01-11 21:51:51', 1, 1, 1, 'KWbjJYmPhf0'),
 (12, 7, 'Kaidah Alur Jitu', 'BHS Indonesia', ' Para penulis Novel mempunyai sifat kreatif dan imajinatif. Kata kreatif mengacu pada sifat bebas menciptakan cerita, tokoh, gaya bercerita, dan teknik sehingga menghasilkan nilai estetis (keindahan). Sifat imajinatif berarti penulis dapat membuat cerita bahkan cerita yang belum pernah ada sekalipun. Kata imajinatif dan kreatif inilah yang membuat penulis “liar” sejauh imajinasi mereka. Keliaran ini harus dikendalikan dengan plot agar dapat disajikan secara menarik bagi pembaca', 'plotfiksi.jpg', '2018-01-11 22:09:18', '2018-01-11 22:09:18', 1, 0, 0, '26DuZt9ljUp'),
-(13, 7, 'Penokohan BHS Indonesia', 'BHS Indonesia', ' Suatu pementasan drama memiliki para pemain yang memerankan peran yang berbeda satu sama lain. Peran pada setiap diri tokoh sangat mendukung jalannya suatu cerita pada pementasan drama. Namun sering kali para penonton atau penikmat pementasan drama merasa bingung dengan peran apa yang dibawakan oleh tokoh pada saat pementasan itu berlangsung. Oleh karena itu, dalam artikel ini akan membahas berbagai jenis peran yang ada dalam pementasan drama. Diantaranya terdapat peran protagonis, antagonis, deutragonis, tritagonis, foil, dan utility. Biasanya pada sebuah pementasan drama, peran yang sangat menonjol adalah peran protagonis dan antagonis, karena antara kedua karakter ini konflik akan terlihat jelas. Dengan adanya berbagai macam klasifikasi  penokohan ini bertujuan untuk mempermudah penikmat sastra dalam mengidentifikasi  peran apa yang sedang dibawakan oleh para pemeran drama. Selain peran juga terdapat jenis karakter yang dimainkan oleh para pemeran pementasan drama. Karakter-karakter tersebut adalah flat character, round character, teatrikal, dan karikatural. Keduanya sangat berhubungan erat sehingga tidak dapat dipisahkan satu sama lain. Untuk memudahkan mengklasifikasi jenis-jenis karakter, disini juga akan membahas mengenai teknik penggambaran tokoh.', 'Tokoh_dan_Penokohan.jpg', '2018-01-11 22:11:09', '2018-01-11 22:11:09', 1, 1, 1, 'OrLPhFmRn10'),
+(13, 7, 'Penokohan BHS Indonesia', 'BHS Indonesia', ' Suatu pementasan drama memiliki para pemain yang memerankan peran yang berbeda satu sama lain. Peran pada setiap diri tokoh sangat mendukung jalannya suatu cerita pada pementasan drama. Namun sering kali para penonton atau penikmat pementasan drama merasa bingung dengan peran apa yang dibawakan oleh tokoh pada saat pementasan itu berlangsung. Oleh karena itu, dalam artikel ini akan membahas berbagai jenis peran yang ada dalam pementasan drama. Diantaranya terdapat peran protagonis, antagonis, deutragonis, tritagonis, foil, dan utility. Biasanya pada sebuah pementasan drama, peran yang sangat menonjol adalah peran protagonis dan antagonis, karena antara kedua karakter ini konflik akan terlihat jelas. Dengan adanya berbagai macam klasifikasi  penokohan ini bertujuan untuk mempermudah penikmat sastra dalam mengidentifikasi  peran apa yang sedang dibawakan oleh para pemeran drama. Selain peran juga terdapat jenis karakter yang dimainkan oleh para pemeran pementasan drama. Karakter-karakter tersebut adalah flat character, round character, teatrikal, dan karikatural. Keduanya sangat berhubungan erat sehingga tidak dapat dipisahkan satu sama lain. Untuk memudahkan mengklasifikasi jenis-jenis karakter, disini juga akan membahas mengenai teknik penggambaran tokoh.', 'Tokoh_dan_Penokohan.jpg', '2018-01-11 22:11:09', '2018-01-11 22:11:09', 1, 1, 2, 'OrLPhFmRn10'),
 (14, 9, 'Cerita Pendek', 'BHS Indonesia', 'Cerita pendek atau sering disingkat sebagai cerpen adalah suatu bentuk prosa naratif fiktif. Cerita pendek cenderung padat dan langsung pada tujuannya dibandingkan karya-karya fiksi lain yang lebih panjang, seperti novella (dalam pengertian modern) dan novel. Karena singkatnya, cerita-cerita pendek yang sukses mengandalkan teknik-teknik sastra seperti tokoh, plot, tema, bahasa dan insight secara lebih luas dibandingkan dengan fiksi yang lebih panjang. Ceritanya bisa dalam berbagai jenis.', 'Pengertian_Cerpen2.jpg', '2018-01-12 19:58:13', '2018-01-12 19:58:13', 1, 0, 0, 'icuTKyzx9ej'),
 (15, 9, 'Teks Anekdot', 'BHS Indonesia', 'Teks anekdot merupakan suatu cerita pendek yang bersifat lucu, akan tetapi mempunyai maksud untuk mengkritik. Biasanya yang di kritik dalam teks anekdot adalah layanan publik dalam bidang sosial, hukum, lingkungan dan politik.\r\n\r\nTeks anekdot merupakan suatu cerita singkat yang lucu dan dapat menghibur yang mungkin diambil dari pengalaman hidup seseorang.', 'teks-anekdot.jpg', '2018-01-12 20:20:24', '2018-01-12 20:20:24', 1, 0, 0, '0eHTdlwD9hU'),
 (16, 9, 'Teks Berita', 'BHS Indonesia', 'Pengertian teks berita adalah teks yang isinya mengenai segala hal yang terjadi di dunia ini yang berupa fakta, dan ditulis di media cetak, disiarkan di radio, ditayangkan di televisi, atau diunggah di situs. Pada dasarnya, sebuah berita harus berisi fakta, tetapi tidak semua fakta dapat diangkat menjadi berita.', 'Contoh-Teks-Berita-Singkat-Tentang-Kebakaran-Kecelakaan.jpg', '2018-01-12 20:26:17', '2018-01-12 20:32:22', 1, 0, 0, 'BVcU0LhJa1l'),
@@ -245,6 +245,7 @@ CREATE TABLE `enroll_course` (
 INSERT INTO `enroll_course` (`id_enroll`, `id_title`, `id_user`, `created_at`) VALUES
 (4, 4, 7, '2018-01-11 22:00:49'),
 (12, 8, 7, '2018-01-12 10:44:12'),
+(13, 7, 3, '2018-01-14 13:03:15'),
 (6, 11, 8, '2018-01-12 05:54:02'),
 (7, 13, 3, '2018-01-12 05:59:31'),
 (8, 8, 3, '2018-01-12 05:59:35'),
@@ -352,7 +353,9 @@ INSERT INTO `notification` (`id_notif`, `id_user`, `get_id`, `type`, `status`, `
 (134, 8, 5, 'broadcast', 0, '2018-01-13 16:44:03'),
 (135, 3, 5, 'broadcast', 0, '2018-01-13 16:44:03'),
 (136, 9, 5, 'broadcast', 0, '2018-01-13 16:44:03'),
-(137, 10, 5, 'broadcast', 0, '2018-01-13 16:44:03');
+(137, 10, 5, 'broadcast', 0, '2018-01-13 16:44:03'),
+(138, 8, 13, 'enroll_course', 0, '2018-01-14 13:03:15'),
+(139, 8, 27, 'comment', 0, '2018-01-14 13:04:05');
 
 -- --------------------------------------------------------
 
@@ -494,12 +497,12 @@ ALTER TABLE `broadcast`
 -- AUTO_INCREMENT for table `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `id_comment` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_comment` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT for table `config`
 --
 ALTER TABLE `config`
-  MODIFY `id_config` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id_config` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT for table `course_content`
 --
@@ -514,7 +517,7 @@ ALTER TABLE `course_title`
 -- AUTO_INCREMENT for table `enroll_course`
 --
 ALTER TABLE `enroll_course`
-  MODIFY `id_enroll` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_enroll` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `like_comment`
 --
@@ -529,7 +532,7 @@ ALTER TABLE `like_course`
 -- AUTO_INCREMENT for table `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `id_notif` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
+  MODIFY `id_notif` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=140;
 --
 -- AUTO_INCREMENT for table `subscribe`
 --

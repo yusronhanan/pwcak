@@ -7,7 +7,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Courses</title>
+<title>T-Learning</title>
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url();?>assets/images/icon logo.png" />
 <!-- Meta tag Keywords -->
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -562,11 +563,10 @@ a.subs_true{
 
   <!-- //Modal4-->
 
-         <div class="">
-            <a class="navbar-brand" href="#">T-Learning</a>
+
+<div class="">
+            <a class="navbar-brand" href="<?php echo base_url();?>home"><img class="icon_cuy" src="<?php echo base_url();?>assets/images/icon logo.png" alt="icon" name="icon" style="width: 45px;height: auto;"></a>
           </div>
-
-
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-right" style="width: 800px">
 

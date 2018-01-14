@@ -12,7 +12,8 @@
     	home, about, credits... or in a good page that you want
     	THANK YOU MY FRIEND!
     -->
-    <title>Project view details page - Bootdey.com</title>
+    <title>T-Learning</title>
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url();?>assets/images/icon logo.png" />
     <!-- css files -->
     <link href="<?php echo base_url(); ?>assets/css/style.css" rel="stylesheet" type="text/css" media="all">
     <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all">
@@ -371,13 +372,13 @@
               <h4>Register Now</h4>
               <!--newsletter-->
               <div class="login-main wthree">
-              <form action="<?php echo base_url(); ?>auth/submit_user" method="post">
-                <input type="text" placeholder="Name" name="name" class="form-control">
-                <input type="email" placeholder="Email" required="" name="email" class="form-control">
-                <input type="text" name="username" placeholder="Username" class="form-control">
-                <input type="password" placeholder="Password" name="password" class="form-control">
-                <input type="text" placeholder="City" name="city" class="form-control">
-                <input type="text" name="bio" placeholder="Bio" class="form-control">
+             <form action="<?php echo base_url(); ?>auth/submit_user" method="post">
+                <input type="text" placeholder="Name" name="name" class="form-control" required minlength="4">
+                <input type="email" placeholder="Email" required name="email" class="form-control">
+                <input type="text" name="username" placeholder="Username" class="form-control" required minlength="6">
+                <input type="password" placeholder="Password" name="password" class="form-control" required minlength="8">
+                <input type="text" placeholder="City" name="city" class="form-control" required minlength="5">
+                <input type="text" name="bio" placeholder="Bio" class="form-control" required minlength="10">
                 <input type="submit" value="Register Now" name="submit">
               </form>
               </div>

@@ -30,8 +30,46 @@
 <!-- Popular courses -->
 <div class="event" id="events">
 	<div class="container">
+		<div class="nav nav-justified navbar-nav">
+ 
+            <form class="navbar-form navbar-search" id="formcourses" method="get" action="<?php echo base_url() ?>discussion" role="search">
+                <div class="input-group">
+                                                                                                
+                    <input type="text" id="title" name="title" class="form-control" value="<?php if(!empty($title)) { echo $title; } ?>" placeholder="search courses">
+                
+                    <div class="input-group-btn">
+                        <input type="submit"  class="btn btn-search btn-danger" value="Search" id="searchcourses">
+                        
+                        <select class="form-control" name="subject">
+                            <option value="">All</option>
+                                <?php 
+
+                                foreach ($list_subject as $sbj) {
+                                 if ($sbj->text == $subject) {
+                                    
+                                 ?>
+                                 <option value="<?php echo $sbj->text ?>" selected="selected"><?php echo $sbj->text ?></option>
+                                 <?php }
+                                 else { ?>
+                                    <option value="<?php echo $sbj->text ?>"><?php echo $sbj->text ?></option>
+                                <?php 
+                            }
+                            } ?>
+                                </select>
+                     
+                    </div>
+                </div>  
+            </form>   
+         
+        </div>
+
+        <br>
+        <br>
+
 		<h3 style="text-align: left;text-transform: uppercase;">Discussion</h3>
-		<?php foreach ($list_discuss as $discuss) { ?>
+		<?php
+		if (!empty($list_discuss)) {
+		 foreach ($list_discuss as $discuss) { ?>
 		<div class="col-md-4 eve-agile e1">
 			<div class="eve-sub1">
 				<!-- <a href="#" data-toggle="modal" data-target="#myModal5"><img src="images/e2.jpg" alt="image"></a> -->
@@ -71,7 +109,16 @@
 				<div class="clearfix"></div>	
 			</div>
 		</div>
-		<?php } ?>
+		<?php 
+    }
+    } else{ ?>
+		  <div id="about" class="about">
+    <div class="container">
+            <h1> <span>Sorry!</span></h1>
+            <h2>Not Found. Try Again</h2>
+    </div>
+</div>
+        <?php } ?>
 	
 	</div>
 </div>

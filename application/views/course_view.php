@@ -74,13 +74,7 @@
                 
                     <div class="input-group-btn">
                         <input type="submit"  class="btn btn-search btn-danger" value="Search" id="searchcourses">
-                        <!-- <button type="button" class="btn btn-search btn-danger" id="searchcourses">
-                            <span class="glyphicon glyphicon-search"></span>
-                            <span class="label-icon">Search</span>
-                        </button> -->
-                        <!-- <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                        </button> -->
+                        
                         <select class="form-control" name="subject">
                             <option value="">All</option>
                                 <?php 
@@ -96,51 +90,7 @@
                             }
                             } ?>
                                 </select>
-                      <!--   <ul class="dropdown-menu pull-right" role="menu">
-                            <li>
-                                <a href="#">
-                                    <span class="glyphicon glyphicon-user"></span>
-                                    <span class="label-icon">Mathematic</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                <span class="glyphicon glyphicon-book"></span>
-                                <span class="label-icon">BHS INDONESIA</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                <span class="glyphicon glyphicon-book"></span>
-                                <span class="label-icon">dummy</span>
-                                </a>
-                            </li>
-                             <li>
-                                <a href="#">
-                                <span class="glyphicon glyphicon-book"></span>
-                                <span class="label-icon">dummy</span>
-                                </a>
-                            </li>
-                             <li>
-                                <a href="#">
-                                <span class="glyphicon glyphicon-book"></span>
-                                <span class="label-icon">dummy</span>
-                                </a>
-                            </li>
-                             <li>
-                                <a href="#">
-                                <span class="glyphicon glyphicon-book"></span>
-                                <span class="label-icon">dummy</span>
-                                </a>
-                            </li>
-
-                             <li>
-                                <a href="#">
-                                <span class="glyphicon glyphicon-book"></span>
-                                <span class="label-icon">dummy</span>
-                                </a>
-                            </li>
-                        </ul> -->
+                     
                     </div>
                 </div>  
             </form>   

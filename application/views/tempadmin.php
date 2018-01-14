@@ -7,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>ECharts Chart Bootstrap Examples | Gentelella Alela! by Colorlib</title>
-
+    <title>Admin T-Learning</title>
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url();?>assets/images/icon logo.png" />
     <!-- Bootstrap -->
     <link href="<?php echo base_url(); ?>assets/vendorss/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->

@@ -16,6 +16,12 @@ class Admin_model extends CI_Model {
 				        ->get('user')
 				        ->result();
 	}
+	public function get_data_broadcasts($limit,$mulai){
+		return $this->db->limit($limit,$mulai)
+						->order_by('created_at','DESC')	
+				        ->get('broadcast')
+				        ->result();
+	}
 	public function new_subject(){
 		date_default_timezone_set('Asia/Jakarta'); 
 		$now = date('Y-m-d H:i:s');
@@ -112,6 +118,10 @@ class Admin_model extends CI_Model {
 
 	public function total_user(){
 		return $this->db->from('user')
+		                ->count_all_results();
+	}
+	public function total_broadcast(){
+		return $this->db->from('broadcast')
 		                ->count_all_results();
 	}
 	

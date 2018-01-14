@@ -65,8 +65,7 @@ $route['lesson/(.+)'] = "course/detail_course/$1";
 $route['add_course/(.+)'] = "myaccount/add_course/$1";
 $route['discuss/(.+)'] = "discussion/detail_discuss/$1";
 
-$route['(:any)'] = "myaccount/user_profile/$1";
-// $route['(.*)'] = "home/user_profile/$1";  
 $route['404_override'] = 'eror404';
 $route['translate_uri_dashes'] = FALSE;
+$route['(:any)'] = "myaccount/user_profile/$1";
 

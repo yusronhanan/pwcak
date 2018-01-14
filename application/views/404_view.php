@@ -109,7 +109,7 @@ html, body{
 	<div class="four">
 		<img src="<?php echo base_url(); ?>assets/images/Asset 11.png" alt="Not Found" width="50%"/>
 		<p>For Some Reason The Page You Requested Could Not Be Found On Our Server</p>
-		<a href="#" class="hvr-shutter-in-horizontal">Go To Home</a>
+		<a href="<?php echo base_url(); ?>" class="hvr-shutter-in-horizontal">Go To Home</a>
 	</div>
 		<!---->
 	<!-- <div class="copy-right">

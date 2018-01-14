@@ -45,7 +45,7 @@ class Admin extends CI_Controller {
 
 			$this->load->library('pagination');
 
-		    $config['base_url'] = base_url().'index.php/admin/get_user';
+		    $config['base_url'] = base_url().'/admin/get_user';
 			$config['total_rows'] = $this->admin_model->total_user();
 			$config['per_page'] = 5;
 			$config['uri_segment'] =3;
@@ -88,7 +88,7 @@ class Admin extends CI_Controller {
 			$data['main_view'] = 'datacourse_view';
 			$this->load->library('pagination');
 
-		    $config['base_url'] = base_url().'index.php/admin/get_course';
+		    $config['base_url'] = base_url().'/admin/get_course';
 			$config['total_rows'] = $this->admin_model->total();
 			$config['per_page'] = 5;
 			$config['uri_segment'] =3;
@@ -134,7 +134,7 @@ class Admin extends CI_Controller {
 
 			$this->load->library('pagination');
 
-		    $config['base_url'] = base_url().'index.php/admin/get_discuss';
+		    $config['base_url'] = base_url().'/admin/get_discuss';
 			$config['total_rows'] = $this->admin_model->total_user();
 			$config['per_page'] = 5;
 			$config['uri_segment'] =3;
@@ -179,7 +179,7 @@ class Admin extends CI_Controller {
 
 			$this->load->library('pagination');
 
-		    $config['base_url'] = base_url().'index.php/admin/get_comment';
+		    $config['base_url'] = base_url().'/admin/get_comment';
 			$config['total_rows'] = $this->admin_model->total_user();
 			$config['per_page'] = 5;
 			$config['uri_segment'] =3;
@@ -294,6 +294,17 @@ class Admin extends CI_Controller {
 			}
 		}
 	}
+	public function delete_broadcast(){
+		$delete_in_notif = $this->admin_model->Delete(['get_id'=>$this->input->post('id_broadcast')],'notification');
+		$result = $this->admin_model->Delete(['id_broadcast'=>$this->input->post('id_broadcast')],'broadcast');
+
+			if($result == TRUE){
+				echo 'true';
+			}
+			else{
+				echo 'false';
+			}
+	}
 
 	public function broadcast()
 	{
@@ -302,6 +313,37 @@ class Admin extends CI_Controller {
 		$data['user_login'] = $this->home_model->GetData(['id_user'=> $id_user],'user')->row();
 
 		$data['main_view'] = 'broadcast_view';
+
+		$this->load->library('pagination');
+
+		    $config['base_url'] = base_url().'admin/broadcast';
+			$config['total_rows'] = $this->admin_model->total_broadcast();
+			$config['per_page'] = 5;
+			$config['uri_segment'] =3;
+			$config['full_tag_open'] = "<ul class='pagination'>";
+			$config['full_tag_close'] ="</ul>";
+			$config['num_tag_open'] = '<li>';
+			$config['num_tag_close'] = '</li>';
+			$config['cur_tag_open'] = "<li class='active'><a href='#'>";
+			$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+			$config['next_tag_open']="<li>";
+			$config['next_tagl_close']="</li>";
+			$config['prev_tag_open'] = "<li>";
+			$config['prev_tagl_close'] = "</li>";
+			$config['first_tag_open'] ="<li>";
+			$config['first_tagl_close'] ="</li>";
+			$config['last_tag_open'] = "<li>";
+			$config['last_tagl_close'] = "</li>";
+
+			$this->pagination->initialize($config);
+
+			$mulai = $this->uri->segment(3,0);
+
+			$rows = $this->admin_model->get_data_broadcasts($config['per_page'],$mulai);
+
+			$data['broadcastt'] = $rows;
+			$data['pagination'] = $this->pagination->create_links();
+			$data['mulai'] = $mulai;
 		$this->load->view('tempadmin',$data);
 		}
 	}

@@ -223,7 +223,10 @@ class Admin_model extends CI_Model {
 		$id = $this->input->post('id_broadcast');
 
 		if ($link == '') {
-			$link = NULL;
+			$links = NULL;
+		}
+		else{
+			$links = 'http://'.$link;
 		}
 		
 
@@ -232,7 +235,7 @@ class Admin_model extends CI_Model {
 			'id_user' => 0,
 			'subject' =>  $sub,
 			'text' => $text,
-			'link' => 'http://'.$link,
+			'link' => $links,
 			'thumbnail' => $thumbnail,
 			'created_at' => $now,
 	);

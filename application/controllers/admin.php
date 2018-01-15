@@ -22,7 +22,7 @@ class Admin extends CI_Controller {
 		$data['main_view'] = 'dashboard1';
 		$this->load->view('tempadmin',$data);
 		}else{
-			redirect('home');
+			redirect('');
 		}
 	}
 	public function admin_login()
@@ -76,7 +76,7 @@ class Admin extends CI_Controller {
 			$this->load->view('tempadmin',$data);
 		// }
 		}else{
-			redirect('home');
+			redirect('');
 		}
 	}
 
@@ -120,7 +120,7 @@ class Admin extends CI_Controller {
 
 		// }
 		}else{
-			redirect('home');
+			redirect('');
 		}
 	}
 
@@ -165,7 +165,7 @@ class Admin extends CI_Controller {
 			$this->load->view('tempadmin',$data);
 		// }
 		}else{
-			redirect('home');
+			redirect('');
 		}
 	}
 
@@ -210,7 +210,7 @@ class Admin extends CI_Controller {
 			$this->load->view('tempadmin',$data);
 		// }
 		}else{
-			redirect('home');
+			redirect('');
 		}
 	}
 
@@ -224,7 +224,7 @@ class Admin extends CI_Controller {
  				redirect('admin');
  		}
  	}else{
-			redirect('home');
+			redirect('');
 		}
 }
 
@@ -237,7 +237,7 @@ class Admin extends CI_Controller {
  				redirect('admin');
  		}
  	}else{
-			redirect('home');
+			redirect('');
 		}
  }
 
@@ -263,7 +263,7 @@ class Admin extends CI_Controller {
 		}
 		else{
 			$this->session->set_flashdata('notif_failed','Anda telah logout sebelumnya');
-			redirect('home');
+			redirect('');
 		}
 	}
 
@@ -278,7 +278,7 @@ class Admin extends CI_Controller {
 		    	echo 'FALSE';
 		    }
 		}else{
-			redirect('home');
+			redirect('');
 		}
 	}
 

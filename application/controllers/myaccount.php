@@ -564,6 +564,7 @@ class Myaccount extends CI_Controller {
 		$user_id = $this->auth_model->GetUser(['username' => $username])->row('id_user');
 		$userid_in = $this->session->userdata('logged_id');
 		$enrolled = $this->home_model->GetEnrolled($user_id);
+		$subscription = $this->home_model->GetSubscribed($user_id);
 		if (empty($user_id)) {
 			redirect('eror404');
 		}
@@ -646,6 +647,7 @@ class Myaccount extends CI_Controller {
 				'enroll'		=> $enrolled,
 				'other_courses' => $other_courses,
 				'other_user'    => $other_user,
+				'subsrciption'   => $subscription,
 				'main_view'		=> 'acc_view',
 				
 					];
@@ -666,13 +668,13 @@ class Myaccount extends CI_Controller {
 				'enroll'		=> $enrolled,
 				'other_courses' => $other_courses,
 				'other_user'    => $other_user,
+				'subscription'   => $subscription,
 				'main_view'		=> 'acc_view',
 				
 					];
 		}
 		
 		$this->load->view('templet', $data);
-		// }
 	}
 }
 	public function about_us(){

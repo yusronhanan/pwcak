@@ -11,8 +11,9 @@ class Home_model extends CI_Model {
 	}
 	public function GetListPCourses(){
 		// popular course list
-		return $this->db->limit(3,0) 
+		return $this->db->limit(6,0) 
             ->where(['status'=>'1'])
+            ->order_by('visitor', 'DESC')
             ->get('course_title')
             ->result();
 	}
@@ -33,6 +34,14 @@ class Home_model extends CI_Model {
             ->join('enroll_course', 'enroll_course.id_title = course_title.id_title')
             ->group_by('course_title.id_title')
             ->get('course_title')
+            ->result();
+  }
+  public function GetSubscribed($id_user){
+    return $this->db 
+            ->where(['user.status !='=>'1','subscribe.id_user'=> $id_user])
+            ->join('user', 'subscribe.for_id = user.id_user')
+            ->group_by('subscribe.for_id')
+            ->get('subscribe')
             ->result();
   }
   public function GetOtherUser($id_user){

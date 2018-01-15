@@ -177,6 +177,7 @@
                                         <li class=""><a href="#tab-2" data-toggle="tab" aria-expanded="false">All Notifications</a></li>
                                         <?php }  ?>
                                         <li class=""><a href="#tab-3" data-toggle="tab" aria-expanded="true">Enroll Course</a></li>
+                                        <li class=""><a href="#tab-4" data-toggle="tab" aria-expanded="true">Subscription</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -279,6 +280,34 @@
                                     </tbody>
                                 </table>
 
+                            </div>
+                            <div class="tab-pane" id="tab-4">
+                               <table class="table table-striped">
+                                  <?php if (!empty($subscription)) { ?>
+                                    <thead>
+                                    <tr>
+                                      <th>No</th>
+                                      <th>Name</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                      <?php
+                                        $i=1; 
+                                        
+                                        foreach ($subscription as $sbs) {  ?>
+                                        <tr>
+                                        <td><?php echo $i++ ?></td>
+                                        <td><a href="<?php echo $sbs->username ?>"><?php echo $sbs->name ?></a></td>
+                                       
+                                        
+
+                                    </tr>
+                                    <?php } }
+                                    else {
+                                      echo '<img src="'.base_url().'assets/images/Asset 44.png" alt="" width="200px" style="display: block;margin: 0 auto;"/>';
+                                    } ?>
+                                    </tbody>
+                                </table>
                             </div>
                             </div>
 

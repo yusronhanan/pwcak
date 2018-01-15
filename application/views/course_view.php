@@ -61,16 +61,16 @@
 	<div class="container">
 
 <div class="row">
-<div class="col-md-6">
+<div class="col-md-8">
 
 
 
         <div class="nav nav-justified navbar-nav">
  
             <form class="navbar-form navbar-search" id="formcourses" method="get" action="<?php echo base_url() ?>course" role="search">
-                <div class="input-group">
+                <div class="input-group col-md-12">
                                                                                                 
-                    <input type="text" id="title" name="title" class="form-control" value="<?php if(!empty($title)) { echo $title; } ?>" placeholder="search courses">
+                    <input type="text" id="title" name="title" class="form-control" value="<?php if(!empty($title)) { echo $title; } ?>" placeholder="search by course name or user maker">
                 
                     <div class="input-group-btn">
                         <input type="submit"  class="btn btn-search btn-danger" value="Search" id="searchcourses">

@@ -207,7 +207,15 @@ figure.effect-zoe:hover p.icon-links a:first-child {
     -webkit-transition-delay: 0.2s;
     transition-delay: 0.2s;
 }
+.rotate {
+	transform:rotate(90deg);
+	-ms-transform:rotate(90deg);
+	-moz-transform:rotate(90deg);
+	-webkit-transform:rotate(90deg);
+	-o-transform:rotate(90deg);
+	}
     </style>
+
 
 <body>
 
@@ -221,7 +229,7 @@ figure.effect-zoe:hover p.icon-links a:first-child {
 			        <div class="team-member">
 			            <figure class="effect-zoe">
 			                <div class="team-photo">
-			                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Rachel James Johnes" class="img-responsive">
+			                    <img src="<?php echo base_url() ?>assets/images/aryabayu.jpg" alt="Arya Bayu Ageng P." class="img-responsive rotate">
 			                </div>
 			                <div class="team-attrs">
 			                    <div class="team-name font-accident-two-bold-italic">Arya Bayu Ageng P.</div>
@@ -251,7 +259,7 @@ figure.effect-zoe:hover p.icon-links a:first-child {
 			        <div class="team-member">
 			            <figure class="effect-zoe">
 			                <div class="team-photo">
-			                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Rachel James Johnes" class="img-responsive">
+			                    <img src="<?php echo base_url() ?>assets/images/karinawidhia.jpg" alt="Karina Widhia N." class="img-responsive rotate">
 			                </div>
 			                <div class="team-attrs">
 			                    <div class="team-name font-accident-two-bold-italic">Karina Widhia N.</div>
@@ -279,7 +287,7 @@ figure.effect-zoe:hover p.icon-links a:first-child {
 			        <div class="team-member">
 			            <figure class="effect-zoe">
 			                <div class="team-photo">
-			                    <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="Rachel James Johnes" class="img-responsive">
+			                    <img src="<?php echo base_url() ?>assets/images/qoriatul.jpg" alt="Qoriatul Masfufah" class="img-responsive rotate" >
 			                </div>
 			                <div class="team-attrs">
 			                    <div class="team-name font-accident-two-bold-italic">Qoriatul Masfufah</div>
@@ -307,7 +315,7 @@ figure.effect-zoe:hover p.icon-links a:first-child {
 			        <div class="team-member">
 			            <figure class="effect-zoe">
 			                <div class="team-photo">
-			                    <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="Rachel James Johnes" class="img-responsive">
+			                    <img src="<?php echo base_url() ?>assets/images/yusronhanan.jpg" alt="Yusron Hanan Zain V.I" class="img-responsive rotate">
 			                </div>
 			                <div class="team-attrs">
 			                    <div class="team-name font-accident-two-bold-italic">Yusron Hanan Zain V.I.</div>
@@ -338,49 +346,6 @@ figure.effect-zoe:hover p.icon-links a:first-child {
 
 <br/>
 
-<!--test-->
-	<div id="testimonials" class="review">
-		<div class="container">
-		<h3 class="title-w3">Testimonials</h3>
-				<div class="test-monials">
-				<!--//screen-gallery-->
-						<div class="sreen-gallery-cursual">
-							
-						       <div id="owl-demo" class="owl-carousel">
-					                 <div class="item-owl">
-					                	<div class="test-review">
-										<p><img src="images/left-quote.png" alt="">Lorem ipsum dolor sit ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<img src="images/right-quote.png" alt=""></p>
-											<div class="img-agile">
-												<img src="images/t1.jpg" class="img-responsive" alt=""/>
-											</div>
-											  <h5>James</h5>
-					                	    </div>
-					                </div>
-					                 <div class="item-owl">
-					                	<div class="test-review">
-										 <p> <img src="images/left-quote.png" alt="">Lorem ipsum dolor sit ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<img src="images/right-quote.png" alt=""></p>
-						                	<div class="img-agile">
-											<img src="images/t2.jpg" class="img-responsive" alt=""/>
-											</div>
-											<h5>Williams Allen</h5>
-					                	</div>
-					                </div>
-					                 <div class="item-owl">
-					                	<div class="test-review">
-										     <p><img src="images/left-quote.png" alt="">Lorem ipsum dolor sit ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<img src="images/right-quote.png" alt=""></p>
-						                	<div class="img-agile">
-											<img src="images/t3.jpg" class="img-responsive" alt=""/>
-											</div>
-											<h5>Richard</h5>
-					                	</div>
-					                </div>
-				              </div>
-						<!--//screen-gallery-->
-					</div>
-				</div>
-			</div>
-		</div>
-<!--//test-->
 
 <!-- js -->
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery-2.1.4.min.js"></script>

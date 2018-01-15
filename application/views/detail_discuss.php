@@ -369,7 +369,7 @@ p {
   background-repeat: no-repeat;
 
   <?php 
-  $avame = base_url().'assets/images/'.$maker_info->photo;
+  $avame = base_url().'assets/images/'.$user_login->photo;
    ?>
 background-image: url('<?php echo $avame ?>');
 }
@@ -729,14 +729,7 @@ a.subs_true{
 
                                     <dt>Last Updated:</dt> <dd><?php  echo $title_info->last_update ?></dd>
                                     <dt>Created:</dt> <dd>  <?php  echo $title_info->created_at ?> </dd>
-                                    <dt>Participants:</dt>
-                                    <dd class="project-people">
-                                    <a href=""><img alt="image" class="img-circle" src="https://bootdey.com/img/Content/avatar/avatar1.png"></a>
-                                    <a href=""><img alt="image" class="img-circle" src="https://bootdey.com/img/Content/avatar/avatar2.png"></a>
-                                    <a href=""><img alt="image" class="img-circle" src="https://bootdey.com/img/Content/avatar/avatar3.png"></a>
-                                    <a href=""><img alt="image" class="img-circle" src="https://bootdey.com/img/Content/avatar/avatar4.png"></a>
-                                    <a href=""><img alt="image" class="img-circle" src="https://bootdey.com/img/Content/avatar/avatar5.png"></a>
-                                    </dd>
+                                    
                                 </dl>
                             </div>
                         </div>
@@ -1074,6 +1067,7 @@ a.subs_true{
     <?php } ?>
 
                             </div>
+                          </div>
                             <div class="tab-pane" id="tab-2">
                                  <?php if (!empty($list_comment)) { ?>
                                 <table class="table table-striped">
@@ -1169,33 +1163,6 @@ a.subs_true{
 </div>
 <!-- sini -->
 
-              <!-- <div class="timeline-nav-bar hidden-sm hidden-xs">
-                      <div class="row">
-                        <div class="col-md-3">
-                          <div class="profile-info">
-                            <img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo" />
-                            <h3><?php echo $user_data->name ?></h3>
-                            <p class="text-muted"><?php echo $user_data->interest ?></p>
-                          </div>
-                        </div>
-                        <div class="col-md-9">
-                          <ul class="list-inline profile-menu"> -->
-
-                            <!-- <li><a href="<?php echo base_url() ?>MyAccount" <?php if($active == 'timeline'){echo 'class="active"';} ?> >Timeline</a></li>
-                            <li><a href="<?php echo base_url() ?>MyAccount/About" <?php if($active == 'about'){echo 'class="active"';} ?>>About</a></li> -->
-                            <!-- <li><a href="<?php echo base_url() ?>MyAccount/#">Album</a></li> -->
-
-                            <!-- <li><a href="<?php echo base_url() ?>MyAccount/Following" <?php if($active == 'following'){echo 'class="active"';} ?>>Following</a></li>
-                            <li><a href="<?php echo base_url() ?>MyAccount/Follower" <?php if($active == 'follower'){echo 'class="active"';} ?>>Follower</a></li>
-                          </ul>
-                          <ul class="follow-me list-inline">
-                            <li>1,299 people following you</li>
-                            <li><a href="<?php echo base_url() ?>MyAccount/#"><button class="btn-primary">Edit Account</button></a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div> -->
-
 
   
 
@@ -1260,6 +1227,12 @@ a.subs_true{
   <div class="clearfix"></div>
 <!--//tidak ada course-->
 
+<hr/>
+<!-- footer -->
+<!--  <div style="background-color: #212121; height: 50px;"> -->
+    
+  <!-- <div class="container"> -->
+    <p style="text-align: center;">© 2017 T-Learning. All rights reserved | <a href="<?php echo base_url(); ?>myaccount/about_us">About Us</a></p>
 
 <!-- footer -->
   <!-- <div class="footer" id="footer">

@@ -58,10 +58,8 @@
                               " href="#" class="btn btn-info view"
                               id="'.$data->id_user.'" data-toggle="modal" data-target="#myModalView" style="color: white"><i class="glyphicon glyphicon-eye-open"></i></a></button>
                               <input type="hidden" name="id_user" placeholder="ID User" class="form-control" value=""> 
-                          <button type="button" href="#" id="'.$data->id_user.'" class="btn btn-success update" data-toggle="modal" data-target="#myModalEdit" style="color: white"><i class="fa fa-edit"></i></a></button>
                           <button id="'.$data->id_user.'" class="btn btn-warning banned" style="color: white">'.$status.'</a></button>
-                          <button id="'.$data->id_user.'" class="btn btn-danger delete" style="color: white"><i class="fa fa-trash-o"></i></a></button>
-                          
+                            <button id="'.$data->id_user.'" class="btn btn-danger delete" style="color: white"><i class="fa fa-trash-o"></i></a></button>
                               </td>
                               
                           </tr>';
@@ -161,68 +159,6 @@
               </div>
             </div> -->
 <!-- Modal Ubah -->
-<div aria-hidden="true" aria-labelledby="myModalView" role="dialog" tabindex="-1" id="myModalEdit" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                <h4 class="modal-title">Ubah Data</h4>
-            </div>
-            <form class="form-horizontal" action="" method="post" enctype="multipart/form-data" role="form">
-              <div class="modal-body">
-                      <div class="form-group">
-                          <label class="col-lg-2 col-sm-2 control-label">Name :</label>
-                          <div class="col-lg-10">
-                            <input type="hidden" id="id" name="id">
-                              <input type="text" class="form-control" id="name_idd" name="nama" placeholder="Tuliskan Nama">
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          <label class="col-lg-2 col-sm-2 control-label">Email :</label>
-                          <div class="col-lg-10">
-                            <input type="hidden" id="id" name="id">
-                              <input type="text" class="form-control" id="email_idd" name="nama" placeholder="Tuliskan Nama">
-                          </div>
-                      </div>
-                      <br>
-                      <div class="form-group">
-                          <label class="col-lg-2 col-sm-2 control-label">Username:</label>
-                          <div class="col-lg-10">
-                            <input type="text" class="form-control" id="username_idd" name="alamat" placeholder="Tuliskan Alamat">
-                          </div>
-                      </div>
-                      <br>
-                      <div class="form-group">
-                          <label class="col-lg-2 col-sm-2 control-label">City :</label>
-                          <div class="col-lg-10">
-                              <input type="text" class="form-control" id="city_idd"  >
-                          </div>
-                      </div>
-                      <br>
-                      <div class="form-group">
-                          <label class="col-lg-2 col-sm-2 control-label">Bio :</label>
-                          <div class="col-lg-10">
-                              <input type="text" class="form-control" id="bio_idd"  >
-                          </div>
-                      </div>
-                      <br>
-                      <div class="form-group">
-                          <label class="col-lg-2 col-sm-2 control-label">Role :</label>
-                          <div class="col-lg-10">
-                              <input type="number" max="1" min="0" class="form-control" id="role_idd">
-                          </div>
-                      </div>
-                      <br>
-                  </div>
-                  <div class="modal-footer">
-                      <a class="btn btn-info updateclass" href="#" id=""> Simpan&nbsp;</a>
-                      <a class="btn btn-warning" data-dismiss="modal"> Batal</a>
-                  </div>
-                </form?
-            </div>
-        </div>
-    </div>
-</div>
               <div class="clearfix"></div>
 
             <!-- <script type="text/javascript">
@@ -269,77 +205,8 @@
               }
           });
 
-            $("button.update").click(function(event) {
-              var id_user = $(this).attr('id');
-              // alert(product_id);
-              if (id_user != "") {
-                  $.ajax({
-                      url: "<?php echo base_url()?>admin/detuser",
-                      type: 'post',
-                      data: {
-                          id: id_user
-                      },
-                      success: function(e) {
-                          var data = e.split("|");
-                          $('a.updateclass').attr('id',data[0]);
-                          $('input#email_idd').attr('value',data[1]);
-                          $('input#username_idd').attr('value',data[2]);
-                          $('input#city_idd').attr('value',data[3]);
-                          $('input#bio_idd').attr('value',data[4]);
-                          $('input#name_idd').attr('value',data[5]);
-                          $('input#role_idd').attr('value',data[7]);
-                      }
-                  });
-              }
-          });
-
-            $("a.updateclass").click(function(event) {
-              var id_user =  $(this).attr('id');
-              var email =    $('input#email_idd').val();
-              var name =    $('input#name_idd').val();
-              var username = $('input#username_idd').val();
-              var city =     $('input#city_idd').val();
-              var bio =      $('input#bio_idd').val();
-              var role =      $('input#role_idd').val();
-              var bd =       $('button.view#'+id_user).parent();
-              // alert(id_user+email+username+city+bio);
-              // alert(product_id);
-              if (id_user != "") {
-                  $.ajax({
-                      url: "<?php echo base_url()?>admin/updateUser/",
-                      type: 'post',
-                      data: {
-                          id: id_user,
-                          name: name,
-                          email : email,
-                          username:username,
-                          city:city,
-                          bio:bio,
-                          role:role,
-                      },
-                      success: function(e) {
-                          var data = e.split("|");
-                          // $('a.update_id').attr('href', '<?php echo base_url()?>admin/updateUser/'+ data[0]);
-                          // alert(e)
-                          $('input#email_idd').attr('value',data[1]);
-                          $('input#username_idd').attr('value',data[2]);
-                          $('input#city_idd').attr('value',data[3]);
-                          $('input#bio_idd').attr('value',data[4]);
-                          $('input#name_idd').attr('value',data[5]);
-                          $('input#role_idd').attr('value',data[7]);
-                          $('div#myModalEdit').modal('hide');
-
-
-                          bd.prev().prev().prev().prev().html(data[1]);
-                          bd.prev().prev().prev().html(data[2]);
-                          bd.prev().prev().html(data[3]);
-                          bd.prev().html(data[4]);
-                          
-                      }
-                  });
-              } 
-          });
-              $("button.delete").click(function(event) {
+          
+             $("button.delete").click(function(event) {
                 if (confirm('Apa anda ingin menghapus user ini?')) {
               var id_user = $(this).attr('id');
               // alert(id_user);

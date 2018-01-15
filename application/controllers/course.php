@@ -22,22 +22,22 @@ class Course extends CI_Controller {
 		$title = $this->input->get('title');
 		$subject = $this->input->get('subject');
 		if (empty($title) && empty($subject)) {
-		$list_courses = $this->course_model->GetListCourses('');
+		$list_courses = $this->course_model->GetListCourses('','');
 		}
 		else if (empty($title)) {
 			if ($subject == "") {
-				$list_courses = $this->course_model->GetListCourses("");
+				$list_courses = $this->course_model->GetListCourses("",'');
 			}
 			else{
-				$list_courses = $this->course_model->GetListCourses(["subject "=>$subject]);
+				$list_courses = $this->course_model->GetListCourses(["subject "=>$subject],'');
 			}
 		}
 		else{
 			if ($subject == "") {
-				$list_courses = $this->course_model->GetListCourses(["title LIKE"=>"%".$title."%"]);
+				$list_courses = $this->course_model->GetListCourses(["title LIKE"=>"%".$title."%"],["name LIKE"=>"%".$title."%"]);
 			}
 			else{
-				$list_courses = $this->course_model->GetListCourses(["title LIKE"=>"%".$title."%", "subject" => $subject]);
+				$list_courses = $this->course_model->GetListCourses(["title LIKE"=>"%".$title."%", "subject" => $subject],["name LIKE"=>"%".$title."%", "subject" => $subject]);
 			}
 			
 		}

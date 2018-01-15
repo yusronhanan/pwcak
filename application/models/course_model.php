@@ -198,20 +198,36 @@ class Course_model extends CI_Model {
         }
     }
     
-	public function GetListCourses($keyword){
+	public function GetListCourses($keyword,$keywordd){
 		// courses/search course course list
-		if (empty($keyword)) {
+		if ($keyword == '' && $keywordd == '') {
 		return $this->db
-			->limit(15,0)
-            ->where('status', '1')
+			// ->limit(15,0)
+            ->where('course_title.status', '1')
+            ->join('user','user.id_user = course_title.id_user')
+            ->group_by('course_title.id_title')
+            ->order_by('course_title.created_at', 'DESC')
             ->get('course_title')
             ->result();
 		}
-		else{
-		return $this->db
-			->where($keyword)
-            ->where('status', '1')
-			->limit(15,0) 
+		else if ($keywordd == '') {
+           return $this->db
+            ->where($keyword)
+            ->where('course_title.status', '1')
+            ->join('user','user.id_user = course_title.id_user')
+            ->group_by('course_title.id_title')
+            ->order_by('course_title.created_at', 'DESC')
+            ->get('course_title')
+            ->result();
+        }
+        else {
+		  return $this->db
+            ->where($keyword)
+            ->where('course_title.status', '1')
+            ->or_where($keywordd)
+            ->join('user','user.id_user = course_title.id_user')
+            ->group_by('course_title.id_title')
+            ->order_by('course_title.created_at', 'DESC')
             ->get('course_title')
             ->result();
 		}

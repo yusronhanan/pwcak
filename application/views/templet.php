@@ -317,23 +317,15 @@
       
         
 
-      <!-- <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-9" aria-expanded="false">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navvvs" aria-expanded="false">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <div style="margin-left: 875px; margin-top: 20px; font-size: 16px;">
 
-        <a href="<?php echo base_url() ?>auth/logout" ><i class="fa fa-close" aria-hidden="true"></i>LOGOUT</a>
-
-        <a href="#" style="margin-right: 25px;" data-toggle="modal" data-target="#myModal3"><i class="fa fa-key" aria-hidden="true"></i>Login</a>
-        <a href="#" data-toggle="modal" data-target="#myModal4"><i class="fa fa-lock" aria-hidden="true"></i>Register</a>
-       
-       </div>
-
-      </div> -->
+      </div>
 
       <?php 
         if ($this->session->userdata('logged_in') != TRUE) { ?>
@@ -397,7 +389,7 @@
           </div>
 
 
-      <div class="collapse navbar-collapse">
+      <div class="collapse navbar-collapse" id="navvvs">
         <ul class="nav navbar-nav navbar-right" style="width: 800px">
 
         
@@ -563,6 +555,12 @@
 
   <?php $this->load->view($main_view); ?>
 
+<hr/>
+<!-- footer -->
+<!--  <div style="background-color: #212121; height: 50px;"> -->
+    
+  <!-- <div class="container"> -->
+    <p style="text-align: center;">© 2017 T-Learning. All rights reserved | <a href="<?php echo base_url(); ?>myaccount/about_us">About Us</a></p>
 <?php if ($this->session->flashdata('notif_success')): ?>
                             <script>
                                 swal({

@@ -427,7 +427,7 @@ i.del_reply:hover{
 
 		 			
 		 			<div style="padding-left: 15px">
-					    <h3>Popular discussion of this course <br><p/>
+					    <h3>Few Discussion<br><p/>
 					</div>
 		 			<!-- <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"> -->
 					<div class="container">
@@ -536,26 +536,19 @@ i.del_reply:hover{
 		</div>
 		<?php
 		} ?>
-		<?php } 
-		else{
-		?><div class="container">
-					    <div class="row">
-			 <div id="about" class="about">
-			    <div class="container">
-			            <h1> <span>Waw!</span></h1>
-			            <h2>There is no discussion, let's make!</h2>
-			    </div>
-			</div>
-
-		</div>
-	</div>
-		<?php } ?>
-		
-		<div class="pull-right">
-		<a href="<?php echo base_url()?>discuss/<?php echo $title_info->random_code ?>" ><button class="btn btn-danger pull-right" style="border-radius:50px;"><i class="fa fa-chevron-right" aria-hidden="true"></i></button></a>
-		<br>
-		<p>to make new discussion,<br> see discussion in detail</p>
+		<?php 
+    ?>
+    <div class="pull-right">
+    <a href="<?php echo base_url()?>discuss/<?php echo $title_info->random_code ?>" class="pull-right"><button class="btn btn-danger pull-right" style="border-radius:50px;"><i class="fa fa-chevron-right" aria-hidden="true"></i></button></a>
+    <br>
+    <p class="pull-right">to make new discussion,<br> see discussion in detail</p>
 </div>
+    <?php
+  }
+    else{ ?>
+		  <p><i>Tidak ada diskusi. Mari membuat, klik disini </i> <a href="<?php echo base_url()?>discuss/<?php echo $title_info->random_code ?>"><button class="btn btn-danger" style="border-radius:50px;"><i class="fa fa-chevron-right" aria-hidden="true"></i></button></a></p>
+    <?php } ?>
+		
 
 		
 </div>

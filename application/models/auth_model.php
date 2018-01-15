@@ -10,7 +10,7 @@ class Auth_model extends CI_Model {
         $username = $this->GetUser(['email'=>$email])->row('username');
         
 
-        $query = $this->GetUser(['email'=>$email,'password'=>md5($password)]);
+        $query = $this->GetUser(['email'=>$email,'password'=>md5($password),'status'=>'0']);
         if ($query->num_rows() > 0) {
             $data = [
                 'logged_id'     => $id,
@@ -33,7 +33,7 @@ class Auth_model extends CI_Model {
         $username = $this->GetUser(['email'=>$email])->row('username');
         
 
-        $query = $this->GetUser(['email'=>$email,'password'=>md5($password),'role'=>'1']);
+        $query = $this->GetUser(['email'=>$email,'password'=>md5($password),'role'=>'1','status !='=>'1']);
         if ($query->num_rows() > 0) {
             $data = [
                 'logged_id'     => $id,

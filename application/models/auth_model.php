@@ -36,10 +36,10 @@ class Auth_model extends CI_Model {
         $query = $this->GetUser(['email'=>$email,'password'=>md5($password),'role'=>'1','status !='=>'1']);
         if ($query->num_rows() > 0) {
             $data = [
-                'logged_id'     => $id,
-                'role'          => '1',
-                'username'      => $username,
-                'logged_in'     => TRUE,
+                'logged_id_admin'     => $id,
+                'role_admin'          => '1',
+                'username_admin'      => $username,
+                'logged_in_admin'     => TRUE,
             ];
             $this->session->set_userdata( $data );
             return TRUE;

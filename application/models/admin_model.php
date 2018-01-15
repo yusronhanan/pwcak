@@ -90,23 +90,33 @@ class Admin_model extends CI_Model {
 
 	public function get_data_course($limit,$start){
 		return $this->db->limit($limit,$start)
+						->join('user', 'user.id_user = course_title.id_user')
 		                ->order_by('id_title','ASC')
+		                ->group_by('id_title')
 		                ->get('course_title')
 		                ->result();
 	}
 
 	public function get_data_discuss($limit,$start)
 	{
-		return $this->db->where('reply_id',0)
-		                ->limit($limit,$start)         
-		                ->get('comment')
-		                ->result();
+	 return $this->db->select('course_title.random_code, course_title.title, user.name, user.username, comment.*, comment.subject as subjectcom')
+						->where('reply_id',0)
+						->limit($limit,$start)
+						->join('course_title', 'course_title.id_title = comment.id_title')
+						->join('user', 'comment.id_user = user.id_user')
+						->group_by('id_comment')
+						->get('comment')
+						->result();
 	}
 
 	public function get_data_comment($limit,$start)
 	{
-		return $this->db->where('reply_id !=', 0)
+		return $this->db->select('course_title.random_code, course_title.title, user.name, user.username, comment.*, comment.subject as subjectcom')
+						->where('reply_id !=', 0)
 						->limit($limit,$start)
+						->join('course_title', 'course_title.id_title = comment.id_title')
+						->join('user', 'comment.id_user = user.id_user')
+						->group_by('id_comment')
 						->get('comment')
 						->result();
 	}
@@ -120,6 +130,17 @@ class Admin_model extends CI_Model {
 		return $this->db->from('user')
 		                ->count_all_results();
 	}
+	public function total_comment(){
+		return $this->db->where('reply_id !=', '0')
+						->from('comment')
+		                ->count_all_results();
+	}
+	public function total_discuss(){
+		return $this->db->where('reply_id', '0')
+						->from('comment')
+		                ->count_all_results();
+	}
+	
 	public function total_broadcast(){
 		return $this->db->from('broadcast')
 		                ->count_all_results();

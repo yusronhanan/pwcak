@@ -13,8 +13,8 @@ class Admin extends CI_Controller {
 
 	public function index()
 	{
-		if($this->session->userdata('role') == 1){
-		$id_user = $this->session->userdata('logged_id');
+		if($this->session->userdata('role_admin') == 1){
+		$id_user = $this->session->userdata('logged_id_admin');
 		$data['user_login'] = $this->home_model->GetData(['id_user'=> $id_user],'user')->row();
 		// $data['user'] = $this->admin_model->get_data_user();
 		// // $data['course'] = $this->admin_model->get_data_course();
@@ -27,7 +27,7 @@ class Admin extends CI_Controller {
 	}
 	public function admin_login()
 	{
-		if($this->session->userdata('role') != 1 && $this->session->userdata('logged_in') != TRUE){
+		if($this->session->userdata('role_admin') != 1 && $this->session->userdata('logged_in_admin') != TRUE){
 		$this->load->view('loginadm_view');
 		}
 		else{
@@ -36,9 +36,9 @@ class Admin extends CI_Controller {
 	}
 
 	public function get_user(){
-		if($this->session->userdata('role') == 1){
+		if($this->session->userdata('role_admin') == 1){
 		// if($this->session->userdata('admin_login')==TRUE){
-			$id_user = $this->session->userdata('logged_id');
+			$id_user = $this->session->userdata('logged_id_admin');
 		$data['user_login'] = $this->home_model->GetData(['id_user'=> $id_user],'user')->row();
 		
 			$data['main_view'] = 'datauser_view';
@@ -81,9 +81,9 @@ class Admin extends CI_Controller {
 	}
 
 	public function get_course(){
-		if($this->session->userdata('role') == 1){
+		if($this->session->userdata('role_admin') == 1){
 		// if($this->session->userdata('admin_login') == TRUE){
-			$id_user = $this->session->userdata('logged_id');
+			$id_user = $this->session->userdata('logged_id_admin');
 		$data['user_login'] = $this->home_model->GetData(['id_user'=> $id_user],'user')->row();
 			$data['main_view'] = 'datacourse_view';
 			$this->load->library('pagination');
@@ -125,9 +125,9 @@ class Admin extends CI_Controller {
 	}
 
 	public function get_discuss(){
-		if($this->session->userdata('role') == 1){
+		if($this->session->userdata('role_admin') == 1){
 		// if($this->session->userdata('admin_login')==TRUE){
-			$id_user = $this->session->userdata('logged_id');
+			$id_user = $this->session->userdata('logged_id_admin');
 			$data['user_login'] = $this->home_model->GetData(['id_user'=> $id_user],'user')->row();
 		
 			$data['main_view'] = 'datadiscuss_view';
@@ -135,7 +135,7 @@ class Admin extends CI_Controller {
 			$this->load->library('pagination');
 
 		    $config['base_url'] = base_url().'/admin/get_discuss';
-			$config['total_rows'] = $this->admin_model->total_user();
+			$config['total_rows'] = $this->admin_model->total_discuss();
 			$config['per_page'] = 5;
 			$config['uri_segment'] =3;
 			$config['full_tag_open'] = "<ul class='pagination'>";
@@ -170,9 +170,9 @@ class Admin extends CI_Controller {
 	}
 
 	public function get_comment(){
-		if($this->session->userdata('role') == 1){
+		if($this->session->userdata('role_admin') == 1){
 		// if($this->session->userdata('admin_login')==TRUE){
-			$id_user = $this->session->userdata('logged_id');
+			$id_user = $this->session->userdata('logged_id_admin');
 			$data['user_login'] = $this->home_model->GetData(['id_user'=> $id_user],'user')->row();
 		
 			$data['main_view'] = 'datacomment_view';
@@ -180,7 +180,7 @@ class Admin extends CI_Controller {
 			$this->load->library('pagination');
 
 		    $config['base_url'] = base_url().'/admin/get_comment';
-			$config['total_rows'] = $this->admin_model->total_user();
+			$config['total_rows'] = $this->admin_model->total_comment();
 			$config['per_page'] = 5;
 			$config['uri_segment'] =3;
 			$config['full_tag_open'] = "<ul class='pagination'>";
@@ -216,7 +216,7 @@ class Admin extends CI_Controller {
 
 
 	public function user_delete(){
-		if($this->session->userdata('role') == 1){
+		if($this->session->userdata('role_admin') == 1){
 		$id_user=$this->uri->segment(3);
  		if($this->admin_model->delete_user($id_user)==TRUE){
  				redirect('admin/get_user');
@@ -229,7 +229,7 @@ class Admin extends CI_Controller {
 }
 
 	public function course_delete(){
-		if($this->session->userdata('role') == 1){
+		if($this->session->userdata('role_admin') == 1){
 		$id_title=$this->uri->segment(3);
  		if($this->admin_model->delete_course($id_title)==TRUE){
  				redirect('admin/get_course');
@@ -242,12 +242,16 @@ class Admin extends CI_Controller {
  }
 
  	public function logout_admin(){
- 		$this->session->sess_destroy();
+ 		// $this->session->sess_destroy();
+ 			$this->session->unset_userdata('logged_id_admin');
+	 		$this->session->unset_userdata('role_admin');
+	 		$this->session->unset_userdata('username_admin');
+	 		$this->session->unset_userdata('logged_in_admin');
  		redirect('admin_login');
  	}
 
  	public function detUser(){
- 		if($this->session->userdata('role')==1){
+ 		if($this->session->userdata('role_admin')==1){
  		    $data 	= $this->admin_model->get_detail_user();
 			echo $data->id_user."|".$data->email."|".$data->username."|".$data->city."|".$data->bio."|".$data->name."|".$data->photo."|".$data->role;
 		}
@@ -257,7 +261,7 @@ class Admin extends CI_Controller {
 	}
 
 	public function detCourse(){
- 		if($this->session->userdata('role')==1){
+ 		if($this->session->userdata('role_admin')==1){
  		    $data = $this->admin_model->get_detail_course();
 			echo $data->id_title."|".$data->title."|".$data->subject."|".$data->created_at."|".$data->thumbnail."|".$data->description."|".$data->visitor."|".$data->random_code;
 		}
@@ -268,7 +272,7 @@ class Admin extends CI_Controller {
 	}
 
 	public function updateUser(){
-		if($this->session->userdata('role')==1){
+		if($this->session->userdata('role_admin')==1){
 
 			$result = $this->admin_model->update_user();
 			if($result == 'TRUE'){
@@ -283,7 +287,7 @@ class Admin extends CI_Controller {
 	}
 
 	public function edit_pick(){
-		if($this->session->userdata('role')==1){
+		if($this->session->userdata('role_admin')==1){
 			// $unedit = 
 			$result = $this->admin_model->editpick();
 			if($result == TRUE){
@@ -308,8 +312,8 @@ class Admin extends CI_Controller {
 
 	public function broadcast()
 	{
-		if($this->session->userdata('role')==1){
-		$id_user = $this->session->userdata('logged_id');
+		if($this->session->userdata('role_admin')==1){
+		$id_user = $this->session->userdata('logged_id_admin');
 		$data['user_login'] = $this->home_model->GetData(['id_user'=> $id_user],'user')->row();
 
 		$data['main_view'] = 'broadcast_view';
@@ -349,8 +353,8 @@ class Admin extends CI_Controller {
 	}
 
 	public function slider() {
-		if($this->session->userdata('role')==1){
-		$id_user = $this->session->userdata('logged_id');
+		if($this->session->userdata('role_admin')==1){
+		$id_user = $this->session->userdata('logged_id_admin');
 		$data['user_login'] = $this->home_model->GetData(['id_user'=> $id_user],'user')->row();
 		$data['slider_image'] = $this->home_model->GetData(['type'=> 'slide image'],'config')->row();
 		$data['list_quote'] = $this->home_model->GetData(['type'=> 'slide'],'config')->result();
@@ -362,8 +366,8 @@ class Admin extends CI_Controller {
 
 
 	public function testi() {
-		if($this->session->userdata('role')==1){
-		$id_user = $this->session->userdata('logged_id');
+		if($this->session->userdata('role_admin')==1){
+		$id_user = $this->session->userdata('logged_id_admin');
 		$data['user_login'] = $this->home_model->GetData(['id_user'=> $id_user],'user')->row();
 		
 		$data['list_testi'] = $this->home_model->GetData(['type'=> 'testimoni'],'config')->result();
@@ -374,8 +378,8 @@ class Admin extends CI_Controller {
 	}
 
 	public function subject() {
-		if($this->session->userdata('role')==1){
-		$id_user = $this->session->userdata('logged_id');
+		if($this->session->userdata('role_admin')==1){
+		$id_user = $this->session->userdata('logged_id_admin');
 		$data['user_login'] = $this->home_model->GetData(['id_user'=> $id_user],'user')->row();
 		$data['list_subject'] = $this->home_model->GetData(['type'=> 'subject'],'config')->result();
 
@@ -384,13 +388,13 @@ class Admin extends CI_Controller {
 		}
 	}
 	public function getsubject(){
-		if($this->session->userdata('role')==1){
+		if($this->session->userdata('role_admin')==1){
  		    $data 	= $this->home_model->GetData(['id_config'=>$this->input->post('id_sbj')],'config');
 			echo $data->row('id_config')."|".$data->row('text');
 		}
 	}
 	public function gettesti(){
-		if($this->session->userdata('role')==1){
+		if($this->session->userdata('role_admin')==1){
  		    $data 	= $this->home_model->GetData(['id_config'=>$this->input->post('id_testi')],'config');
 			$tes = explode('|', $data->row('text'));
 			echo $data->row('id_config')."|".$tes[1]."|".$tes[2]."|".$tes[0];
@@ -441,7 +445,7 @@ class Admin extends CI_Controller {
 			}
 	}
 	public function getslider(){
-		if($this->session->userdata('role')==1){
+		if($this->session->userdata('role_admin')==1){
  		    $data 	= $this->home_model->GetData(['id_config'=>$this->input->post('id_quote')],'config');
  		    $qt = explode('|', $data->row('text'));
 			echo $qt[0]."|".$qt[1];
@@ -538,7 +542,7 @@ class Admin extends CI_Controller {
 	}
 
 	public function delete_user(){
-		if($this->session->userdata('role')==1){
+		if($this->session->userdata('role_admin')==1){
 			$id_user = $this->input->post('id_user');
 			$comment = $this->admin_model->Delete(['id_user'=>$id_user],'comment');
 			$notif = $this->admin_model->Delete(['id_user'=>$id_user],'notification');
@@ -560,7 +564,7 @@ class Admin extends CI_Controller {
 		}
 	}
 	public function delete_discuss(){
-		if($this->session->userdata('role')==1){
+		if($this->session->userdata('role_admin')==1){
 		$id_comment = $this->input->post('id_comment');	
 		$check = $this->admin_model->GetData(['id_comment'=>$id_comment],'comment');
 // >num_rows()
@@ -583,7 +587,7 @@ class Admin extends CI_Controller {
 }
 
 	public function delete_course(){
-		if($this->session->userdata('role')==1){
+		if($this->session->userdata('role_admin')==1){
 			$id_title = $this->input->post('id_title');
 			$comment = $this->admin_model->Delete(['id_title'=>$id_title],'comment');
 			$like_course = $this->admin_model->Delete(['id_title'=>$id_title],'like_course');
@@ -601,7 +605,7 @@ class Admin extends CI_Controller {
 	}
 	
 	public function banned_user(){
-		if($this->session->userdata('role')==1){
+		if($this->session->userdata('role_admin')==1){
 			$id_user = $this->input->post('id_user');
 			$status = $this->input->post('status');
 			if ($status == 'fa fa-times') {
@@ -620,7 +624,7 @@ class Admin extends CI_Controller {
 		}
 	}
 	public function banned_course(){
-		if($this->session->userdata('role')==1){
+		if($this->session->userdata('role_admin')==1){
 			$id_title = $this->input->post('id_title');
 			$status = $this->input->post('status');
 			if ($status == 'fa fa-times') {
@@ -640,7 +644,7 @@ class Admin extends CI_Controller {
 	}
 	public function submit_B()
 	{
-		if($this->session->userdata('role') == 1){
+		if($this->session->userdata('role_admin') == 1){
 			if($this->input->post('submit') == TRUE){
 
 				$this->form_validation->set_rules('subject','Subject','required|trim');

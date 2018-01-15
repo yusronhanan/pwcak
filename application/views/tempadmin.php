@@ -99,7 +99,7 @@
                     </ul>
                   </li>
                   
-                  <li><a href="<?php echo base_url(); ?>admin/broadcast"><i class="fa fa-desktop"></i> Broadcast</a>
+                  <li><a href="<?php echo base_url(); ?>admin/broadcast"><i class="fa fa-bullhorn"></i> Broadcast</a>
                   <li><a><i class="fa fa-cogs"></i> Settings <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="<?php echo base_url(); ?>admin/subject">Subject</a></li>
@@ -153,7 +153,7 @@
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="<?php echo base_url() ?>auth/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="<?php echo base_url() ?>admin/logout_admin"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 

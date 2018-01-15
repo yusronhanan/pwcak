@@ -25,7 +25,9 @@
                           <th>No </th>
                           <th>ID Comment</th>
                           <th>Title</th>
-                          <th>Subject</th>
+                          <th>Name</th>
+                          <th>Subject Comment</th>
+                          <th>Text Comment</th>
                           <th>Reply ID</th>
                           <th>Date</th>
                           <th colspan="2">Action</th>
@@ -40,12 +42,14 @@
                                 echo '
                                   <td>'.++$start.'</td>
                                   <td>'.$data->id_comment.'</td>
-                                  <td>'.$data->id_title.'</td>
-                                  <td>'.$data->subject.'</td>
+                                  <td>'.$data->title.'</td>
+                                  <td><a href="'.base_url().$data->username.'">'.$data->name.'</a></td>
+                                  <td>'.$data->subjectcom.'</td>
+                                  <td>'.$data->text_comment.'</td>
                                   <td>'.$data->reply_id.'</td>
                                   <td>'.$data->created_at.'</td>
                                   <td colspan="2"> 
-                              <a class = "btn btn-success" id="'.$data->id_comment.'">Go to</a>
+                              <a class = "btn btn-success" id="'.$data->id_comment.'" href="'.base_url().'discuss/'.$data->random_code.'">Go to</a>
                               <button id="'.$data->id_comment.'"  class="btn btn-danger delete" style="color: white"><i class="fa fa-trash-o"></i></a></button>
                                   </td>
                               </tr> '

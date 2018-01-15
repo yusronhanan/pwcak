@@ -361,14 +361,14 @@ i.del_reply:hover{
 				<h2>
 				<a href=""><?php echo $title_info->title; ?></a>
 				<i class="fa fa-angle-right"></i>
-				<span>by: <?php echo $maker_info->name; ?></span>
+				<span>by: <a href="<?php echo base_url().$maker_info->username; ?>"><?php echo $maker_info->name; ?></a></span>
 				</h2>
 		    </div>
 		<!--//banner-->
 		<!--content-->
 		<div class="grid-system">
 			<div class="horz-grid">
-		 		<div class="grid"> <!-- -hor -->
+		 		<div class="grid" style="padding:20px"> <!-- -hor -->
 		 			<h3 id="grid-example-basic" ><?php echo $getcontent->step_title;?></h3>
 		 			<!-- <p class="" > -->
             <?php echo $getcontent->content; ?>
@@ -427,7 +427,7 @@ i.del_reply:hover{
 
 		 			
 		 			<div style="padding-left: 15px">
-					    <h3>Few Discussion<br><p/>
+					    <h3>Popular discussion of this course <br><p/>
 					</div>
 		 			<!-- <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"> -->
 					<div class="container">
@@ -438,10 +438,10 @@ i.del_reply:hover{
 		<?php foreach ($list_comment_2top as $comment) {
 			?>
 			<div class="comment-wrap">
-				<div class="photo">
+				<!-- <div class="photo">
 						<div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg')"></div>
 
-				</div>
+				</div> -->
 				<div class="comment-block">
 					<?php 
 					if(array_key_exists($comment->id_user, $username)) {
@@ -535,8 +535,8 @@ i.del_reply:hover{
 			</div>
 		</div>
 		<?php
-		} ?>
-		<?php 
+    } ?>
+    <?php 
     ?>
     <div class="pull-right">
     <a href="<?php echo base_url()?>discuss/<?php echo $title_info->random_code ?>" class="pull-right"><button class="btn btn-danger pull-right" style="border-radius:50px;"><i class="fa fa-chevron-right" aria-hidden="true"></i></button></a>
@@ -546,9 +546,8 @@ i.del_reply:hover{
     <?php
   }
     else{ ?>
-		  <p><i>Tidak ada diskusi. Mari membuat, klik disini </i> <a href="<?php echo base_url()?>discuss/<?php echo $title_info->random_code ?>"><button class="btn btn-danger" style="border-radius:50px;"><i class="fa fa-chevron-right" aria-hidden="true"></i></button></a></p>
+      <p><i>Tidak ada diskusi. Mari membuat, klik disini </i> <a href="<?php echo base_url()?>discuss/<?php echo $title_info->random_code ?>"><button class="btn btn-danger" style="border-radius:50px;"><i class="fa fa-chevron-right" aria-hidden="true"></i></button></a></p>
     <?php } ?>
-		
 
 		
 </div>

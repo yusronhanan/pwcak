@@ -23,7 +23,7 @@
                       <thead>
                         <tr>
                           <th>No </th>
-                          <th>ID User</th>
+                          <th>User</th>
                           <th>Title</th>
                           <th>Category</th>
                           <th>Date</th>
@@ -57,7 +57,7 @@
                                 
                                 echo '
                                   <td>'.++$start.'</td>
-                                  <td>'.$data->id_user.'</td>
+                                  <td><a href="'.base_url().$data->username.'">'.$data->name.'</a></td>
                                   <td>'.$data->title.'</td>
                                   <td>'.$data->subject.'</td>
                                   <td>'.$data->created_at.'</td>

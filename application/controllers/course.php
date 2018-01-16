@@ -44,12 +44,18 @@ class Course extends CI_Controller {
 				$title = "";
 			}
 			$check_name = $this->home_model->GetData(["name LIKE"=>"%".$title."%"],'user')->num_rows();
-			if ($check_name > 0) {
+			$check_title = $this->home_model->GetData(["title LIKE"=>"%".$title."%"],'course_title')->num_rows();
+			if ($check_title > 0 && $check_name > 0) {
+				$list_courses = $this->course_model->GetListCourses($sbjct_filter,["title LIKE"=>"%".$title."%", "name LIKE"=>"%".$title."%"]);
+			}
+			else if ($check_title > 0) {
+				$list_courses = $this->course_model->GetListCourses($sbjct_filter,["title LIKE"=>"%".$title."%"]);
+			}
+			else if ($check_name > 0) {
 				$list_courses = $this->course_model->GetListCourses($sbjct_filter,["name LIKE"=>"%".$title."%"]);
 			}
-			else {
-
-			$list_courses = $this->course_model->GetListCourses($sbjct_filter,["title LIKE"=>"%".$title."%"]);	
+			else{
+			$list_courses = $this->course_model->GetListCourses($sbjct_filter,["title LIKE"=>"%".$title."%", "name LIKE"=>"%".$title."%"]);	
 			}
 
 		}

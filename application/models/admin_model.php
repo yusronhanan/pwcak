@@ -26,14 +26,16 @@ class Admin_model extends CI_Model {
 	}
 	public function top_discussion(){
 		// by reply
-		return $this->db->select('course_title.random_code, course_title.title, user.name, user.username, comment.*, comment.subject as subjectcom, (SELECT COUNT(*) FROM comment WHERE comment.id_comment = comment.id_comment) AS tot_comment')
+		return $this->db->select('course_title.random_code, course_title.title, user.name, user.username, C.*, C.subject as subjectcom, (SELECT COUNT(case when C.id_comment = B.reply_id then 1 end) FROM comment B WHERE B.reply_id != 0) AS tot_comment')
+
 						->where('reply_id',0)
 						->limit(5,0)
-						->join('course_title', 'course_title.id_title = comment.id_title')
-						->join('user', 'comment.id_user = user.id_user')
+						->join('course_title', 'course_title.id_title = C.id_title')
+						->join('user', 'C.id_user = user.id_user')
 						->order_by('tot_comment','DESC')
-						->group_by('id_comment')
-						->get('comment')
+						->group_by('C.id_comment')
+						->get('comment C')
+						// ->get('comment B')
 						->result();
 	}
 	public function top_course_visitor(){

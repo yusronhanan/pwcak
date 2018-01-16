@@ -12,7 +12,7 @@
 <div class="col-md-12 col-sm-6 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Top 5 Users </h2>
+                    <h2>Top Users </h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link pull-right"><i class="fa fa-chevron-up"></i></a></li>
                       
@@ -75,7 +75,7 @@
           <div class="col-md-12 col-sm-6 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Top Courses by Like Course </h2>
+                    <h2>Top Courses by Visitor </h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link pull-right"><i class="fa fa-chevron-up"></i></a></li>
                       
@@ -371,7 +371,7 @@
                 <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-between">
                         <h4>Description :</h4> 
-                        <p id="description_id breaks"></p>
+                        <p id="description_id" class="breaks"></p>
                     </div>
                 </a>
                 <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">

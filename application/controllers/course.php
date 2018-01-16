@@ -21,25 +21,37 @@ class Course extends CI_Controller {
 
 		$title = $this->input->get('title');
 		$subject = $this->input->get('subject');
+
 		if (empty($title) && empty($subject)) {
 		$list_courses = $this->course_model->GetListCourses('','');
 		}
-		else if (empty($title)) {
-			if ($subject == "") {
-				$list_courses = $this->course_model->GetListCourses("",'');
-			}
-			else{
-				$list_courses = $this->course_model->GetListCourses(["subject "=>$subject],'');
-			}
+		else if ($title == "" &&  $subject == "") {
+		$list_courses = $this->course_model->GetListCourses('','');
 		}
 		else{
-			if ($subject == "") {
-				$list_courses = $this->course_model->GetListCourses(["title LIKE"=>"%".$title."%"],["name LIKE"=>"%".$title."%"]);
+			if($subject != ""){
+				$subject = $subject;
+				$sbjct_filter = ["subject" => $subject];
 			}
 			else{
-				$list_courses = $this->course_model->GetListCourses(["title LIKE"=>"%".$title."%", "subject" => $subject],["name LIKE"=>"%".$title."%", "subject" => $subject]);
+				$subject ="";
+				$sbjct_filter = "";
 			}
-			
+			if ($title != "") {
+				$title = $title;
+			}
+			else{
+				$title = "";
+			}
+			$check_name = $this->home_model->GetData(["name LIKE"=>"%".$title."%"],'user')->num_rows();
+			if ($check_name > 0) {
+				$list_courses = $this->course_model->GetListCourses($sbjct_filter,["name LIKE"=>"%".$title."%"]);
+			}
+			else {
+
+			$list_courses = $this->course_model->GetListCourses($sbjct_filter,["title LIKE"=>"%".$title."%"]);	
+			}
+
 		}
 		$username = array();
 		$like_amount = array();

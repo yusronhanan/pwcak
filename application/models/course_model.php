@@ -210,9 +210,9 @@ class Course_model extends CI_Model {
             ->get('course_title')
             ->result();
 		}
-		else if ($keywordd == '') {
+		else if ($keyword == '') {
            return $this->db
-            ->where($keyword)
+            ->where($keywordd)
             ->where('course_title.status', '1')
             ->join('user','user.id_user = course_title.id_user')
             ->group_by('course_title.id_title')
@@ -224,7 +224,8 @@ class Course_model extends CI_Model {
 		  return $this->db
             ->where($keyword)
             ->where('course_title.status', '1')
-            ->or_where($keywordd)
+            ->where($keywordd)
+            // ->where($keyworddd)
             ->join('user','user.id_user = course_title.id_user')
             ->group_by('course_title.id_title')
             ->order_by('course_title.created_at', 'DESC')

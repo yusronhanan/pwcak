@@ -62,7 +62,7 @@
 			</a></h4>
 				<h6>By an <a href="#"><?php echo $discuss->username ?></a>, <?php echo $discuss->comment_created ?>
 				<br>in <a href="#" data-toggle="modal" data-target="#lesson" class="lesson_view" id="<?php echo $discuss->random_code ?>" style="color:#d9534f;"><?php echo $discuss->title ?></a></h6>
-				<p><?php 
+				<p class="breaks"><?php 
                         if (strlen($discuss->text_comment) < 37) {
                           echo $discuss->text_comment;
                         }

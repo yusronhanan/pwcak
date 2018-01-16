@@ -9,7 +9,43 @@ class Admin_model extends CI_Model {
 	}
 
 	
-
+	public function top_user(){
+		// by subscribe
+		$query = 'SELECT user.*, (SELECT COUNT(*) FROM subscribe WHERE subscribe.for_id = user.id_user) AS tot_subs FROM user  ORDER BY tot_subs DESC LIMIT 5';
+		return $this->db->query($query)->result();
+	}
+	public function top_course(){
+		// by like
+		return $this->db->select('user.*, course_title.*,course_title.status as status_course, (SELECT COUNT(*) FROM like_course WHERE like_course.id_title = course_title.id_title) AS tot_likecourse')
+						->limit(5,0)
+						->join('user', 'user.id_user = course_title.id_user')
+		                ->order_by('tot_likecourse','DESC')
+		                ->group_by('id_title')
+		                ->get('course_title')
+		                ->result();
+	}
+	public function top_discussion(){
+		// by reply
+		return $this->db->select('course_title.random_code, course_title.title, user.name, user.username, comment.*, comment.subject as subjectcom, (SELECT COUNT(*) FROM comment WHERE comment.id_comment = comment.id_comment) AS tot_comment')
+						->where('reply_id',0)
+						->limit(5,0)
+						->join('course_title', 'course_title.id_title = comment.id_title')
+						->join('user', 'comment.id_user = user.id_user')
+						->order_by('tot_comment','DESC')
+						->group_by('id_comment')
+						->get('comment')
+						->result();
+	}
+	public function top_course_visitor(){
+		// by visitor
+		return $this->db->select('user.*, course_title.*,course_title.status as status_course')
+						->limit(5,0)
+						->join('user', 'user.id_user = course_title.id_user')
+		                ->order_by('course_title.visitor','DESC')
+		                ->group_by('id_title')
+		                ->get('course_title')
+		                ->result();
+	}
 	public function get_data_user($limit,$mulai,$where_user){
 		if (!empty($where_user)) {
 		return $this->db->limit($limit,$mulai)

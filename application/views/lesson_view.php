@@ -208,6 +208,16 @@ i.del_reply{
 i.del_reply:hover{
 	color:black;
 }
+.breaks{
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -ms-word-break: break-all;
+    word-break: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
 </style>
 <!----->
 
@@ -458,7 +468,7 @@ i.del_reply:hover{
 										<li class="reply" title="Go to this discussion"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></li>
 								</ul>
 					<!-- </div> -->
-						<p class="comment-text" style="color:black;"><?php echo $comment->text_comment ?></p>
+						<p class="comment-text breaks" style="color:black;"><?php echo $comment->text_comment ?></p>
 						<div class="bottom-comment">
 								<div class="comment-date"><?php
 								$this->load->helper('date');

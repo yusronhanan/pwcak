@@ -116,7 +116,7 @@
 				<h6>By  <a href="<?php echo base_url() ?><?php echo $usrnm ?>">
 					<?php echo $usrnm ?>
 				</a>, <?php echo $courses->created_at ?></h6>
-				<p><?php echo substr($courses->description, 0,104) ?>...</p>
+				<p class="breaks"><?php echo substr($courses->description, 0,104) ?>...</p>
 			</div>
 			<div class="eve-sub2">
 				<div class="eve-w3lleft">

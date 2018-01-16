@@ -141,7 +141,7 @@
 				<h6>By  <a href="<?php echo base_url() ?><?php echo $usrnm ?>">
 					<?php echo $usrnm ?>
 				</a>, <?php echo $pcourses->created_at ?></h6>
-				<p><?php echo substr($pcourses->description, 0,105) ?>...</p>
+				<p class="breaks"><?php echo substr($pcourses->description, 0,105) ?>...</p>
 			</div>
 			<div class="eve-sub2">
 				<div class="eve-w3lleft">
@@ -233,7 +233,7 @@
                                 <i class="fa fa-quote-left"></i>
                             </div>
 
-                            <p class="description">
+                            <p class="description breaks">
                                 <?php echo $testii[0] ?>
                             </p>
                         </div>

@@ -33,6 +33,18 @@
     <link href="<?php echo base_url(); ?>assets/builds/css/custom.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.1/sweetalert2.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.9.1/sweetalert2.min.css">
+    <style type="text/css">
+      .breaks{
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -ms-word-break: break-all;
+    word-break: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+    </style>
   </head>
 
   <body class="nav-md">
@@ -96,6 +108,7 @@
                       <li><a href="<?php echo base_url(); ?>admin/get_course">Data Course</a></li>
                        <li><a href="<?php echo base_url(); ?>admin/get_discuss">Data Discussion</a></li>
                        <li><a href="<?php echo base_url(); ?>admin/get_comment">Data Comment</a></li>
+                       <li><a href="<?php echo base_url(); ?>admin/report_top">Data Report</a></li>
                     </ul>
                   </li>
                   

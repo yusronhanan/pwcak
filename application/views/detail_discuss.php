@@ -280,6 +280,16 @@ ul.notes li,
 ul.tag-list li {
   list-style: none;
 }
+.breaks{
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -ms-word-break: break-all;
+    word-break: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
 </style>
 <style class="cp-pen-styles">
 /*html, body {*/
@@ -871,7 +881,7 @@ a.subs_true{
                     <li class="reply" title="Go to this discussion"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></li>
                 </ul>
           <!-- </div> -->
-            <p class="comment-text" style="color:black;"><?php echo $comment->text_comment ?></p>
+            <p class="comment-text breaks" style="color:black;"><?php echo $comment->text_comment ?></p>
             <div class="bottom-comment">
                 <div class="comment-date"><?php
                 $this->load->helper('date');
@@ -973,7 +983,7 @@ a.subs_true{
               }
              ?>
             </h5>
-<ul class="comment-actions"><li class="reply" title="Go to this discussion"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></li></ul><p class="comment-text" style="color:black;"><?php  echo $reply_comment->text_comment ?></p>
+<ul class="comment-actions"><li class="reply" title="Go to this discussion"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></li></ul><p class="comment-text breaks" style="color:black;"><?php  echo $reply_comment->text_comment ?></p>
   <div class="bottom-comment">
                 <div class="comment-date"><?php
                 $this->load->helper('date');
@@ -1063,7 +1073,7 @@ a.subs_true{
                                             } ?>
                                         </td>
                                         <td>
-                                        <p class="small">
+                                        <p class="small breaks">
                                             <?php echo $comment->text_comment ?>
                                         </p>
                                         </td>

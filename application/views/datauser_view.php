@@ -141,7 +141,6 @@
                             <option value="0">User</option>
                             <option value="1">Admin</option>
                             </select>
-                              <!-- <input type="text" class="form-control" id="role_id"  placeholder="" disabled> -->
                           </div>
                       </div>
                       
@@ -152,34 +151,8 @@
     </div>
 </div>
               <div class="clearfix"></div>
-          <!-- Modal edit -->
-
-
-          <!--Modal lihat-->
-            <!-- <div class="modal fade" id="myModalView" tabindex="-1" role="dialog" >
-              <div class="modal-dialog" role="document"> -->
-              <!-- Modal content-->
-                <!-- <div class="modal-content news-w3l">
-                    <div class="modal-header">
-                      <button type="button" class="close w3l" data-dismiss="modal">&times;</button>
-                      <h4>Detail User</h4> -->
-                      <!--newsletter-->
-                      <!-- <div class="login-main wthree">
-                        <form action="#" method="post">
-                          <h5> Email User </h5> <input type="text" disabled value="" name="email" id="email_id" class="form-control">
-                          <h5> Username </h5> <input type="text" disabled value="" name="Username" id="username_id" class="form-control">
-                          <h5> City </h5> <input type="text" disabled value="" name="city" id="city_id" class="form-control">
-                          <h5> Bio </h5> <input type="text" disabled value="" name="bio" id="bio_id" class="form-control"> -->
-
-                          <!-- <input type="submit" value="Save"> -->
-                        <!-- </form>
-                      </div>    
-                    </div>
-                </div>
-              </div>
-            </div> -->
-<!-- Modal Ubah -->
--<div aria-hidden="true" aria-labelledby="myModalView" role="dialog" tabindex="-1" id="myModalEdit" class="modal fade">
+          
+<div aria-hidden="true" aria-labelledby="myModalView" role="dialog" tabindex="-1" id="myModalEdit" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -240,7 +213,7 @@
                       <a class="btn btn-info updateclass" href="#" id=""> Simpan&nbsp;</a>
                       <a class="btn btn-warning" data-dismiss="modal"> Batal</a>
                   </div>
-                </form?
+                </form>
             </div>
         </div>
     </div>

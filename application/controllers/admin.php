@@ -34,6 +34,24 @@ class Admin extends CI_Controller {
 			redirect('admin');
 		}
 	}
+	public function report_top()
+	{
+		if($this->session->userdata('role_admin') == 1 && $this->session->userdata('logged_in_admin') == TRUE){
+			$id_user = $this->session->userdata('logged_id_admin');
+		$data = [
+		'user' 		=> $this->admin_model->top_user(),
+		'course'			=> $this->admin_model->top_course(),
+		'course_visitor' => $this->admin_model->top_course_visitor(),
+		'discuss' 	=> $this->admin_model->top_discussion(),
+		'main_view'	=> 'report_topview',
+		'user_login' => $this->home_model->GetData(['id_user'=> $id_user],'user')->row(),
+ 		];
+		$this->load->view('tempadmin',$data);
+		}
+		else{
+			redirect('admin');
+		}
+	}
 
 	public function get_user(){
 		if($this->session->userdata('role_admin') == 1){

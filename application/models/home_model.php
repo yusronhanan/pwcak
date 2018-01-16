@@ -66,7 +66,7 @@ class Home_model extends CI_Model {
     return $this->db
                 ->where(['status'=>'1'])
                 ->where('pick',1)
-                ->limit(7,0)
+                ->limit(6,0)
                 ->get('course_title')
                 ->result();
   }

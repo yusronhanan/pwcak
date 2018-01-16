@@ -49,8 +49,8 @@
                                   <td>'.$data->reply_id.'</td>
                                   <td>'.$data->created_at.'</td>
                                   <td colspan="2"> 
-                              <a class = "btn btn-success" id="'.$data->id_comment.'" href="'.base_url().'discuss/'.$data->random_code.'">Go to</a>
-                              <button id="'.$data->id_comment.'"  class="btn btn-danger delete" style="color: white"><i class="fa fa-trash-o"></i></a></button>
+                              <a class = "btn btn-success" id="'.$data->id_comment.'" href="'.base_url().'discuss/'.$data->random_code.'" title="Go to Discussion">Go to</a>
+                              <button id="'.$data->id_comment.'"  class="btn btn-danger delete" title="Delete Comment" style="color: white"><i class="fa fa-trash-o"></i></a></button>
                                   </td>
                               </tr> '
                              ;

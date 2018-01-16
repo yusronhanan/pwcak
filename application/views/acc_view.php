@@ -2,6 +2,16 @@
   body{
     background: #eee;
   }
+  .breaks{
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -ms-word-break: break-all;
+    word-break: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
 </style>
 <div class="container">
 <div class="row">
@@ -112,7 +122,7 @@
                             } ?>
                                 </select>
                                 Description
-                                <textarea name="description" minlength="105" class="form-control" required></textarea>
+                                <textarea name="description" minlength="105" class="form-control" required rows="5"></textarea>
                                 
               <!-- <label for="file-upload" class="custom-file-upload ">
                 <span class="glyphicon glyphicon-upload"></span>  Upload Thumbnail
@@ -211,7 +221,7 @@
                                         <td><?php echo $courses->title ?></td>
                                         <td><?php echo $courses->subject ?></td>
                                         <td>
-                                        <p class="small">
+                                        <p class="small breaks">
                                             <?php echo substr($courses->description, 0,105) ?>...
                                         </p>
                                         </td>

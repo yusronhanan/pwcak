@@ -48,6 +48,7 @@
                               <td>'.$data->created_at.'</td>
                               <td colspan="2">
                           <button id="'.$data->id_broadcast.'" class="btn btn-danger delete" style="color: white"><i class="fa fa-trash-o"></i></a></button>
+                          <button id="'.$data->id_broadcast.'" class="btn btn-success editview" style="color: white" data-toggle="modal" data-target="#broadcast_see"><i class="fa fa-pencil"></i></a></button>
                           
                               </td>
                               
@@ -110,6 +111,50 @@
 </div>
 </div>
 </div>
+<div aria-hidden="true" aria-labelledby="myModalView" role="dialog" tabindex="-1" id="broadcast_see" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">Edit Broadcast</h4>
+            </div>
+                  <br>
+            <form method="post" action="<?php echo base_url();?>admin/editbroadcast" enctype="multipart/form-data" class="form-horizontal" role="form">
+              <div class="modal-body">
+                  <br>
+                  <div class="form-group">
+                          <label class="col-lg-2 col-sm-2 control-label">Subject</label>
+                          <div class="col-lg-10">
+                            <input type="text" class="form-control" id="subjectt" placeholder="subject" name="subject">
+                            <input type="hidden" id="id_bdd" name="id_broadcast">
+                          </div>
+                      </div>
+                      <br>
+                    <div class="form-group">
+                          <label class="col-lg-2 col-sm-2 control-label">Text</label>
+                          <div class="col-lg-10">
+                            <input type="text" class="form-control" id="textt" placeholder="Text" name="text">
+                          </div>
+                      </div>
+                      <br>
+                              <div class="form-group">
+                    <label for="link">Link :</label>
+                    <div class="input-group">
+                      <span class="input-group-addon">http://</span>
+                      <input id="linkk" type="text" class="form-control" name="link" placeholder="(Optional)">
+                    </div>
+                  </div>
+                      <br>
+                      <div class="form-group">
+                          <div class="col-lg-12">
+                              <button class="form-control btn btn-primary updatetesti" type="submit">Save</button>
+                          </div>
+                      </div>
+                  </div>
+                </form>
+            </div>
+        </div>
+    </div>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
    $("button.delete").click(function(event) {
@@ -135,6 +180,27 @@
                   });
               }
             }
+          });
+    $("button.editview").click(function(event) {
+              var id_bd = $(this).attr('id');
+              // alert(product_id);
+              if (id_bd != "") {
+                  $.ajax({
+                      url: "<?php echo base_url()?>admin/getbroadcast",
+                      type: 'post',
+                      data: {
+                          id_broadcast: id_bd
+                      },
+                      success: function(e) {
+                          var data = e.split("|");
+                          $('input#subjectt').attr('value',data[0]);
+                          $('input#textt').attr('value',data[1]);
+                          $('input#linkk').attr('value',data[2]);
+                          $('input#id_bdd').attr('value',id_bd);
+                          
+                      }
+                  });
+              }
           });
 </script>
 

@@ -47,8 +47,8 @@
                                   <td>'.$data->text_comment.'</td>
                                   <td>'.$data->created_at.'</td>
                                   <td colspan="2"> 
-                              <a class = "btn btn-success" id="'.$data->id_comment.'" href="'.base_url().'discuss/'.$data->random_code.'">Go to</a>
-                              <button id="'.$data->id_comment.'"  class="btn btn-danger delete" style="color: white"><i class="fa fa-trash-o"></i></a></button>
+                              <a class = "btn btn-success" id="'.$data->id_comment.'" href="'.base_url().'discuss/'.$data->random_code.'" title="Go to Discussion">Go to</a>
+                              <button id="'.$data->id_comment.'"  class="btn btn-danger delete" title="Delete Discussion" style="color: white"><i class="fa fa-trash-o"></i></a></button>
                                   </td>
                               </tr> '
                              ;
@@ -61,71 +61,7 @@
                   </div>
                 </div>
 
-                <!-- <div class="modal fade product_view" id="viewCourse">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <a href="#" data-dismiss="modal" class="class pull-right"><span class="glyphicon glyphicon-remove"></span></a>
-                <h3 class="modal-title" id="id_title"></h3>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12 product_img">
-                        <img src="" class="images_c" id="image_id">
-                    </div>
-                    <div class="col-md-12 product_content">
-                    <br>
-                    
-                      <div class="list-group">
-                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                        <h4>Title ID : <span id="title_id"></span></h4>
-                    </div>
-                    </a> -->
-                        <!-- <div class="rating">
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            (10 reviews)
-                        </div> -->
-                <!-- <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h4>Description :</h4> 
-                        <p id="description_id"></p>
-                    </div>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h4>Catergory   :</h4> <span><h5 id="subject_id"></h5></span>
-                    </div>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h4>Created at  :</h4> 
-                        <span><h5 id="date_id"></h5></span>
-                    </div>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h4>Visitor     :</h4> 
-                        <span><h5 id="visitor_id"></h5></span>
-                    </div>
-                </a>
-                        <br>
-                        <div class="space-ten"></div>
-                        <div class="btn-ground">
-                            <a href="" id="go_discuss" target="_blank"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-comment"></span></button></a>
-                            <a href="" id="go_lesson" target="_blank"><button type="button" class="btn btn-success"><span class="glyphicon glyphicon-education"></span></button></a>
-                        </div>
-                    </div>
-                   </div>
-                </div>
-             </div>
-        </div>
-    </div>
-</div> -->
+     
 
 
               

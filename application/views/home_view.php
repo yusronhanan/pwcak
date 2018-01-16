@@ -95,7 +95,7 @@
 							<div class="slider-info">
 								<p><?php echo $texts[0] ?></p>
 								<h3><a href="#"><span>EDU</span>CATIONAL</a></h3>
-								<h6><?php echo $texts[1] ?></h6>
+								<h6><a href="<?php echo $texts[2] ?>" style="color:white"><?php echo $texts[1] ?></a></h6>
 							</div>
 						</li>
 						<?php } ?>
@@ -127,7 +127,13 @@
                         else{
                         echo  substr($pcourses->title, 0,24).'..';
                         } ?>
-			</a></h4>
+			</a>
+			<?php if ($pcourses->pick == 1) {
+				?>
+				<i class="glyphicon glyphicon-check"></i>
+				<?php
+				} ?>
+		</h4>
 				<?php 
 					if(array_key_exists($pcourses->id_user, $username)) {
 					$usrnm =  $username[$pcourses->id_user];
@@ -206,7 +212,7 @@
 
 
 <!-- testii start -->
-
+<?php if ($this->session->userdata('logged_in') != TRUE) { ?>
 <div class="event" id="events">
 <!-- <div class="demo"> -->
     <div class="container">
@@ -216,7 +222,9 @@
             
             <div class="col-md-12">
                 <div id="testimonial-slider" class="owl-carousel">
-                	<?php foreach ($testimonial as $testi) { 
+                	<?php 
+                	
+                	foreach ($testimonial as $testi) { 
             	$testii = explode('|', $testi->text);
              ?>
                     <div class="testimonial">
@@ -232,7 +240,7 @@
                         <h3 class="title"><?php echo $testii[1] ?></h3>
                         <span class="post"><?php echo $testii[2] ?></span>
                     </div>
-                      <?php } ?>
+                      <?php }  ?>
                 </div>
             </div>
           
@@ -240,6 +248,7 @@
     </div>
 <!-- </div> -->
 </div>
+<?php } ?>
 
 
 <!-- testii end -->
@@ -258,7 +267,7 @@
 				
 				<div class="col-md-4 grid slideanim">
 					<figure class="effect-jazz">
-					<a href="#portfolioModal1" class="pick_view" data-toggle="modal" id="<?php echo $rcourses->random_code ?>">
+					<a href="#" data-toggle="modal" data-target="#lesson" class="lesson_view" id="<?php echo $rcourses->random_code ?>" title="<?php echo $rcourses->title ?>">
 
 						<img src="<?php echo base_url(); ?>assets/images/<?php echo $rcourses->thumbnail ?>" alt="<?php echo $rcourses->title ?>"  width ="550px" height="366px"/>
 							<figcaption>
@@ -307,58 +316,13 @@
 				<div class="clearfix"></div>
 			 <!-- </div> -->
 		</div>
-	<!-- Portfolio Modals -->
-	<div class="portfolio-modal modal fade slideanim" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
-	    <div class="modal-content">
-	        <div class="close-modal" data-dismiss="modal">
-	            <div class="lr">
-	                <div class="rl"></div>
-	            </div>
-	        </div>
-	        <div class="container">
-			
-	                <div class="col-lg-8 col-lg-offset-2">
-	                    <div class="modal-body">
-	                        <h3 id="titlee_lesson">Educatiaonal</h3>
-							
-	                        <img id="imgg_lesson" src="" class="img-responsive" alt="">
-	                        <p id="descc_lesson"></p>
 
-	                        <p id="namee_lesson"></p>
-	                        
-	                        <a id="goo_lesson" href="">Enroll</a>
-	                    </div>
-	                </div>
-	           
-	        </div>
-	    </div>
-	</div>
 	
 	<!-- /Portfolio Modals -->
 	<!-- //gallery -->
 				
 <script type="text/javascript">
-			$("a.pick_view").click(function(event) {
-					    var random_code = $(this).attr('id');
-					    if (random_code != "") {
-					        $.ajax({
-					            url: "<?php echo base_url()?>course/getlesson",
-					            type: 'post',
-					            data: {
-					                random_code: random_code
-					            },
-					            success: function(e) {
-					                var data = e.split("|");
-					                $('#titlee_lesson').html(data[0]);
-					                $('#imgg_lesson').attr('src','<?php echo base_url() ?>assets/images/'+data[1]);
-					                $('#descc_lesson').html(data[2]);
-					                $('#namee_lesson').html('by <a href="<?php echo base_url() ?>'+data[4]+'">'+data[3]+'</a>');
-					                // $('#usernamee_lesson').attr('href','<?php echo base_url() ?>'+data[4]);
-					                $('#goo_lesson').attr('href','<?php echo base_url() ?>lesson/'+random_code);
-					            }
-					        });
-					    }
-					});
+			 
 </script>
 	
 </div>

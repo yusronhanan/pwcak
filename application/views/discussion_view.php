@@ -1,26 +1,4 @@
-	
-	<div class="header" style="background: url(<?php echo base_url().'assets/images/'.$sld_img; ?>) no-repeat center;">
-		<!-- Slider -->
-			<div class="slider">
-				<div class="callbacks_container">
-					<ul class="rslides" id="slider">
-						<?php foreach ($slider as $sld) { 
-							$texts = explode("|",$sld->text);
-						?>
-						<li>
-							<div class="slider-info">
-								<p><?php echo $texts[0] ?></p>
-								<h3><a href="#"><span>EDU</span>CATIONAL</a></h3>
-								<h6><?php echo $texts[1] ?></h6>
-							</div>
-						</li>
-						<?php } ?>
-					</ul>
-				</div>
-				<div class="clearfix"></div>
-			</div>
-		<!-- //Slider -->
-	</div>
+
 
 	
 </div>
@@ -73,7 +51,7 @@
 		<div class="col-md-4 eve-agile e1">
 			<div class="eve-sub1">
 				<!-- <a href="#" data-toggle="modal" data-target="#myModal5"><img src="images/e2.jpg" alt="image"></a> -->
-			<h4><a href="#" data-toggle="modal" data-target="#myModal5" title="<?php echo $discuss->subject; ?>">
+			<h4><a href="<?php echo base_url().'discuss/'.$discuss->random_code ?>" data-toggle="" data-target="" title="<?php echo $discuss->subject; ?>">
 				<?php 
                         if (strlen($discuss->subject) < 24) {
                           echo $discuss->subject;

@@ -671,39 +671,7 @@ a.subs_true{
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="m-b-md">
-                                    <?php
-                  $subss_amount = '0';
-                    if (!empty($subs_amount)) {
-                if(array_key_exists($maker_info->id_user, $subs_amount)) {
-                $subss_amount =  $subs_amount[$maker_info->id_user];
-                } 
-              } 
-                  if ($this->session->userdata('logged_id') == $maker_info->id_user) {
-
-                 ?>
-                 <button class="btn btn-danger pull-right"><a href="#" data-toggle="modal" data-target="" class="subs_false"><i class="fa fa-users"></i> Subscriber  <?php echo $subss_amount; ?></a></button>
-                 <?php }
-                 else { 
-              
-            
-                    $text = 'Subscribe';
-                    $subs = 'btn-danger'; #button class
-                    $a_subs ='subs_false' ; #a class
-                    $i_subs ='fa fa-plus'; #i class
-                  if (!empty($subscribed)) {
-                    if(in_array($maker_info->id_user, $subscribed)) {
-                    $text = 'Disubscribe';
-                    $subs = 'btn-default'; #button class
-                    $a_subs ='subs_true' ; #a class
-                    $i_subs ='fa fa-users'; #i class
-                  }
-                }
-              
-                  ?>
-
-                  <button class="btn <?php echo $subs; ?> subs_in pull-right" id="<?php echo $maker_info->id_user; ?>"><a href="#" data-toggle="modal" data-target="" class="<?php echo $a_subs; ?>"><i class="<?php echo $i_subs; ?>"></i> <?php echo $text; ?>  <?php echo $subss_amount; ?></a></button>
-                  <!-- <button class="btn btn-default"><a href="#" data-toggle="modal" data-target=""><i class="fa fa-users"></i> Disubscribe  1000</a></button> -->
-                <?php } ?>
+                    
                 <a href="#" data-toggle="modal" data-target="#lesson" class="lesson_view" id="<?php echo $title_info->random_code ?>"><button class="btn btn-danger"><i class="fa fa-search"></i> Course Detail</button></a>
                 
                                     <!-- <a href="#" class="btn btn-white btn-xs pull-right">Edit project</a> -->
@@ -1054,20 +1022,7 @@ a.subs_true{
     ?>
   
     <?php
-    } 
-    else{
-    ?><div class="container">
-              <div class="row">
-       <div id="about" class="about">
-          <div class="container">
-                  <h1> <span>Waw!</span></h1>
-                  <h2>There is no discussion, let's make!</h2>
-          </div>
-      </div>
-
-    </div>
-  </div>
-    <?php } ?>
+    }  ?>
 
                             </div>
                             <div class="tab-pane" id="tab-2">

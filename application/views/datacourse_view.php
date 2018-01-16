@@ -42,11 +42,11 @@
                                 else{
                                   $picks = '<i class="glyphicon glyphicon-check"></i> ';
                                 }
-                                if ($data->status == 1) {
+                                if ($data->status_course == 1) {
                                   $status = '<i class="fa fa-times"></i> ';
                                   $publish = 'published';
                                 }
-                                else if($data->status == 2){
+                                else if($data->status_course == 2){
                                   $status = '<i class="fa fa-check"></i> ';
                                   $publish = 'published';
                                 }
@@ -62,11 +62,11 @@
                                   <td>'.$data->subject.'</td>
                                   <td>'.$data->created_at.'</td>
                                   <td colspan="2"> 
-                                 <a class = "btn btn-success pickss" id="'.$data->id_title.'">'.$picks.'</a>
+                                 <a class = "btn btn-success pickss" id="'.$data->id_title.'" title="Change Pick Status">'.$picks.'</a>
                               <input type="hidden" id="id_course" value="" class="form-control"> 
-                              <button type="button" href="#" id="'.$data->id_title.'" class = "btn btn-info view" data-toggle="modal" data-target="#viewCourse"><i class="glyphicon glyphicon-eye-open"></i></a>
-                              <button id="'.$data->id_title.'"  class="btn btn-warning banned '.$publish.'" style="color: white">'.$status.'</a></button>
-                              <button id="'.$data->id_title.'"  class="btn btn-danger delete" style="color: white"><i class="fa fa-trash-o"></i></a></button>
+                              <button type="button" href="#" id="'.$data->id_title.'" class = "btn btn-info view"  data-toggle="modal" data-target="#viewCourse" title="Detail Course"><i class="glyphicon glyphicon-eye-open"></i></a>
+                              <button id="'.$data->id_title.'"  class="btn btn-warning banned '.$publish.'" style="color: white" title="Banned Course">'.$status.'</a></button>
+                              <button id="'.$data->id_title.'"  class="btn btn-danger delete" style="color: white"><i class="fa fa-trash-o" title="Delete Course"></i></a></button>
                                   </td>
                                   
                               </tr> '

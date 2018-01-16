@@ -24,6 +24,7 @@
                             <th>No</th>
                             <th>Slider Text 1</th>
                             <th>Slider Text 2</th>
+                            <th>Slider Link</th>
                             <th colspan="2">Action</th>
                             
                         </tr>
@@ -38,6 +39,7 @@
                           <td><?php echo $i++ ?></td>
                           <td><?php echo $qtes[0] ?></td>
                           <td><?php echo $qtes[1] ?></td>
+                          <td><?php echo $qtes[2] ?></td>
                           <td><a href="#" data-toggle="modal" data-target="#quote_see" class="btn btn-xs btn-success" id="<?php echo $quote->id_config ?>"><i class="fa fa-pencil"></i></a></td>
                         
                         </tr>
@@ -124,6 +126,13 @@
                           <input type="hidden" class="form-control" id="id_qts" name="id_quote">
                       </div>
                       <div class="form-group">
+                 <label for="link">Link :</label>
+                   <div class="input-group">
+                    <span class="input-group-addon">http://</span>
+                  <input id="text_link" type="text" class="form-control" name="text_link" placeholder="(Optional)">
+                 </div>
+                      </div>
+                      <div class="form-group">
                           <div class="col-lg-12">
                               <button class="form-control btn btn-primary updatequote" type="submit">Save</button>
                           </div>
@@ -149,6 +158,7 @@
                           $('input#id_qts').val(id_qt);
                           $('input#text_1').val(data[0]);
                           $('input#text_2').val(data[1]);
+                          $('input#text_link').val(data[2]);
                            
                       }
                   });

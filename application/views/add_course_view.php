@@ -276,7 +276,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             } ?>
                                 </select>
                                 Description
-                                <textarea name="description" class="form-control"><?php echo $tit_info[4]; ?></textarea>
+                                <textarea name="description" class="form-control" rows="5"><?php echo $tit_info[4]; ?></textarea>
                                 
 							<!-- <label for="file-upload" class="custom-file-upload ">
     						<span class="glyphicon glyphicon-upload"></span>  Upload Thumbnail

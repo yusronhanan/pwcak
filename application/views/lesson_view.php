@@ -401,19 +401,11 @@ i.del_reply:hover{
 		                        <input type="hidden" name="step_number" value="<?php echo  $before; ?>">
 		                        <input type="submit" class="hidden" name="GO" id="goo">
                     			</form>
-                                <a href="" id="before_step" class="btn btn-default"><i class="fa fa-angle-left"></i></a>
+                                <a href="" id="before_step" class="btn btn-danger" style="font-family: 'Montserrat-Regular'">Previous</a>
                                 
                     			<?php 
-                    		} if ($next != 0) {
+                    		} 
 								?>
-                    <!-- next -->
-                                <a href="" id="next_step" class="btn btn-default"><i class="fa fa-angle-right"></i></a>
-                                <form action="<?php echo base_url(); ?>lesson/<?php echo $title_info->random_code; ?>" id="<?php echo  $next; ?>" method="post" enctype="multipart/form-data">
-			                        <input type="hidden" name="step_number" value="<?php echo  $next; ?>">
-			                        <input type="submit" class="hidden" name="GO" id="goo">
-			                    </form>
-			                    <?php 
-					} ?>
                             </div>
 				<!----> 		
 			</div>

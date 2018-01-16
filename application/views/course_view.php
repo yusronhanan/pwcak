@@ -29,28 +29,7 @@
 }
 
 </style>
-<div class="header" style="background: url(<?php echo base_url().'assets/images/'.$sld_img; ?>) no-repeat center;">
-        <!-- Slider -->
-            <div class="slider">
-                <div class="callbacks_container">
-                    <ul class="rslides" id="slider">
-                        <?php foreach ($slider as $sld) { 
-                            $texts = explode("|",$sld->text);
-                        ?>
-                        <li>
-                            <div class="slider-info">
-                                <p><?php echo $texts[0] ?></p>
-                                <h3><a href="#"><span>EDU</span>CATIONAL</a></h3>
-                                <h6><?php echo $texts[1] ?></h6>
-                            </div>
-                        </li>
-                        <?php } ?>
-                    </ul>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-        <!-- //Slider -->
-    </div>
+
 </div>
 <!--main-content-->
 
@@ -122,8 +101,14 @@
                         }
                         else{
                         echo  substr($courses->title, 0,24).'..';
-                        } ?>         
-            </a></h4>
+                        } ?> 
+
+            </a>
+            <?php if ($courses->pick == 1) {
+                ?>
+                <i class="glyphicon glyphicon-check"></i>
+                <?php
+                } ?></h4>
 				<?php 
 					if(array_key_exists($courses->id_user, $username)) {
 					$usrnm =  $username[$courses->id_user];
@@ -131,7 +116,7 @@
 				<h6>By  <a href="<?php echo base_url() ?><?php echo $usrnm ?>">
 					<?php echo $usrnm ?>
 				</a>, <?php echo $courses->created_at ?></h6>
-				<p><?php echo substr($courses->description, 0,105) ?>...</p>
+				<p><?php echo substr($courses->description, 0,104) ?>...</p>
 			</div>
 			<div class="eve-sub2">
 				<div class="eve-w3lleft">

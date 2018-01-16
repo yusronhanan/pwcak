@@ -10,11 +10,21 @@ class Admin_model extends CI_Model {
 
 	
 
-	public function get_data_user($limit,$mulai){
+	public function get_data_user($limit,$mulai,$where_user){
+		if (!empty($where_user)) {
+		return $this->db->limit($limit,$mulai)
+						->where($where_user)
+						->order_by('id_user','ASC')	
+				        ->get('user')
+				        ->result();	
+		}
+		else{
 		return $this->db->limit($limit,$mulai)
 						->order_by('id_user','ASC')	
 				        ->get('user')
-				        ->result();
+				        ->result();	
+		}
+		
 	}
 	public function get_data_broadcasts($limit,$mulai){
 		return $this->db->limit($limit,$mulai)
@@ -89,7 +99,8 @@ class Admin_model extends CI_Model {
 	}
 
 	public function get_data_course($limit,$start){
-		return $this->db->limit($limit,$start)
+		return $this->db->select('user.*, course_title.*,course_title.status as status_course')
+						->limit($limit,$start)
 						->join('user', 'user.id_user = course_title.id_user')
 		                ->order_by('id_title','ASC')
 		                ->group_by('id_title')
@@ -128,6 +139,15 @@ class Admin_model extends CI_Model {
 
 	public function total_user(){
 		return $this->db->from('user')
+		                ->count_all_results();
+	}
+	public function total_user_biasa(){
+		return $this->db->where('role','0')->from('user')
+		                ->count_all_results();
+	}
+	public function total_user_admin(){
+		return $this->db->where('role','1')
+						->from('user')
 		                ->count_all_results();
 	}
 	public function total_comment(){
@@ -190,7 +210,8 @@ class Admin_model extends CI_Model {
 			'email' => $this->input->post('email'),
 			'username' => $this->input->post('username'),
 			'city' => $this->input->post('city'),
-			'bio' => $this->input->post('bio')
+			'bio' => $this->input->post('bio'),
+			'role' => $this->input->post('role')
 		);
 		$this->db->where('id_user',$id_user)
 				 ->update('user',$data);

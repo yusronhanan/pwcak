@@ -343,8 +343,14 @@
                 <form action="<?php echo base_url(); ?>auth/login" method="post" enctype="multipart/form-data">
                 <input type="email" placeholder="Email" required="" name="email" class="form-control">
                 <input type="password" placeholder="Password" name="password" class="form-control">
+                <input type="hidden" name="redirect" value="<?php 
+                if($this->session->flashdata('redirect')){
+                  echo $this->session->flashdata('redirect'); 
+                } 
+                  ?>">
                 <input type="submit" name="submit" value="Login">
               </form>
+              <p><a href="#" id="registerrr">Don't you have no an account?</a></p>
               </div>
             <!--//newsletter-->     
             </div>
@@ -369,10 +375,11 @@
                 <input type="email" placeholder="Email" required name="email" class="form-control">
                 <input type="text" name="username" placeholder="Username" class="form-control" required minlength="6">
                 <input type="password" placeholder="Password" name="password" class="form-control" required minlength="8">
-                <input type="text" placeholder="City" name="city" class="form-control" required minlength="5">
-                <input type="text" name="bio" placeholder="Bio" class="form-control" required minlength="10">
+                <input type="text" placeholder="City" name="city" class="form-control" required minlength="2">
+                <input type="text" name="bio" placeholder="Bio (Optional)" class="form-control">
                 <input type="submit" value="Register Now" name="submit">
               </form>
+              <p><a href="#" id="loginnn">Are you already have an account?</a></p>
               </div>
             <!--//newsletter-->     
             </div>
@@ -583,6 +590,19 @@
                                 });
                             </script>
                     <?php endif; ?>
+                    <?php if ($this->session->flashdata('show_login')): ?>
+                            <script>
+                                $('#myModal4').modal('hide');
+                                $('#myModal3').modal('show');
+                            </script>
+                    <?php endif; ?>
+                    <?php if ($this->session->flashdata('show_register')): ?>
+                            <script>
+                                $('#myModal3').modal('hide');
+                                $('#myModal4').modal('show');
+                            </script>
+                    <?php endif; ?>
+                    
 <!-- <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
 
 <script type="text/javascript">
@@ -616,6 +636,7 @@
     <?php }
     else {
       ?>
+      $('#myModal3').modal('show');
        swal({
                        title: "Failed",
                        text: "Anda harus login terlebih dahulu",
@@ -631,6 +652,15 @@
 
 </script>
 <script type="text/javascript">
+  $("#loginnn").click(function(event) {
+   $('#myModal4').modal('hide');
+     $('#myModal3').modal('show');
+
+});
+  $("#registerrr").click(function(event) {
+     $('#myModal3').modal('hide');
+     $('#myModal4').modal('show');
+});
     $(document).ready(function(){
 
     $('a#notifc').click(function(event) {

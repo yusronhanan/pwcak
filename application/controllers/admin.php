@@ -38,15 +38,43 @@ class Admin extends CI_Controller {
 	public function get_user(){
 		if($this->session->userdata('role_admin') == 1){
 		// if($this->session->userdata('admin_login')==TRUE){
+			$where_user = $this->input->get('filter');
+			if (empty($where_user)) {
+				$count_users = $this->admin_model->total_user();
+				$where= '';
+				$data['filter'] = '';
+				// $base_urll = base_url().'/admin/get_user';
+			}
+			else{
+				if ($where_user == 'Admin') {
+				$where= ['role'=>'1'];	
+				$count_users = $this->admin_model->total_user_admin();
+				$data['filter'] = 'Admin';
+				// $base_urll = base_url().'/admin/get_user?filter=Admin';
+				}
+				else if ($where_user == 'User') {
+				$where= ['role'=>'0'];
+				$count_users = $this->admin_model->total_user_biasa();	
+				$data['filter'] = 'User';
+				// $base_urll = base_url().'/admin/get_user?filter=User';
+				}
+				else{
+				$where= '';	
+				$data['filter'] = '';
+				$count_users = $this->admin_model->total_user();
+				// $base_urll = base_url().'/admin/get_user';
+				}
+				
+			}
 			$id_user = $this->session->userdata('logged_id_admin');
 		$data['user_login'] = $this->home_model->GetData(['id_user'=> $id_user],'user')->row();
 		
 			$data['main_view'] = 'datauser_view';
 
 			$this->load->library('pagination');
-
-		    $config['base_url'] = base_url().'/admin/get_user';
-			$config['total_rows'] = $this->admin_model->total_user();
+			$config['page_query_string'] = TRUE;
+		    $config['base_url'] = base_url().'/admin/get_user?filter='.$this->input->get('filter', TRUE);
+			$config['total_rows'] = $count_users;
 			$config['per_page'] = 5;
 			$config['uri_segment'] =3;
 			$config['full_tag_open'] = "<ul class='pagination'>";
@@ -66,9 +94,10 @@ class Admin extends CI_Controller {
 
 			$this->pagination->initialize($config);
 
-			$mulai = $this->uri->segment(3,0);
+			// $mulai = $this->uri->segment(3,0);
+			$mulai = $this->input->get('per_page');
 
-			$rows = $this->admin_model->get_data_user($config['per_page'],$mulai);
+			$rows = $this->admin_model->get_data_user($config['per_page'],$mulai,$where);
 
 			$data['user'] = $rows;
 			$data['pagination'] = $this->pagination->create_links();
@@ -253,6 +282,7 @@ class Admin extends CI_Controller {
  	public function detUser(){
  		if($this->session->userdata('role_admin')==1){
  		    $data 	= $this->admin_model->get_detail_user();
+
 			echo $data->id_user."|".$data->email."|".$data->username."|".$data->city."|".$data->bio."|".$data->name."|".$data->photo."|".$data->role;
 		}
 		else{
@@ -448,7 +478,21 @@ class Admin extends CI_Controller {
 		if($this->session->userdata('role_admin')==1){
  		    $data 	= $this->home_model->GetData(['id_config'=>$this->input->post('id_quote')],'config');
  		    $qt = explode('|', $data->row('text'));
-			echo $qt[0]."|".$qt[1];
+ 		    $link = substr($qt[2], 7); 
+			echo $qt[0]."|".$qt[1]."|".$link;
+		}
+	}
+	public function getbroadcast(){
+		if($this->session->userdata('role_admin')==1){
+ 		    $data 	= $this->home_model->GetData(['id_broadcast'=>$this->input->post('id_broadcast')],'broadcast')->row();
+ 		    $link="";
+ 		    if ($data->link != NULL) {
+ 		    $link = substr($data->link, 7);
+ 		    }
+ 		    else{
+ 		    $link = '';
+ 		    }
+ 		    echo $data->subject."|".$data->text."|".$link;
 		}
 	}
 	public function updateslider(){
@@ -456,7 +500,8 @@ class Admin extends CI_Controller {
 		$now = date('Y-m-d H:i:s');
 		$text_1 = $this->input->post('text_1');
 		$text_2 = $this->input->post('text_2');
-		$qts = $text_1.'|'.$text_2;
+		$text_link = $this->input->post('text_link');
+		$qts = $text_1.'|'.$text_2.'|http://'.$text_link;
 		$result = $this->admin_model->Update(['id_config'=>$this->input->post('id_quote')],['text'=>$qts,'last_update'=>$now],'config');
 
 			if($result == TRUE){
@@ -684,6 +729,32 @@ class Admin extends CI_Controller {
 		}
 	}
 }
+			public function editbroadcast(){
+		date_default_timezone_set('Asia/Jakarta'); 
+		$now = date('Y-m-d H:i:s');
+		$subject = $this->input->post('subject');
+		$text = $this->input->post('text');
+		if ($this->input->post('link') == '') {
+			$link = NULL;
+		}
+		else{
+			$link = 'http://'.$this->input->post('link');
+		}
+		
+		$id_broadcast = $this->input->post('id_broadcast');
+		
+		$result_notif = $this->admin_model->Update(['get_id'=>$id_broadcast,'type'=>'broadcast'],['status'=>'0','created_at'=>$now],'notification');
+		$result = $this->admin_model->Update(['id_broadcast'=>$id_broadcast],['text'=>$text,'link'=>$link,'subject'=>$subject,'created_at'=>$now],'broadcast');
+
+			if($result == TRUE){
+			$this->session->set_flashdata('notif_success','Anda sukses update broadcast');
+			redirect('admin/broadcast');
+		}
+		else{
+			$this->session->set_flashdata('notif_failed','Maaf, ada kesalahan. Coba lagi');
+			redirect('admin/broadcast');	
+		}
+				}
 
 
 }

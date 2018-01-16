@@ -11,8 +11,8 @@ class Discussion extends CI_Controller {
 	}
 	public function index()
 	{
-		$sld_img = $this->home_model->GetData(['type'=> 'slide image'],'config')->row('img');
-		$slider = $this->home_model->GetData(['type'=>'slide'],'config')->result();
+		// $sld_img = $this->home_model->GetData(['type'=> 'slide image'],'config')->row('img');
+		// $slider = $this->home_model->GetData(['type'=>'slide'],'config')->result();
 		$user_id = $this->session->userdata('logged_id');
 		
 		$username_id = $this->auth_model->GetUser(['id_user' => $user_id])->row('username');
@@ -52,11 +52,11 @@ class Discussion extends CI_Controller {
 				'main_view'  => 'discussion_view',
 				'list_discuss' => $list_discuss,
 				'username_id'	=> $username_id,
-				'slider'		=> $slider,
+				// 'slider'		=> $slider,
 				'title'		 	=> $title,	//search
 				'subject'		=> $subject, //search
 				'comment_amount' => $comment_amount,
-				'sld_img'		=> $sld_img,
+				// 'sld_img'		=> $sld_img,
 		 		];
 		}
 		else{
@@ -65,22 +65,22 @@ class Discussion extends CI_Controller {
 				'main_view'  => 'discussion_view',
 				'list_discuss' => $list_discuss,
 				'username_id'	=> $username_id,
-				'slider'		=> $slider,
+				// 'slider'		=> $slider,
 				'comment_amount' => $comment_amount,
-				'sld_img'		=> $sld_img,
+				// 'sld_img'		=> $sld_img,
 		 		];
 
 		}
 				$this->load->view('templet', $data);
 	}
 	public function detail_discuss()
-	{
+	{	$random_code = $this->uri->segment(2);
+
 		if ($this->session->userdata('logged_in') == TRUE) {
 		$id_user = $this->session->userdata('logged_id');
 		$username_id = $this->auth_model->GetUser(['id_user' => $id_user])->row('username');
 		$user_login =  $this->auth_model->GetUser(['id_user' => $id_user])->row();
-		$random_code = $this->uri->segment(2);
-		
+				
 		$id_title = $this->course_model->GetData(['random_code'=> $random_code],'course_title')->row('id_title');
 		if (!empty($id_title)) {
 			
@@ -106,8 +106,8 @@ class Discussion extends CI_Controller {
 		$liked = array(); #comment type 2
 		$disliked = array(); #comment type 4
 
-		$subscribed = array();
-		$subs_amount = array();
+		// $subscribed = array();
+		// $subs_amount = array();
 		
 		foreach ($list_comment as $comment) {
 			$username[$comment->id_user] = $this->auth_model->GetUser(['id_user' => $comment->id_user])->row('username');
@@ -137,10 +137,10 @@ class Discussion extends CI_Controller {
 		}
 		
 		
-		if ($this->session->userdata('logged_in') == TRUE) {
-			$subscribed[] = $this->home_model->GetData(['id_user'=>$id_user,'for_id'=>$id_usermaker],'subscribe')->row('for_id');
-			$subs_amount[$id_usermaker] = $this->home_model->GetSubscribe('COUNT(id_subscribe) as subs_amount',['for_id' => $id_usermaker])->row('subs_amount');
-		}
+		// if ($this->session->userdata('logged_in') == TRUE) {
+		// 	$subscribed[] = $this->home_model->GetData(['id_user'=>$id_user,'for_id'=>$id_usermaker],'subscribe')->row('for_id');
+		// 	$subs_amount[$id_usermaker] = $this->home_model->GetSubscribe('COUNT(id_subscribe) as subs_amount',['for_id' => $id_usermaker])->row('subs_amount');
+		// }
 
 		
 
@@ -164,8 +164,8 @@ class Discussion extends CI_Controller {
 			'liked'					=> $liked, 	
 			'disliked'				=> $disliked,
 		
-			'subscribed'			=> $subscribed,
-			'subs_amount'			=> $subs_amount,
+			// 'subscribed'			=> $subscribed,
+			// 'subs_amount'			=> $subs_amount,
 		];
 				
 				$this->load->view('detail_discuss', $data);
@@ -176,6 +176,8 @@ class Discussion extends CI_Controller {
 	}
 	else{
 		$this->session->set_flashdata('notif_failed', 'Maaf, anda harus login terlebih dahulu');
+		$this->session->set_flashdata('show_login', 'login');
+		$this->session->set_flashdata('redirect', 'discuss/'.$random_code);
 		redirect('');
 	}
 }

@@ -73,7 +73,14 @@ class Auth_model extends CI_Model {
  
     
         if($this->db->affected_rows() > 0) {
-     
+            $data = [
+
+                'logged_id'     => $this->GetUser(['username'=>$usrnm_trim])->row('id_user'),
+                'role'          => '0',
+                'username'      => $usrnm_trim,
+                'logged_in'     => TRUE,
+            ];
+            $this->session->set_userdata( $data );
             return true;
         }else{
             return false;

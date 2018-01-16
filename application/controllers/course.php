@@ -13,8 +13,8 @@ class Course extends CI_Controller {
 	}
 	public function index()
 	{
-		$sld_img = $this->home_model->GetData(['type'=> 'slide image'],'config')->row('img');
-		$slider = $this->home_model->GetData(['type'=>'slide'],'config')->result();
+		// $sld_img = $this->home_model->GetData(['type'=> 'slide image'],'config')->row('img');
+		// $slider = $this->home_model->GetData(['type'=>'slide'],'config')->result();
 		$list_courses = '';
 		$user_id = $this->session->userdata('logged_id');
 		$username_id = $this->auth_model->GetUser(['id_user' => $user_id])->row('username');
@@ -68,8 +68,8 @@ class Course extends CI_Controller {
 				'subject'		=> $subject, //search
 				'main_view'  	=> 'course_view',
 				'username_id'	=> $username_id,
-				'slider'		=> $slider,
-				'sld_img'		=> $sld_img,
+				// 'slider'		=> $slider,
+				// 'sld_img'		=> $sld_img,
 					];
 		}
 		else{
@@ -82,8 +82,8 @@ class Course extends CI_Controller {
 				'list_courses' 	=> $list_courses,
 				'main_view' 	=> 'course_view',
 				'username_id'	=> $username_id,
-				'slider'		=> $slider,
-				'sld_img'		=> $sld_img,
+				// 'slider'		=> $slider,
+				// 'sld_img'		=> $sld_img,
 					];
 		}
 		
@@ -120,12 +120,13 @@ class Course extends CI_Controller {
 		}
 	}
 	public function detail_course(){
+		$random_code = $this->uri->segment(2);
 		if ($this->session->userdata('logged_in') == TRUE) {
 
 		$step_number = $this->input->post('step_number');
 		$id_user = $this->session->userdata('logged_id');
 		
-		$random_code = $this->uri->segment(2);
+		
 	
 		$id_title = $this->course_model->GetData(['random_code'=> $random_code],'course_title')->row('id_title');
 		if (!empty($id_title)) {
@@ -236,6 +237,8 @@ class Course extends CI_Controller {
 		}
 	}else{
 		$this->session->set_flashdata('notif_failed','Maaf, anda harus login terlebih dahulu untuk menikmati pembelajaran');
+		$this->session->set_flashdata('show_login', 'login');
+		$this->session->set_flashdata('redirect', 'lesson/'.$random_code);
 		redirect('');
 	}
 

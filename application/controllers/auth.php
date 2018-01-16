@@ -26,9 +26,15 @@ class Auth extends CI_Controller {
                     
                     if ($this->auth_model->authentication() == TRUE) {
                         $this->session->set_flashdata('notif_success', 'Anda telah berhasil login, selamat belajar !');
-                        redirect('');
+                        if ($this->input->post('redirect') != "") {
+                        redirect($this->input->post('redirect'));	
+                        }
+                        else{
+                        redirect('course');
+                    	}
                     } else {
                         $this->session->set_flashdata('notif_failed', 'Email atau Password anda tidak valid, coba lagi');
+                        $this->session->set_flashdata('show_login', 'login');
                         redirect('');
                     }
                 } else {
@@ -62,18 +68,19 @@ class Auth extends CI_Controller {
 			$this->form_validation->set_rules('username','Username','trim|required');
 			$this->form_validation->set_rules('password','Password','trim|required');
 			$this->form_validation->set_rules('city','City','required');
-			$this->form_validation->set_rules('bio','Bio','required');
 
 			if($this->form_validation->run() == TRUE){
 				if($this->auth_model->register_user()==TRUE)
 				{
 					
 					$this->session->set_flashdata('notif_success','Anda telah berhasil register, silahkan login!');
-					redirect('');
+					redirect('course');
 				}else{
 					
 					$this->session->set_flashdata('notif_failed','Maaf anda gagal register, silahkan coba lagi!');
+					$this->session->set_flashdata('show_register', 'register');
 					redirect('');
+
 				}
 			}else{
 				$this->session->set_flashdata('notif_failed', validation_errors());

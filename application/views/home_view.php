@@ -128,11 +128,6 @@
                         echo  substr($pcourses->title, 0,24).'..';
                         } ?>
 			</a>
-			<?php if ($pcourses->pick == 1) {
-				?>
-				<i class="glyphicon glyphicon-check"></i>
-				<?php
-				} ?>
 		</h4>
 				<?php 
 					if(array_key_exists($pcourses->id_user, $username)) {
@@ -163,6 +158,11 @@
 					}
 					?>
 					<h6 id="<?php echo $pcourses->random_code ?>" class="thumb_in <?php echo $thumb ?>"><i class="fa fa-thumbs-up" aria-hidden="true"></i><?php echo $likes; ?></h6>
+					<?php if ($pcourses->pick == 1) {
+                ?>
+                <i class="glyphicon glyphicon-check" style="color:#d95459"></i>
+                <?php
+                } ?>
 				</div>
 				<div class="eve-w3lright e1">
 					<a href="#" data-toggle="modal" data-target="#lesson" class="lesson_view" id="<?php echo $pcourses->random_code ?>"><h5>More</h5></a>
@@ -330,15 +330,7 @@
 <!-- //courses -->
 
 <hr/>
-<!-- footer -->
-<!-- 	<div style="background-color: #212121; height: 50px;"> -->
-		
-	<!-- <div class="container"> -->
-		<p style="text-align: center;">© 2017 T-Learning. All rights reserved | <a href="<?php echo base_url(); ?>myaccount/about_us">About Us</a></p>
-	<!-- </div> -->
 
-	<!-- </div> -->
-<!-- //footer -->
 
 
 

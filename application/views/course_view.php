@@ -104,11 +104,7 @@
                         } ?> 
 
             </a>
-            <?php if ($courses->pick == 1) {
-                ?>
-                <i class="glyphicon glyphicon-check"></i>
-                <?php
-                } ?></h4>
+            </h4>
 				<?php 
 					if(array_key_exists($courses->id_user, $username)) {
 					$usrnm =  $username[$courses->id_user];

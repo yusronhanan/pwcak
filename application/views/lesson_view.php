@@ -8,7 +8,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>T-Learning</title>
+<title>Indo-Learning</title>
 <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url();?>assets/images/icon logo.png" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -402,7 +402,7 @@ i.del_reply:hover{
 						
 				</div>
 
-				 <div class="btn-group">
+				 <div style="text-align: left; padding-left: 35px">
 				 	<?php if ($before != 0) {
 								?>
                     <!-- before -->

@@ -12,7 +12,7 @@
     	home, about, credits... or in a good page that you want
     	THANK YOU MY FRIEND!
     -->
-    <title>T-Learning</title>
+    <title>Indo-Learning</title>
     <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url();?>assets/images/icon logo.png" />
     <!-- css files -->
     <link href="<?php echo base_url(); ?>assets/css/style.css" rel="stylesheet" type="text/css" media="all">
@@ -385,7 +385,7 @@
                 <input type="email" placeholder="Email" required name="email" class="form-control">
                 <input type="text" name="username" placeholder="Username" class="form-control" required minlength="6">
                 <input type="password" placeholder="Password" name="password" class="form-control" required minlength="8">
-                <input type="text" placeholder="City" name="city" class="form-control" required minlength="2">
+                <input type="text" placeholder="City" name="city" class="form-control">
                 <input type="text" name="bio" placeholder="Bio (Optional)" class="form-control">
                 <input type="submit" value="Register Now" name="submit">
               </form>
@@ -577,7 +577,7 @@
 <!--  <div style="background-color: #212121; height: 50px;"> -->
     
   <!-- <div class="container"> -->
-    <p style="text-align: center;">© 2017 T-Learning. All rights reserved | <a href="<?php echo base_url(); ?>myaccount/about_us">About Us</a></p>
+    <p style="text-align: center;">© 2017 Indo-Learning. All rights reserved | <a href="<?php echo base_url(); ?>myaccount/about_us">About Us</a></p>
 <?php if ($this->session->flashdata('notif_success')): ?>
                             <script>
                                 swal({

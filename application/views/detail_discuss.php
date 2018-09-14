@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>T-Learning</title>
+<title>Indo-Learning</title>
     <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url();?>assets/images/icon logo.png" />
 <!-- Meta tag Keywords -->
 
@@ -1221,7 +1221,7 @@ a.subs_true{
   <div class="clearfix"></div>
 <!--//tidak ada course-->
 
-<p style="text-align: center;">© 2017 T-Learning. All rights reserved | <a href="<?php echo base_url(); ?>myaccount/about_us">About Us</a></p>
+<p style="text-align: center;">© 2017 Indo-Learning. All rights reserved | <a href="<?php echo base_url(); ?>myaccount/about_us">About Us</a></p>
 <!-- footer -->
   <!-- <div class="footer" id="footer">
     <div class="container">
